@@ -1,0 +1,10 @@
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\bin\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.deps.json
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\bin\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\bin\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.AssemblyInfoInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.AssemblyInfo.cs
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.csproj.CoreCompileInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Entities\obj\Debug\netcoreapp3.1\AHM.Total.Travel.Entities.csproj.AssemblyReference.cache

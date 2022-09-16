@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YjdEiCFsDGQRxGBn8SRdKsD+fcsDUQTtOPZo8hnPC/Ck77nDtv7XI4vDIUqPvflWUxTxQqC8GmY9htlhx2CUtw==",
+  "dgSpecHash": "ujRwHf2gLsPyRyRqsI0rOQ/r2OvcV9lMOvsKlVkpqjSm4uX7GiRUeIxjk+rP9REMKMKeBsniaYnck/F30+UEWA==",
   "success": true,
   "projectFilePath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.BusinessLogic\\AHM.Total.Travel.BusinessLogic.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

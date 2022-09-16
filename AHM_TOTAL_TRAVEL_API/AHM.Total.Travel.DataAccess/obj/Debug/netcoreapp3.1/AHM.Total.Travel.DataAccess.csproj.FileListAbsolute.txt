@@ -1,0 +1,10 @@
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\bin\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.deps.json
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\bin\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\bin\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.AssemblyInfoInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.AssemblyInfo.cs
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.DataAccess\obj\Debug\netcoreapp3.1\AHM.Total.Travel.DataAccess.csproj.AssemblyReference.cache

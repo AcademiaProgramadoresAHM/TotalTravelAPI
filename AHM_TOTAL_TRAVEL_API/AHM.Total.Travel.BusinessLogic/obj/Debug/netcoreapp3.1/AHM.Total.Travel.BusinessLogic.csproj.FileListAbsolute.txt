@@ -1,0 +1,10 @@
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.deps.json
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.AssemblyInfo.cs
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.dll
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.pdb
+C:\Users\andre\OneDrive\Documentos\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Debug\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.csproj.AssemblyReference.cache
