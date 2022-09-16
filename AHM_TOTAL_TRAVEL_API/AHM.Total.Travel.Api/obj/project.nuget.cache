@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "wwfAi2tUtwjh1ubSLkHqmpB8VB6GibbkouEbhD8ygLnxahnoHHP97VbIFf253cRY+KI/91oP43DvfsfIe7NyZQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Api\\AHM.Total.Travel.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.25\\microsoft.netcore.app.host.win-x64.3.1.25.nupkg.sha512"
+  ],
+  "logs": []
+}
