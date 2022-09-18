@@ -8,4 +8,12 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AHM.Total.Travel.DataAccess\AHM.Total.Travel.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

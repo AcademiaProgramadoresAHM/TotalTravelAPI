@@ -28,7 +28,6 @@ namespace AHM.Total.Travel.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
             services.AddCors();
             services.AddSwaggerGen(x =>
             {

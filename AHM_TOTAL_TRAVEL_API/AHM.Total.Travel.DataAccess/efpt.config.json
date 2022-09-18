@@ -1,0 +1,177 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "totaltravel_DBContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Context",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "AHM.Total.Travel.DataAccess",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 1,
+   "Tables": [
+      {
+         "Name": "[Acce].[tbPermisos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbRolesPermisos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Actv].[tbActividades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Actv].[tbActividadesExtras]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Actv].[tbTiposActividades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbCiudades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbDirecciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbPaises]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbPartners]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Htel].[tbCategoriasHabitaciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Htel].[tbHabitaciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Htel].[tbHoteles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Htel].[tbHotelesActividades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Htel].[tbHotelesMenus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Rest].[tbMenus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Rest].[tbRestaurantes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Rest].[tbTipoMenus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbRegistrosPagos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservaciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionesActividadesExtras]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionesActividadesHoteles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionesDetalles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionesHoteles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionRestaurantes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Resv].[tbReservacionTransporte]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sale].[tbPaquetePredeterminados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sale].[tbPaquetePredeterminadosDetalles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sale].[tbTiposPagos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Trpt].[tbDestinosTransportes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Trpt].[tbDetallesTransportes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Trpt].[tbHorariosTransportes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Trpt].[tbTiposTransportes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Trpt].[tbTransportes]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "NS525458\\MSSQL2016.totaltravel_DB",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
