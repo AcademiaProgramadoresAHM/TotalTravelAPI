@@ -104,5 +104,35 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
+        #region TiposTransportes
+
+        public static string UDP_tbTiposTransportes_Insert = "Trpt.UDP_tbTiposTransportes_Insert";
+
+        public static string UDP_tbTiposTransportes_Update = "Trpt.UDP_tbTiposTransportes_Update";
+
+        public static string UDP_tbTiposTransportes_Delete = "Trpt.UDP_tbTiposTransportes_Delete";
+
+        #endregion
+
+        #region HorariosTransportes
+
+        public static string UDP_tbHorariosTransportes_Insert = "Trpt.UDP_tbHorariosTransportes_Insert";
+
+        public static string UDP_tbHorariosTransportes_Update = "Trpt.UDP_tbHorariosTransportes_Update";
+
+        public static string UDP_tbHorariosTransportes_Delete = "Trpt.UDP_tbHorariosTransportes_Delete";
+
+        #endregion
+
+        #region DetallesTransportes
+
+        public static string UDP_tbDetallesTransportes_Insert = "Trpt.UDP_tbDetallesTransportes_Insert";
+
+        public static string UDP_tbDetallesTransportes_Update = "Trpt.UDP_tbDetallesTransportes_Update";
+
+        public static string UDP_tbDetallesTransportes_Delete = "Trpt.UDP_tbDetallesTransportes_Delete";
+
+        #endregion
+
     }
 }
