@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    public class TiposTransportesRepository : IRepository<tbTiposTransportes, VW_TiposTransportes>
+    public class TiposTransportesRepository : IRepository<tbTiposTransportes, VW_tbTiposTransportes>
     {
         TotalTravelContext DB = new TotalTravelContext();
 
@@ -23,7 +23,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTiposTransportes_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public VW_TiposTransportes Find(int? id)
+        public VW_tbTiposTransportes Find(int? id)
         {
             throw new NotImplementedException();
         }
@@ -39,9 +39,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTiposTransportes_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public IEnumerable<VW_TiposTransportes> List()
+        public IEnumerable<VW_tbTiposTransportes> List()
         {
-            return DB.VW_TiposTransportes.AsList();
+            return DB.VW_tbTiposTransportes.AsList();
         }
 
         public int Update(tbTiposTransportes item, int id)
