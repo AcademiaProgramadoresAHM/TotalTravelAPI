@@ -144,5 +144,34 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
+        #region Paises
+        public static string UDP_tbPaises_Insert = "Gene.UDP_tblPaises_Insert";
+
+        public static string UDP_tbPaises_Update = "Gene.UDP_tblPaises_Update";
+
+        public static string UDP_tbPaises_Delete = "Gene.UDP_tblPaises_Delete";
+
+        //public static string UDP_tbPaises_Find = "Gene.UDP_tblPaises_Find";
+        #endregion
+
+        #region Partners
+        public static string UDP_tbPartners_Insert = "Gene.UDP_tbPartners_Insert";
+
+        public static string UDP_tbPartners_Update = "Gene.UDP_tbPartners_Update";
+
+        public static string UDP_tbPartners_Delete = "Gene.UDP_tbPartners_Delete";
+
+        //public static string UDP_tbPartners_Find = "Gene.UDP_tbPartners_Find";
+        #endregion
+
+        #region CategoriasHabitaciones
+        public static string UDP_tbCategoriasHabitaciones_Insert = "Htel.UDP_tbCategoriasHabitaciones_Insert";
+
+        public static string UDP_tbCategoriasHabitaciones_Update = "Htel.UDP_tbCategoriasHabitaciones_Update";
+
+        public static string UDP_tbCategoriasHabitaciones_Delete = "Htel.UDP_tbCategoriasHabitaciones_Delete";
+
+        public static string UDP_tbCategoriasHabitaciones_Find = "Htel.UDP_tbCategoriasHabitaciones_Find";
+        #endregion
     }
 }

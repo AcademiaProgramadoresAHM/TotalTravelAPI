@@ -35,7 +35,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoTr_ID", item.HoTr_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DeTr_Capacidad", item.DeTr_Capacidad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DeTr_Precio", item.DeTr_Precio, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("@Tprt_Matricula", item.Tprt_Matricula, DbType.String, ParameterDirection.Input);
+            parameters.Add("@DeTr_Matricula", item.DeTr_Matricula, DbType.String, ParameterDirection.Input);
             parameters.Add("@DeTr_UsuarioCreacion", item.DeTr_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -56,7 +56,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoTr_ID", item.HoTr_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DeTr_Capacidad", item.DeTr_Capacidad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@DeTr_Precio", item.DeTr_Precio, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("@Tprt_Matricula", item.Tprt_Matricula, DbType.String, ParameterDirection.Input);
+            parameters.Add("@DeTr_Matricula", item.DeTr_Matricula, DbType.String, ParameterDirection.Input);
             parameters.Add("@DeTr_UsuarioModifica", item.DeTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
