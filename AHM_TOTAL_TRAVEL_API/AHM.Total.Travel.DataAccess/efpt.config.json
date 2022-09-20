@@ -153,6 +153,74 @@
       {
          "Name": "[Trpt].[tbTransportes]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[VW_tbPermisos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[VW_tbRoles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[VW_tbRolesPermisos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Actv].[VW_tbTiposActividades]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbCiudades]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbDirecciones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbPaises]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbPartners]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Htel].[VW_tbCategoriasHabitaciones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Htel].[VW_tbHotelesMenus]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Rest].[VW_tbMenus]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Rest].[VW_tbRestaurantes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_ReservacionRestaurante]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_ReservacionTransporte]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_PaquetePredeterminados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_tbTiposPagos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbTransportes]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "NS525458\\MSSQL2016.totaltravel_DB",

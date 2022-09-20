@@ -25,5 +25,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AHM.Total.Travel.BusinessLogic\AHM.Total.Travel.BusinessLogic.csproj" />
+    <ProjectReference Include="..\AHM.Total.Travel.Common\AHM.Total.Travel.Common.csproj" />
+  </ItemGroup>
+
 
 </Project>

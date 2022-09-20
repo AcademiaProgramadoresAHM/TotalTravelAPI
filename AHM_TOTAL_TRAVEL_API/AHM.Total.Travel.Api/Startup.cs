@@ -1,3 +1,5 @@
+using AHM.Total.Travel.Api.Extensions;
+using AHM.Total.Travel.BusinessLogic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +30,14 @@ namespace AHM.Total.Travel.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.DataAccess(Configuration.GetConnectionString("TotalTravelDB"));
+            services.BusinessLogic();
+            services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(x =>
             {
+                x.EnableAnnotations();
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "TotalTravel API", Version = "v1" });
             });
 
@@ -47,7 +54,10 @@ namespace AHM.Total.Travel.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(options =>
+            options.WithOrigins("http://localhost:44313/")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
             app.UseRouting();
 
             app.UseAuthorization();
