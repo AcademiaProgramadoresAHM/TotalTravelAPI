@@ -114,6 +114,16 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
+        #region DestinosTransportes
+
+        public static string UDP_tbDestinosTransportes_Insert = "Trpt.UDP_tbDestinosTransportes_Insert";
+
+        public static string UDP_tbDestinosTransportes_Update = "Trpt.UDP_tbDestinosTransportes_Update";
+
+        public static string UDP_tbDestinosTransportes_Delete = "Trpt.UDP_tbDestinosTransportes_Delete";
+
+        #endregion
+
         #region HorariosTransportes
 
         public static string UDP_tbHorariosTransportes_Insert = "Trpt.UDP_tbHorariosTransportes_Insert";
