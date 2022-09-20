@@ -16,7 +16,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("Tprt_ID", ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Tprt_ID", ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Tprt_UsuarioModifica", Mod, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
