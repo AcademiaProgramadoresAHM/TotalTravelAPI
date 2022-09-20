@@ -9,10 +9,10 @@ using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    public class PaquetePredeterminadosRepository : IRepository<tbPaquetePredeterminados, VW_PaquetePredeterminados>
+    
+    public class PaquetePredeterminadosRepository : IRepository<tbPaquetePredeterminados, VW_tbPaquetePredeterminados>
     {
         TotalTravelContext DB = new TotalTravelContext();
-
         public int Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
@@ -24,9 +24,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public VW_PaquetePredeterminados Find(int? id)
+        public VW_tbPaquetePredeterminados Find(int? id)
         {
-            return DB.VW_PaquetePredeterminados.Where(x => x.Id == id).FirstOrDefault();
+            return DB.VW_tbPaquetePredeterminados.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public int Insert(tbPaquetePredeterminados item)
@@ -44,9 +44,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public IEnumerable<VW_PaquetePredeterminados> List()
+        public IEnumerable<VW_tbPaquetePredeterminados> List()
         {
-            return DB.VW_PaquetePredeterminados.AsList();
+            return DB.VW_tbPaquetePredeterminados.AsList();
         }
 
         public int Update(tbPaquetePredeterminados item, int id)
@@ -63,6 +63,6 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Update, parameters, commandType: CommandType.StoredProcedure);
         }
-
     }
 }
+

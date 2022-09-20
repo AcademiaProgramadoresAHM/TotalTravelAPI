@@ -18,6 +18,7 @@ namespace AHM.Total.Travel.BusinessLogic
         public static void BusinessLogic(this IServiceCollection services)
         {
             services.AddScoped<GeneralService>();
+            services.AddScoped<SaleService>();
         }
     }
 }
