@@ -11,8 +11,8 @@ namespace AHM.Total.Travel.Entities.Entities
         {
             InverseUsua_UsuarioCreacionNavigation = new HashSet<tbUsuarios>();
             InverseUsua_UsuarioModificaNavigation = new HashSet<tbUsuarios>();
-            tbActividadesActc_UsuarioCreacionNavigation = new HashSet<tbActividades>();
-            tbActividadesActc_UsuarioModificaNavigation = new HashSet<tbActividades>();
+            tbActividadesActv_UsuarioCreacionNavigation = new HashSet<tbActividades>();
+            tbActividadesActv_UsuarioModificaNavigation = new HashSet<tbActividades>();
             tbActividadesExtrasAcEx_UsuarioCreacionNavigation = new HashSet<tbActividadesExtras>();
             tbActividadesExtrasAcEx_UsuarioModificaNavigation = new HashSet<tbActividadesExtras>();
             tbCategoriasHabitacionesCaHa_UsuarioCreacionNavigation = new HashSet<tbCategoriasHabitaciones>();
@@ -110,8 +110,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbUsuarios Usua_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbUsuarios> InverseUsua_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbUsuarios> InverseUsua_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbActividades> tbActividadesActc_UsuarioCreacionNavigation { get; set; }
-        public virtual ICollection<tbActividades> tbActividadesActc_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbActividades> tbActividadesActv_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbActividades> tbActividadesActv_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbActividadesExtras> tbActividadesExtrasAcEx_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbActividadesExtras> tbActividadesExtrasAcEx_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbCategoriasHabitaciones> tbCategoriasHabitacionesCaHa_UsuarioCreacionNavigation { get; set; }

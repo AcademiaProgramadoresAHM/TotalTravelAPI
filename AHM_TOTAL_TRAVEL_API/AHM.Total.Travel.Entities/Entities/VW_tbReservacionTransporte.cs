@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_ReservacionTransporte
+    public partial class VW_tbReservacionTransporte
     {
         public int Id { get; set; }
         public int? Capacidad { get; set; }

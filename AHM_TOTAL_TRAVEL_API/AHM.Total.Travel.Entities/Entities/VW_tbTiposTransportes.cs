@@ -5,13 +5,10 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_ReservacionRestaurante
+    public partial class VW_tbTiposTransportes
     {
-        public int Id { get; set; }
-        public int? Numero_Reservacacion { get; set; }
-        public string Restaurante { get; set; }
-        public DateTime? Fecha_Reservacion { get; set; }
-        public string Hora_Reservacion { get; set; }
+        public int ID { get; set; }
+        public string Trasporte { get; set; }
         public int? Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
         public int? Usuario_Modifica { get; set; }

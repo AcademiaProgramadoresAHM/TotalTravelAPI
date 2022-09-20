@@ -191,6 +191,18 @@
          "ObjectType": 3
       },
       {
+         "Name": "[Htel].[VW_tbHabitaciones]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Htel].[VW_tbHoteles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Htel].[VW_tbHotelesActividades]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Htel].[VW_tbHotelesMenus]",
          "ObjectType": 3
       },
@@ -203,19 +215,51 @@
          "ObjectType": 3
       },
       {
-         "Name": "[Resv].[VW_ReservacionRestaurante]",
+         "Name": "[Resv].[VW_tbReservacionesActividadesExtras]",
          "ObjectType": 3
       },
       {
-         "Name": "[Resv].[VW_ReservacionTransporte]",
+         "Name": "[Resv].[VW_tbReservacionesActividadesHoteles]",
          "ObjectType": 3
       },
       {
-         "Name": "[Sale].[VW_PaquetePredeterminados]",
+         "Name": "[Resv].[VW_tbReservacionesDetalles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_tbReservacionRestaurante]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_tbReservacionTransporte]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_tbPaquetePredeterminados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_tbPaquetePredeterminadosDetalles]",
          "ObjectType": 3
       },
       {
          "Name": "[Sale].[VW_tbTiposPagos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbDestinosTransportes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbDetallesTransportes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbHorariosTransportes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbTiposTransportes]",
          "ObjectType": 3
       },
       {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_PaquetePredeterminados
+    public partial class VW_tbPaquetePredeterminados
     {
         public int Id { get; set; }
         public string Nombre { get; set; }

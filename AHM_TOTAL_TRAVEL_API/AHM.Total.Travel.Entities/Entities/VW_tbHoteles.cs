@@ -5,10 +5,13 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_tbRoles
+    public partial class VW_tbHoteles
     {
         public int ID { get; set; }
+        public string Hotel { get; set; }
         public string Descripcion { get; set; }
+        public string Direccion { get; set; }
+        public string Partners { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
         public string UsuarioModifica { get; set; }

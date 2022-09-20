@@ -17,7 +17,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? HoTr_ID { get; set; }
         public int? DeTr_Capacidad { get; set; }
         public decimal? DeTr_Precio { get; set; }
-        public string Tprt_Matricula { get; set; }
+        public string DeTr_Matricula { get; set; }
         public int? DeTr_UsuarioCreacion { get; set; }
         public DateTime? DeTr_FechaCreacion { get; set; }
         public int? DeTr_UsuarioModifica { get; set; }

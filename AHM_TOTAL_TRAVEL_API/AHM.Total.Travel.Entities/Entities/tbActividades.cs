@@ -15,16 +15,16 @@ namespace AHM.Total.Travel.Entities.Entities
         }
 
         public int Actv_ID { get; set; }
-        public string Actc_Descripcion { get; set; }
+        public string Actv_Descripcion { get; set; }
         public int? TiAc_ID { get; set; }
-        public int? Actc_UsuarioCreacion { get; set; }
-        public DateTime? Actc_FechaCreacion { get; set; }
-        public int? Actc_UsuarioModifica { get; set; }
-        public DateTime? Actc_FechaModifica { get; set; }
-        public bool? Actc_Estado { get; set; }
+        public int? Actv_UsuarioCreacion { get; set; }
+        public DateTime? Actv_FechaCreacion { get; set; }
+        public int? Actv_UsuarioModifica { get; set; }
+        public DateTime? Actv_FechaModifica { get; set; }
+        public bool? Actv_Estado { get; set; }
 
-        public virtual tbUsuarios Actc_UsuarioCreacionNavigation { get; set; }
-        public virtual tbUsuarios Actc_UsuarioModificaNavigation { get; set; }
+        public virtual tbUsuarios Actv_UsuarioCreacionNavigation { get; set; }
+        public virtual tbUsuarios Actv_UsuarioModificaNavigation { get; set; }
         public virtual tbTiposActividades TiAc { get; set; }
         public virtual ICollection<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual ICollection<tbHotelesActividades> tbHotelesActividades { get; set; }
