@@ -67,5 +67,42 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
+        #region Permisos
+
+        public static string UDP_tbPermisos_Insert = "Acce.UDP_tbPermisos_INSERT";
+
+        public static string UDP_tbPermisos_Update = "Acce.UDP_tbPermisos_UPDATE";
+
+        public static string UDP_tbPermisos_Delete = "Acce.UDP_tbPermisos_DELETE";
+
+        public static string UDP_tbPermisos_Find = "Acce.UDP_tbPermisos_FIND";
+
+
+        #endregion
+
+        #region Roles
+
+        public static string UDP_tbRoles_Insert = "Acce.UDP_tbRoles_Insert";
+
+        public static string UDP_tbRoles_Update = "Acce.UDP_tbRoles_Update";
+
+        public static string UDP_tbRoles_Delete = "Acce.UDP_tbRoles_Delete";
+
+        public static string UDP_tbRoles_Find = "Acce.UDP_tbRoles_Find";
+
+        #endregion
+
+        #region RolesPermisos
+
+        public static string UDP_tbRolesPermisos_Insert = "Acce.UDP_tbRolesPermisos_Insert";
+
+        public static string UDP_tbRolesPermisos_Update = "Acce.UDP_tbRolesPermisos_Update";
+
+        public static string UDP_tbRolesPermisos_Delete = "Acce.UDP_tbRolesPermisos_Delete";
+
+        public static string UDP_tbRolesPermisos_Find = "Acce.UDP_tbRolesPermisos_Find";
+
+        #endregion
+
     }
 }
