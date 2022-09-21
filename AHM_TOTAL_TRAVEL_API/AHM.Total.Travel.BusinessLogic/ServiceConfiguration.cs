@@ -12,7 +12,13 @@ namespace AHM.Total.Travel.BusinessLogic
     {
         public static void DataAccess(this IServiceCollection services, string connectionString)
         {
+            //General
             services.AddScoped<CiudadesRepository>();
+
+            //Sales
+            services.AddScoped<PaquetePredeterminadosDetallesRepository>();
+            services.AddScoped<TiposPagosRepository>();
+            services.AddScoped<PaquetePredeterminadosRepository>();
             TotalTravelContext.BuildConnectionString(connectionString);
         }
         public static void BusinessLogic(this IServiceCollection services)

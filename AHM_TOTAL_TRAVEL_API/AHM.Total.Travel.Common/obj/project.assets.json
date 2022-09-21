@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "AHM.Total.Travel.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/AHM.Total.Travel.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AHM.Total.Travel.Entities.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "AHM.Total.Travel.Entities/1.0.0": {
+      "type": "project",
+      "path": "../AHM.Total.Travel.Entities/AHM.Total.Travel.Entities.csproj",
+      "msbuildProject": "../AHM.Total.Travel.Entities/AHM.Total.Travel.Entities.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "AHM.Total.Travel.Entities >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\andre\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj": {
+              "projectPath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
