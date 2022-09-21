@@ -1,7 +1,4 @@
-﻿using AHM.Total.Travel.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace AHM.Total.Travel.Common.Models
 {

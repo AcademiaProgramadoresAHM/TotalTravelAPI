@@ -26,7 +26,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbPartners Find(int? id)
         {
-            return DB.VW_tbPartners.Where(x => x.ID == id).FirstOrDefault();
+            return DB.VW_tbPartners.Where(x => x.Part_ID == id).FirstOrDefault();
         }
 
         public int Insert(tbPartners item)

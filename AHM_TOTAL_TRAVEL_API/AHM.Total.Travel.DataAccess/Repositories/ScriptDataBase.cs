@@ -25,7 +25,6 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
-
         #region RestauranteReservaciones
         public static string UDP_tbReservacionRestaurantes_Insert = "Resv.UDP_tbReservacionRestaurantes_Insert";
 
@@ -35,8 +34,6 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbReservacionRestaurantes_Find = "Resv.UDP_tbReservacionRestaurantes_Find";
         #endregion
-
-
 
         #region ReservacionTransporte
         public static string UDP_tbReservacionTransporte_Insert = "Resv.UDP_tbReservacionTransporte_Insert";
@@ -172,6 +169,14 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbCategoriasHabitaciones_Delete = "Htel.UDP_tbCategoriasHabitaciones_Delete";
 
         public static string UDP_tbCategoriasHabitaciones_Find = "Htel.UDP_tbCategoriasHabitaciones_Find";
+        #endregion
+
+        #region PaquetePredeterminadosDetalles
+        public static string UDP_tbPaquetePredeterminadosDetalles_Insert = "Sale.UDP_tbPaquetePredeterminadosDetalles_INSERT";
+
+        public static string UDP_tbPaquetePredeterminadosDetalles_Update = "Sale.UDP_tbPaquetePredeterminadosDetalles_UPDATE";
+
+        public static string UDP_tbPaquetePredeterminadosDetalles_Delete = "Sale.UDP_tbPaquetePredeterminadosDetalles_DELETE";
         #endregion
     }
 }

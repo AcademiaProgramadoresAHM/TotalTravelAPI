@@ -11,12 +11,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     {
         private readonly PaquetePredeterminadosRepository _paquetepredeterminadosRepository;
         private readonly TiposPagosRepository _tipospagosRepository;
+        private readonly PaquetePredeterminadosDetallesRepository _paquetePredeterminadosDetallesRepository;
 
         public SaleService(PaquetePredeterminadosRepository paquetepredeterminados,
-            TiposPagosRepository tipospagos)
+            TiposPagosRepository tipospagos, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetalles)
         {
             _paquetepredeterminadosRepository = paquetepredeterminados;
             _tipospagosRepository = tipospagos;
+            _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetalles;
         }
 
         #region PaquetesPredeterminados
@@ -214,6 +216,109 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 city = _tipospagosRepository.Find(id);
+                return result.Ok(city);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
+
+        #endregion
+
+        #region PaquetesPredeterminadosDetalles
+        //LISTADO
+        public ServiceResult ListPackage()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _paquetePredeterminadosDetallesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreatePaquetesDetalles(tbPaquetePredeterminadosDetalles item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _paquetePredeterminadosDetallesRepository.Insert(item);
+                if (map > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                    return result.Error();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdatePaquetesDetalles(int id, tbPaquetePredeterminadosDetalles paquetePredeterminadosDetalles)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var list = _paquetePredeterminadosDetallesRepository.Update(paquetePredeterminadosDetalles, id);
+                    return result.Ok(list);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeletePaquetesDetalles(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var listado = _paquetePredeterminadosDetallesRepository.Delete(id, Mod);
+                    return result.Ok(listado);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindPaquetesDetalles(int id)
+        {
+            var result = new ServiceResult();
+            var city = new VW_tbPaquetePredeterminadosDetalles();
+            try
+            {
+                city = _paquetePredeterminadosDetallesRepository.Find(id);
                 return result.Ok(city);
             }
             catch (Exception ex)
