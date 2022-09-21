@@ -1,7 +1,4 @@
-﻿using AHM.Total.Travel.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace AHM.Total.Travel.Common.Models
 {
@@ -17,11 +14,5 @@ namespace AHM.Total.Travel.Common.Models
         public DateTime? Tprt_FechaModifica { get; set; }
         public bool? Tprt_Estado { get; set; }
 
-        public virtual tbDirecciones Dire { get; set; }
-        public virtual tbPartners Part { get; set; }
-        public virtual tbTiposTransportes Tprt { get; set; }
-        public virtual tbUsuarios Tprt_UsuarioCreacionNavigation { get; set; }
-        public virtual tbUsuarios Tprt_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbDetallesTransportes> tbDetallesTransportes { get; set; }
     }
 }
