@@ -204,5 +204,23 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbReservacionesDetalles_Delete = "Resv.UDP_tbReservacionesDetalles_Delete";
         #endregion
+
+        #region TiposMenu 
+            public static string UDP_tbTipoMenus_Delete = "Rest.UDP_tbTipoMenus_Delete";
+            public static string UDP_tbTipoMenus_Insert = "Rest.UDP_tbTipoMenus_Insert";
+            public static string UDP_tbTipoMenus_Update = "Rest.UDP_tbTipoMenus_Update";
+        #endregion
+
+        #region RegistrosPagos
+            public static string UDP_tbRegistrosPagos_Delete = "Resv.UDP_tbRegistrosPagos_Delete";
+            public static string UDP_tbRegistrosPagos_Insert = "Resv.UDP_tbRegistrosPagos_Insert";
+        #endregion
+
+        #region Reservaciones
+            public static string UDP_tbReservaciones_Delete = "Resv.UDP_tbReservaciones_Delete";
+            public static string UDP_tbReservaciones_Insert = "Resv.UDP_tbReservaciones_Insert";
+            public static string UDP_tbReservaciones_Update = "Resv.UDP_tbReservaciones_Update"; 
+             public static string UDP_tbReservaciones_Confirmaciones = "Resv.UDP_tbReservaciones_Confirmaciones";
+        #endregion
     }
 }
