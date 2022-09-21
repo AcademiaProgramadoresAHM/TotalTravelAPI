@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AHM.Total.Travel.Common.Models
+{
+    public class HabitacionesViewModel
+    {
+        public int Habi_ID { get; set; }
+        public string Habi_Nombre { get; set; }
+        public string Habi_Descripcion { get; set; }
+        public int? CaHa_ID { get; set; }
+        public int? Hote_ID { get; set; }
+        public decimal? Habi_Precio { get; set; }
+        public int? Habi_UsuarioCreacion { get; set; }
+        public DateTime? Habi_FechaCreacion { get; set; }
+        public int? Habi_UsuarioModifica { get; set; }
+        public DateTime? Habi_FechaModifica { get; set; }
+        public bool? Habi_Estado { get; set; }
+    }
+}
