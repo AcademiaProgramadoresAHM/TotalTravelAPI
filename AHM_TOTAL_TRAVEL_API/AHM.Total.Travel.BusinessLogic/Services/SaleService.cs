@@ -23,7 +23,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #region PaquetesPredeterminados
         //LISTADO
-        public ServiceResult ListCities()
+        public ServiceResult Listpackages()
         {
             var result = new ServiceResult();
             try
@@ -38,7 +38,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreatePaquetes(tbPaquetePredeterminados item)
+        public ServiceResult Createpackages(tbPaquetePredeterminados item)
         {
 
             var result = new ServiceResult();
@@ -60,7 +60,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdatePaquetes(int id, tbPaquetePredeterminados tbPaquetePredeterminados)
+        public ServiceResult Updatepackages(int id, tbPaquetePredeterminados tbPaquetePredeterminados)
         {
             var result = new ServiceResult();
             try
@@ -83,7 +83,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeletePaquetes(int id, int Mod)
+        public ServiceResult Deletepackages(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -106,7 +106,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindPaquetes(int id)
+        public ServiceResult FindPackage(int id)
         {
             var result = new ServiceResult();
             var city = new VW_tbPaquetePredeterminados();
@@ -126,7 +126,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #region TipoPagos
         //LISTADO
-        public ServiceResult ListCitive()
+        public ServiceResult Listpayment()
         {
             var result = new ServiceResult();
             try
@@ -141,7 +141,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateTipopago(tbTiposPagos item)
+        public ServiceResult Createpayment(tbTiposPagos item)
         {
 
             var result = new ServiceResult();
@@ -156,14 +156,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 else
                     return result.Error();
             }
-            catch (Exception ex)
+             catch (Exception ex)
             {
 
                 return result.Error(ex.Message);
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateTipopago(int id, tbTiposPagos tbTiposPagos)
+        public ServiceResult Updatepayment(int id, tbTiposPagos tbTiposPagos)
         {
             var result = new ServiceResult();
             try
@@ -186,7 +186,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeleteTipopago(int id, int Mod)
+        public ServiceResult Deletepayment(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -209,7 +209,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindTipoPago(int id)
+        public ServiceResult Findpayment(int id)
         {
             var result = new ServiceResult();
             var city = new VW_tbTiposPagos();
@@ -229,7 +229,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #region PaquetesPredeterminadosDetalles
         //LISTADO
-        public ServiceResult ListPackage()
+        public ServiceResult ListPackagesdetail()
         {
             var result = new ServiceResult();
             try
@@ -244,7 +244,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreatePaquetesDetalles(tbPaquetePredeterminadosDetalles item)
+        public ServiceResult CreatePackagesdetail(tbPaquetePredeterminadosDetalles item)
         {
 
             var result = new ServiceResult();
@@ -266,7 +266,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdatePaquetesDetalles(int id, tbPaquetePredeterminadosDetalles paquetePredeterminadosDetalles)
+        public ServiceResult UpdatePackagesdetail(int id, tbPaquetePredeterminadosDetalles paquetePredeterminadosDetalles)
         {
             var result = new ServiceResult();
             try
@@ -289,7 +289,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeletePaquetesDetalles(int id, int Mod)
+        public ServiceResult DeletePackagesdetail(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -312,7 +312,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindPaquetesDetalles(int id)
+        public ServiceResult FindPackagesdetail(int id)
         {
             var result = new ServiceResult();
             var city = new VW_tbPaquetePredeterminadosDetalles();
