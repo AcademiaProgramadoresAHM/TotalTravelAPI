@@ -7,28 +7,27 @@ using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
-    public class SaleService
+    public class ActivitiesServices
     {
-        private readonly PaquetePredeterminadosRepository _paquetepredeterminadosRepository;
-        private readonly TiposPagosRepository _tipospagosRepository;
-        private readonly PaquetePredeterminadosDetallesRepository _paquetePredeterminadosDetallesRepository;
+        private readonly ActividadesRepository _actividadesRepository;
+        private readonly ActividadesExtrasRepository _actividadesExtrasRepository;
+        private readonly TiposActividadesRepository _tiposActividadesRepository;
 
-        public SaleService(PaquetePredeterminadosRepository paquetepredeterminados,
-            TiposPagosRepository tipospagos, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetalles)
+        public ActivitiesServices( ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
         {
-            _paquetepredeterminadosRepository = paquetepredeterminados;
-            _tipospagosRepository = tipospagos;
-            _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetalles;
+            _actividadesRepository = actividades;
+            _actividadesExtrasRepository = actividadesExtras;
+            _tiposActividadesRepository = tiposActividades;
         }
-
-        #region PaquetesPredeterminados
+      
+        #region Actividades
         //LISTADO
-        public ServiceResult Listpackages()
+        public ServiceResult ListActivities()
         {
             var result = new ServiceResult();
             try
             {
-                var list = _paquetepredeterminadosRepository.List();
+                var list = _actividadesRepository.List();
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -38,13 +37,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult Createpackages(tbPaquetePredeterminados item)
+        public ServiceResult CreateActivity(tbCiudades item)
         {
 
             var result = new ServiceResult();
             try
             {
-                var map = _paquetepredeterminadosRepository.Insert(item);
+                var map = _actividadesRepository.Insert(item);
                 if (map > 0)
                 {
 
@@ -60,15 +59,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult Updatepackages(int id, tbPaquetePredeterminados tbPaquetePredeterminados)
+        public ServiceResult UpdateActivity(int id, tbActividades tbActividades)
         {
             var result = new ServiceResult();
             try
             {
-                var itemID = _paquetepredeterminadosRepository.Find(id);
+                var itemID = _actividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _paquetepredeterminadosRepository.Update(tbPaquetePredeterminados, id);
+                    var list = _actividadesRepository.Update(tbActividades, id);
                     return result.Ok(list);
 
                 }
@@ -83,15 +82,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult Deletepackages(int id, int Mod)
+        public ServiceResult DeleteActivity(int id, int Mod)
         {
             var result = new ServiceResult();
             try
             {
-                var itemID = _paquetepredeterminadosRepository.Find(id);
+                var itemID = _actividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _paquetepredeterminadosRepository.Delete(id, Mod);
+                    var listado = _actividadesRepository.Delete(id, Mod);
                     return result.Ok(listado);
 
                 }
@@ -106,14 +105,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindPackage(int id)
+        public ServiceResult FindActivity(int id)
         {
             var result = new ServiceResult();
-            var city = new VW_tbPaquetePredeterminados();
+            var activity = new VW_tbActividades();
             try
             {
-                city = _paquetepredeterminadosRepository.Find(id);
-                return result.Ok(city);
+                activity = _actividadesRepository.Find(id);
+                return result.Ok(activity);
             }
             catch (Exception ex)
             {
@@ -124,14 +123,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #endregion
 
-        #region TipoPagos
+        #region ActividadesExtras
         //LISTADO
-        public ServiceResult Listpayment()
+        public ServiceResult ListActiExt()
         {
             var result = new ServiceResult();
             try
             {
-                var list = _tipospagosRepository.List();
+                var list = _actividadesExtrasRepository.List();
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -141,116 +140,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult Createpayment(tbTiposPagos item)
+        public ServiceResult CreateActiExt(tbActividadesExtras item)
         {
 
             var result = new ServiceResult();
             try
             {
-                var map = _tipospagosRepository.Insert(item);
-                if (map > 0)
-                {
-
-                    return result.Ok(map);
-                }
-                else
-                    return result.Error();
-            }
-             catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
-        }
-        //ACTUALIZAR
-        public ServiceResult Updatepayment(int id, tbTiposPagos tbTiposPagos)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var itemID = _tipospagosRepository.Find(id);
-                if (itemID != null)
-                {
-                    var list = _tipospagosRepository.Update(tbTiposPagos, id);
-                    return result.Ok(list);
-
-                }
-                else
-                {
-                    return result.Error("Los datos ingresados son incorrectos");
-                }
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
-        }
-        //ELIMINAR
-        public ServiceResult Deletepayment(int id, int Mod)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var itemID = _tipospagosRepository.Find(id);
-                if (itemID != null)
-                {
-                    var listado = _paquetepredeterminadosRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
-                }
-                else
-                {
-                    return result.Error("Los datos ingresados son incorrectos");
-                }
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
-        }
-        //BUSCAR
-        public ServiceResult Findpayment(int id)
-        {
-            var result = new ServiceResult();
-            var city = new VW_tbTiposPagos();
-            try
-            {
-                city = _tipospagosRepository.Find(id);
-                return result.Ok(city);
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
-
-        }
-
-        #endregion
-
-        #region PaquetesPredeterminadosDetalles
-        //LISTADO
-        public ServiceResult ListPackagesdetail()
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var list = _paquetePredeterminadosDetallesRepository.List();
-                return result.Ok(list);
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
-        }
-
-        //CREAR
-        public ServiceResult CreatePackagesdetail(tbPaquetePredeterminadosDetalles item)
-        {
-
-            var result = new ServiceResult();
-            try
-            {
-                var map = _paquetePredeterminadosDetallesRepository.Insert(item);
+                var map = _actividadesExtrasRepository.Insert(item);
                 if (map > 0)
                 {
 
@@ -266,15 +162,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdatePackagesdetail(int id, tbPaquetePredeterminadosDetalles paquetePredeterminadosDetalles)
+        public ServiceResult UpdateActiExt(int id, tbActividadesExtras tbActividadesExtras)
         {
             var result = new ServiceResult();
             try
             {
-                var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
+                var itemID = _actividadesExtrasRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _paquetePredeterminadosDetallesRepository.Update(paquetePredeterminadosDetalles, id);
+                    var list = _actividadesExtrasRepository.Update(tbActividadesExtras, id);
                     return result.Ok(list);
 
                 }
@@ -289,15 +185,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeletePackagesdetail(int id, int Mod)
+        public ServiceResult DeleteActiExt(int id, int Mod)
         {
             var result = new ServiceResult();
             try
             {
-                var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
+                var itemID = _actividadesExtrasRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _paquetePredeterminadosDetallesRepository.Delete(id, Mod);
+                    var listado = _actividadesExtrasRepository.Delete(id, Mod);
                     return result.Ok(listado);
 
                 }
@@ -312,14 +208,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindPackagesdetail(int id)
+        public ServiceResult FindActiExt(int id)
         {
             var result = new ServiceResult();
-            var city = new VW_tbPaquetePredeterminadosDetalles();
+            var actExt = new VW_tbActividadesExtras();
             try
             {
-                city = _paquetePredeterminadosDetallesRepository.Find(id);
-                return result.Ok(city);
+                actExt = _actividadesExtrasRepository.Find(id);
+                return result.Ok(actExt);
             }
             catch (Exception ex)
             {
@@ -330,6 +226,108 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #endregion
 
+        
+        #region TiposActividades
+        //LISTADO
+        public ServiceResult ListActTyp()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _tiposActividadesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
 
+        //CREAR
+        public ServiceResult CreateActTyp(tbTiposActividades item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _tiposActividadesRepository.Insert(item);
+                if (map > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                    return result.Error();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdateActTyp(int id, tbTiposActividades tbTiposActividades)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _tiposActividadesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var list = _tiposActividadesRepository.Update(tbTiposActividades, id);
+                    return result.Ok(list);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeleteActTyp(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _tiposActividadesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var listado = _tiposActividadesRepository.Delete(id, Mod);
+                    return result.Ok(listado);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindActTyp(int id)
+        {
+            var result = new ServiceResult();
+            var actTyp = new VW_tbTiposActividades();
+            try
+            {
+                actTyp = _tiposActividadesRepository.Find(id);
+                return result.Ok(actTyp);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
+
+        #endregion
     }
 }

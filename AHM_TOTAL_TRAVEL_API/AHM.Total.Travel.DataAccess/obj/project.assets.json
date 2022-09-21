@@ -1488,6 +1488,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "AHM.Total.Travel.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/AHM.Total.Travel.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AHM.Total.Travel.Entities.dll": {}
+        }
       }
     }
   },
@@ -5731,10 +5741,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "AHM.Total.Travel.Entities/1.0.0": {
+      "type": "project",
+      "path": "../AHM.Total.Travel.Entities/AHM.Total.Travel.Entities.csproj",
+      "msbuildProject": "../AHM.Total.Travel.Entities/AHM.Total.Travel.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "AHM.Total.Travel.Entities >= 1.0.0",
       "Dapper >= 2.0.123",
       "Microsoft.EntityFrameworkCore >= 5.0.17",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.17"
@@ -5771,7 +5787,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj": {
+              "projectPath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

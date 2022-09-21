@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AHM.Total.Travel.Entities\AHM.Total.Travel.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

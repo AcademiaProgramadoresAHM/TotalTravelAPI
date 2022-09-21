@@ -2948,6 +2948,9 @@
       "AHM.Total.Travel.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "AHM.Total.Travel.Entities": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/AHM.Total.Travel.Common.dll": {}
         },
