@@ -5,10 +5,20 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_tbCategoriasHabitaciones
+    public partial class VW_tbRegistrosPagos
     {
         public int ID { get; set; }
-        public string Descripcion { get; set; }
+        public decimal? MontoPago { get; set; }
+        public DateTime? fechaPago { get; set; }
+        public int Id_TipoPago { get; set; }
+        public string TipoPago { get; set; }
+        public int Id_Reservacion { get; set; }
+        public int? Id_Paquete { get; set; }
+        public int Id_Cliente { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string DNI { get; set; }
+        public string Telefono { get; set; }
         public int? Id_UsuarioCrea { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCreacion { get; set; }
