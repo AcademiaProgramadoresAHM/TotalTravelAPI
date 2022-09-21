@@ -9,7 +9,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    public class ReservacionTransporteRepository : IRepository<tbReservacionTransporte, VW_ReservacionTransporte>
+    public class ReservacionTransporteRepository : IRepository<tbReservacionTransporte, VW_tbReservacionTransporte>
     {
         TotalTravelContext DB = new TotalTravelContext();
 
@@ -24,9 +24,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionTransporte_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public VW_ReservacionTransporte Find(int? id)
+        public VW_tbReservacionTransporte Find(int? id)
         {
-            return DB.VW_ReservacionTransporte.Where(x => x.Id == id).FirstOrDefault();
+            return DB.VW_tbReservacionTransporte.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public int Insert(tbReservacionTransporte item)
@@ -44,9 +44,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionTransporte_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public IEnumerable<VW_ReservacionTransporte> List()
+        public IEnumerable<VW_tbReservacionTransporte> List()
         {
-            return DB.VW_ReservacionTransporte.AsList();
+            return DB.VW_tbReservacionTransporte.AsList();
         }
 
         public int Update(tbReservacionTransporte item, int id)

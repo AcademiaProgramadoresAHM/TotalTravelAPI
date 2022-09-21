@@ -8,7 +8,6 @@
    "ModelNamespace": null,
    "OutputContextPath": null,
    "OutputPath": "Entities",
-   "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "AHM.Total.Travel.Entities",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
@@ -167,6 +166,18 @@
          "ObjectType": 3
       },
       {
+         "Name": "[Acce].[VW_tbUsuarios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Actv].[VW_tbActividades]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Actv].[VW_tbActividadesExtras]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Actv].[VW_tbTiposActividades]",
          "ObjectType": 3
       },
@@ -212,6 +223,18 @@
       },
       {
          "Name": "[Rest].[VW_tbRestaurantes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Rest].[VW_tbTiposMenus]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_tbRegistrosPagos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Resv].[VW_tbReservaciones]",
          "ObjectType": 3
       },
       {
@@ -284,6 +307,5 @@
    "UseNodaTime": false,
    "UseNullableReferences": false,
    "UseSchemaFolders": false,
-   "UseSpatial": false,
-   "UseT4": false
+   "UseSpatial": false
 }
