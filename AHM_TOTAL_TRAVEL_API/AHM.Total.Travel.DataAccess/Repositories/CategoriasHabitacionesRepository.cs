@@ -42,7 +42,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public IEnumerable<VW_tbCategoriasHabitaciones> List()
         {
-            return (IEnumerable<VW_tbCategoriasHabitaciones>)DB.VW_tbCategoriasHabitaciones.AsList();
+            return DB.VW_tbCategoriasHabitaciones.AsList();
         }
 
         public int Update(tbCategoriasHabitaciones item, int id)
