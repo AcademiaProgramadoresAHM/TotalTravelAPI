@@ -12,12 +12,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly HotelesRepository _hotelesRepository;
         private readonly HotelesActividadesRepository _hotelesActividadesRepository;
         private readonly HabitacionesRepository _habitacionesRepository;
+        private readonly HotelesMenusRepository _hotelesMenusRepository;
 
-    public HotelService(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository, HabitacionesRepository habitacionesRepository)
+    public HotelService(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository, HabitacionesRepository habitacionesRepository, HotelesMenusRepository hotelesMenusRepository)
         {
             _hotelesRepository = hotelesRepository;
             _hotelesActividadesRepository = hotelesActividadesRepository;
             _habitacionesRepository = habitacionesRepository;
+            _hotelesMenusRepository = hotelesMenusRepository;
         }
 
         #region Hoteles
@@ -314,6 +316,108 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 habitaciones = _habitacionesRepository.Find(id);
                 return result.Ok(habitaciones);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
+
+        #endregion
+
+        #region HotelesMenus
+        public ServiceResult ListHotelesMenus()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _hotelesMenusRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreateHotelesMenus(tbHotelesMenus item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _hotelesMenusRepository.Insert(item);
+                if (map > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                    return result.Error();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdateHotelesMenus(int id, tbHotelesMenus tbHotelesMenus)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _hotelesMenusRepository.Find(id);
+                if (itemID != null)
+                {
+                    var list = _hotelesMenusRepository.Update(tbHotelesMenus, id);
+                    return result.Ok(list);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeleteHotelesMenus(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _hotelesMenusRepository.Find(id);
+                if (itemID != null)
+                {
+                    var listado = _hotelesMenusRepository.Delete(id, Mod);
+                    return result.Ok(listado);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindHotelesMenus(int id)
+        {
+            var result = new ServiceResult();
+            var hotelesmenus = new VW_tbHotelesMenus();
+            try
+            {
+                hotelesmenus = _hotelesMenusRepository.Find(id);
+                return result.Ok(hotelesmenus);
             }
             catch (Exception ex)
             {
