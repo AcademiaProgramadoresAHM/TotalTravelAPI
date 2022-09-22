@@ -9,7 +9,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    class RolesPermisosRepository : IRepository<tbRolesPermisos, VW_tbRolesPermisos>
+    public class RolesPermisosRepository : IRepository<tbRolesPermisos, VW_tbRolesPermisos>
     {
         TotalTravelContext DB = new TotalTravelContext();
         public int Delete(int Id, int Mod)
