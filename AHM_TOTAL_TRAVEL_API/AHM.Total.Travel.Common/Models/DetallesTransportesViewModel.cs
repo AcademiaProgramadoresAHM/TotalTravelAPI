@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.Common.Models
 {
-    class DetallesTransportesViewModel
+    public class DetallesTransportesViewModel
     {
         public int ID { get; set; }
         public string Transporte { get; set; }

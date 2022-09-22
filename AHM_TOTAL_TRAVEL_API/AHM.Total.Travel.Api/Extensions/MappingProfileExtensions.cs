@@ -13,6 +13,39 @@ namespace AHM.Total.Travel.Api.Extensions
         public MappingProfileExtensions()
         {
             CreateMap<CiudadesViewModel, tbCiudades>().ReverseMap();
+            CreateMap<ActividadesExtrasViewModel, tbActividadesExtras>().ReverseMap();
+            CreateMap<ActividadesViewModel, tbActividades>().ReverseMap();
+            CreateMap<CategoriasHabitacionesViewModel, tbCategoriasHabitaciones>().ReverseMap();
+            CreateMap<DetallesTransportesViewModel, tbDetallesTransportes>().ReverseMap();
+            CreateMap<DireccionesViewModel, tbDirecciones>().ReverseMap();
+            CreateMap<HabitacionesViewModel, tbHabitaciones>().ReverseMap();
+            CreateMap<HorariosTransportesViewModel, tbHorariosTransportes>().ReverseMap();
+            CreateMap<HotelesActividadesViewModel, tbHotelesActividades>().ReverseMap();
+            CreateMap<HotelesViewModel, tbHoteles>().ReverseMap();
+            CreateMap<PaisesViewModel, tbPaises>().ReverseMap();
+            CreateMap<PaquetePredeterminadosDetallesViewModel, tbPaquetePredeterminadosDetalles>().ReverseMap();
+            CreateMap<PaquetePredeterminadosViewModel, tbPaquetePredeterminados>().ReverseMap();
+            CreateMap<PartnersViewModel, tbPartners>().ReverseMap();
+            CreateMap<PermisosViewModel, tbPermisos>().ReverseMap();
+            CreateMap<RegistrosPagosViewModel, tbRegistrosPagos>().ReverseMap();
+            CreateMap<ReservacionesActividadesExtrasViewModel, tbReservacionesActividadesExtras>().ReverseMap();
+            CreateMap<ReservacionesActividadesHotelesViewModel, tbReservacionesActividadesHoteles>().ReverseMap();
+            CreateMap<ReservacionesDetallesViewModel, tbReservacionesDetalles>().ReverseMap();
+            CreateMap<ReservacionesDetallesViewModel, tbReservacionesDetalles>().ReverseMap();
+            CreateMap<ReservacionesViewModel, tbReservaciones>().ReverseMap();
+            CreateMap<ReservacionesDetallesViewModel, tbReservacionesDetalles>().ReverseMap();
+            CreateMap<ReservacionRestaurantesViewModel, tbReservacionRestaurantes>().ReverseMap();
+            CreateMap<ReservacionTransporteViewModel, tbReservacionTransporte>().ReverseMap();
+            CreateMap<ReservacionTransporteViewModel, tbReservacionTransporte>().ReverseMap();
+            CreateMap<RolesPermisosViewModel, tbRolesPermisos>().ReverseMap();
+            CreateMap<RolesViewModel, tbRoles>().ReverseMap();
+            CreateMap<TipoMenusViewModel, tbTipoMenus>().ReverseMap();
+            CreateMap<TiposActividades, tbTiposActividades>().ReverseMap();
+            CreateMap<TiposPagosViewModel, tbTiposPagos>().ReverseMap();
+            CreateMap<TiposTransportesViewModel, tbTiposTransportes>().ReverseMap();
+            CreateMap<TransportesViewModel, tbTransportes>().ReverseMap();
+            CreateMap<UsuariosViewModel, tbUsuarios>().ReverseMap();
+
         }
     }
 }
