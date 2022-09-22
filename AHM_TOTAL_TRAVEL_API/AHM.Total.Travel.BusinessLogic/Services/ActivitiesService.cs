@@ -225,8 +225,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #endregion
-
-        
+      
         #region TiposActividades
         //LISTADO
         public ServiceResult ListActTyp()
