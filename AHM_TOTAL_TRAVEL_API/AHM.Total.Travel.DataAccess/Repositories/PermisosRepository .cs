@@ -50,7 +50,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbPermisos item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Perm_ID", item.Perm_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Perm_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Perm_Icono", item.Perm_Icono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.Int32, ParameterDirection.Input);

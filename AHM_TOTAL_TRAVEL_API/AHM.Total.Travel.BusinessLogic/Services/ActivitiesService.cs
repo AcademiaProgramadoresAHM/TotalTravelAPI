@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateActivity(tbCiudades item)
+        public ServiceResult CreateActivity(tbActividades item)
         {
 
             var result = new ServiceResult();

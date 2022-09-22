@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
 
             var parameters = new DynamicParameters();
-            parameters.Add("@ID", item.RoPe_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Perm_ID", item.Perm_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rol_ID", item.Role_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", item.RoPe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

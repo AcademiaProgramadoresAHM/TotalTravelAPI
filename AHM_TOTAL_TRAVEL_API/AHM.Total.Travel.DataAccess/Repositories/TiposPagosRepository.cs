@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbTiposPagos item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@TiPa_Id", item.TiPa_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@TiPa_Id", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiPa_Descripcion", item.TiPa_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Usuario_Modifica", item.TiPa_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);

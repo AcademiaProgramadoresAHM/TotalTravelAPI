@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbPaquetePredeterminadosDetalles item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@PaDe_ID", item.PaDe_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PaDe_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Paqu_ID", item.Paqu_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@PaDe_UsuarioModifica", item.PaDe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

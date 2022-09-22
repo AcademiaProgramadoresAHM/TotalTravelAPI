@@ -52,7 +52,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbMenus item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Menu_ID", item.Menu_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Menu_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Time_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Menu_Descripcion", item.Menu_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Menu_Nombre", item.Menu_Nombre, DbType.String, ParameterDirection.Input);
