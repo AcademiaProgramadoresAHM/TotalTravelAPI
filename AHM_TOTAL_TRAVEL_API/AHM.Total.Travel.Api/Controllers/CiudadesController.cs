@@ -39,9 +39,7 @@ namespace AHM.Total.Travel.Api.Controllers
                 var item = _mapper.Map<tbCiudades>(items);
                 var result = _generalService.UpdateCity(id, item);
                 return Ok(result);
-
-
-            
+ 
         }
 
         [HttpDelete("Delete")]

@@ -17,7 +17,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Ciud_ID", ID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@CiudUsuarioModifica", Mod, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Ciud_UsuarioModifica", Mod, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -49,7 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbCiudades item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Ciud_ID", item.Ciud_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Ciud_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Ciud_Descripcion", item.Ciud_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_ID", item.Pais_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Ciud_UsuarioModifica", item.Ciud_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
