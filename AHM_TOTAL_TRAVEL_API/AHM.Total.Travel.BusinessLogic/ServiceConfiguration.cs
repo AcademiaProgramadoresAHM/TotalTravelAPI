@@ -14,12 +14,18 @@ namespace AHM.Total.Travel.BusinessLogic
         {
             //General
             services.AddScoped<CiudadesRepository>();
+            services.AddScoped<DireccionesRepository>();
+            services.AddScoped<PaisesRepository>();
+            services.AddScoped<PartnersRepository>();
 
             //Sales
             services.AddScoped<PaquetePredeterminadosDetallesRepository>();
             services.AddScoped<TiposPagosRepository>();
             services.AddScoped<PaquetePredeterminadosRepository>();
             TotalTravelContext.BuildConnectionString(connectionString);
+            //Activities
+            //Hotel
+            //Transport
         }
         public static void BusinessLogic(this IServiceCollection services)
         {

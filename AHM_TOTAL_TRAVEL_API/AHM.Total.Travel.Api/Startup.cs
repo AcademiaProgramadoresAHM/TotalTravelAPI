@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.Api
 
             app.UseHttpsRedirection();
             app.UseCors(options =>
-            options.WithOrigins("http://localhost:44313/")
+            options.WithOrigins("http://localhost:44313/api")
             .AllowAnyHeader()
             .AllowAnyMethod());
             app.UseRouting();
