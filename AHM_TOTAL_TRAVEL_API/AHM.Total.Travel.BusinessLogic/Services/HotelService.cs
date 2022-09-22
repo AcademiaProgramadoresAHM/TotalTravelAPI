@@ -7,12 +7,12 @@ using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
-    public class HotelServices
+    public class HotelService
     {
         private readonly HotelesRepository _hotelesRepository;
         private readonly HotelesActividadesRepository _hotelesActividadesRepository;
 
-    public HotelServices(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository)
+    public HotelService(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository)
         {
             _hotelesRepository = hotelesRepository;
             _hotelesActividadesRepository = hotelesActividadesRepository;
@@ -135,7 +135,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotelActivities(tbHoteles item)
+        public ServiceResult CreateHotelActivities(tbHotelesActividades item)
         {
 
             var result = new ServiceResult();
