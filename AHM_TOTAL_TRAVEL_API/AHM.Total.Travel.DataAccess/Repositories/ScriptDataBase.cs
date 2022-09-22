@@ -255,8 +255,20 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             public static string UDP_tbTipoMenus_Update = "Rest.UDP_tbTipoMenus_Update";
         #endregion
 
+        #region TiposMenu 
+        public static string UDP_tbRestaurantes_Delete = "Rest.UDP_tbRestaurantes_Delete";
+        public static string UDP_tbRestaurantes_Insert = "Rest.UDP_tbRestaurantes_Insert";
+        public static string UDP_tbRestaurantes_Update = "Rest.UDP_tbRestaurantes_Update";
+        #endregion
+
+        #region Menus 
+        public static string UDP_tbMenus_Delete = "Htel.UDP_tbMenus_Delete";
+        public static string UDP_tbMenus_Insert = "Htel.UDP_tbMenus_Insert";
+        public static string UDP_tbMenus_Update = "Htel.UDP_tbMenus_Update";
+        #endregion
+
         #region RegistrosPagos
-            public static string UDP_tbRegistrosPagos_Delete = "Resv.UDP_tbRegistrosPagos_Delete";
+        public static string UDP_tbRegistrosPagos_Delete = "Resv.UDP_tbRegistrosPagos_Delete";
             public static string UDP_tbRegistrosPagos_Insert = "Resv.UDP_tbRegistrosPagos_Insert";
         #endregion
 
@@ -286,6 +298,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #endregion
 
+
+        #region HotelesMenus 
+        public static string UDP_tbHotelesMenus_Delete = "Htel.UDP_tbHotelesMenus_Delete";
+        public static string UDP_tbHotelesMenus_Insert = "Htel.UDP_tbHotelesMenus_Insert";
+        public static string UDP_tbHotelesMenus_Update = "Htel.UDP_tbHotelesMenus_Update";
+        #endregion
         #region HotelesActividades
         public static string UDP_tbHotelesActividades_Insert = "Htel.UDP_tbHotelesActividades_Insert";
 
