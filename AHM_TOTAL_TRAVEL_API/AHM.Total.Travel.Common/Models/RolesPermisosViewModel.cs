@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.Common.Models
 {
-    class RolesPermisosViewModel
+   public  class RolesPermisosViewModel
     {
         public int ID { get; set; }
         public string Rol { get; set; }
