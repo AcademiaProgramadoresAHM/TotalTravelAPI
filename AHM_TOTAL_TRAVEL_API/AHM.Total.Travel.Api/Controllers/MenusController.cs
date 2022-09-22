@@ -12,30 +12,31 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RestaurantesController : Controller
+    public class MenusController : Controller
     {
-
         private readonly RestaurantService _restaurantService;
         private readonly IMapper _mapper;
-        public RestaurantesController(RestaurantService restaurantService, IMapper mapper)
+        public MenusController(RestaurantService restaurantService, IMapper mapper)
         {
             _restaurantService = restaurantService;
             _mapper = mapper;
         }
 
+
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _restaurantService.ListRestaurants ();
+            var list = _restaurantService.ListMenus();
             return Ok(list);
+
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, RestaurantesViewModel items)
+        public IActionResult Update(int id, MenusViewModel items)
         {
 
-            var item = _mapper.Map<tbRestaurantes>(items);
-            var result = _restaurantService.UpdateRestaurants(id, item);
+            var item = _mapper.Map<tbMenus>(items);
+            var result = _restaurantService.UpdateMenus(id, item);
             return Ok(result);
 
         }
@@ -43,7 +44,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _restaurantService.DeleteRestaurants(id, Mod);
+            var result = _restaurantService.DeleteMenus(id, Mod);
             return Ok(result);
 
         }
@@ -52,12 +53,8 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _restaurantService.FindRestaurants(Id);
+            var result = _restaurantService.FindMenus(Id);
             return Ok(result);
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
 
     }
