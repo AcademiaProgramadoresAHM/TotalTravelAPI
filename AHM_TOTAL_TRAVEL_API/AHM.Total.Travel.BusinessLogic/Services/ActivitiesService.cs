@@ -7,13 +7,13 @@ using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
-    public class ActivitiesServices
+    public class ActivitiesService
     {
         private readonly ActividadesRepository _actividadesRepository;
         private readonly ActividadesExtrasRepository _actividadesExtrasRepository;
         private readonly TiposActividadesRepository _tiposActividadesRepository;
 
-        public ActivitiesServices( ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
+        public ActivitiesService( ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
         {
             _actividadesRepository = actividades;
             _actividadesExtrasRepository = actividadesExtras;
