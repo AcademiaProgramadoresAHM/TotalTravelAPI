@@ -16,6 +16,50 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbCiudades_Find = "Gene.UDP_tbCiudades_Find";
         #endregion
 
+        #region Actividades
+        public static string UDP_tbActividades_Insert = "Actv.UDP_tbActividades_Insert";
+
+        public static string UDP_tbActividades_Update = "Actv.UDP_tbActividades_Update";
+
+        public static string UDP_tbActividades_Delete = "Actv.UDP_tbActividades_Delete";
+
+        #endregion
+        #region Usuarios
+        public static string UDP_tbUsuarios_Insert = "Acce.UDP_tbUsuarios_Insert";
+
+        public static string UDP_tbUsuarios_Update = "Acce.UDP_tbUsuarios_Update";
+        
+        public static string UDP_tbUsuarios_Delete = "Acce.UDP_tbUsuarios_Delete";
+
+
+        #endregion
+        #region ActividadesExtras
+        public static string UDP_tbActividadesExtra_Delete = "Actv.UDP_tbActividadesExtra_Delete";
+
+        public static string UDP_tbActividadesExtra_Insert = "Actv.UDP_tbActividadesExtra_Insert";
+
+        public static string UDP_tbActividadesExtra_Update = "Actv.UDP_tbActividadesExtra_Update";
+
+        #endregion
+
+        #region Direcciones
+        public static string UDP_tbDirecciones_Insert = "Gene.UDP_tbDirecciones_Insert";
+
+        public static string UDP_tbDirecciones_Update = "Gene.UDP_tbDirecciones_Update";
+
+        public static string UDP_tbDirecciones_Delete = "Gene.UDP_tbDirecciones_Delete";
+
+        public static string UDP_tbDirecciones_Find = "Gene.UDP_tbDirecciones_Find";
+        #endregion
+        #region TiposActividades
+        public static string UDP_tbTiposActividades_Insert = "Gene.UDP_tbTiposActividades_Insert";
+
+        public static string UDP_tbTiposActividades_Update = "Gene.UDP_tbTiposActividades_Update";
+
+        public static string UDP_tbTiposActividades_Delete = "Gene.UDP_tbTiposActividades_Delete";
+
+        public static string UDP_tbTiposActividades_Find = "Gene.UDP_tbTiposActividades_Find";
+        #endregion
         #region Transportes
 
         public static string UDP_tbTransportes_Insert = "Trpt.UDP_tbTransportes_Insert";
@@ -203,6 +247,52 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbReservacionesDetalles_Find = "Resv.UDP_tbReservacionesDetalles_Find";
 
         public static string UDP_tbReservacionesDetalles_Delete = "Resv.UDP_tbReservacionesDetalles_Delete";
+        #endregion
+
+        #region TiposMenu 
+            public static string UDP_tbTipoMenus_Delete = "Rest.UDP_tbTipoMenus_Delete";
+            public static string UDP_tbTipoMenus_Insert = "Rest.UDP_tbTipoMenus_Insert";
+            public static string UDP_tbTipoMenus_Update = "Rest.UDP_tbTipoMenus_Update";
+        #endregion
+
+        #region RegistrosPagos
+            public static string UDP_tbRegistrosPagos_Delete = "Resv.UDP_tbRegistrosPagos_Delete";
+            public static string UDP_tbRegistrosPagos_Insert = "Resv.UDP_tbRegistrosPagos_Insert";
+        #endregion
+
+        #region Reservaciones
+            public static string UDP_tbReservaciones_Delete = "Resv.UDP_tbReservaciones_Delete";
+            public static string UDP_tbReservaciones_Insert = "Resv.UDP_tbReservaciones_Insert";
+            public static string UDP_tbReservaciones_Update = "Resv.UDP_tbReservaciones_Update"; 
+             public static string UDP_tbReservaciones_Confirmaciones = "Resv.UDP_tbReservaciones_Confirmaciones";
+        #endregion
+
+        #region Habitaciones
+        public static string UDP_tbHabitaciones_Insert = "Htel.UDP_tbHabitaciones_Insert";
+
+        public static string UDP_tbHabitaciones_Update = "Htel.UDP_tbHabitaciones_Update";
+
+        public static string UDP_tbHabitaciones_Delete = "Htel.UDP_tbHabitaciones_Delete";
+
+
+        #endregion
+
+        #region Hoteles
+        public static string UDP_tbHoteles_Insert = "Htel.UDP_tbHoteles_Insert";
+
+        public static string UDP_tbHoteles_Update = "Htel.UDP_tbHoteles_Update";
+
+        public static string UDP_tbHoteles_Delete = "Htel.UDP_tbHoteles_Delete";
+
+        #endregion
+
+        #region HotelesActividades
+        public static string UDP_tbHotelesActividades_Insert = "Htel.UDP_tbHotelesActividades_Insert";
+
+        public static string UDP_tbHotelesActividades_Update = "Htel.UDP_tbHotelesActividades_Update";
+
+        public static string UDP_tbHotelesActividades_Delete = "Htel.UDP_tbHotelesActividades_Delete";
+
         #endregion
     }
 }
