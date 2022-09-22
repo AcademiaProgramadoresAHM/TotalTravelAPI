@@ -11,11 +11,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     {
         private readonly HotelesRepository _hotelesRepository;
         private readonly HotelesActividadesRepository _hotelesActividadesRepository;
+        private readonly HabitacionesRepository _habitacionesRepository;
 
-    public HotelService(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository)
+    public HotelService(HotelesRepository hotelesRepository,HotelesActividadesRepository hotelesActividadesRepository, HabitacionesRepository habitacionesRepository)
         {
             _hotelesRepository = hotelesRepository;
             _hotelesActividadesRepository = hotelesActividadesRepository;
+            _habitacionesRepository = habitacionesRepository;
         }
 
         #region Hoteles
@@ -211,6 +213,107 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 hotelactivities = _hotelesActividadesRepository.Find(id);
                 return result.Ok(hotelactivities);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
+
+        #endregion
+        #region Habitaciones
+        public ServiceResult ListHabitaciones()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _habitacionesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreateHabitaciones(tbHabitaciones item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _habitacionesRepository.Insert(item);
+                if (map > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                    return result.Error();
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdateHabitaciones(int id, tbHabitaciones tbHabitaciones)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _habitacionesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var list = _habitacionesRepository.Update(tbHabitaciones, id);
+                    return result.Ok(list);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeleteHabitaciones(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _habitacionesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var listado = _habitacionesRepository.Delete(id, Mod);
+                    return result.Ok(listado);
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindHabitaciones(int id)
+        {
+            var result = new ServiceResult();
+            var habitaciones = new VW_tbHabitaciones();
+            try
+            {
+                habitaciones = _habitacionesRepository.Find(id);
+                return result.Ok(habitaciones);
             }
             catch (Exception ex)
             {
