@@ -15,6 +15,33 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbCiudades_Find = "Gene.UDP_tbCiudades_Find";
         #endregion
+
+        #region Actividades
+        public static string UDP_tbActividades_Insert = "Actv.UDP_tbActividades_Insert";
+
+        public static string UDP_tbActividades_Update = "Actv.UDP_tbActividades_Update";
+
+        public static string UDP_tbActividades_Delete = "Actv.UDP_tbActividades_Delete";
+
+        #endregion
+        #region Usuarios
+        public static string UDP_tbUsuarios_Insert = "Acce.UDP_tbUsuarios_Insert";
+
+        public static string UDP_tbUsuarios_Update = "Acce.UDP_tbUsuarios_Update";
+        
+        public static string UDP_tbUsuarios_Delete = "Acce.UDP_tbUsuarios_Delete";
+
+
+        #endregion
+        #region ActividadesExtras
+        public static string UDP_tbActividadesExtra_Delete = "Actv.UDP_tbActividadesExtra_Delete";
+
+        public static string UDP_tbActividadesExtra_Insert = "Actv.UDP_tbActividadesExtra_Insert";
+
+        public static string UDP_tbActividadesExtra_Update = "Actv.UDP_tbActividadesExtra_Update";
+
+        #endregion
+
         #region Direcciones
         public static string UDP_tbDirecciones_Insert = "Gene.UDP_tbDirecciones_Insert";
 

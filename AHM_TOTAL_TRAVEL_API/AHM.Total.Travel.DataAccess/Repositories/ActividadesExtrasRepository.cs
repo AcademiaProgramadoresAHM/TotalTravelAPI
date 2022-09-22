@@ -1,0 +1,65 @@
+﻿using AHM.Total.Travel.Entities.Entities;
+using Dapper;
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+
+namespace AHM.Total.Travel.DataAccess.Repositories
+{
+    public class ActividadesExtrasRepository : IRepository<tbActividadesExtras, VW_tbActividadesExtras>
+    {
+        TotalTravelContext DB = new TotalTravelContext();
+        public int Delete(int Id, int Mod)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@AcEx_ID", Id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_UsuarioModifica", Mod, DbType.Int32, ParameterDirection.Input);
+
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Delete, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public VW_tbActividadesExtras Find(int? id)
+        {
+            return DB.VW_tbActividadesExtras.Where(x => x.ID == id).FirstOrDefault();
+        }
+
+        public int Insert(tbActividadesExtras item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_Precio", item.AcEx_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@AcEx_UsuarioCreacion", item.AcEx_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Insert, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<VW_tbActividadesExtras> List()
+        {
+            return DB.VW_tbActividadesExtras.AsList();
+        }
+
+        public int Update(tbActividadesExtras item, int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@AcEx_ID", item.AcEx_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_Precio", item.AcEx_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@AcEx_UsuarioModifica", item.AcEx_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Update, parameters, commandType: CommandType.StoredProcedure);
+        }
+    }
+}
