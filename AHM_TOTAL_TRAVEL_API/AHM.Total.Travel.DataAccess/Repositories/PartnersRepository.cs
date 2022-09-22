@@ -50,7 +50,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbPartners item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Part_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_Nombre", item.Part_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_Email", item.Part_Email, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_Telefono", item.Part_Telefono, DbType.String, ParameterDirection.Input);

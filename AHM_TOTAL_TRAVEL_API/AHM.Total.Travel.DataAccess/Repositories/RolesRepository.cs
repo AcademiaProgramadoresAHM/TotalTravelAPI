@@ -57,7 +57,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbRoles item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Role_ID", item.Role_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Role_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Role_Descripcion", item.Role_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Usuario_Modifica", item.Role_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);

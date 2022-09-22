@@ -51,7 +51,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbHorariosTransportes item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@ID", item.HoTr_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Fecha", item.HoTr_Fecha, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@HoraSalida", item.HoTr_HoraSalida, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoraLlegada", item.HoTr_HoraLlegada, DbType.String, ParameterDirection.Input);

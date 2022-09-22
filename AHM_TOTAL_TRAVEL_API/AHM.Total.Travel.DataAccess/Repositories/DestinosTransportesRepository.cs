@@ -49,7 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbDestinosTransportes item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@ID", item.DsTr_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@CiudadSalida", item.DsTr_CiudadSalida, DbType.String, ParameterDirection.Input);
             parameters.Add("@CiudadDestino", item.DsTr_CiudadDestino, DbType.String, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", item.DsTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

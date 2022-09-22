@@ -51,7 +51,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public int Update(tbHotelesMenus item, int id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@HoMe_ID", item.HoMe_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@HoMe_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoMe_Descripcion", item.HoMe_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoMe_Precio", item.HoMe_Precio, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
