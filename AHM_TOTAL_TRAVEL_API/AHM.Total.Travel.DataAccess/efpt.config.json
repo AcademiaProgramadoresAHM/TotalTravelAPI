@@ -251,6 +251,10 @@
          "ObjectType": 3
       },
       {
+         "Name": "[Resv].[VW_tbReservacionesHoteles]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Resv].[VW_tbReservacionRestaurante]",
          "ObjectType": 3
       },

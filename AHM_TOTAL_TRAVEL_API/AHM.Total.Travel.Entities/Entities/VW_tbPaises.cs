@@ -7,14 +7,14 @@ namespace AHM.Total.Travel.Entities.Entities
 {
     public partial class VW_tbPaises
     {
-        public int Pais_ID { get; set; }
-        public string Pais_Codigo { get; set; }
-        public string Pais_Descripcion { get; set; }
-        public string Pais_Nacionalidad { get; set; }
-        public int? Pais_UsuarioCreacion { get; set; }
-        public DateTime? Pais_FechaCreacion { get; set; }
-        public int? Pais_UsuarioModifica { get; set; }
-        public DateTime? Pais_FechaModifica { get; set; }
-        public bool? Pais_Estado { get; set; }
+        public int ID { get; set; }
+        public string Codigo { get; set; }
+        public string Pais { get; set; }
+        public string Nacionalidad { get; set; }
+        public int? UsuarioCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
+        public int? UsuarioModifica { get; set; }
+        public DateTime? FechaModifica { get; set; }
+        public bool? Estado { get; set; }
     }
 }
