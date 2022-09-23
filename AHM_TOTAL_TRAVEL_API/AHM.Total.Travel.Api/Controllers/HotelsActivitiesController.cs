@@ -13,11 +13,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HotelesController : Controller
+    public class HotelsActivitiesController : Controller
     {
         private readonly HotelService _hotelService;
         private readonly IMapper _mapper;
-        public HotelesController(HotelService hotelService, IMapper mapper)
+        public HotelsActivitiesController(HotelService hotelService, IMapper mapper)
         {
             _hotelService = hotelService;
             _mapper = mapper;
@@ -27,17 +27,17 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHotels();
+            var list = _hotelService.ListHotelsActivity();
             return Ok(list);
 
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesViewModel items)
+        public IActionResult Update(int id, HotelesActividadesViewModel items)
         {
 
-            var item = _mapper.Map<tbHoteles>(items);
-            var result = _hotelService.UpdateHotels(id, item);
+            var item = _mapper.Map<tbHotelesActividades>(items);
+            var result = _hotelService.UpdateHotelsActivity(id, item);
             return Ok(result);
 
         }
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotels(id, Mod);
+            var result = _hotelService.DeleteHotelsActivity(id, Mod);
             return Ok(result);
 
         }
@@ -53,7 +53,8 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _hotelService.FindHotels(Id);
+
+            var result = _hotelService.FindHotelsActivity(Id);
             return Ok(result);
         }
 
