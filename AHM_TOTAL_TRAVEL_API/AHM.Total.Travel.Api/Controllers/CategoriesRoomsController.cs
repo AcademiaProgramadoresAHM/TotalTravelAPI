@@ -12,38 +12,37 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PartnersController : Controller
+    public class CategoriesRoomsController : Controller
     {
-        private readonly GeneralService _generalService;
+        private readonly HotelService _hotelService;
         private readonly IMapper _mapper;
-
-        public PartnersController(GeneralService generalService, IMapper mapper)
+        public CategoriesRoomsController(HotelService hotelService, IMapper mapper)
         {
-            _generalService = generalService;
+            _hotelService = hotelService;
             _mapper = mapper;
         }
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _generalService.ListPartners();
+            var list = _hotelService.ListCategoriesRooms();
             return Ok(list);
 
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(PartnersViewModel item)
+        public IActionResult Insert(CategoriasHabitacionesViewModel item)
         {
-            var items = _mapper.Map<tbPartners>(item);
-            var result = _generalService.CreatePartner(items);
+            var items = _mapper.Map<tbCategoriasHabitaciones>(item);
+            var result = _hotelService.CreateCategoriesRooms(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PartnersViewModel items)
+        public IActionResult Update(int id, CategoriasHabitacionesViewModel items)
         {
 
-            var item = _mapper.Map<tbPartners>(items);
-            var result = _generalService.UpdatePartner(id, item);
+            var item = _mapper.Map<tbCategoriasHabitaciones>(items);
+            var result = _hotelService.UpdateCategoriesRooms(id, item);
             return Ok(result);
 
         }
@@ -51,7 +50,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _generalService.DeletePartner(id, Mod);
+            var result = _hotelService.DeleteCategoriesRooms(id, Mod);
             return Ok(result);
 
         }
@@ -60,7 +59,7 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _generalService.FindPartner(Id);
+            var result = _hotelService.FindCategoriesRooms(Id);
             return Ok(result);
         }
     }
