@@ -53,9 +53,5 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(item);
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
