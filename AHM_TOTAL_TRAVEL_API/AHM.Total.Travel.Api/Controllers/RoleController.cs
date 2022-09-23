@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController] 
-    [Route(" [Controller] ")]
+    [Route("[Controller]")]
     public class RoleController : Controller
         {
         private readonly AccessService _AccessService;
