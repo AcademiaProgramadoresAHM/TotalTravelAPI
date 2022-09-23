@@ -29,6 +29,14 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(PaquetePredeterminadosViewModel item)
+        {
+            var items = _mapper.Map<tbPaquetePredeterminados>(item);
+            var result = _saleService.Createpackages(items);
+            return Ok(result);
+        }
+
         [HttpPut("Update")]
         public IActionResult Update(int id, PaquetePredeterminadosViewModel items)
         {
