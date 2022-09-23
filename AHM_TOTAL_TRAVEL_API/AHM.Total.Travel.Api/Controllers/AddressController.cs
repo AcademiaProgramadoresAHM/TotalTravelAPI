@@ -31,6 +31,14 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(DireccionesViewModel item)
+        {
+            var items = _mapper.Map<tbDirecciones>(item);
+            var result = _generalService.CreateAddress(items);
+            return Ok(result);
+        }
+
         [HttpPut("Update")]
         public IActionResult Update(int id, DireccionesViewModel items)
         {

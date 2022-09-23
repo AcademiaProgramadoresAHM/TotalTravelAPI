@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route(" [Controller] ")]
+    [Route("[Controller]")]
     public class PaquetePredeterminadosController : Controller
     {
         private readonly SaleService _saleService;
@@ -28,6 +28,17 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
 
         }
+
+        [HttpPost("Insert")]
+        public IActionResult Insert(PaquetePredeterminadosViewModel items)
+        {
+
+            var item = _mapper.Map<tbPaquetePredeterminados>(items);
+            var result = _saleService.Createpackages(item);
+            return Ok(result);
+
+        }
+
 
         [HttpPut("Update")]
         public IActionResult Update(int id, PaquetePredeterminadosViewModel items)

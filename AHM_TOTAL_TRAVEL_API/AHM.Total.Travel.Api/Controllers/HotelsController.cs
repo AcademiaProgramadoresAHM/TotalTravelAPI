@@ -13,11 +13,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HabitacionesController : Controller
+    public class HotelsController : Controller
     {
         private readonly HotelService _hotelService;
         private readonly IMapper _mapper;
-        public HabitacionesController(HotelService hotelService, IMapper mapper)
+        public HotelsController(HotelService hotelService, IMapper mapper)
         {
             _hotelService = hotelService;
             _mapper = mapper;
@@ -27,17 +27,25 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHabitaciones();
+            var list = _hotelService.ListHotels();
             return Ok(list);
 
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(HotelesViewModel item)
+        {
+            var items = _mapper.Map<tbHoteles>(item);
+            var result = _hotelService.CreateHotels(items);
+            return Ok(result);
+        }
+
         [HttpPut("Update")]
-        public IActionResult Update(int id, HabitacionesViewModel items)
+        public IActionResult Update(int id, HotelesViewModel items)
         {
 
-            var item = _mapper.Map<tbHabitaciones>(items);
-            var result = _hotelService.UpdateHabitaciones(id, item);
+            var item = _mapper.Map<tbHoteles>(items);
+            var result = _hotelService.UpdateHotels(id, item);
             return Ok(result);
 
         }
@@ -45,7 +53,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHabitaciones(id, Mod);
+            var result = _hotelService.DeleteHotels(id, Mod);
             return Ok(result);
 
         }
@@ -53,9 +61,9 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
-            var result = _hotelService.FindHabitaciones(Id);
+            var result = _hotelService.FindHotels(Id);
             return Ok(result);
         }
+
     }
 }

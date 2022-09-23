@@ -13,11 +13,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HotelesActividadesController : Controller
+    public class HabitacionsController : Controller
     {
         private readonly HotelService _hotelService;
         private readonly IMapper _mapper;
-        public HotelesActividadesController(HotelService hotelService, IMapper mapper)
+        public HabitacionsController(HotelService hotelService, IMapper mapper)
         {
             _hotelService = hotelService;
             _mapper = mapper;
@@ -27,17 +27,25 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHotelsActivity();
+            var list = _hotelService.ListHabitaciones();
             return Ok(list);
 
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(HabitacionesViewModel item)
+        {
+            var items = _mapper.Map<tbHabitaciones>(item);
+            var result = _hotelService.CreateHabitaciones(items);
+            return Ok(result);
+        }
+
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesActividadesViewModel items)
+        public IActionResult Update(int id, HabitacionesViewModel items)
         {
 
-            var item = _mapper.Map<tbHotelesActividades>(items);
-            var result = _hotelService.UpdateHotelsActivity(id, item);
+            var item = _mapper.Map<tbHabitaciones>(items);
+            var result = _hotelService.UpdateHabitaciones(id, item);
             return Ok(result);
 
         }
@@ -45,7 +53,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotelsActivity(id, Mod);
+            var result = _hotelService.DeleteHabitaciones(id, Mod);
             return Ok(result);
 
         }
@@ -54,9 +62,8 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _hotelService.FindHotelsActivity(Id);
+            var result = _hotelService.FindHabitaciones(Id);
             return Ok(result);
         }
-
     }
 }
