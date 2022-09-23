@@ -12,11 +12,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class ReservationTransportationController : Controller
+    public class ReservationRestaurantController : Controller
     {
-        private readonly ReservationService _reservationService;
+        private readonly ReservationService  _reservationService;
         private readonly IMapper _mapper;
-        public ReservationTransportationController(ReservationService reservationService, IMapper mapper)
+        public ReservationRestaurantController(ReservationService  reservationService, IMapper mapper)
         {
             _reservationService = reservationService;
             _mapper = mapper;
@@ -24,28 +24,28 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _reservationService.ListReservationTransport();
+            var list = _reservationService.ListReservationRestaurant();
             return Ok(list);
 
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(ReservacionTransporteViewModel items)
+        public IActionResult Insert( ReservacionRestaurantesViewModel items)
         {
 
-            var item = _mapper.Map<tbReservacionTransporte>(items);
-            var result = _reservationService.CreateReservationTransport(item);
+            var item = _mapper.Map<tbReservacionRestaurantes>(items);
+            var result = _reservationService.CreateReservationRestaurant(item);
             return Ok(result);
 
         }
 
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, ReservacionTransporteViewModel items)
+        public IActionResult Update(int id, ReservacionRestaurantesViewModel items)
         {
 
-            var item = _mapper.Map<tbReservacionTransporte>(items);
-            var result = _reservationService.UpdateReservationTransport(id, item);
+            var item = _mapper.Map<tbReservacionRestaurantes>(items);
+            var result = _reservationService.UpdateReservationRestaurant(id, item);
             return Ok(result);
 
         }
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _reservationService.DeleteReservationTransport(id, Mod);
+            var result = _reservationService.DeleteReservationRestaurant(id, Mod);
             return Ok(result);
 
         }
@@ -61,7 +61,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _reservationService.FindReservationTransport(Id);
+            var result = _reservationService.FindReservationRestaurant(Id);
             return Ok(result);
         }
     }
