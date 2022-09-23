@@ -23,7 +23,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #region Hoteles
-        public ServiceResult ListHotel()
+        public ServiceResult ListHotels()
         {
             var result = new ServiceResult();
             try
@@ -38,7 +38,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotel(tbHoteles item)
+        public ServiceResult CreateHotels(tbHoteles item)
         {
 
             var result = new ServiceResult();
@@ -60,7 +60,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotel(int id, tbHoteles tbHoteles)
+        public ServiceResult UpdateHotels(int id, tbHoteles tbHoteles)
         {
             var result = new ServiceResult();
             try
@@ -83,7 +83,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeleteHotel(int id, int Mod)
+        public ServiceResult DeleteHotels(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -106,7 +106,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindHotel(int id)
+        public ServiceResult FindHotels(int id)
         {
             var result = new ServiceResult();
             var hotel = new VW_tbHoteles();
@@ -124,7 +124,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         #endregion
         #region HotelesActividades
-        public ServiceResult ListHotelActivities()
+        public ServiceResult ListHotelsActivity()
         {
             var result = new ServiceResult();
             try
@@ -139,7 +139,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotelActivities(tbHotelesActividades item)
+        public ServiceResult CreateHotelsActivity(tbHotelesActividades item)
         {
 
             var result = new ServiceResult();
@@ -161,7 +161,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotelActivities(int id, tbHotelesActividades tbHotelesActividades)
+        public ServiceResult UpdateHotelsActivity(int id, tbHotelesActividades tbHotelesActividades)
         {
             var result = new ServiceResult();
             try
@@ -184,7 +184,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeleteHotelActivities(int id, int Mod)
+        public ServiceResult DeleteHotelsActivity(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -207,7 +207,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindHotelActivities(int id)
+        public ServiceResult FindHotelsActivity(int id)
         {
             var result = new ServiceResult();
             var hotelactivities = new VW_tbHotelesActividades();
@@ -327,7 +327,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         #endregion
 
         #region HotelesMenus
-        public ServiceResult ListHotelesMenus()
+        public ServiceResult ListHotelsMenu()
         {
             var result = new ServiceResult();
             try
@@ -342,7 +342,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotelesMenus(tbHotelesMenus item)
+        public ServiceResult CreateHotelsMenu(tbHotelesMenus item)
         {
 
             var result = new ServiceResult();
@@ -364,7 +364,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotelesMenus(int id, tbHotelesMenus tbHotelesMenus)
+        public ServiceResult UpdateHotelsMenu(int id, tbHotelesMenus tbHotelesMenus)
         {
             var result = new ServiceResult();
             try
@@ -387,7 +387,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeleteHotelesMenus(int id, int Mod)
+        public ServiceResult DeleteHotelsMenu(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -410,7 +410,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindHotelesMenus(int id)
+        public ServiceResult FindHotelsMenu(int id)
         {
             var result = new ServiceResult();
             var hotelesmenus = new VW_tbHotelesMenus();

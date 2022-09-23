@@ -55,10 +55,6 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _restaurantService.FindRestaurants(Id);
             return Ok(result);
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
     }
 }

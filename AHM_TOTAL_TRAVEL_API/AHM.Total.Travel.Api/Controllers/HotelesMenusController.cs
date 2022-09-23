@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class HotelesMenusController : Controller
     {
         private readonly HotelService _hotelService;
@@ -23,7 +25,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHotelesMenus();
+            var list = _hotelService.ListHotelsMenu();
             return Ok(list);
         }
 
@@ -32,7 +34,7 @@ namespace AHM.Total.Travel.Api.Controllers
         {
 
             var item = _mapper.Map<tbHotelesMenus>(items);
-            var result = _hotelService.UpdateHotelesMenus(id, item);
+            var result = _hotelService.UpdateHotelsMenu(id, item);
             return Ok(result);
 
         }
@@ -40,7 +42,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotelesMenus(id, Mod);
+            var result = _hotelService.DeleteHotelsMenu(id, Mod);
             return Ok(result);
 
         }
@@ -49,13 +51,8 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _hotelService.FindHotelesMenus(Id);
+            var result = _hotelService.FindHotelsMenu(Id);
             return Ok(result);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
     }
 }
