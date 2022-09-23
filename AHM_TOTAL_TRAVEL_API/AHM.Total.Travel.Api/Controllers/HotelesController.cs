@@ -27,7 +27,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHotel();
+            var list = _hotelService.ListHotels();
             return Ok(list);
 
         }
@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.Api.Controllers
         {
 
             var item = _mapper.Map<tbHoteles>(items);
-            var result = _hotelService.UpdateHotel(id, item);
+            var result = _hotelService.UpdateHotels(id, item);
             return Ok(result);
 
         }
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotel(id, Mod);
+            var result = _hotelService.DeleteHotels(id, Mod);
             return Ok(result);
 
         }
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _hotelService.FindHotel(Id);
+            var result = _hotelService.FindHotels(Id);
             return Ok(result);
         }
 
