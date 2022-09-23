@@ -6,17 +6,15 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class ReservacionRestaurantesViewModel
     {
-        public int Id { get; set; }
-        public int? Capacidad { get; set; }
-        public decimal? Precio { get; set; }
-        public int? Reservacion { get; set; }
-        public int? Asientos { get; set; }
-        public bool? Cancelado { get; set; }
-        public DateTime? Fecha_Cancelado { get; set; }
-        public int? Usuario_Creacion { get; set; }
-        public DateTime? Fecha_Creacion { get; set; }
-        public int? Usuario_Modifica { get; set; }
-        public DateTime? Fecha_Modifica { get; set; }
-        public bool? Estado { get; set; }
+        public int ReRe_ID { get; set; }
+        public int? Resv_ID { get; set; }
+        public int? Rest_ID { get; set; }
+        public DateTime? ReRe_FechaReservacion { get; set; }
+        public string ReRe_HoraReservacion { get; set; }
+        public int? ReRe_UsuarioCreacion { get; set; }
+        public DateTime? ReRe_FechaCreacion { get; set; }
+        public int? ReRe_UsuarioModifica { get; set; }
+        public DateTime? ReRe_FechaModifica { get; set; }
+        public bool? ReRe_Estado { get; set; }
     }
 }
