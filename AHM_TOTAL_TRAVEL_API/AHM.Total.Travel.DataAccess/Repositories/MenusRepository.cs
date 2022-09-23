@@ -11,7 +11,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 {
     public class MenusRepository : IRepository<tbMenus, VW_tbMenus>
     {
-        TotalTravelContext DB = new TotalTravelContext();
+        TotalTravelContext db = new TotalTravelContext();
 
         public int Delete(int Id, int Mod)
         {
@@ -21,12 +21,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenus_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbMenus Find(int? id)
         {
-            return DB.VW_tbMenus.Where(x => x.ID == id).FirstOrDefault();
+            return db.VW_tbMenus.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public int Insert(tbMenus item)
@@ -41,12 +41,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenus_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbMenus> List()
         {
-            return DB.VW_tbMenus.ToList();
+            return db.VW_tbMenus.ToList();
         }
 
         public int Update(tbMenus item, int id)
@@ -62,7 +62,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenus_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

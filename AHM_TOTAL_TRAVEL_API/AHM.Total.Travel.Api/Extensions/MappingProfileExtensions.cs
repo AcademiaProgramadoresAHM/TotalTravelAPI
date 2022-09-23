@@ -21,6 +21,7 @@ namespace AHM.Total.Travel.Api.Extensions
             CreateMap<HabitacionesViewModel, tbHabitaciones>().ReverseMap();
             CreateMap<HorariosTransportesViewModel, tbHorariosTransportes>().ReverseMap();
             CreateMap<HotelesActividadesViewModel, tbHotelesActividades>().ReverseMap();
+            CreateMap<HotelesMenusViewModel, tbHotelesMenus>().ReverseMap();
             CreateMap<HotelesViewModel, tbHoteles>().ReverseMap();
             CreateMap<PaisesViewModel, tbPaises>().ReverseMap();
             CreateMap<PaquetePredeterminadosDetallesViewModel, tbPaquetePredeterminadosDetalles>().ReverseMap();
@@ -39,6 +40,8 @@ namespace AHM.Total.Travel.Api.Extensions
             CreateMap<ReservacionTransporteViewModel, tbReservacionTransporte>().ReverseMap();
             CreateMap<RolesPermisosViewModel, tbRolesPermisos>().ReverseMap();
             CreateMap<RolesViewModel, tbRoles>().ReverseMap();
+            CreateMap<MenusViewModel, tbMenus>().ReverseMap();
+            CreateMap<RestaurantesViewModel, tbRestaurantes>().ReverseMap();
             CreateMap<TipoMenusViewModel, tbTipoMenus>().ReverseMap();
             CreateMap<TiposActividadesViewModel, tbTiposActividades>().ReverseMap();
             CreateMap<TiposPagosViewModel, tbTiposPagos>().ReverseMap();

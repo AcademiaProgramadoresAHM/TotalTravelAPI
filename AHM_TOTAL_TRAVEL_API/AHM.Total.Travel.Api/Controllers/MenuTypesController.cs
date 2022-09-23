@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class MenuTypesController : Controller
     {
-        
         private readonly RestaurantService _restaurantService;
         private readonly IMapper _mapper;
         public MenuTypesController(RestaurantService restaurantService, IMapper mapper)

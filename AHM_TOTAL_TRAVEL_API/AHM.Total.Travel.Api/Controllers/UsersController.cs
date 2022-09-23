@@ -1,4 +1,5 @@
 ﻿using AHM.Total.Travel.BusinessLogic.Services;
+using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var list = _accessService.ListUsers();
             return Ok(list);
+        }
+        [HttpPost("Insert")]
+        public IActionResult Insert(UsuariosViewModel item)
+        {
+            var items = _mapper.Map<tbUsuarios>(item);
+            var result = _accessService.CreateUsers(items);
+            return Ok(result);
         }
 
         [HttpPut("Update")]

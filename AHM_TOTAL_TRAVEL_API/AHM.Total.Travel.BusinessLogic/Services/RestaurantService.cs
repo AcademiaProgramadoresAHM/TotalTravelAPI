@@ -10,11 +10,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     public class RestaurantService
     {
         private readonly MenusRepository _menusRepository;
-        private readonly TiposMenuRepository _tiposMenusRepository;
+        private readonly MenuTypesRepository _tiposMenusRepository;
         private readonly RestaurantesRepository _restaurantesRepository;
 
         public RestaurantService(MenusRepository menusRepository,
-                              TiposMenuRepository tiposMenusRepository,
+                              MenuTypesRepository tiposMenusRepository,
                               RestaurantesRepository restaurantesRepository)
         {
             _menusRepository = menusRepository;

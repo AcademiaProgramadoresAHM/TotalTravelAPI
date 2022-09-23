@@ -261,16 +261,16 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             public static string UDP_tbTipoMenus_Update = "Rest.UDP_tbTipoMenus_Update";
         #endregion
 
-        #region TiposMenu 
+        #region Restaurantes 
         public static string UDP_tbRestaurantes_Delete = "Rest.UDP_tbRestaurantes_Delete";
         public static string UDP_tbRestaurantes_Insert = "Rest.UDP_tbRestaurantes_Insert";
         public static string UDP_tbRestaurantes_Update = "Rest.UDP_tbRestaurantes_Update";
         #endregion
 
         #region Menus 
-        public static string UDP_tbMenus_Delete = "Htel.UDP_tbMenus_Delete";
-        public static string UDP_tbMenus_Insert = "Htel.UDP_tbMenus_Insert";
-        public static string UDP_tbMenus_Update = "Htel.UDP_tbMenus_Update";
+        public static string UDP_tbMenu_Delete = "Rest.UDP_tbMenu_Delete";
+        public static string UDP_tbMenu_Insert = "Rest.UDP_tbMenu_Insert";
+        public static string UDP_tbMenu_Update = "Rest.UDP_tbMenu_Update";
         #endregion
 
         #region RegistrosPagos

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    public class TiposMenuRepository : IRepository<tbTipoMenus, VW_tbTiposMenus>
+    public class MenuTypesRepository : IRepository<tbTipoMenus, VW_tbTiposMenus>
     {
         TotalTravelContext DB = new TotalTravelContext();
         public int Delete(int Id, int Mod)

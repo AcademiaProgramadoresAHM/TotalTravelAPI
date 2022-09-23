@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.BusinessLogic
             //Restaurant
             services.AddScoped<MenusRepository>();
             services.AddScoped<RestaurantesRepository>();
-            services.AddScoped<TiposMenuRepository>();
+            services.AddScoped<MenuTypesRepository>();
             //Reservations
             services.AddScoped<ReservacionesActividadesExtraRepository>();
             services.AddScoped<ReservacionesActividadesHotelesRepository>();

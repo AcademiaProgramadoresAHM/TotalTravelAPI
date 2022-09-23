@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class RecordPaymentController : Controller
     {
         private readonly ReservationService _reservationService;

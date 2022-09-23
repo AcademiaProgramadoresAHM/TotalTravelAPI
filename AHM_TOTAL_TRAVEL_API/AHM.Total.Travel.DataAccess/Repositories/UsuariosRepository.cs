@@ -11,7 +11,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 {
     public class UsuariosRepository : IRepository<tbUsuarios, VW_tbUsuarios>
     {
-        TotalTravelContext DB = new TotalTravelContext();
+        TotalTravelContext db = new TotalTravelContext();
         public int Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbUsuarios Find(int? id)
         {
-            return DB.VW_tbUsuarios.Where(x => x.ID == id).FirstOrDefault();
+            return db.VW_tbUsuarios.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public int Insert(tbUsuarios item)
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public IEnumerable<VW_tbUsuarios> List()
         {
-            return DB.VW_tbUsuarios.AsList();
+            return db.VW_tbUsuarios.AsList();
         }
 
         public int Update(tbUsuarios item, int id)
