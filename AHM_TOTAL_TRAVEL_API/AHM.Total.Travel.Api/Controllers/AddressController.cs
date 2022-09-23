@@ -26,7 +26,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _generalService.ListDirections();
+            var list = _generalService.ListAddress();
             return Ok(list);
 
         }
@@ -36,7 +36,7 @@ namespace AHM.Total.Travel.Api.Controllers
         {
 
             var item = _mapper.Map<tbDirecciones>(items);
-            var result = _generalService.UpdateDirection(id, item);
+            var result = _generalService.UpdateAddress(id, item);
             return Ok(result);
 
         }
@@ -44,7 +44,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _generalService.DeleteDirection(id, Mod);
+            var result = _generalService.DeleteAddress(id, Mod);
             return Ok(result);
 
         }
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _generalService.FindDirection(Id);
+            var result = _generalService.FindAddress(Id);
             return Ok(result);
         }
     }
