@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.Common.Models
 {
-    public class DestinosTransporte
+    public class DestinosTransporteViewModel
     {
         public int DsTr_ID { get; set; }
         public int? DsTr_CiudadSalida { get; set; }
