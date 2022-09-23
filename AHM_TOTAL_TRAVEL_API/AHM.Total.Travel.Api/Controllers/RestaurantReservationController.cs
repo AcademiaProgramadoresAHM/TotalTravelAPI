@@ -11,46 +11,47 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class ReservationDetailsController : Controller
+    [Route("[Controller]")]
+    public class RestaurantReservationController : Controller
     {
-        private readonly ReservationService _reservationService;
+        private readonly ReservationService  _reservationService;
         private readonly IMapper _mapper;
-
-        public ReservationDetailsController(ReservationService reservationService, IMapper mapper)
+        public RestaurantReservationController(ReservationService  reservationService, IMapper mapper)
         {
             _reservationService = reservationService;
             _mapper = mapper;
         }
-
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _reservationService.ListReservationDetails();
+            var list = _reservationService.ListReservationRestaurant();
             return Ok(list);
+
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, ReservacionesDetallesViewModel items)
+        public IActionResult Update(int id, ReservacionRestaurantesViewModel items)
         {
-            var item = _mapper.Map<tbReservacionesDetalles>(items);
-            var result = _reservationService.UpdateReservationDetails(id, item);
+
+            var item = _mapper.Map<tbReservacionRestaurantes>(items);
+            var result = _reservationService.UpdateReservationRestaurant(id, item);
             return Ok(result);
+
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _reservationService.DeleteReservationDetails(id, Mod);
+            var result = _reservationService.DeleteReservationRestaurant(id, Mod);
             return Ok(result);
+
         }
 
         [HttpGet("Find")]
-        public IActionResult Find(int id)
+        public IActionResult Details(int Id)
         {
-            var list = _reservationService.FindReservationDetails(id);
-            return Ok(list);
+            var result = _reservationService.FindReservationRestaurant(Id);
+            return Ok(result);
         }
-
     }
 }

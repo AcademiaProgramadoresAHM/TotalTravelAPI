@@ -11,32 +11,30 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class AddressController : ControllerBase
+    [Route("[Controller]")]
+    public class DefaultPackagesController : Controller
     {
-        private readonly GeneralService _generalService;
+        private readonly SaleService _saleService;
         private readonly IMapper _mapper;
-        public AddressController(GeneralService generalService, IMapper mapper)
+        public DefaultPackagesController(SaleService saleService, IMapper mapper)
         {
-            _generalService = generalService;
+            _saleService = saleService;
             _mapper = mapper;
         }
-
-
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _generalService.ListAddress();
+            var list = _saleService.Listpackages();
             return Ok(list);
 
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, DireccionesViewModel items)
+        public IActionResult Update(int id, PaquetePredeterminadosViewModel items)
         {
 
-            var item = _mapper.Map<tbDirecciones>(items);
-            var result = _generalService.UpdateAddress(id, item);
+            var item = _mapper.Map<tbPaquetePredeterminados>(items);
+            var result = _saleService.Updatepackages(id, item);
             return Ok(result);
 
         }
@@ -44,16 +42,15 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _generalService.DeleteAddress(id, Mod);
+            var result = _saleService.Deletepackages(id, Mod);
             return Ok(result);
 
         }
 
         [HttpGet("Find")]
-        public IActionResult Details(int Id)
+        public IActionResult Details(int id)
         {
-
-            var result = _generalService.FindAddress(Id);
+            var result = _saleService.FindPackage(id);
             return Ok(result);
         }
     }

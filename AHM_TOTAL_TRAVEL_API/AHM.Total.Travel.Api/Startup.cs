@@ -50,17 +50,18 @@ namespace AHM.Total.Travel.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TotalTravel API v1"));
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/Api/swagger/v1/swagger.json", "TotalTravel API v1"); }) ;
             }
 
             app.UseHttpsRedirection();
             app.UseCors(options =>
-            options.WithOrigins("http://localhost:44313/api")
+            options.WithOrigins("http://localhost:44313/")
             .AllowAnyHeader()
             .AllowAnyMethod());
             app.UseRouting();
-
+            
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
