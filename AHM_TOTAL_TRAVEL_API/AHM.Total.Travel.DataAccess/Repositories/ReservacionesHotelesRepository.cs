@@ -4,11 +4,12 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
 {
-    public class ReservacionesHotelesRepository : IRepository<tbReservacionesHoteles, Vw_tbReservacionesHoteles>
+    public class ReservacionesHotelesRepository : IRepository<tbReservacionesHoteles, VW_tbReservacionesHoteles>
     {
         TotalTravelContext DB = new TotalTravelContext();
         public int Delete(int Id, int Mod)
@@ -22,9 +23,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesHoteles_DELETE, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public Vw_tbReservacionesHoteles Find(int? id)
+        public VW_tbReservacionesHoteles Find(int? id)
         {
-            return DB.Vw_tbReservacionesHoteles.Where(x => x.ID == id).FirstOrDefault();
+            return DB.VW_tbReservacionesHoteles.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public int Insert(tbReservacionesHoteles item)
@@ -41,9 +42,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesHoteles_INSERT, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public IEnumerable<Vw_tbReservacionesHoteles> List()
+        public IEnumerable<VW_tbReservacionesHoteles> List()
         {
-            return DB.Vw_tbReservacionesHoteles.ToList();
+            return DB.VW_tbReservacionesHoteles.ToList();
         }
 
         public int Update(tbReservacionesHoteles item, int id)
