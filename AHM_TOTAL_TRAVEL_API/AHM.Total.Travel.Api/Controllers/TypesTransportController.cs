@@ -12,11 +12,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TiposTransportesController : Controller
+    public class TypesTransportController : Controller
     {
         private readonly TransportService _transportService;
         private readonly IMapper _mapper;
-        public TiposTransportesController(TransportService transportService, IMapper mapper)
+        public TypesTransportController(TransportService transportService, IMapper mapper)
         {
             _transportService = transportService;
             _mapper = mapper;
@@ -27,6 +27,13 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _transportService.ListTipoTransports();
             return Ok(list);
 
+        }
+        [HttpPost("Insert")]
+        public IActionResult Insert(TiposTransportesViewModel item)
+        {
+            var items = _mapper.Map<tbTiposTransportes>(item);
+            var result = _transportService.CreateTipoTransports(items);
+            return Ok(result);
         }
         [HttpPut("Update")]
         public IActionResult Update(int id, TiposTransportesViewModel items)
