@@ -1,0 +1,53 @@
+﻿using AHM.Total.Travel.BusinessLogic.Services;
+using AHM.Total.Travel.Entities.Entities;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AHM.Total.Travel.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class UsersController : Controller
+    {
+        private readonly AccessService _accessService;
+        private readonly IMapper _mapper;
+        public UsersController(AccessService accessService, IMapper mapper)
+        {
+            _accessService = accessService;
+            _mapper = mapper;
+        }
+
+        [HttpGet("List")]
+        public IActionResult List()
+        {
+            var list = _accessService.ListUsers();
+            return Ok(list);
+        }
+
+        [HttpPut("Update")]
+        public IActionResult Update(int id, ActivitiesService items)
+        {
+            var item = _mapper.Map<tbUsuarios>(items);
+            var result = _accessService.UpdateUsers(id, item);
+            return Ok(result);
+        }
+
+        [HttpDelete("Delete")]
+        public IActionResult Delete(int id, int mod)
+        {
+            var result = _accessService.DeleteUsers(id, mod);
+            return Ok(result);
+        }
+
+        [HttpGet("Find")]
+        public IActionResult Details(int id)
+        {
+            var result = _accessService.FindUsers(id);
+            return Ok(result);
+        }
+    }
+}
