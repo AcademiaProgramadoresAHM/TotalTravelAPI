@@ -26,7 +26,7 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<PaquetePredeterminadosDetallesRepository>();
             services.AddScoped<TiposPagosRepository>();
             services.AddScoped<PaquetePredeterminadosRepository>();
-            TotalTravelContext.BuildConnectionString(connectionString);
+            
             //Activities
             services.AddScoped<ActividadesRepository>();
             services.AddScoped<ActividadesExtrasRepository>();
@@ -55,6 +55,8 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<ReservacionRestaurantesRepository>();
             services.AddScoped<ReservacionTransporteRepository>();
             services.AddScoped<ReservacionesRepository>();
+
+            TotalTravelContext.BuildConnectionString(connectionString);
         }
         public static void BusinessLogic(this IServiceCollection services)
         {
