@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, ActivitiesService items)
+        public IActionResult Update(int id, UsuariosViewModel items)
         {
             var item = _mapper.Map<tbUsuarios>(items);
             var result = _accessService.UpdateUsers(id, item);

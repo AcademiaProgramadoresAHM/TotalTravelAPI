@@ -30,8 +30,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
-        [HttpPost("Create")]
-        public IActionResult Create(ReservacionesDetallesViewModel item)
+        [HttpPost("Insert")]
+        public IActionResult Insert(ReservacionesDetallesViewModel item)
         {
             var items = _mapper.Map<tbReservacionesDetalles>(item);
             var result = _reservationService.CreateReservationDetails(items);

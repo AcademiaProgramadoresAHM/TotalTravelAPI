@@ -38,7 +38,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, TipoMenusViewModel items)
+        public IActionResult Update(int id, RegistrosPagosViewModel items)
         {
             var item = _mapper.Map<tbRegistrosPagos>(items);
             var result = _reservationService.UpdateRecordPayments(id, item);

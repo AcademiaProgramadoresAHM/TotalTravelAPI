@@ -13,11 +13,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController] 
     [Route("[Controller]")]
-    public class RoleController : Controller
+    public class RolesController : Controller
         {
         private readonly AccessService _AccessService;
         private readonly IMapper _mapper;
-        public RoleController(AccessService AccessService, IMapper mapper)
+        public RolesController(AccessService AccessService, IMapper mapper)
         {
             _AccessService = AccessService;
             _mapper = mapper;
