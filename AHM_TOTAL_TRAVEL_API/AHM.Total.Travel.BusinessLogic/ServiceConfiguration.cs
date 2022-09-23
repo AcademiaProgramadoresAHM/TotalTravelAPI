@@ -65,6 +65,7 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<ActivitiesService>();
             services.AddScoped<TransportService>();
             services.AddScoped<RestaurantService>();
+            services.AddScoped<ReservationService>();
         }
     }
 }
