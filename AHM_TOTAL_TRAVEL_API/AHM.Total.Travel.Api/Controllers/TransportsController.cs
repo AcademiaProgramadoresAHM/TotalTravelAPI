@@ -12,29 +12,37 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TiposPagosController : Controller
+    public class TransportsController : Controller
     {
-        private readonly SaleService _saleService;
+        private readonly TransportService _transportService;
         private readonly IMapper _mapper;
-        public TiposPagosController(SaleService saleService, IMapper mapper)
+
+        public TransportsController(TransportService transportService, IMapper mapper)
         {
-            _saleService = saleService;
+            _transportService = transportService;
             _mapper = mapper;
         }
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _saleService.Listpayment();
+            var list = _transportService.ListTransports();
             return Ok(list);
+        }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(TransportesViewModel item)
+        {
+            var items = _mapper.Map<tbTransportes>(item);
+            var result = _transportService.CreateTransports(items);
+            return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, TiposPagosViewModel items)
+        public IActionResult Update(int id, TransportesViewModel items)
         {
 
-            var item = _mapper.Map<tbTiposPagos>(items);
-            var result = _saleService.Updatepayment(id, item);
+            var item = _mapper.Map<tbTransportes>(items);
+            var result = _transportService.UpdateTransports(id, item);
             return Ok(result);
 
         }
@@ -42,7 +50,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _saleService.Deletepayment(id, Mod);
+            var result = _transportService.DeleteTransports(id, Mod);
             return Ok(result);
 
         }
@@ -50,7 +58,7 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _saleService.Findpayment(Id);
+            var result = _transportService.FindTransports(Id);
             return Ok(result);
         }
     }
