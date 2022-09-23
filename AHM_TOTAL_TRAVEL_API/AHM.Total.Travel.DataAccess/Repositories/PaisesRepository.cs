@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbPaises Find(int? id)
         {
-            return DB.VW_tbPaises.Where(x => x.Pais_ID == id).FirstOrDefault();
+            return DB.VW_tbPaises.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public int Insert(tbPaises item)
