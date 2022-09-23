@@ -31,6 +31,14 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(CiudadesViewModel item)
+        {
+            var items = _mapper.Map<tbCiudades>(item);
+            var result = _generalService.CreateCity(items);
+            return Ok(result);
+        }
+
         [HttpPut("Update")]
         public IActionResult Update(int id, CiudadesViewModel items)
         {
