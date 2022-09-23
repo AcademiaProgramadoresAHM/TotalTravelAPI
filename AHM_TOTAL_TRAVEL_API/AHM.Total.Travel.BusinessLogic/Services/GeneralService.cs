@@ -126,7 +126,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         #endregion
         #region Direcciones
         //LISTADO
-        public ServiceResult ListDirections()
+        public ServiceResult ListAddress()
         {
             var result = new ServiceResult();
             try
@@ -141,7 +141,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateDirection(tbDirecciones item)
+        public ServiceResult CreateAddress(tbDirecciones item)
         {
 
             var result = new ServiceResult();
@@ -163,7 +163,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateDirection(int id, tbDirecciones item)
+        public ServiceResult UpdateAddress(int id, tbDirecciones item)
         {
             var result = new ServiceResult();
             try
@@ -186,7 +186,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ELIMINAR
-        public ServiceResult DeleteDirection(int id, int Mod)
+        public ServiceResult DeleteAddress(int id, int Mod)
         {
             var result = new ServiceResult();
             try
@@ -209,7 +209,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //BUSCAR
-        public ServiceResult FindDirection(int id)
+        public ServiceResult FindAddress(int id)
         {
             var result = new ServiceResult();            
             try

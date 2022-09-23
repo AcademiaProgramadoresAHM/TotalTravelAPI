@@ -14,9 +14,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Asientos { get; set; }
         public bool? Cancelado { get; set; }
         public DateTime? Fecha_Cancelado { get; set; }
-        public int? Usuario_Creacion { get; set; }
+        public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
-        public int? Usuario_Modifica { get; set; }
+        public string Usuario_Modifica { get; set; }
         public DateTime? Fecha_Modifica { get; set; }
         public bool? Estado { get; set; }
     }

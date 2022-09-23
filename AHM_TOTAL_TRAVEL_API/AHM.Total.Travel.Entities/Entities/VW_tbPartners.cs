@@ -7,14 +7,14 @@ namespace AHM.Total.Travel.Entities.Entities
 {
     public partial class VW_tbPartners
     {
-        public int Part_ID { get; set; }
-        public string Part_Nombre { get; set; }
-        public string Part_Email { get; set; }
-        public string Part_Telefono { get; set; }
-        public int? Part_UsuarioCreacion { get; set; }
-        public DateTime? Part_FechaCreacion { get; set; }
-        public int? Part_UsuarioModifica { get; set; }
-        public DateTime? Part_FechaModifica { get; set; }
-        public bool? Part_Estado { get; set; }
+        public int ID { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public string Telefono { get; set; }
+        public int? UsuarioCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
+        public int? UsuarioModifica { get; set; }
+        public DateTime? FechaModifica { get; set; }
+        public bool? Estado { get; set; }
     }
 }

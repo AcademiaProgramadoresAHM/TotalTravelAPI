@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AHM.Total.Travel.Common.Models
 {
-    public class TiposActividades
+    public class TiposActividadesViewModel
     {
         public int TiAc_ID { get; set; }
         public string TiAc_Descripcion { get; set; }
