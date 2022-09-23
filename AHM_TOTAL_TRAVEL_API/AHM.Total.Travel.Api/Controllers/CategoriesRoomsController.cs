@@ -30,18 +30,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(CategoriasHabitacionesViewModel item)
+        public IActionResult Insert(CategoriasHabitacionesViewModel categoriasHabitacionesViewModel)
         {
-            var items = _mapper.Map<tbCategoriasHabitaciones>(item);
+            var items = _mapper.Map<tbCategoriasHabitaciones>(categoriasHabitacionesViewModel);
             var result = _hotelService.CreateCategoriesRooms(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, CategoriasHabitacionesViewModel items)
+        public IActionResult Update(int id, CategoriasHabitacionesViewModel categoriasHabitacionesViewModel)
         {
 
-            var item = _mapper.Map<tbCategoriasHabitaciones>(items);
+            var item = _mapper.Map<tbCategoriasHabitaciones>(categoriasHabitacionesViewModel);
             var result = _hotelService.UpdateCategoriesRooms(id, item);
             return Ok(result);
 
@@ -58,7 +58,6 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
             var result = _hotelService.FindCategoriesRooms(Id);
             return Ok(result);
         }

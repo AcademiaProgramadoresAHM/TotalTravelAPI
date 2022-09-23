@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbDirecciones Find(int? id)
         {
-            return DB.VW_tbDirecciones.Where(x => x.ID == id).FirstOrDefault();
+            return DB.VW_tbDirecciones.Where(x => x.ID == id).First();
         }
 
         public int Insert(tbDirecciones item)
@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbDirecciones> List()
@@ -54,7 +54,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Usuario_Modifica", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

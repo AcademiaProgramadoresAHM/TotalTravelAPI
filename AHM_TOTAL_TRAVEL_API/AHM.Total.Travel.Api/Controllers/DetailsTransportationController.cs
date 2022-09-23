@@ -31,17 +31,17 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
         [HttpPost("Insert")]
-        public IActionResult Insert(DetallesTransportesViewModel item)
+        public IActionResult Insert(DetallesTransportesViewModel detallesTransportesViewModel)
         {
-            var items = _mapper.Map<tbDetallesTransportes>(item);
+            var items = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
             var result = _transportService.CreateDetallesTransports(items);
             return Ok(result);
         }
         [HttpPut("Update")]
-        public IActionResult Update(int id, DetallesTransportesViewModel items)
+        public IActionResult Update(int id, DetallesTransportesViewModel detallesTransportesViewModel)
         {
 
-            var item = _mapper.Map<tbDetallesTransportes>(items);
+            var item = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
             var result = _transportService.UpdateDetallesTransports(id, item);
             return Ok(result);
 

@@ -30,18 +30,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(HotelesMenusViewModel item)
+        public IActionResult Insert(HotelesMenusViewModel hotelesMenusViewModel)
         {
-            var items = _mapper.Map<tbHotelesMenus>(item);
+            var items = _mapper.Map<tbHotelesMenus>(hotelesMenusViewModel);
             var result = _hotelService.CreateHotelsMenu(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesMenusViewModel items)
+        public IActionResult Update(int id, HotelesMenusViewModel hotelesMenusViewModel)
         {
 
-            var item = _mapper.Map<tbHotelesMenus>(items);
+            var item = _mapper.Map<tbHotelesMenus>(hotelesMenusViewModel);
             var result = _hotelService.UpdateHotelsMenu(id, item);
             return Ok(result);
 

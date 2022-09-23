@@ -32,18 +32,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(DestinationsTransportationController item)
+        public IActionResult Insert(DestinosTransporteViewModel destinosTransporteViewModel)
         {
-            var items = _mapper.Map<tbDestinosTransportes>(item);
+            var items = _mapper.Map<tbDestinosTransportes>(destinosTransporteViewModel);
             var result = _transportService.CreateDestinosTransports(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, DestinosTransporteViewModel items)
+        public IActionResult Update(int id, DestinosTransporteViewModel destinosTransporteViewModel)
         {
 
-            var item = _mapper.Map<tbDestinosTransportes>(items);
+            var item = _mapper.Map<tbDestinosTransportes>(destinosTransporteViewModel);
             var result = _transportService.UpdateDestinosTransports(id, item);
             return Ok(result);
 
@@ -54,13 +54,11 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var result = _transportService.DeleteDestinosTransports(id, Mod);
             return Ok(result);
-
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
             var result = _transportService.FindDestinosTransports(Id);
             return Ok(result);
         }

@@ -32,18 +32,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(PaisesViewModel item)
+        public IActionResult Insert(PaisesViewModel paisesViewModel)
         {
-            var items = _mapper.Map<tbPaises>(item);
+            var items = _mapper.Map<tbPaises>(paisesViewModel);
             var result = _generalService.CreateCountry(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PaisesViewModel items)
+        public IActionResult Update(int id, PaisesViewModel paisesViewModel)
         {
 
-            var item = _mapper.Map<tbPaises>(items);
+            var item = _mapper.Map<tbPaises>(paisesViewModel);
             var result = _generalService.UpdateCountry(id, item);
             return Ok(result);
 

@@ -28,13 +28,12 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var list = _generalService.ListCities();
             return Ok(list);
-
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(CiudadesViewModel item)
+        public IActionResult Insert(CiudadesViewModel ciudadesViewModel)
         {
-            var items = _mapper.Map<tbCiudades>(item);
+            var items = _mapper.Map<tbCiudades>(ciudadesViewModel);
             var result = _generalService.CreateCity(items);
             return Ok(result);
         }

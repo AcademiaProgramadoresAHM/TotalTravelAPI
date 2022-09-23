@@ -28,22 +28,21 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var list = _generalService.ListAddress();
             return Ok(list);
-
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(DireccionesViewModel item)
+        public IActionResult Insert(DireccionesViewModel direccionesViewModel)
         {
-            var items = _mapper.Map<tbDirecciones>(item);
+            var items = _mapper.Map<tbDirecciones>(direccionesViewModel);
             var result = _generalService.CreateAddress(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, DireccionesViewModel items)
+        public IActionResult Update(int id, DireccionesViewModel direccionesViewModel)
         {
 
-            var item = _mapper.Map<tbDirecciones>(items);
+            var item = _mapper.Map<tbDirecciones>(direccionesViewModel);
             var result = _generalService.UpdateAddress(id, item);
             return Ok(result);
 

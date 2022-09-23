@@ -13,11 +13,11 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HabitacionsController : Controller
+    public class RoomsController : Controller
     {
         private readonly HotelService _hotelService;
         private readonly IMapper _mapper;
-        public HabitacionsController(HotelService hotelService, IMapper mapper)
+        public RoomsController(HotelService hotelService, IMapper mapper)
         {
             _hotelService = hotelService;
             _mapper = mapper;
@@ -33,18 +33,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(HabitacionesViewModel item)
+        public IActionResult Insert(HabitacionesViewModel habitacionesViewModel)
         {
-            var items = _mapper.Map<tbHabitaciones>(item);
+            var items = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
             var result = _hotelService.CreateHabitaciones(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HabitacionesViewModel items)
+        public IActionResult Update(int id, HabitacionesViewModel habitacionesViewModel)
         {
 
-            var item = _mapper.Map<tbHabitaciones>(items);
+            var item = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
             var result = _hotelService.UpdateHabitaciones(id, item);
             return Ok(result);
 

@@ -31,18 +31,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(PartnersViewModel item)
+        public IActionResult Insert(PartnersViewModel partnersViewModel)
         {
-            var items = _mapper.Map<tbPartners>(item);
+            var items = _mapper.Map<tbPartners>(partnersViewModel);
             var result = _generalService.CreatePartner(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PartnersViewModel items)
+        public IActionResult Update(int id, PartnersViewModel partnersViewModel)
         {
 
-            var item = _mapper.Map<tbPartners>(items);
+            var item = _mapper.Map<tbPartners>(partnersViewModel);
             var result = _generalService.UpdatePartner(id, item);
             return Ok(result);
 

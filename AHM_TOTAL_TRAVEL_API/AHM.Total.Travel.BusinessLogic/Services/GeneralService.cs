@@ -168,7 +168,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var itemID = _paisesRepository.Find(id);
+                var itemID = _direccionesRepository.Find(id);
                 if (itemID != null)
                 {
                     var list = _direccionesRepository.Update(item, id);

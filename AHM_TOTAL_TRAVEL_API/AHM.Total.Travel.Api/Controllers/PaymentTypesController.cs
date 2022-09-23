@@ -30,18 +30,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(TiposPagosViewModel item)
+        public IActionResult Insert(TiposPagosViewModel tiposPagosViewModel)
         {
-            var items = _mapper.Map<tbTiposPagos>(item);
+            var items = _mapper.Map<tbTiposPagos>(tiposPagosViewModel);
             var result = _saleService.Createpayment(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, TiposPagosViewModel items)
+        public IActionResult Update(int id, TiposPagosViewModel tiposPagosViewModel)
         {
 
-            var item = _mapper.Map<tbTiposPagos>(items);
+            var item = _mapper.Map<tbTiposPagos>(tiposPagosViewModel);
             var result = _saleService.Updatepayment(id, item);
             return Ok(result);
 

@@ -32,18 +32,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(PaquetePredeterminadosDetallesViewModel item)
+        public IActionResult Insert(PaquetePredeterminadosDetallesViewModel paquetePredeterminadosDetallesViewModel)
         {
-            var items = _mapper.Map<tbPaquetePredeterminadosDetalles>(item);
+            var items = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
             var result = _saleService.CreatePackagesdetail(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PaquetePredeterminadosDetallesViewModel items)
+        public IActionResult Update(int id, PaquetePredeterminadosDetallesViewModel paquetePredeterminadosDetallesViewModel)
         {
 
-            var item = _mapper.Map<tbPaquetePredeterminadosDetalles>(items);
+            var item = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
             var result = _saleService.UpdatePackagesdetail(id, item);
             return Ok(result);
 

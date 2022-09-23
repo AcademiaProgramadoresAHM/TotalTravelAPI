@@ -28,6 +28,13 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
+        [HttpPost("Insert")]
+        public IActionResult Insert(tbActividadesExtras tbActividadesExtras)
+        {
+            var response = _activitiesService.CreateActiExt(tbActividadesExtras);
+            return Ok(response);
+        }
+
         [HttpPut("Update")]
         public IActionResult Update(int id, ActivitiesService items)
         {
