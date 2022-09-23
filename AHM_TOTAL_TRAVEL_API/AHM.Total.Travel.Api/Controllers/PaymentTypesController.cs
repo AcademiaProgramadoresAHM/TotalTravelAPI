@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
-    public class PaquetePredeterminadosController : Controller
+    [Route("[controller]")]
+    public class PaymentTypesController : Controller
     {
         private readonly SaleService _saleService;
         private readonly IMapper _mapper;
-        public PaquetePredeterminadosController(SaleService saleService, IMapper mapper)
+        public PaymentTypesController(SaleService saleService, IMapper mapper)
         {
             _saleService = saleService;
             _mapper = mapper;
@@ -24,28 +24,25 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _saleService.Listpackages();
+            var list = _saleService.Listpayment();
             return Ok(list);
 
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(PaquetePredeterminadosViewModel items)
+        public IActionResult Insert(TiposPagosViewModel item)
         {
-
-            var item = _mapper.Map<tbPaquetePredeterminados>(items);
-            var result = _saleService.Createpackages(item);
+            var items = _mapper.Map<tbTiposPagos>(item);
+            var result = _saleService.Createpayment(items);
             return Ok(result);
-
         }
 
-
         [HttpPut("Update")]
-        public IActionResult Update(int id, PaquetePredeterminadosViewModel items)
+        public IActionResult Update(int id, TiposPagosViewModel items)
         {
 
-            var item = _mapper.Map<tbPaquetePredeterminados>(items);
-            var result = _saleService.Updatepackages(id, item);
+            var item = _mapper.Map<tbTiposPagos>(items);
+            var result = _saleService.Updatepayment(id, item);
             return Ok(result);
 
         }
@@ -53,15 +50,15 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _saleService.Deletepackages(id, Mod);
+            var result = _saleService.Deletepayment(id, Mod);
             return Ok(result);
 
         }
 
         [HttpGet("Find")]
-        public IActionResult Details(int id)
+        public IActionResult Details(int Id)
         {
-            var result = _saleService.FindPackage(id);
+            var result = _saleService.Findpayment(Id);
             return Ok(result);
         }
     }
