@@ -12,12 +12,12 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RestaurantesController : Controller
+    public class RestaurantsController : Controller
     {
 
         private readonly RestaurantService _restaurantService;
         private readonly IMapper _mapper;
-        public RestaurantesController(RestaurantService restaurantService, IMapper mapper)
+        public RestaurantsController(RestaurantService restaurantService, IMapper mapper)
         {
             _restaurantService = restaurantService;
             _mapper = mapper;
@@ -29,6 +29,14 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _restaurantService.ListRestaurants ();
             return Ok(list);
         }
+        [HttpPost("Insert")]
+        public IActionResult Insert(RestaurantesViewModel item)
+        {
+            var items = _mapper.Map<tbRestaurantes>(item);
+            var result = _restaurantService.CreateRestaurants(items);
+            return Ok(result);
+        }
+
 
         [HttpPut("Update")]
         public IActionResult Update(int id, RestaurantesViewModel items)
