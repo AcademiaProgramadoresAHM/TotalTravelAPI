@@ -31,7 +31,16 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
-        [HttpPut("Update")]
+        [HttpPost("Insert")]
+        public IActionResult Insert(PermisosViewModel item)
+        {
+            var items = _mapper.Map<tbPermisos>(item);
+            var result = _AccessService.CreatePermission(items);
+            return Ok(result);
+        }
+
+
+            [HttpPut("Update")]
         public IActionResult Update(int id, PermisosViewModel items)
         {
 
