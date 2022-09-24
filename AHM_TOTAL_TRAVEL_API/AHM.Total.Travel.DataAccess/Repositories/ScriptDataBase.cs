@@ -123,13 +123,13 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #region Roles
 
-        public static string UDP_tbRoles_Insert = "Acce.UDP_tbRoles_Insert";
+        public static string UDP_tbRoles_Insert = "Acce.tbRoles_Insert";
 
-        public static string UDP_tbRoles_Update = "Acce.UDP_tbRoles_Update";
+        public static string UDP_tbRoles_Update = "Acce.tbRoles_Update";
 
-        public static string UDP_tbRoles_Delete = "Acce.UDP_tbRoles_Delete";
+        public static string UDP_tbRoles_Delete = "Acce.tbRoles_Delete";
 
-        public static string UDP_tbRoles_Find = "Acce.UDP_tbRoles_Find";
+        public static string UDP_tbRoles_Find = "Acce.tbRoles_Find";
 
         #endregion
 
