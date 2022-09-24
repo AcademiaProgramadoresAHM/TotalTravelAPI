@@ -52,13 +52,13 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbDirecciones_Find = "Gene.UDP_tbDirecciones_Find";
         #endregion
         #region TiposActividades
-        public static string UDP_tbTiposActividades_Insert = "Gene.UDP_tbTiposActividades_Insert";
+        public static string UDP_tbTiposActividades_Insert = "Actv.UDP_tbTiposActividades_Insert";
 
-        public static string UDP_tbTiposActividades_Update = "Gene.UDP_tbTiposActividades_Update";
+        public static string UDP_tbTiposActividades_Update = "Actv.UDP_tbTiposActividades_Update";
 
-        public static string UDP_tbTiposActividades_Delete = "Gene.UDP_tbTiposActividades_Delete";
+        public static string UDP_tbTiposActividades_Delete = "Actv.UDP_tbTiposActividades_Delete";
 
-        public static string UDP_tbTiposActividades_Find = "Gene.UDP_tbTiposActividades_Find";
+        public static string UDP_tbTiposActividades_Find = "Actv.UDP_tbTiposActividades_Find";
         #endregion
         #region Transportes
 

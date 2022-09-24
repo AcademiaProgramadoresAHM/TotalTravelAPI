@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbDirecciones Find(int? id)
         {
-            return DB.VW_tbDirecciones.Where(x => x.ID == id).First();
+            return DB.VW_tbDirecciones.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public int Insert(tbDirecciones item)
