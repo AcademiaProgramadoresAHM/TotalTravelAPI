@@ -31,9 +31,10 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(tbActividades tbActividades)
+        public IActionResult Insert(ActividadesViewModel Actividades)
         {
-            var response = _activitiesService.CreateActivity(tbActividades);
+            var item = _mapper.Map<tbActividades>(Actividades);
+            var response = _activitiesService.CreateActivity(item);
             return Ok(response);
         }
 

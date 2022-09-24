@@ -6,15 +6,13 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class ActividadesViewModel
     {
-        public int ID { get; set; }
-        public string Descripcion { get; set; }
-        public string Tipo { get; set; }
-        public int? ID_Crea { get; set; }
-        public string UsuarioCrea { get; set; }
-        public DateTime? FechaCreacion { get; set; }
-        public int? ID_Modifca { get; set; }
-        public string UsuarioModifica { get; set; }
-        public DateTime? FechaModifica { get; set; }
-        public bool? Estado { get; set; }
+        public int Actv_ID { get; set; }
+        public string Actv_Descripcion { get; set; }
+        public int? TiAc_ID { get; set; }
+        public int? Actv_UsuarioCreacion { get; set; }
+        public DateTime? Actv_FechaCreacion { get; set; }
+        public int? Actv_UsuarioModifica { get; set; }
+        public DateTime? Actv_FechaModifica { get; set; }
+        public bool? Actv_Estado { get; set; }
     }
 }

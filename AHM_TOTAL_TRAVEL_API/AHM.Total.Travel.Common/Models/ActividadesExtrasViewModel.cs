@@ -6,17 +6,15 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class ActividadesExtrasViewModel
     {
-        public int ID { get; set; }
-        public string Partner { get; set; }
-        public string Actividad { get; set; }
-        public decimal? Precio { get; set; }
-        public string Descripcion { get; set; }
-        public int? ID_Crea { get; set; }
-        public string UsuarioCrea { get; set; }
-        public DateTime? FechaCreacion { get; set; }
-        public int? ID_Modifica { get; set; }
-        public string UsuarioModifica { get; set; }
-        public DateTime? FechaModifica { get; set; }
-        public bool? Estado { get; set; }
+        public int AcEx_ID { get; set; }
+        public int? Part_ID { get; set; }
+        public int? Actv_ID { get; set; }
+        public decimal? AcEx_Precio { get; set; }
+        public string AcEx_Descripcion { get; set; }
+        public int? AcEx_UsuarioCreacion { get; set; }
+        public DateTime? AcEx_FechaCreacion { get; set; }
+        public int? AcEx_UsuarioModifica { get; set; }
+        public DateTime? AcEx_FechaModifica { get; set; }
+        public bool? AcEx_Estado { get; set; }
     }
 }

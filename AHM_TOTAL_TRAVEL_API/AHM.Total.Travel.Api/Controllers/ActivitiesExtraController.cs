@@ -1,4 +1,5 @@
 ﻿using AHM.Total.Travel.BusinessLogic.Services;
+using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +30,15 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(tbActividadesExtras tbActividadesExtras)
+        public IActionResult Insert(ActividadesExtrasViewModel ActividadesExtras)
         {
-            var response = _activitiesService.CreateActiExt(tbActividadesExtras);
+            var item = _mapper.Map<tbActividadesExtras>(ActividadesExtras);
+            var response = _activitiesService.CreateActiExt(item);
             return Ok(response);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, ActivitiesService items)
+        public IActionResult Update(int id, ActividadesExtrasViewModel items)
         {
             var item = _mapper.Map<tbActividadesExtras>(items);
             var result = _activitiesService.UpdateActiExt(id, item);
