@@ -66,7 +66,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _reservacionesDetallesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -170,7 +170,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 try
                 {
                     var map = _reservacionRestaurantesRepository.Insert(item);
-                    if (map > 0)
+                    if (map.CodeStatus > 0)
                     {
 
                         return result.Ok(map);
@@ -272,7 +272,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 try
                 {
                     var map = _reservacionTransporteRepository.Insert(item);
-                    if (map > 0)
+                    if (map.CodeStatus > 0)
                     {
 
                         return result.Ok(map);
@@ -374,7 +374,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 try
                 {
                     var map = _reservacionesHotelesRepository.Insert(item);
-                    if (map > 0)
+                    if (map.CodeStatus > 0)
                     {
 
                         return result.Ok(map);
@@ -477,7 +477,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _reservacionesActividadesExtraRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -583,7 +583,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _reservacionesActividadesHotelesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -688,7 +688,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _reservacionesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -792,7 +792,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _registrosPagosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);

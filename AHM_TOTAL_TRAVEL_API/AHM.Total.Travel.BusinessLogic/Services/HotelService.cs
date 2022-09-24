@@ -51,7 +51,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _hotelesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -152,7 +152,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _hotelesActividadesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -253,7 +253,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _habitacionesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -354,7 +354,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _hotelesMenusRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -455,7 +455,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _categoriasHabitacionesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);

@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _rolesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                     return result.Ok(map);
                 else
                     return result.Error();
@@ -143,7 +143,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _permisosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                     return result.Ok(map);
                 else
                     return result.Error();
@@ -243,7 +243,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _rolesPermisosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                     return result.Ok(map);
                 else
                     return result.Error();
@@ -337,7 +337,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _usuariosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                     return result.Ok(map);
                 else
                     return result.Error();

@@ -58,7 +58,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@UsuarioModifica", item.HoTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.EQueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHorariosTransportes_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHorariosTransportes_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

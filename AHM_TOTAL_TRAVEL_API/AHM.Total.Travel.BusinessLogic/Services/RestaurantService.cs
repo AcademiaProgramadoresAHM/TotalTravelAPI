@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _restaurantesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -150,7 +150,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _tiposMenusRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -253,7 +253,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _menusRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);

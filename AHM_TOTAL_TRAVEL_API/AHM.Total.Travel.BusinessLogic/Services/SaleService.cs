@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _paquetepredeterminadosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -148,7 +148,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _tipospagosRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -251,7 +251,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _paquetePredeterminadosDetallesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);

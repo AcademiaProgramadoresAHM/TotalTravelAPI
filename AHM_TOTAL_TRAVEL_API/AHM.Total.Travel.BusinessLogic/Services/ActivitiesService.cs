@@ -44,7 +44,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _actividadesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -147,7 +147,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _actividadesExtrasRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -250,7 +250,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _tiposActividadesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);

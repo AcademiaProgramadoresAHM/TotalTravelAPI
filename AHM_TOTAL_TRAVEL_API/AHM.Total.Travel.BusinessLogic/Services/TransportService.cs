@@ -54,7 +54,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _tiposTransportesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -157,7 +157,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _transportesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -260,7 +260,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _destinosTransportesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -363,7 +363,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _horariosTransportesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
@@ -466,7 +466,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var map = _detallesTransportesRepository.Insert(item);
-                if (map > 0)
+                if (map.CodeStatus > 0)
                 {
 
                     return result.Ok(map);
