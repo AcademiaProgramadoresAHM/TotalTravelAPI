@@ -56,5 +56,18 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Update, parameters, commandType: CommandType.StoredProcedure);
         }
+
+        public RequestStatus Update2(tbDirecciones item, int id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Dire_ID", id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_Descripcion", item.Dire_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Ciud_ID", item.Ciud_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Usuario_Modifica", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+
+            RequestStatus x = db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbDirecciones_Update, parameters, commandType: CommandType.StoredProcedure);
+            return x;
+        }
     }
 }
