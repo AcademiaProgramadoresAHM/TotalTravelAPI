@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class DireccionesRepository : IRepository<tbDirecciones, VW_tbDirecciones>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Dire_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbDirecciones_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbDirecciones Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbDirecciones.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbDirecciones item)
+        public RequestStatus Insert(tbDirecciones item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Dire_Descripcion", item.Dire_Descripcion, DbType.String, ParameterDirection.Input);
@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbDirecciones_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbDirecciones> List()
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbDirecciones.AsList();
         }
 
-        public int Update(tbDirecciones item, int id)
+        public RequestStatus Update(tbDirecciones item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Dire_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -54,7 +54,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Usuario_Modifica", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbDirecciones_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbDirecciones_Update, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public RequestStatus Update2(tbDirecciones item, int id)

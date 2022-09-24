@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@CaHa_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbCategoriasHabitaciones Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbCategoriasHabitaciones.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbCategoriasHabitaciones item)
+        public RequestStatus Insert(tbCategoriasHabitaciones item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@CaHa_Descripcion", item.CaHa_Descripcion, DbType.String, ParameterDirection.Input);
@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbCategoriasHabitaciones> List()
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbCategoriasHabitaciones.AsList();
         }
 
-        public int Update(tbCategoriasHabitaciones item, int id)
+        public RequestStatus Update(tbCategoriasHabitaciones item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@CaHa_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@CaHa_UsuarioModifica", item.CaHa_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbCategoriasHabitaciones_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

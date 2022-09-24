@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class RegistrosPagosRepository : IRepository<tbRegistrosPagos, VW_tbRegistrosPagos>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbRegistrosPagos_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRegistrosPagos_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbRegistrosPagos Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbRegistrosPagos.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbRegistrosPagos item)
+        public RequestStatus Insert(tbRegistrosPagos item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReservacionID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
@@ -39,7 +39,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbRegistrosPagos_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRegistrosPagos_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbRegistrosPagos> List()
@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbRegistrosPagos.ToList();
         }
 
-        public int Update(tbRegistrosPagos item, int id)
+        public RequestStatus Update(tbRegistrosPagos item, int id)
         {
             throw new NotImplementedException();
         }

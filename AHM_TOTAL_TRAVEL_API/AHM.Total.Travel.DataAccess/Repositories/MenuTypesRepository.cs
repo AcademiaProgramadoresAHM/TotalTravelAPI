@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class MenuTypesRepository : IRepository<tbTipoMenus, VW_tbTiposMenus>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Time_ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTipoMenus_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbTipoMenus_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbTiposMenus Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbTiposMenus.Where(x=>x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbTipoMenus item)
+        public RequestStatus Insert(tbTipoMenus item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Time_Descripcion", item.Time_Descripcion, DbType.String, ParameterDirection.Input);
@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTipoMenus_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbTipoMenus_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbTiposMenus> List()
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbTiposMenus.ToList();
         }
 
-        public int Update(tbTipoMenus item, int id)
+        public RequestStatus Update(tbTipoMenus item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Time_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -54,7 +54,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTipoMenus_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbTipoMenus_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

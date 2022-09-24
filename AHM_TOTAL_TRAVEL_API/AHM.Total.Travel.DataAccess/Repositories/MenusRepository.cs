@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext db = new TotalTravelContext();
 
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Menu_ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbMenu_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbMenus Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.VW_tbMenus.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbMenus item)
+        public RequestStatus Insert(tbMenus item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Time_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
@@ -41,7 +41,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbMenu_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbMenus> List()
@@ -49,7 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.VW_tbMenus.ToList();
         }
 
-        public int Update(tbMenus item, int id)
+        public RequestStatus Update(tbMenus item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Menu_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -62,7 +62,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbMenu_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbMenu_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

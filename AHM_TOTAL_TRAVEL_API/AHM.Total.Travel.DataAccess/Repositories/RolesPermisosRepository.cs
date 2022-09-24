@@ -12,19 +12,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class RolesPermisosRepository : IRepository<tbRolesPermisos, VW_tbRolesPermisos>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
-
             var parameters = new DynamicParameters();
             parameters.Add("@ID", Id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", Mod, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbRolesPermisos_Delete, parameters, commandType: CommandType.StoredProcedure);
-
-
-
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRolesPermisos_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbRolesPermisos Find(int? id)
@@ -32,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbRolesPermisos.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbRolesPermisos item)
+        public RequestStatus Insert(tbRolesPermisos item)
         {
 
             var parameters = new DynamicParameters();
@@ -42,7 +38,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbRolesPermisos_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRolesPermisos_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbRolesPermisos> List()
@@ -51,9 +47,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         }
 
-        public int Update(tbRolesPermisos item, int id)
+        public RequestStatus Update(tbRolesPermisos item, int id)
         {
-
             var parameters = new DynamicParameters();
             parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Perm_ID", item.Perm_ID, DbType.Int32, ParameterDirection.Input);
@@ -61,7 +56,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@UsuarioModifica", item.RoPe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbRolesPermisos_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRolesPermisos_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

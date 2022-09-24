@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class ReservacionesHotelesRepository : IRepository<tbReservacionesHoteles, VW_tbReservacionesHoteles>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReHo_ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesHoteles_DELETE, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesHoteles_DELETE, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbReservacionesHoteles Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionesHoteles.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbReservacionesHoteles item)
+        public RequestStatus Insert(tbReservacionesHoteles item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReHo_FechaEntrada", item.ReHo_FechaEntrada, DbType.Date, ParameterDirection.Input);
@@ -39,7 +39,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesHoteles_INSERT, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesHoteles_INSERT, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbReservacionesHoteles> List()
@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionesHoteles.ToList();
         }
 
-        public int Update(tbReservacionesHoteles item, int id)
+        public RequestStatus Update(tbReservacionesHoteles item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReHo_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -59,7 +59,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesHoteles_UPDATE, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesHoteles_UPDATE, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

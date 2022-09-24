@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHorariosTransportes_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHorariosTransportes_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbHorariosTransportes Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHorariosTransportes.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbHorariosTransportes item)
+        public RequestStatus Insert(tbHorariosTransportes item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@DestinoTransporte", item.DsTr_ID, DbType.Int32, ParameterDirection.Input);
@@ -40,7 +40,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHorariosTransportes_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHorariosTransportes_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbHorariosTransportes> List()
@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHorariosTransportes.AsList();
         }
 
-        public int Update(tbHorariosTransportes item, int id)
+        public RequestStatus Update(tbHorariosTransportes item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
@@ -58,7 +58,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@UsuarioModifica", item.HoTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHorariosTransportes_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.EQueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHorariosTransportes_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

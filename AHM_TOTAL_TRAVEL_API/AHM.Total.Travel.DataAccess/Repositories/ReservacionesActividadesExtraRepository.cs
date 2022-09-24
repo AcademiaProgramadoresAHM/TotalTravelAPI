@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class ReservacionesActividadesExtraRepository : IRepository<tbReservacionesActividadesExtras, VW_tbReservacionesActividadesExtras>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReAE_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbReservacionesActividadesExtras Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionesActividadesExtras.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbReservacionesActividadesExtras item)
+        public RequestStatus Insert(tbReservacionesActividadesExtras item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
@@ -40,7 +40,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbReservacionesActividadesExtras> List()
@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionesActividadesExtras.AsList();
         }
 
-        public int Update(tbReservacionesActividadesExtras item, int id)
+        public RequestStatus Update(tbReservacionesActividadesExtras item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReAE_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -61,7 +61,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionesActividadesExtras_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

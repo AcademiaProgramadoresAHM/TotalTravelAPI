@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class ActividadesExtrasRepository : IRepository<tbActividadesExtras, VW_tbActividadesExtras>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@AcEx_ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbActividadesExtra_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbActividadesExtras Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbActividadesExtras.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbActividadesExtras item)
+        public RequestStatus Insert(tbActividadesExtras item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
@@ -39,7 +39,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbActividadesExtra_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbActividadesExtras> List()
@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbActividadesExtras.AsList();
         }
 
-        public int Update(tbActividadesExtras item, int id)
+        public RequestStatus Update(tbActividadesExtras item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@AcEx_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -59,7 +59,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbActividadesExtra_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbActividadesExtra_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

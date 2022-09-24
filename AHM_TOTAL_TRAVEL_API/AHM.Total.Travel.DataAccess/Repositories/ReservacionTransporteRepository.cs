@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReTr_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionTransporte_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionTransporte_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbReservacionTransporte Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionTransporte.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public int Insert(tbReservacionTransporte item)
+        public RequestStatus Insert(tbReservacionTransporte item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Detr_ID", item.Detr_ID, DbType.String, ParameterDirection.Input);
@@ -41,7 +41,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionTransporte_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionTransporte_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbReservacionTransporte> List()
@@ -49,7 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbReservacionTransporte.AsList();
         }
 
-        public int Update(tbReservacionTransporte item, int id)
+        public RequestStatus Update(tbReservacionTransporte item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReTr_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -62,7 +62,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbReservacionTransporte_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbReservacionTransporte_Update, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

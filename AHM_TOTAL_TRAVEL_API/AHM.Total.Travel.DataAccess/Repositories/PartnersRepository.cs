@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Part_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPartners_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPartners_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbPartners Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbPartners.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbPartners item)
+        public RequestStatus Insert(tbPartners item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Part_Nombre", item.Part_Nombre, DbType.String, ParameterDirection.Input);
@@ -39,15 +39,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPartners_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPartners_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbPartners> List()
         {
-            return (IEnumerable<VW_tbPartners>)DB.VW_tbPartners.AsList();
+            return DB.VW_tbPartners.AsList();
         }
 
-        public int Update(tbPartners item, int id)
+        public RequestStatus Update(tbPartners item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Part_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -57,7 +57,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Part_UsuarioModifica", item.Part_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPartners_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPartners_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     public class HabitacionesRepository : IRepository<tbHabitaciones, VW_tbHabitaciones>
     {
         TotalTravelContext DB = new TotalTravelContext();
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Habi_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHabitaciones_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHabitaciones_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbHabitaciones Find(int? id)
@@ -28,7 +28,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHabitaciones.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbHabitaciones item)
+        public RequestStatus Insert(tbHabitaciones item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Habi_Nombre", item.Habi_Nombre, DbType.String, ParameterDirection.Input);
@@ -40,7 +40,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHabitaciones_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHabitaciones_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbHabitaciones> List()
@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHabitaciones.AsList();
         }
 
-        public int Update(tbHabitaciones item, int id)
+        public RequestStatus Update(tbHabitaciones item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Habi_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -60,7 +60,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Habi_UsuarioModifica", item.Habi_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHabitaciones_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHabitaciones_Update, parameters, commandType: CommandType.StoredProcedure);
         }
 
     }

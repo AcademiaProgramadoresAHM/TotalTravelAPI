@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int Id, int Mod)
+        public RequestStatus Delete(int Id, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@HoMe_ID", Id, DbType.Int32, ParameterDirection.Input);
@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHotelesMenus_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHotelesMenus_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbHotelesMenus Find(int? id)
@@ -29,7 +29,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHotelesMenus.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbHotelesMenus item)
+        public RequestStatus Insert(tbHotelesMenus item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@HoMe_Descripcion", item.HoMe_Descripcion, DbType.String, ParameterDirection.Input);
@@ -40,7 +40,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHotelesMenus_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHotelesMenus_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbHotelesMenus> List()
@@ -48,7 +48,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbHotelesMenus.AsList();
         }
 
-        public int Update(tbHotelesMenus item, int id)
+        public RequestStatus Update(tbHotelesMenus item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@HoMe_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -59,7 +59,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoMe_UsuarioModifica", item.HoMe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbHotelesMenus_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHotelesMenus_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }
