@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.DataAccess.Repositories;
+﻿using AHM.Total.Travel.Common.Models;
+using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using System;

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AHM.Total.Travel.Common\AHM.Total.Travel.Common.csproj" />
     <ProjectReference Include="..\AHM.Total.Travel.DataAccess\AHM.Total.Travel.DataAccess.csproj" />
   </ItemGroup>
 

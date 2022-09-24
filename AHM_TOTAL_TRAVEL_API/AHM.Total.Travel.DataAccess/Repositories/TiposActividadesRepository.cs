@@ -32,7 +32,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@TiAc_Descripcion", item.TiAc_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Ciud_UsuarioCreacion", item.TiAc_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@TiAc_UsuarioCreacion", item.TiAc_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -52,7 +52,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@TiAc_UsuarioModifica", item.TiAc_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbCiudades_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbTiposActividades_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }
