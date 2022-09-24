@@ -35,7 +35,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoMe_Descripcion", item.HoMe_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoMe_Precio", item.HoMe_Precio, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Time_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Time_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoMe_UsuarioCreacion", item.HoMe_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoMe_Descripcion", item.HoMe_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoMe_Precio", item.HoMe_Precio, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Time_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Time_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoMe_UsuarioModifica", item.HoMe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

@@ -36,7 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Menu_Descripcion", item.Menu_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Menu_Nombre", item.Menu_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Menu_Precio", item.Menu_Precio, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("@Rest_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Menu_UsuarioCreacion", item.Menu_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -57,7 +57,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Menu_Descripcion", item.Menu_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Menu_Nombre", item.Menu_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Menu_Precio", item.Menu_Precio, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("@Rest_ID", item.Time_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Menu_UsuarioModifica", item.Menu_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);

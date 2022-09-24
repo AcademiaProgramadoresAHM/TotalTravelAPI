@@ -12,6 +12,7 @@ namespace AHM.Total.Travel.Common.Models
         public decimal? Menu_Precio { get; set; }
         public int? Rest_ID { get; set; }
         public int? Menu_UsuarioCreacion { get; set; }
+        public int? Menu_UsuarioModifica { get; set; }
     }
 
     public class MenusListViewModel
