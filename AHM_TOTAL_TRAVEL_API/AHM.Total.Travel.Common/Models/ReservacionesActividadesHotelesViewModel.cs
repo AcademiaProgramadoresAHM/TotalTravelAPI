@@ -6,17 +6,16 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class ReservacionesActividadesHotelesViewModel
     {
-        public int ID { get; set; }
-        public int? Reservacion_ID { get; set; }
-        public string Cliente { get; set; }
-        public string Actividad { get; set; }
-        public int? Cantidad { get; set; }
-        public DateTime? Fecha_Reservacion { get; set; }
-        public string Hora_Reservacion { get; set; }
-        public int? Usuario_Creacion { get; set; }
-        public DateTime? Fecha_Creacion { get; set; }
-        public int? Usuario_Modifica { get; set; }
-        public DateTime? Fecha_Modifica { get; set; }
-        public bool? Estado { get; set; }
+        public int ReAH_ID { get; set; }
+        public int? Resv_ID { get; set; }
+        public int? HoAc_ID { get; set; }
+        public int? ReAH_Cantidad { get; set; }
+        public DateTime? ReAH_FechaReservacion { get; set; }
+        public string ReAH_HoraReservacion { get; set; }
+        public int? ReAH_UsuarioCreacion { get; set; }
+        public DateTime? ReAH_FechaCreacion { get; set; }
+        public int? ReAH_UsuarioModifica { get; set; }
+        public DateTime? ReAH_FechaModifica { get; set; }
+        public bool? ReAH_Estado { get; set; }
     }
 }

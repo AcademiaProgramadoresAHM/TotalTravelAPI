@@ -437,7 +437,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
 
             //BUSCAR
-            public ServiceResult findReservationHotel(int id)
+            public ServiceResult FindReservationHotel(int id)
             {
                 var result = new ServiceResult();
                 try

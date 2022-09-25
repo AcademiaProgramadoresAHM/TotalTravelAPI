@@ -24,6 +24,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbActividades_Delete = "Actv.UDP_tbActividades_Delete";
 
         #endregion
+
         #region Usuarios
         public static string UDP_tbUsuarios_Insert = "Acce.UDP_tbUsuarios_Insert";
 
@@ -33,6 +34,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
 
         #endregion
+
         #region ActividadesExtras
         public static string UDP_tbActividadesExtra_Delete = "Actv.UDP_tbActividadesExtra_Delete";
 
@@ -51,6 +53,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbDirecciones_Find = "Gene.UDP_tbDirecciones_Find";
         #endregion
+
         #region TiposActividades
         public static string UDP_tbTiposActividades_Insert = "Actv.UDP_tbTiposActividades_Insert";
 
@@ -60,6 +63,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbTiposActividades_Find = "Actv.UDP_tbTiposActividades_Find";
         #endregion
+
         #region Transportes
 
         public static string UDP_tbTransportes_Insert = "Trpt.UDP_tbTransportes_Insert";
@@ -123,11 +127,11 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #region Roles
 
-        public static string UDP_tbRoles_Insert = "Acce.tbRoles_Insert";
+        public static string UDP_tbRoles_Insert = "Acce.UDP_tbRoles_Insert";
 
-        public static string UDP_tbRoles_Update = "Acce.tbRoles_Update";
+        public static string UDP_tbRoles_Update = "Acce.UDP_tbRoles_Update";
 
-        public static string UDP_tbRoles_Delete = "Acce.tbRoles_Delete";
+        public static string UDP_tbRoles_Delete = "Acce.UDP_tbRoles_Delete";
 
         public static string UDP_tbRoles_Find = "Acce.tbRoles_Find";
 
@@ -224,7 +228,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         #endregion
 
         #region ReservacionesActividadesExtras
-        public static string UDP_tbReservacionesActividadesExtras_Insert = "Resv,UDP_tbReservacionesActividadesExtras_Insert";
+        public static string UDP_tbReservacionesActividadesExtras_Insert = "Resv.UDP_tbReservacionesActividadesExtras_Insert";
 
         public static string UDP_tbReservacionesActividadesExtras_Update = "Resv.UDP_tbReservacionesActividadesExtras_Update";
 

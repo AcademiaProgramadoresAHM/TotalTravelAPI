@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
@@ -12,7 +13,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
     {
         TotalTravelContext DB = new TotalTravelContext();
 
-        public int Delete(int ID, int Mod)
+        public RequestStatus Delete(int ID, int Mod)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@PaDe_ID", ID, DbType.Int32, ParameterDirection.Input);
@@ -20,15 +21,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Delete, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Delete, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public VW_tbPaquetePredeterminadosDetalles Find(int? id)
         {
-            throw new NotImplementedException();
+            return DB.VW_tbPaquetePredeterminadosDetalles.Where(x => x.ID == id).FirstOrDefault();
         }
 
-        public int Insert(tbPaquetePredeterminadosDetalles item)
+        public RequestStatus Insert(tbPaquetePredeterminadosDetalles item)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Paqu_ID", item.Paqu_ID, DbType.Int32, ParameterDirection.Input);
@@ -37,7 +38,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Insert, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Insert, parameters, commandType: CommandType.StoredProcedure);
         }
 
         public IEnumerable<VW_tbPaquetePredeterminadosDetalles> List()
@@ -45,7 +46,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return DB.VW_tbPaquetePredeterminadosDetalles.AsList();
         }
 
-        public int Update(tbPaquetePredeterminadosDetalles item, int id)
+        public RequestStatus Update(tbPaquetePredeterminadosDetalles item, int id)
         {
             var parameters = new DynamicParameters();
             parameters.Add("@PaDe_ID", id, DbType.Int32, ParameterDirection.Input);
@@ -54,7 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@PaDe_UsuarioModifica", item.PaDe_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
-            return db.ExecuteScalar<int>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Update, parameters, commandType: CommandType.StoredProcedure);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPaquetePredeterminadosDetalles_Update, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

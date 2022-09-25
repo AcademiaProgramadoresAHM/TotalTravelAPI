@@ -34,7 +34,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoAc_ID", item.HoAc_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAH_Cantidad", item.ReAH_Cantidad, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@ReAH_FechaReservacion", item.ReAH_FechaReservacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ReAH_FechaReservacion", item.ReAH_FechaReservacion, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@ReAH_HoraReservacion", item.ReAH_HoraReservacion, DbType.String, ParameterDirection.Input);
             parameters.Add("@ReAH_UsuarioCreacion", item.ReAH_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoAc_ID", item.HoAc_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAH_Cantidad", item.ReAH_Cantidad, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@ReAH_FechaReservacion", item.ReAH_FechaReservacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ReAH_FechaReservacion", item.ReAH_FechaReservacion, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@ReAH_HoraReservacion", item.ReAH_HoraReservacion, DbType.String, ParameterDirection.Input);
             parameters.Add("@ReAH_UsuarioModifica", item.ReAH_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
 

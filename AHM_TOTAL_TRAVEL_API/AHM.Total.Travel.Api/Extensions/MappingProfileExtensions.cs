@@ -31,6 +31,7 @@ namespace AHM.Total.Travel.Api.Extensions
             CreateMap<RegistrosPagosViewModel, tbRegistrosPagos>().ReverseMap();
             CreateMap<ReservacionesActividadesExtrasViewModel, tbReservacionesActividadesExtras>().ReverseMap();
             CreateMap<ReservacionesActividadesHotelesViewModel, tbReservacionesActividadesHoteles>().ReverseMap();
+            CreateMap<ReservacionesHotelesViewModel, tbReservacionesHoteles>().ReverseMap();
             CreateMap<ReservacionesDetallesViewModel, tbReservacionesDetalles>().ReverseMap();
             CreateMap<ReservacionesDetallesViewModel, tbReservacionesDetalles>().ReverseMap();
             CreateMap<ReservacionesViewModel, tbReservaciones>().ReverseMap();
