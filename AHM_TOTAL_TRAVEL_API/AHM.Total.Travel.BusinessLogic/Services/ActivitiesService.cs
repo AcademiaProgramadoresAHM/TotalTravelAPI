@@ -46,11 +46,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _actividadesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -67,8 +69,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _actividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _actividadesRepository.Update(tbActividades, id);
-                    return result.Ok(list);
+                    var map = _actividadesRepository.Update(tbActividades, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -90,8 +100,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _actividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _actividadesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _actividadesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -108,10 +126,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindActivity(int id)
         {
             var result = new ServiceResult();
-            var activity = new VW_tbActividades();
             try
             {
-                activity = _actividadesRepository.Find(id);
+                var activity = _actividadesRepository.Find(id);
                 return result.Ok(activity);
             }
             catch (Exception ex)
@@ -149,11 +166,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _actividadesExtrasRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -170,9 +189,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _actividadesExtrasRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _actividadesExtrasRepository.Update(tbActividadesExtras, id);
-                    return result.Ok(list);
-
+                    var map = _actividadesExtrasRepository.Update(tbActividadesExtras, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -193,9 +219,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _actividadesExtrasRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _actividadesExtrasRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _actividadesExtrasRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -211,10 +244,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindActiExt(int id)
         {
             var result = new ServiceResult();
-            var actExt = new VW_tbActividadesExtras();
             try
             {
-                actExt = _actividadesExtrasRepository.Find(id);
+                var actExt = _actividadesExtrasRepository.Find(id);
                 return result.Ok(actExt);
             }
             catch (Exception ex)
@@ -252,11 +284,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _tiposActividadesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -273,9 +307,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposActividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _tiposActividadesRepository.Update(tbTiposActividades, id);
-                    return result.Ok(list);
-
+                    var map = _tiposActividadesRepository.Update(tbTiposActividades, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -296,9 +337,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposActividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _tiposActividadesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _tiposActividadesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -314,10 +362,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindActTyp(int id)
         {
             var result = new ServiceResult();
-            var actTyp = new VW_tbTiposActividades();
             try
             {
-                actTyp = _tiposActividadesRepository.Find(id);
+                var actTyp = _tiposActividadesRepository.Find(id);
                 return result.Ok(actTyp);
             }
             catch (Exception ex)

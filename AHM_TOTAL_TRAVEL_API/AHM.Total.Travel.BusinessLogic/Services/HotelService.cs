@@ -53,11 +53,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -74,9 +76,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _hotelesRepository.Update(tbHoteles, id);
-                    return result.Ok(list);
-
+                    var map = _hotelesRepository.Update(tbHoteles, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -97,9 +106,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _hotelesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _hotelesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -115,10 +131,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindHotels(int id)
         {
             var result = new ServiceResult();
-            var hotel = new VW_tbHoteles();
             try
             {
-                hotel = _hotelesRepository.Find(id);
+                var hotel = _hotelesRepository.Find(id);
                 return result.Ok(hotel);
             }
             catch (Exception ex)
@@ -129,6 +144,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #endregion
+
         #region HotelesActividades
         public ServiceResult ListHotelsActivity()
         {
@@ -154,11 +170,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesActividadesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -175,9 +193,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesActividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _hotelesActividadesRepository.Update(tbHotelesActividades, id);
-                    return result.Ok(list);
-
+                    var map = _hotelesActividadesRepository.Update(tbHotelesActividades, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -198,9 +223,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesActividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _hotelesActividadesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _hotelesActividadesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -216,10 +248,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindHotelsActivity(int id)
         {
             var result = new ServiceResult();
-            var hotelactivities = new VW_tbHotelesActividades();
             try
             {
-                hotelactivities = _hotelesActividadesRepository.Find(id);
+                var hotelactivities = _hotelesActividadesRepository.Find(id);
                 return result.Ok(hotelactivities);
             }
             catch (Exception ex)
@@ -230,6 +261,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #endregion
+
         #region Habitaciones
         public ServiceResult ListHabitaciones()
         {
@@ -255,11 +287,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _habitacionesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -276,9 +310,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _habitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _habitacionesRepository.Update(tbHabitaciones, id);
-                    return result.Ok(list);
-
+                    var map = _habitacionesRepository.Update(tbHabitaciones, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -299,9 +340,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _habitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _habitacionesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _habitacionesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -317,10 +365,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindHabitaciones(int id)
         {
             var result = new ServiceResult();
-            var habitaciones = new VW_tbHabitaciones();
             try
             {
-                habitaciones = _habitacionesRepository.Find(id);
+                var habitaciones = _habitacionesRepository.Find(id);
                 return result.Ok(habitaciones);
             }
             catch (Exception ex)
@@ -331,6 +378,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #endregion
+
         #region HotelesMenus
         public ServiceResult ListHotelsMenu()
         {
@@ -356,11 +404,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesMenusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -377,9 +427,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesMenusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _hotelesMenusRepository.Update(tbHotelesMenus, id);
-                    return result.Ok(list);
-
+                    var map = _hotelesMenusRepository.Update(tbHotelesMenus, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -400,9 +457,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesMenusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _hotelesMenusRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _hotelesMenusRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -418,10 +482,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindHotelsMenu(int id)
         {
             var result = new ServiceResult();
-            var hotelesmenus = new VW_tbHotelesMenus();
             try
             {
-                hotelesmenus = _hotelesMenusRepository.Find(id);
+                var hotelesmenus = _hotelesMenusRepository.Find(id);
                 return result.Ok(hotelesmenus);
             }
             catch (Exception ex)
@@ -432,6 +495,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         #endregion
+
         #region CategoriasHabitaciones
         public ServiceResult ListCategoriesRooms()
         {
@@ -457,11 +521,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _categoriasHabitacionesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -478,9 +544,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _categoriasHabitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _categoriasHabitacionesRepository.Update(tbcategoriasHabitaciones, id);
-                    return result.Ok(list);
-
+                    var map = _categoriasHabitacionesRepository.Update(tbcategoriasHabitaciones, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -501,9 +574,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _categoriasHabitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _categoriasHabitacionesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _categoriasHabitacionesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -519,10 +599,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindCategoriesRooms(int id)
         {
             var result = new ServiceResult();
-            var hotelesmenus = new VW_tbCategoriasHabitaciones();
             try
             {
-                hotelesmenus = _categoriasHabitacionesRepository.Find(id);
+                var hotelesmenus = _categoriasHabitacionesRepository.Find(id);
                 return result.Ok(hotelesmenus);
             }
             catch (Exception ex)
