@@ -53,7 +53,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -70,8 +73,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _restaurantesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _restaurantesRepository.Update(tbRestaurantes, id);
-                    return result.Ok(list);
+                    var map = _restaurantesRepository.Update(tbRestaurantes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -93,8 +105,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _restaurantesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _restaurantesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _restaurantesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -156,7 +178,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -173,8 +198,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposMenusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _tiposMenusRepository.Update(tbTipoMenus, id);
-                    return result.Ok(list);
+                    var map = _tiposMenusRepository.Update(tbTipoMenus, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -196,8 +230,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposMenusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _tiposMenusRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _tiposMenusRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -259,7 +302,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+
             }
             catch (Exception ex)
             {
@@ -276,12 +323,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _menusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _menusRepository.Update(tbMenus, id);
-                    return result.Ok(list);
+                    var map = _menusRepository.Update(tbMenus, id);
+                    if (map.CodeStatus > 0)
+                    {
 
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
+                    
                     return result.Error("Los datos ingresados son incorrectos");
                 }
             }
@@ -299,8 +355,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _menusRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _menusRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _menusRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else

@@ -72,7 +72,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -90,8 +93,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesDetallesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _reservacionesDetallesRepository.Update(tbReservacionesDetalles, id);
-                    return result.Ok(list);
+                    var map = _reservacionesDetallesRepository.Update(tbReservacionesDetalles, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {
@@ -113,8 +125,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesDetallesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _reservacionesDetallesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _reservacionesDetallesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -176,8 +198,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         return result.Ok(map);
                     }
                     else
-                        return result.Error();
-                }
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+            }
                 catch (Exception ex)
                 {
 
@@ -194,8 +219,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionRestaurantesRepository.Find(id);
                     if (itemID != null)
                     {
-                        var list = _reservacionRestaurantesRepository.Update(tbReservacionRestaurantes, id);
-                        return result.Ok(list);
+                        var map = _reservacionRestaurantesRepository.Update(tbReservacionRestaurantes, id);
+                        if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+
                     }
                     else
                     {
@@ -217,8 +252,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionRestaurantesRepository.Find(id);
                     if (itemID != null)
                     {
-                        var listado = _reservacionRestaurantesRepository.Delete(id, Mod);
-                        return result.Ok(listado);
+                        var map = _reservacionRestaurantesRepository.Delete(id, Mod);
+                        if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
 
                     }
                     else
@@ -278,8 +322,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         return result.Ok(map);
                     }
                     else
-                        return result.Error();
-                }
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+            }
                 catch (Exception ex)
                 {
 
@@ -296,8 +343,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionTransporteRepository.Find(id);
                     if (itemID != null)
                     {
-                        var list = _reservacionTransporteRepository.Update(tbReservacionTransporte, id);
-                        return result.Ok(list);
+                        var map = _reservacionTransporteRepository.Update(tbReservacionTransporte, id);
+                        if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+
                     }
                     else
                     {
@@ -319,8 +376,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionTransporteRepository.Find(id);
                     if (itemID != null)
                     {
-                        var listado = _reservacionTransporteRepository.Delete(id, Mod);
-                        return result.Ok(listado);
+                        var map = _reservacionTransporteRepository.Delete(id, Mod);
+                        if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+
 
                     }
                     else
@@ -374,14 +441,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 try
                 {
                     var map = _reservacionesHotelesRepository.Insert(item);
-                    if (map.CodeStatus > 0)
-                    {
+                        if (map.CodeStatus > 0)
+                        {
 
-                        return result.Ok(map);
-                    }
-                    else
-                        return result.Error();
-                }
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+            }
                 catch (Exception ex)
                 {
 
@@ -398,8 +468,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionesHotelesRepository.Find(id);
                     if (itemID != null)
                     {
-                        var list = _reservacionesHotelesRepository.Update(tbReservacionesHoteles, id);
-                        return result.Ok(list);
+                        var map = _reservacionesHotelesRepository.Update(tbReservacionesHoteles, id);\
+                          if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+
                     }
                     else
                     {
@@ -421,8 +501,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionesHotelesRepository.Find(id);
                     if (itemID != null)
                     {
-                        var listado = _reservacionesHotelesRepository.Delete(id, Mod);
-                        return result.Ok(listado);
+                        var map = _reservacionesHotelesRepository.Delete(id, Mod);
+                        if (map.CodeStatus > 0)
+                        {
+
+                            return result.Ok(map);
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                            return result.Error(map);
+                        }
+
 
                     }
                     else
@@ -483,7 +573,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -501,8 +594,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesActividadesExtraRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _reservacionesActividadesExtraRepository.Update(tbReservacionesActividadesExtras, id);
-                    return result.Ok(list);
+                    var map = _reservacionesActividadesExtraRepository.Update(tbReservacionesActividadesExtras, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -525,8 +628,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesActividadesExtraRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _reservacionesActividadesExtraRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _reservacionesActividadesExtraRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -589,7 +701,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -607,8 +722,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesActividadesHotelesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _reservacionesActividadesHotelesRepository.Update(tbReservacionesActividadesHoteles, id);
-                    return result.Ok(list);
+                    var map = _reservacionesActividadesHotelesRepository.Update(tbReservacionesActividadesHoteles, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -631,8 +755,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesActividadesHotelesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _reservacionesActividadesHotelesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _reservacionesActividadesHotelesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -694,7 +828,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -712,8 +849,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _reservacionesRepository.Update(tbReservaciones, id);
-                    return result.Ok(list);
+                    var map = _reservacionesRepository.Update(tbReservaciones, id);
+
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -736,8 +883,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _reservacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _reservacionesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _reservacionesRepository.Delete(id, Mod);
+                     
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -798,7 +955,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -816,8 +976,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _registrosPagosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _registrosPagosRepository.Update(tbRegistrosPagos, id);
-                    return result.Ok(list);
+                    var map = _registrosPagosRepository.Update(tbRegistrosPagos, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -840,7 +1010,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _registrosPagosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _registrosPagosRepository.Delete(id, Mod);
+                    var map = _registrosPagosRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                     return result.Ok(listado);
 
                 }

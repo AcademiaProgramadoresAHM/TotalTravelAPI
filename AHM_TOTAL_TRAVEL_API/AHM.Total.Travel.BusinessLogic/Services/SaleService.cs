@@ -51,7 +51,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -68,8 +71,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _paquetepredeterminadosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _paquetepredeterminadosRepository.Update(tbPaquetePredeterminados, id);
-                    return result.Ok(list);
+                    var map = _paquetepredeterminadosRepository.Update(tbPaquetePredeterminados, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -91,8 +104,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _paquetepredeterminadosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _paquetepredeterminadosRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _paquetepredeterminadosRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -154,7 +177,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
              catch (Exception ex)
             {
@@ -171,8 +197,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tipospagosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _tipospagosRepository.Update(tbTiposPagos, id);
-                    return result.Ok(list);
+                    var map = _tipospagosRepository.Update(tbTiposPagos, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -257,7 +293,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -274,8 +313,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _paquetePredeterminadosDetallesRepository.Update(paquetePredeterminadosDetalles, id);
-                    return result.Ok(list);
+                    var map = _paquetePredeterminadosDetallesRepository.Update(paquetePredeterminadosDetalles, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -297,8 +345,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _paquetePredeterminadosDetallesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _paquetePredeterminadosDetallesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _paquetePredeterminadosDetallesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else

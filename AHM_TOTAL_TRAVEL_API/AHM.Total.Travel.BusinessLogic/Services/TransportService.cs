@@ -60,7 +60,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -77,8 +80,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _tiposTransportesRepository.Update(tbTiposTransportes, id);
-                    return result.Ok(list);
+                    var map = _tiposTransportesRepository.Update(tbTiposTransportes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -100,8 +113,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tiposTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _tiposTransportesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _tiposTransportesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -163,7 +186,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -180,8 +206,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _transportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _transportesRepository.Update(tbTransportes, id);
-                    return result.Ok(list);
+                    var map = _transportesRepository.Update(tbTransportes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -203,8 +238,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _transportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _transportesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _transportesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -266,7 +310,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -283,8 +330,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _destinosTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _destinosTransportesRepository.Update(tbDestinosTransportes, id);
-                    return result.Ok(list);
+                    var map = _destinosTransportesRepository.Update(tbDestinosTransportes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -306,8 +362,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _destinosTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _destinosTransportesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _destinosTransportesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
 
                 }
                 else
@@ -369,7 +435,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -386,8 +455,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _horariosTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _horariosTransportesRepository.Update(tbHorariosTransportes, id);
-                    return result.Ok(list);
+                    var map = _horariosTransportesRepository.Update(tbHorariosTransportes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -409,8 +487,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _horariosTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _horariosTransportesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _horariosTransportesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -472,7 +559,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     return result.Ok(map);
                 }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -489,8 +579,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _detallesTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _detallesTransportesRepository.Update(tbDetallesTransportes, id);
-                    return result.Ok(list);
+                    var map = _detallesTransportesRepository.Update(tbDetallesTransportes, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
@@ -512,8 +611,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _detallesTransportesRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _detallesTransportesRepository.Delete(id, Mod);
-                    return result.Ok(listado);
+                    var map = _detallesTransportesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
 
                 }
                 else
