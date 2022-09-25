@@ -309,8 +309,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _rolesPermisosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _rolesPermisosRepository.Update(tbRolesPermisos, id);
-                    return result.Ok(list);
+                    var map = _rolesPermisosRepository.Update(tbRolesPermisos, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                     return result.Error("Los datos ingresados son incorrectos");
@@ -330,8 +338,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _rolesPermisosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _rolesPermisosRepository.Delete(id, Mod);
-                    return result.Ok(list);
+                    var map = _rolesPermisosRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                     return result.Error("Los datos ingresados son incorrectos");
@@ -346,10 +362,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindRolePermission(int id)
         {
             var result = new ServiceResult();
-            var rolper = new VW_tbRolesPermisos();
             try
             {
-                rolper = _rolesPermisosRepository.Find(id);
+                var rolper = _rolesPermisosRepository.Find(id);
                 return result.Ok(rolper);
             }
             catch (Exception ex)
@@ -384,9 +399,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 var map = _usuariosRepository.Insert(item);
                 if (map.CodeStatus > 0)
+                {
                     return result.Ok(map);
+                }
                 else
-                    return result.Error();
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
             }
             catch (Exception ex)
             {
@@ -403,8 +423,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _usuariosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _usuariosRepository.Update(tbUsuarios, id);
-                    return result.Ok(list);
+                    var map = _usuariosRepository.Update(tbUsuarios, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                     return result.Error("Los datos son incorrectos");
@@ -424,8 +452,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _usuariosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var list = _usuariosRepository.Delete(id, Mod);
-                    return result.Ok(list);
+                    var map = _usuariosRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                     return result.Error("Los datos son incorrectos");
@@ -440,10 +476,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindUsers(int id)
         {
             var result = new ServiceResult();
-            var user = new VW_tbUsuarios();
             try
             {
-                user = _usuariosRepository.Find(id);
+                var user = _usuariosRepository.Find(id);
                 return result.Ok(user);
             }
             catch (Exception ex)
