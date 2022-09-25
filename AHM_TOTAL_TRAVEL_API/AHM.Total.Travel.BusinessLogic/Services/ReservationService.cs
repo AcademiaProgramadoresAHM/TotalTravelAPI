@@ -468,7 +468,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var itemID = _reservacionesHotelesRepository.Find(id);
                     if (itemID != null)
                     {
-                        var map = _reservacionesHotelesRepository.Update(tbReservacionesHoteles, id);\
+                        var map = _reservacionesHotelesRepository.Update(tbReservacionesHoteles, id);
                           if (map.CodeStatus > 0)
                         {
 
