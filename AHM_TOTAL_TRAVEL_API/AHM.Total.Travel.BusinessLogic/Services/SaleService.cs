@@ -200,7 +200,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     var map = _tipospagosRepository.Update(tbTiposPagos, id);
                     if (map.CodeStatus > 0)
                     {
-
                         return result.Ok(map);
                     }
                     else
@@ -208,8 +207,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
                         return result.Error(map);
                     }
-
-
                 }
                 else
                 {
@@ -230,9 +227,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _tipospagosRepository.Find(id);
                 if (itemID != null)
                 {
-                    var listado = _paquetepredeterminadosRepository.Delete(id, Mod);
-                    return result.Ok(listado);
-
+                    var map = _tipospagosRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
                 }
                 else
                 {

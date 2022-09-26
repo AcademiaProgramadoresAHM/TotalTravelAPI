@@ -105,10 +105,10 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         #region Tipos Pagos
 
-        public static string UDP_tbTiposPagos_INSERT = "Trpt.UDP_tbTiposPagos_INSERT";
-        public static string UDP_tbTiposPagos_UPDATE = "Trpt.UDP_tbTiposPagos_UPDATE";
-        public static string UDP_tbTiposPagos_DELETE = "Trpt.UDP_tbTiposPagos_DELETE";
-        //public static string UDP_tbTiposPagos_FIND = "Trpt.UDP_tbTiposPagos_FIND";
+        public static string UDP_tbTiposPagos_INSERT = "Sale.UDP_tbTiposPagos_INSERT";
+        public static string UDP_tbTiposPagos_UPDATE = "Sale.UDP_tbTiposPagos_UPDATE";
+        public static string UDP_tbTiposPagos_DELETE = "Sale.UDP_tbTiposPagos_DELETE";
+        //public static string UDP_tbTiposPagos_FIND = "Sale.UDP_tbTiposPagos_FIND";
 
         #endregion
 

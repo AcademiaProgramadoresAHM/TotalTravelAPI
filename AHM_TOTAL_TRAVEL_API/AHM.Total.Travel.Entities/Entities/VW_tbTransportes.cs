@@ -14,11 +14,11 @@ namespace AHM.Total.Travel.Entities.Entities
         public string NombrePartner { get; set; }
         public int? DireccionId { get; set; }
         public string Direccion { get; set; }
-        public int? UsuarioCreacion { get; set; }
-        public string UsuarioCreacionID { get; set; }
+        public int? UsuarioCreacionID { get; set; }
+        public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
-        public int? UsuarioModifica { get; set; }
-        public string UsuarioModificaID { get; set; }
+        public int? UsuarioModificaID { get; set; }
+        public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
         public bool? Estado { get; set; }
     }
