@@ -6,18 +6,16 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class DetallesTransportesViewModel
     {
-        public int ID { get; set; }
-        public string Transporte { get; set; }
-        public DateTime? Fecha { get; set; }
-        public string Hora_Salida { get; set; }
-        public string Hora_Llegada { get; set; }
-        public int? Capacidad { get; set; }
-        public decimal? Precio { get; set; }
-        public string Matricula { get; set; }
-        public int? Usuario_Creacion { get; set; }
-        public DateTime? Fecha_Creacion { get; set; }
-        public int? Usuario_Modifica { get; set; }
-        public DateTime? Fecha_Modifica { get; set; }
-        public bool? Estado { get; set; }
+        public int DeTr_ID { get; set; }
+        public int? Tprt_ID { get; set; }
+        public int? HoTr_ID { get; set; }
+        public int? DeTr_Capacidad { get; set; }
+        public decimal? DeTr_Precio { get; set; }
+        public string DeTr_Matricula { get; set; }
+        public int? DeTr_UsuarioCreacion { get; set; }
+        public DateTime? DeTr_FechaCreacion { get; set; }
+        public int? DeTr_UsuarioModifica { get; set; }
+        public DateTime? DeTr_FechaModifica { get; set; }
+        public bool? DeTr_Estado { get; set; }
     }
 }
