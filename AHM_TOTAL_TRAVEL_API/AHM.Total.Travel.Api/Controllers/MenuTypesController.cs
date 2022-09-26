@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("API/[controller]")]
     public class MenuTypesController : Controller
     {
         private readonly RestaurantService _restaurantService;

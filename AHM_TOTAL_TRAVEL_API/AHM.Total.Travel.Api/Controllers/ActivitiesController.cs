@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("API/[controller]")]
     public class ActivitiesController : Controller
     {
         private readonly ActivitiesService _activitiesService;
