@@ -32,8 +32,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public RequestStatus Insert(tbDestinosTransportes item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@CiudadSalida", item.DsTr_CiudadSalida, DbType.String, ParameterDirection.Input);
-            parameters.Add("@CiudadDestino", item.DsTr_CiudadDestino, DbType.String, ParameterDirection.Input);
+            parameters.Add("@CiudadSalida", item.DsTr_CiudadSalida, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@CiudadDestino", item.DsTr_CiudadDestino, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioCrea", item.DsTr_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -50,8 +50,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ID", id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@CiudadSalida", item.DsTr_CiudadSalida, DbType.String, ParameterDirection.Input);
-            parameters.Add("@CiudadDestino", item.DsTr_CiudadDestino, DbType.String, ParameterDirection.Input);
+            parameters.Add("@CiudadSalida", item.DsTr_CiudadSalida, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@CiudadDestino", item.DsTr_CiudadDestino, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", item.DsTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
