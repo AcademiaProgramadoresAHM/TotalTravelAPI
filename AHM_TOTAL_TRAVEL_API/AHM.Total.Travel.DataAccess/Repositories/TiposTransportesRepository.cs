@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace AHM.Total.Travel.DataAccess.Repositories
@@ -25,7 +26,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbTiposTransportes Find(int? id)
         {
-            throw new NotImplementedException();
+            return DB.VW_tbTiposTransportes.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public RequestStatus Insert(tbTiposTransportes item)

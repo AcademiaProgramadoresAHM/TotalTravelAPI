@@ -6,15 +6,15 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class PermisosViewModel
     {
-        public int ID { get; set; }
-        public string Icono { get; set; }
-        public string Descripcion { get; set; }
-        public string Controlador { get; set; }
-        public string Action { get; set; }
-        public string UsuarioCreacion { get; set; }
-        public DateTime? FechaCreacion { get; set; }
-        public string UsuarioModifica { get; set; }
-        public DateTime? FechaModifica { get; set; }
-        public bool? Estado { get; set; }
+        public int Perm_ID { get; set; }
+        public string Perm_Icono { get; set; }
+        public string Perm_Descripcion { get; set; }
+        public string Perm_Controlador { get; set; }
+        public string Perm_Action { get; set; }
+        public string Perm_UsuarioCreacion { get; set; }
+        public DateTime? Perm_FechaCreacion { get; set; }
+        public string Perm_UsuarioModifica { get; set; }
+        public DateTime? Perm_FechaModifica { get; set; }
+        public bool? Perm_Estado { get; set; }
     }
 }
