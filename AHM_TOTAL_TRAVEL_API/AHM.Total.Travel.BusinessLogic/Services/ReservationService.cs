@@ -1021,7 +1021,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
                         return result.Error(map);
                     }
-                    return result.Ok(listado);
 
                 }
                 else
