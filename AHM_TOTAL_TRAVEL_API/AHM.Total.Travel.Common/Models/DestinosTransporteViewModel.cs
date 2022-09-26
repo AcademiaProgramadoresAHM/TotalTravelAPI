@@ -16,10 +16,5 @@ namespace AHM.Total.Travel.Common.Models
         public DateTime? DsTr_FechaModifica { get; set; }
         public bool? DsTr_Estado { get; set; }
 
-        public virtual tbCiudades DsTr_CiudadDestinoNavigation { get; set; }
-        public virtual tbCiudades DsTr_CiudadSalidaNavigation { get; set; }
-        public virtual tbUsuarios DsTr_UsuarioCreacionNavigation { get; set; }
-        public virtual tbUsuarios DsTr_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbHorariosTransportes> tbHorariosTransportes { get; set; }
     }
 }

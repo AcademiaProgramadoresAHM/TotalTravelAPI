@@ -2,6 +2,7 @@
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ using System.Threading.Tasks;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
+
     [ApiController]
     [Route("API/[controller]")]
-    public class DestinationsTransportationController : Controller
+    public class DestinationsTransportationsController : Controller
     {
         private readonly TransportService _transportService;
         private readonly IMapper _mapper;
 
-        public DestinationsTransportationController(TransportService transportService, IMapper mapper)
+        public DestinationsTransportationsController(TransportService transportService, IMapper mapper)
         {
             _transportService = transportService;
             _mapper = mapper;
@@ -62,6 +64,5 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _transportService.FindDestinosTransports(Id);
             return Ok(result);
         }
-
     }
 }
