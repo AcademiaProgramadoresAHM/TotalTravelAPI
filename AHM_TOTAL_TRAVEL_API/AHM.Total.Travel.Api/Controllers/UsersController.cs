@@ -57,5 +57,12 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _accessService.FindUsers(id);
             return Ok(result);
         }
+
+        [HttpGet("Login")]
+        public IActionResult Login(string email, string pass)
+        {
+            var result = _accessService.Login(email, pass);
+            return Ok(result);
+        }
     }
 }

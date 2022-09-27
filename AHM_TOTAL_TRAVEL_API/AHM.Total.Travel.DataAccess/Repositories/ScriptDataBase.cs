@@ -32,6 +32,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         
         public static string UDP_tbUsuarios_Delete = "Acce.UDP_tbUsuarios_Delete";
 
+        public static string UDP_tbUsuarios_Login = "Acce.UDP_tbUsuarios_Login";
 
         #endregion
 
