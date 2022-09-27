@@ -28,6 +28,11 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.VW_tbUsuarios.Where(x => x.ID == id).FirstOrDefault();
         }
 
+        public VW_tbUsuarios AuthenticateUser(string email, string password)
+        {
+            return db.VW_tbUsuarios.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+        }
+
         public RequestStatus Insert(tbUsuarios item)
         {
             var parameters = new DynamicParameters();

@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.DataAccess.Repositories;
+﻿using AHM.Total.Travel.Common.SecurityModels;
+using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using System;
@@ -480,6 +481,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 var user = _usuariosRepository.Find(id);
                 return result.Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR POR EMAIL
+        public ServiceResult ApiLogin(UserLoginModel userLogin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var user = _usuariosRepository.AuthenticateUser(userLogin.Email, userLogin.Password);
+                if (user != null)
+                {
+                    return result.Ok(user);
+                }
+                return result.NotFound("No se pudo encontrar el usuario");
+                
             }
             catch (Exception ex)
             {

@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[11.0.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.29, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -87,6 +91,10 @@
               "target": "Package",
               "version": "[5.0.17, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.23.1, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
@@ -102,6 +110,10 @@
             "Swashbuckle.AspNetCore.Filters": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.23.1, )"
             }
           },
           "imports": [
@@ -160,6 +172,9 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
+              "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Common\\AHM.Total.Travel.Common.csproj": {
+                "projectPath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Common\\AHM.Total.Travel.Common.csproj"
+              },
               "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.DataAccess\\AHM.Total.Travel.DataAccess.csproj": {
                 "projectPath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.DataAccess\\AHM.Total.Travel.DataAccess.csproj"
               }
@@ -227,7 +242,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj": {
+                "projectPath": "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Entities\\AHM.Total.Travel.Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
