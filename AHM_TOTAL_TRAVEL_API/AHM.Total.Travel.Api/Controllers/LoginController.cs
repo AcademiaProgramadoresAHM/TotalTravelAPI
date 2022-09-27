@@ -46,7 +46,7 @@ namespace AHM.Total.Travel.Api.Controllers
         private VW_tbUsuarios Authenticate(UserLoginModel userLoginModel)
         {
             var user = _accessService.ApiLogin(userLoginModel);
-            if (user != null)
+            if (user.Data != null)
             {
                 return user.Data;
             }
@@ -62,7 +62,9 @@ namespace AHM.Total.Travel.Api.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, user.nombre_completo),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Rol)
+                new Claim(ClaimTypes.Role, user.Rol),
+                new Claim("UsuarioID",user.ID.ToString()),
+                new Claim("RolID",user.Role_ID.ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],

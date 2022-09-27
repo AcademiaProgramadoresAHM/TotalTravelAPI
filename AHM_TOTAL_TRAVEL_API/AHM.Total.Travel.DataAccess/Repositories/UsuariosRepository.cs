@@ -30,7 +30,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public VW_tbUsuarios AuthenticateUser(string email, string password)
         {
-            return db.VW_tbUsuarios.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
+            var user = Login(email, password);
+            if (user != null)
+            {
+                return db.VW_tbUsuarios.Where(x => x.ID == user.ID).FirstOrDefault();
+            }
+            return null;
         }
 
         public RequestStatus Insert(tbUsuarios item)
@@ -85,20 +90,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_Update, parameters, commandType: CommandType.StoredProcedure);
         }
 
-        public RequestStatus Login(int Id, int Mod)
+        public VW_tbUsuarios Login(string usu, string contra)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Usua_ID", Id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Usuario_Modifica", Mod, DbType.Int32, ParameterDirection.Input);
-
-            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
-
-            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_Delete, parameters, commandType: CommandType.StoredProcedure);
-        }
-
-        public UsuariosViewModel Login(string usu, string contra)
-        {
-            UsuariosViewModel us = new UsuariosViewModel();
+            VW_tbUsuarios us = new VW_tbUsuarios();
 
             var parametros = new DynamicParameters();
             parametros.Add("@correo", usu, DbType.String, ParameterDirection.Input);
@@ -109,14 +103,13 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
             while (reader.Read())
             {
-                us.Usua_ID = Convert.ToInt32(reader["Usua_ID"]);
-                us.Usua_Email = reader["Usua_Email"].ToString();
-
+                us.ID = Convert.ToInt32(reader["Usua_ID"]);
+                us.Email = reader["Usua_Email"].ToString();
             }
 
             reader.Close();
 
-            if (us.Usua_ID == 0)
+            if (us.ID == 0)
             {
                return null;
 
@@ -127,28 +120,4 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
     }
 
-    public class UsuariosViewModel
-    {
-        public int Usua_ID { get; set; }
-        public string Usua_DNI { get; set; }
-        public string Usua_Url { get; set; }
-        public string Usua_Nombre { get; set; }
-        public string Usua_Apellido { get; set; }
-        public DateTime? Usua_FechaNaci { get; set; }
-        public string Usua_Email { get; set; }
-        public string Usua_Sexo { get; set; }
-        public string Usua_Telefono { get; set; }
-        public string Usua_Password { get; set; }
-        public int? Usua_esAdmin { get; set; }
-        public string Usua_Salt { get; set; }
-        public int? Role_ID { get; set; }
-        public int? Dire_ID { get; set; }
-        public int? Part_ID { get; set; }
-        public int? Usua_UsuarioCreacion { get; set; }
-        public DateTime? Usua_FechaCreacion { get; set; }
-        public int? Usua_UsuarioModifica { get; set; }
-        public DateTime? Usua_FechaModifica { get; set; }
-        public bool? Usua_Estado { get; set; }
-
-    }
 }

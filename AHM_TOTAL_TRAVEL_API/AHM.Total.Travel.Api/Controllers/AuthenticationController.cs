@@ -14,9 +14,9 @@ namespace AHM.Total.Travel.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        [HttpGet("Admin")]
+        [HttpGet("Private")]
         [Authorize(Roles ="Administrador, Cliente")]
-        public IActionResult Admin()
+        public IActionResult Private()
         {
             var user = getCurrentUser();
             return Ok($"Hola {user.nombre_completo}, este endpoint es privado y tu eres un {user.Rol}");

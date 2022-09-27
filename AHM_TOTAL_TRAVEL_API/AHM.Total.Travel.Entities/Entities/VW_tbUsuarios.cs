@@ -16,8 +16,11 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Password { get; set; }
         public string Telefono { get; set; }
         public string Direccion { get; set; }
+        public int DireccionID { get; set; }
         public string Partner { get; set; }
+        public int? PartnerID { get; set; }
         public string Rol { get; set; }
+        public int Role_ID { get; set; }
         public int? ID_Crea { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
