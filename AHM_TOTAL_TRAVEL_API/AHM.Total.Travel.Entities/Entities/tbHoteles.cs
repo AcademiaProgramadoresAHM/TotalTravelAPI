@@ -25,6 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Hote_UsuarioModifica { get; set; }
         public DateTime? Hote_FechaModifica { get; set; }
         public bool? Hote_Estado { get; set; }
+        public string Hote_Url { get; set; }
 
         public virtual tbDirecciones Dire { get; set; }
         public virtual tbUsuarios Hote_UsuarioCreacionNavigation { get; set; }

@@ -16,5 +16,6 @@ namespace AHM.Total.Travel.Common.Models
         public int? Hote_UsuarioModifica { get; set; }
         public DateTime? Hote_FechaModifica { get; set; }
         public bool? Hote_Estado { get; set; }
+        public string Hote_Url { get; set; }
     }
 }

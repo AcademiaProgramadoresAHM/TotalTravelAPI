@@ -25,6 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Part_UsuarioModifica { get; set; }
         public DateTime? Part_FechaModifica { get; set; }
         public bool? Part_Estado { get; set; }
+        public string Part_Url { get; set; }
 
         public virtual tbUsuarios Part_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Part_UsuarioModificaNavigation { get; set; }

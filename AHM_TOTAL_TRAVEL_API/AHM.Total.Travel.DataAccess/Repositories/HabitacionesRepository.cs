@@ -36,6 +36,11 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@CaHa_ID", item.CaHa_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Habi_Precio", item.Habi_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Capacidad", item.Habi_capacidad, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Camas", item.Habi_camas, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Wifi", item.Habi_wifi, DbType.Byte, ParameterDirection.Input);
+            parameters.Add("@Habi_Balcon", item.Habi_balcon, DbType.Byte, ParameterDirection.Input);
+            parameters.Add("@Habi_Url", item.Habi_url, DbType.String, ParameterDirection.Input);
             parameters.Add("@Habi_UsuarioCreacion", item.Habi_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -57,6 +62,11 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@CaHa_ID", item.CaHa_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Habi_Precio", item.Habi_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Capacidad", item.Habi_capacidad, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Camas", item.Habi_camas, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Habi_Wifi", item.Habi_wifi, DbType.Byte, ParameterDirection.Input);
+            parameters.Add("@Habi_Balcon", item.Habi_balcon, DbType.Byte, ParameterDirection.Input);
+            parameters.Add("@Habi_Url", item.Habi_url, DbType.String, ParameterDirection.Input);
             parameters.Add("@Habi_UsuarioModifica", item.Habi_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

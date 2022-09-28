@@ -13,9 +13,11 @@ namespace AHM.Total.Travel.Common.Models
         public int? Hote_ID { get; set; }
         public decimal? Habi_Precio { get; set; }
         public int? Habi_UsuarioCreacion { get; set; }
-        public DateTime? Habi_FechaCreacion { get; set; }
         public int? Habi_UsuarioModifica { get; set; }
-        public DateTime? Habi_FechaModifica { get; set; }
-        public bool? Habi_Estado { get; set; }
+        public int? Habi_balcon { get; set; }
+        public byte? Habi_wifi { get; set; }
+        public byte? Habi_camas { get; set; }
+        public int? Habi_capacidad { get; set; }
+        public string Habi_url { get; set; }
     }
 }
