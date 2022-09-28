@@ -14,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using ConciertosProyecto.BusinessLogic;
+using AutoMapper;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -23,29 +25,34 @@ namespace AHM.Total.Travel.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AccessService _accessService;
-        public LoginController(IConfiguration config, AccessService accessService)
+        private readonly IMapper _mapper;
+        public LoginController(IConfiguration config, AccessService accessService, IMapper mapper)
         {
             _config = config;
             _accessService = accessService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] UserLoginModel userLoginModel)
+        public ServiceResult Login([FromBody] UserLoginModel userLoginModel)
         {
-            var user = Authenticate(userLoginModel);
+            ServiceResult result = new ServiceResult();
 
-            if (user != null) 
+            var user = Authenticate(userLoginModel);
+            if (user != null)
             {
-                var token = GenerateJWT(user);
-                return Ok(token);
+                var response = _mapper.Map<UserLoggedModel>(user);
+                response.Token = GenerateJWT(user);
+                return result.Ok(data:response);
             }
-            return NotFound("El usuario no fue encontrado");
+            return result.NotAcceptable("El usuario no fue encontrado");
         }
 
         private VW_tbUsuarios Authenticate(UserLoginModel userLoginModel)
         {
             var user = _accessService.ApiLogin(userLoginModel);
+            
             if (user.Data != null)
             {
                 return user.Data;
