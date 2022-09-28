@@ -2,7 +2,6 @@
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,6 +22,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _activitiesService = activitiesService;
             _mapper = mapper;
         }
+
         [HttpGet("List")]
         public IActionResult List()
         {

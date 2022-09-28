@@ -1,5 +1,4 @@
 ﻿using AHM.Total.Travel.Common.Models;
-using AHM.Total.Travel.Common.SecurityModels;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using System;
@@ -13,7 +12,6 @@ namespace AHM.Total.Travel.Api.Extensions
     {
         public MappingProfileExtensions()
         {
-            CreateMap<UserLoggedModel, VW_tbUsuarios>().ReverseMap();
             CreateMap<CiudadesViewModel, tbCiudades>().ReverseMap();
             CreateMap<ActividadesExtrasViewModel, tbActividadesExtras>().ReverseMap();
             CreateMap<ActividadesViewModel, tbActividades>().ReverseMap();

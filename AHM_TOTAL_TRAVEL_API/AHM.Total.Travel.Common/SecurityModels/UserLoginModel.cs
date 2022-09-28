@@ -10,16 +10,4 @@ namespace AHM.Total.Travel.Common.SecurityModels
         public string Password { get; set; }
 
     }
-    public class UserLoggedModel
-    {
-        public int ID { get; set; }
-        public string DNI { get; set; }
-        public string nombre_completo { get; set; }
-        public string Email { get; set; }
-        public string Rol { get; set; }
-        public int Role_ID { get; set; }
-        public string Partner { get; set; }
-        public int? PartnerID { get; set; }
-        public string Token { get; set; } 
-    }
 }
