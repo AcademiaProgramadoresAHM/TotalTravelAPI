@@ -19,7 +19,7 @@ using AutoMapper;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("API/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {

@@ -47,7 +47,6 @@ namespace AHM.Total.Travel.Api
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
-            services.AddMvc();
             services.DataAccess(Configuration.GetConnectionString("TotalTravelDB"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());

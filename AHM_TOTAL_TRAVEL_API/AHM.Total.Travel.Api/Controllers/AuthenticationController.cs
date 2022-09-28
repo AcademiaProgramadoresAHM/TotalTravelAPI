@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("API/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
