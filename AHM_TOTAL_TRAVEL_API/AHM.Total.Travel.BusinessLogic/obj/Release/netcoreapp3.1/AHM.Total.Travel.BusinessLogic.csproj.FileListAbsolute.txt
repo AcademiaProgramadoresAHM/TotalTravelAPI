@@ -1,0 +1,17 @@
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.deps.json
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.Common.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.DataAccess.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.Entities.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.Common.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.DataAccess.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\bin\Release\netcoreapp3.1\AHM.Total.Travel.Entities.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.AssemblyInfo.cs
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.csproj.CopyComplete
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.BusinessLogic\obj\Release\netcoreapp3.1\AHM.Total.Travel.BusinessLogic.pdb

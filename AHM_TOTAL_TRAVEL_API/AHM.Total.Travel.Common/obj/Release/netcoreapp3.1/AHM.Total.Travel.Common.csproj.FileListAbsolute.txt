@@ -1,0 +1,13 @@
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\bin\Release\netcoreapp3.1\AHM.Total.Travel.Common.deps.json
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\bin\Release\netcoreapp3.1\AHM.Total.Travel.Common.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\bin\Release\netcoreapp3.1\AHM.Total.Travel.Common.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\bin\Release\netcoreapp3.1\AHM.Total.Travel.Entities.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\bin\Release\netcoreapp3.1\AHM.Total.Travel.Entities.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.AssemblyInfoInputs.cache
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.AssemblyInfo.cs
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.csproj.CoreCompileInputs.cache
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.csproj.CopyComplete
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.dll
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.pdb
+C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Common\obj\Release\netcoreapp3.1\AHM.Total.Travel.Common.csproj.AssemblyReference.cache

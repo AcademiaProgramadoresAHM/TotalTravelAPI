@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Angel Macea\Documents\GitHub\TotalTravelAPI\AHM_TOTAL_TRAVEL_API\AHM.Total.Travel.Api\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-09-28T14:39:11.2525688Z;True|2022-09-27T18:51:57.5963092-06:00;</History>
+  </PropertyGroup>
+</Project>
