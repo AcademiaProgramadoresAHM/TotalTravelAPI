@@ -1468,6 +1468,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Habi_Precio).HasColumnType("money");
 
+                entity.Property(e => e.Habi_url)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.CaHa)
                     .WithMany(p => p.tbHabitaciones)
                     .HasForeignKey(d => d.CaHa_ID);
@@ -1549,6 +1553,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Hote_Nombre)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Hote_Url)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Dire)
@@ -1841,6 +1849,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Part_Telefono)
                     .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Part_Url)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Part_UsuarioCreacionNavigation)
