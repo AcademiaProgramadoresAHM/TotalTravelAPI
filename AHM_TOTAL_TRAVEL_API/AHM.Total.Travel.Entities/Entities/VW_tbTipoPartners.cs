@@ -7,7 +7,7 @@ namespace AHM.Total.Travel.Entities.Entities
 {
     public partial class VW_tbTipoPartners
     {
-        public int? ID { get; set; }
+        public int ID { get; set; }
         public string Descripcion { get; set; }
         public int? Rol_Id { get; set; }
         public string Rol_Descripcion { get; set; }

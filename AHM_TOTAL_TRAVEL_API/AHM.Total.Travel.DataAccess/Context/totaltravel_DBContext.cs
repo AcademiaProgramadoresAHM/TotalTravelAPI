@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbPaises> VW_tbPaises { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminados> VW_tbPaquetePredeterminados { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminadosDetalles> VW_tbPaquetePredeterminadosDetalles { get; set; }
+        public virtual DbSet<VW_tbPaquetesHabitaciones> VW_tbPaquetesHabitaciones { get; set; }
         public virtual DbSet<VW_tbPartners> VW_tbPartners { get; set; }
         public virtual DbSet<VW_tbPermisos> VW_tbPermisos { get; set; }
         public virtual DbSet<VW_tbRegistrosPagos> VW_tbRegistrosPagos { get; set; }
@@ -72,6 +73,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbPaises> tbPaises { get; set; }
         public virtual DbSet<tbPaquetePredeterminados> tbPaquetePredeterminados { get; set; }
         public virtual DbSet<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetalles { get; set; }
+        public virtual DbSet<tbPaquetesHabitaciones> tbPaquetesHabitaciones { get; set; }
         public virtual DbSet<tbPartners> tbPartners { get; set; }
         public virtual DbSet<tbPermisos> tbPermisos { get; set; }
         public virtual DbSet<tbRegistrosPagos> tbRegistrosPagos { get; set; }
@@ -595,6 +597,35 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.UsuarioModifica)
                     .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbPaquetesHabitaciones>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbPaquetesHabitaciones", "Sale");
+
+                entity.Property(e => e.Categoria_Habitacion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Habitacion_Descripcion)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Habitacion_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Habitacion_Precio).HasColumnType("money");
+
+                entity.Property(e => e.Hotel_Descripcion)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre_Hotel)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
@@ -1855,6 +1886,39 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasOne(d => d.Paqu)
                     .WithMany(p => p.tbPaquetePredeterminadosDetalles)
                     .HasForeignKey(d => d.Paqu_ID);
+            });
+
+            modelBuilder.Entity<tbPaquetesHabitaciones>(entity =>
+            {
+                entity.HasKey(e => e.PaHa_Id)
+                    .HasName("PK__tbPaquet__4EE768E7D2FB3BA3");
+
+                entity.ToTable("tbPaquetesHabitaciones", "Sale");
+
+                entity.Property(e => e.PaHa_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.PaHa_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PaHa_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Habi)
+                    .WithMany(p => p.tbPaquetesHabitaciones)
+                    .HasForeignKey(d => d.Habi_Id);
+
+                entity.HasOne(d => d.PaHa_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbPaquetesHabitacionesPaHa_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.PaHa_UsuarioCreacion);
+
+                entity.HasOne(d => d.PaHa_UsuarioModificaNavigation)
+                    .WithMany(p => p.tbPaquetesHabitacionesPaHa_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.PaHa_UsuarioModifica);
+
+                entity.HasOne(d => d.Paqu)
+                    .WithMany(p => p.tbPaquetesHabitaciones)
+                    .HasForeignKey(d => d.Paqu_Id)
+                    .HasConstraintName("FK_tbPaquetesHabitaciones_tbPaquetesPredeterminados_Paqu_Id");
             });
 
             modelBuilder.Entity<tbPartners>(entity =>

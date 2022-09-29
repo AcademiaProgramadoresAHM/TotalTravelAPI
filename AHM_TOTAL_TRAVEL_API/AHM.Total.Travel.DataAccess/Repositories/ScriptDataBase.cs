@@ -228,6 +228,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbCategoriasHabitaciones_Find = "Htel.UDP_tbCategoriasHabitaciones_Find";
         #endregion
 
+        #region PaquetePredeterminado
+        public static string UDP_tbPaquetePredeterminado_Insert = "Sale.UDP_tbPaquetePredeterminado_INSERT";
+
+        public static string UDP_tbPaquetePredeterminado_Update = "Sale.UDP_tbPaquetePredeterminado_UPDATE";
+
+        public static string UDP_tbPaquetePredeterminado_Delete = "Sale.UDP_tbPaquetePredeterminado_DELETE";
+
+        #endregion
+
         #region PaquetePredeterminadosDetalles
         public static string UDP_tbPaquetePredeterminadosDetalles_Insert = "Sale.UDP_tbPaquetePredeterminadosDetalles_INSERT";
 
