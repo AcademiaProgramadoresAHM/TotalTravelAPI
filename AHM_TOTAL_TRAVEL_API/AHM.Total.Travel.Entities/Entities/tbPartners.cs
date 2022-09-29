@@ -20,6 +20,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Part_Nombre { get; set; }
         public string Part_Email { get; set; }
         public string Part_Telefono { get; set; }
+        public int? TiPart_Id { get; set; }
         public int? Part_UsuarioCreacion { get; set; }
         public DateTime? Part_FechaCreacion { get; set; }
         public int? Part_UsuarioModifica { get; set; }
@@ -29,6 +30,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios Part_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Part_UsuarioModificaNavigation { get; set; }
+        public virtual tbTipoPartners TiPart { get; set; }
         public virtual ICollection<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual ICollection<tbHoteles> tbHoteles { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantes { get; set; }

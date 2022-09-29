@@ -8,6 +8,7 @@ namespace AHM.Total.Travel.Common.Models
         public string Part_Nombre { get; set; }
         public string Part_Email { get; set; }
         public string Part_Telefono { get; set; }
+        public int? TiPart_Id { get; set; }
         public int? Part_UsuarioCreacion { get; set; }
         public DateTime? Part_FechaCreacion { get; set; }
         public int? Part_UsuarioModifica { get; set; }

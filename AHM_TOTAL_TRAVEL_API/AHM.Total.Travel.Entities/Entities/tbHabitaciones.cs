@@ -24,8 +24,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Habi_FechaModifica { get; set; }
         public bool? Habi_Estado { get; set; }
         public int? Habi_balcon { get; set; }
-        public byte? Habi_wifi { get; set; }
-        public byte? Habi_camas { get; set; }
+        public bool? Habi_wifi { get; set; }
+        public bool? Habi_camas { get; set; }
         public int? Habi_capacidad { get; set; }
         public string Habi_url { get; set; }
 

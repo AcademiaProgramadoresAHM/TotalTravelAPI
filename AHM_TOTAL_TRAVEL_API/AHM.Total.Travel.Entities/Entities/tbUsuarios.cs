@@ -72,6 +72,8 @@ namespace AHM.Total.Travel.Entities.Entities
             tbRolesRole_UsuarioModificaNavigation = new HashSet<tbRoles>();
             tbTipoMenusTime_UsuarioCreacionNavigation = new HashSet<tbTipoMenus>();
             tbTipoMenusTime_UsuarioModificaNavigation = new HashSet<tbTipoMenus>();
+            tbTipoPartnersTiPar_UsuarioCreacionNavigation = new HashSet<tbTipoPartners>();
+            tbTipoPartnersTiPar_UsuarioModificaNavigation = new HashSet<tbTipoPartners>();
             tbTiposActividadesTiAc_UsuarioCreacionNavigation = new HashSet<tbTiposActividades>();
             tbTiposActividadesTiAc_UsuarioModificaNavigation = new HashSet<tbTiposActividades>();
             tbTiposPagosTiPa_UsuarioCreacionNavigation = new HashSet<tbTiposPagos>();
@@ -171,6 +173,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbRoles> tbRolesRole_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbTipoMenus> tbTipoMenusTime_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbTipoMenus> tbTipoMenusTime_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbTipoPartners> tbTipoPartnersTiPar_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbTipoPartners> tbTipoPartnersTiPar_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbTiposActividades> tbTiposActividadesTiAc_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbTiposActividades> tbTiposActividadesTiAc_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbTiposPagos> tbTiposPagosTiPa_UsuarioCreacionNavigation { get; set; }

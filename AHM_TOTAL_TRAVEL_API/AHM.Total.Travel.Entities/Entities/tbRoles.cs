@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public tbRoles()
         {
+            tbTipoPartners = new HashSet<tbTipoPartners>();
             tbUsuarios = new HashSet<tbUsuarios>();
         }
 
@@ -22,6 +23,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios Role_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Role_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbTipoPartners> tbTipoPartners { get; set; }
         public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
     }
 }

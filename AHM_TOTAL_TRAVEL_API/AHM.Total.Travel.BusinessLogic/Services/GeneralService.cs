@@ -14,13 +14,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly DireccionesRepository _direccionesRepository;
         private readonly PaisesRepository _paisesRepository;
         private readonly PartnersRepository _partnersRepository;
+        private readonly TipoPartnersRepository _tipoPartnersRepository;
 
-        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository)
+        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository)
         {
             _ciudadesRepository = ciudadesRepository;
             _direccionesRepository = direccionesRepository;
             _paisesRepository = paisesRepository;
             _partnersRepository = partnersRepository;
+            _tipoPartnersRepository = tipoPartnersRepository;
         }
 
         #region Ciudades
@@ -493,6 +495,123 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         }
 
+        #endregion
+
+        #region TipoPartners
+        //LISTADO
+        public ServiceResult ListPartnersType()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _tipoPartnersRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreatePartnersType(tbTipoPartners item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _tipoPartnersRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdatePartnersType(int id, tbTipoPartners item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _tipoPartnersRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _tipoPartnersRepository.Update(item, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeletePartnersType(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _tipoPartnersRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _tipoPartnersRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindPartnersType(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var partnerType = _tipoPartnersRepository.Find(id);
+                return result.Ok(partnerType);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
         #endregion
     }
 }

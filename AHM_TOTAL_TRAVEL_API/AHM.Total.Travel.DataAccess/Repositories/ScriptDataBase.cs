@@ -210,6 +210,14 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         //public static string UDP_tbPartners_Find = "Gene.UDP_tbPartners_Find";
         #endregion
 
+        #region TipoPartners
+        public static string UDP_tbTipoPartners_INSERT = "Gene.UDP_tbTipoPartners_INSERT";
+
+        public static string UDP_tbTipoPartners_UPDATE = "Gene.UDP_tbTipoPartners_UPDATE";
+
+        public static string UDP_tbTipoPartners_DELETE = "Gene.UDP_tbTipoPartners_DELETE";
+        #endregion
+
         #region CategoriasHabitaciones
         public static string UDP_tbCategoriasHabitaciones_Insert = "Htel.UDP_tbCategoriasHabitaciones_Insert";
 

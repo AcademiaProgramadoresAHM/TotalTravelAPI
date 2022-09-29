@@ -37,6 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Part_Telefono", item.Part_Telefono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_UsuarioCreacion", item.Part_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_Url", item.Part_Url, DbType.String, ParameterDirection.Input);
+            parameters.Add("@TiPart_Id", item.TiPart_Id, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -57,6 +58,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Part_Telefono", item.Part_Telefono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_UsuarioModifica", item.Part_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_Url", item.Part_Url, DbType.String, ParameterDirection.Input);
+            parameters.Add("@TiPart_Id", item.TiPart_Id, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPartners_Update, parameters, commandType: CommandType.StoredProcedure);

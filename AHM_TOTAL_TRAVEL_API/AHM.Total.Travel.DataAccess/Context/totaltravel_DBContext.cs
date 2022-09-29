@@ -49,6 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbRestaurantes> VW_tbRestaurantes { get; set; }
         public virtual DbSet<VW_tbRoles> VW_tbRoles { get; set; }
         public virtual DbSet<VW_tbRolesPermisos> VW_tbRolesPermisos { get; set; }
+        public virtual DbSet<VW_tbTipoPartners> VW_tbTipoPartners { get; set; }
         public virtual DbSet<VW_tbTiposActividades> VW_tbTiposActividades { get; set; }
         public virtual DbSet<VW_tbTiposMenus> VW_tbTiposMenus { get; set; }
         public virtual DbSet<VW_tbTiposPagos> VW_tbTiposPagos { get; set; }
@@ -85,6 +86,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbRoles> tbRoles { get; set; }
         public virtual DbSet<tbRolesPermisos> tbRolesPermisos { get; set; }
         public virtual DbSet<tbTipoMenus> tbTipoMenus { get; set; }
+        public virtual DbSet<tbTipoPartners> tbTipoPartners { get; set; }
         public virtual DbSet<tbTiposActividades> tbTiposActividades { get; set; }
         public virtual DbSet<tbTiposPagos> tbTiposPagos { get; set; }
         public virtual DbSet<tbTiposTransportes> tbTiposTransportes { get; set; }
@@ -617,6 +619,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Telefono)
                     .HasMaxLength(13)
                     .IsUnicode(false);
+
+                entity.Property(e => e.TipoPartner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbPermisos>(entity =>
@@ -1018,6 +1024,33 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.UsuarioModifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbTipoPartners>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbTipoPartners", "Gene");
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Rol_Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica_Nombre)
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
@@ -1864,6 +1897,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .WithMany(p => p.tbPartnersPart_UsuarioModificaNavigation)
                     .HasForeignKey(d => d.Part_UsuarioModifica)
                     .HasConstraintName("FK_tbPartners_tbUsuarios_Usuario_Modifica");
+
+                entity.HasOne(d => d.TiPart)
+                    .WithMany(p => p.tbPartners)
+                    .HasForeignKey(d => d.TiPart_Id);
             });
 
             modelBuilder.Entity<tbPermisos>(entity =>
@@ -2337,6 +2374,37 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .WithMany(p => p.tbTipoMenusTime_UsuarioModificaNavigation)
                     .HasForeignKey(d => d.Time_UsuarioModifica)
                     .HasConstraintName("FK_tbTipoMenus_tbUsuarios_Usuario_Modifica");
+            });
+
+            modelBuilder.Entity<tbTipoPartners>(entity =>
+            {
+                entity.HasKey(e => e.TiPar_Id);
+
+                entity.ToTable("tbTipoPartners", "Gene");
+
+                entity.Property(e => e.TiPar_Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiPar_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.TiPar_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.TiPar_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Rol)
+                    .WithMany(p => p.tbTipoPartners)
+                    .HasForeignKey(d => d.Rol_Id);
+
+                entity.HasOne(d => d.TiPar_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbTipoPartnersTiPar_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.TiPar_UsuarioCreacion);
+
+                entity.HasOne(d => d.TiPar_UsuarioModificaNavigation)
+                    .WithMany(p => p.tbTipoPartnersTiPar_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.TiPar_UsuarioModifica);
             });
 
             modelBuilder.Entity<tbTiposActividades>(entity =>
