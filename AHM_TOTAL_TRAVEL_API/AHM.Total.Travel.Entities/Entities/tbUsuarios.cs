@@ -43,6 +43,8 @@ namespace AHM.Total.Travel.Entities.Entities
             tbPaquetePredeterminadosDetallesPaDe_UsuarioModificaNavigation = new HashSet<tbPaquetePredeterminadosDetalles>();
             tbPaquetePredeterminadosPaqu_UsuarioCreacionNavigation = new HashSet<tbPaquetePredeterminados>();
             tbPaquetePredeterminadosPaqu_UsuarioModificaNavigation = new HashSet<tbPaquetePredeterminados>();
+            tbPaquetesHabitacionesPaHa_UsuarioCreacionNavigation = new HashSet<tbPaquetesHabitaciones>();
+            tbPaquetesHabitacionesPaHa_UsuarioModificaNavigation = new HashSet<tbPaquetesHabitaciones>();
             tbPartnersPart_UsuarioCreacionNavigation = new HashSet<tbPartners>();
             tbPartnersPart_UsuarioModificaNavigation = new HashSet<tbPartners>();
             tbPermisosPerm_UsuarioCreacionNavigation = new HashSet<tbPermisos>();
@@ -144,6 +146,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetallesPaDe_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPaquetePredeterminados> tbPaquetePredeterminadosPaqu_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbPaquetePredeterminados> tbPaquetePredeterminadosPaqu_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbPaquetesHabitaciones> tbPaquetesHabitacionesPaHa_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbPaquetesHabitaciones> tbPaquetesHabitacionesPaHa_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPartners> tbPartnersPart_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbPartners> tbPartnersPart_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPermisos> tbPermisosPerm_UsuarioCreacionNavigation { get; set; }
