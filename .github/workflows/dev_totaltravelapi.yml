@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'TotalTravelAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0C1C0AF74D7D49E29F906793B22BA8FF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_490DCEBE72174284B2116BE0F51ABDAA }}
           package: .
