@@ -13,6 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class ActivitiesController : Controller
     {
         private readonly ActivitiesService _activitiesService;
@@ -23,7 +24,9 @@ namespace AHM.Total.Travel.Api.Controllers
             _activitiesService = activitiesService;
             _mapper = mapper;
         }
+
         [HttpGet("List")]
+        [AllowAnonymous]
         public IActionResult List()
         {
             var list = _activitiesService.ListActivities();

@@ -3,6 +3,7 @@ using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class RoomsController : Controller
     {
         private readonly HotelService _hotelService;
@@ -23,7 +25,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
@@ -58,6 +60,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

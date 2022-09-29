@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AHM.Total.Travel.Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class TypeActivitiesController : ControllerBase
     {
 
@@ -25,6 +27,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
@@ -59,6 +62,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

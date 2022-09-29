@@ -2,6 +2,7 @@
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class ScheduleTransportationController : Controller
     {
         private readonly TransportService _transportService;
@@ -21,6 +23,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _transportService = transportService;
             _mapper = mapper;
         }
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
@@ -28,6 +31,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
 
         }
+
         [HttpPost("Insert")]
         public IActionResult Insert(HorariosTransportesViewModel item)
         {
@@ -35,6 +39,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _transportService.CreateHorariosTransports(items);
             return Ok(result);
         }
+
         [HttpPut("Update")]
         public IActionResult Update(int id, HorariosTransportesViewModel items)
         {
@@ -44,6 +49,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
+
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
@@ -51,6 +57,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
+        [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

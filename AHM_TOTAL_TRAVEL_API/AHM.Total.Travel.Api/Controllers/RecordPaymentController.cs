@@ -2,6 +2,7 @@
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class RecordPaymentController : Controller
     {
         private readonly ReservationService _reservationService;
@@ -22,6 +24,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
@@ -29,6 +32,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(RegistrosPagosViewModel item)
         {
@@ -52,6 +56,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

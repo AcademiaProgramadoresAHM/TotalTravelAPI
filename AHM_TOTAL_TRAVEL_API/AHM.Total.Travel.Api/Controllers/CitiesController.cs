@@ -2,6 +2,7 @@
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
+    [Authorize(Roles = "Administrador")]
     public class CitiesController : Controller
     {
         private readonly GeneralService _generalService;
@@ -22,7 +24,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
