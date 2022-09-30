@@ -16,6 +16,8 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using ConciertosProyecto.BusinessLogic;
 using AutoMapper;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -54,7 +56,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var user = _accessService.ApiLogin(userLoginModel);
             
             if (user.Data != null)
-            {
+            { 
                 return user.Data;
             }
             return null;
@@ -82,5 +84,6 @@ namespace AHM.Total.Travel.Api.Controllers
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

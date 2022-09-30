@@ -30,6 +30,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _accessService.ListUsers();
             return Ok(list);
         }
+        [AllowAnonymous]
         [HttpPost("Insert")]
         public IActionResult Insert(UsuariosViewModel item)
         {

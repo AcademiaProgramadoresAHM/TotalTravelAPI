@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using AHM.Total.Travel.Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
+using static AHM.Total.Travel.Api.Controllers.LoginController;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
