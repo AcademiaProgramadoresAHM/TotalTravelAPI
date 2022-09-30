@@ -54,6 +54,14 @@ namespace AHM.Total.Travel.Api
             services.AddCors();
             services.AddSwaggerGen(x =>
             {
+                x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
                 x.EnableAnnotations();
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "TotalTravel API", Version = "v1" });
             });

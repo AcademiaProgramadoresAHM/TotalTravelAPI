@@ -16,8 +16,6 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using ConciertosProyecto.BusinessLogic;
 using AutoMapper;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -51,6 +49,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return result.NotAcceptable("El usuario no fue encontrado");
         }
 
+
         private VW_tbUsuarios Authenticate(UserLoginModel userLoginModel)
         {
             var user = _accessService.ApiLogin(userLoginModel);
@@ -79,7 +78,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
                 claims,
-                expires:DateTime.Now.AddMinutes(15),
+                expires:DateTime.Now.AddDays(15),
                 signingCredentials:credentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);

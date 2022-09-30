@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Private()
         {
             var user = getCurrentUser();
-            return Ok($"Hola {user.nombre_completo}, este endpoint es privado y tu eres un {user.Rol}");
+            return Ok($"Hola {user.nombre_completo}, este endpoint es privado y tu eres un {user.Rol}, version modificada de la API");
         }
 
         [HttpGet("Public")]

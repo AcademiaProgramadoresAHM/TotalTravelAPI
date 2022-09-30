@@ -31,7 +31,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _generalService.ListAddress();
             return Ok(list);
         }
-        [AllowAnonymous]
+
         [HttpPost("Insert")]
         public IActionResult Insert(DireccionesViewModel direccionesViewModel)
         {
