@@ -245,6 +245,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbPaquetePredeterminadosDetalles_Delete = "Sale.UDP_tbPaquetePredeterminadosDetalles_DELETE";
         #endregion
 
+        #region PaqueteHabitaciones
+        public static string UDP_tbPaquetesHabitaciones_Insert = "Sale.UDP_tbPaquetesHabitaciones_INSERT";
+
+        public static string UDP_tbPaquetesHabitaciones_Update = "Sale.UDP_tbPaquetesHabitaciones_UPDATE";
+
+        public static string UDP_tbPaquetesHabitaciones_Delete = "Sale.UDP_tbPaquetesHabitaciones_DELETE";
+
+        #endregion
+
         #region ReservacionesActividadesExtras
         public static string UDP_tbReservacionesActividadesExtras_Insert = "Resv.UDP_tbReservacionesActividadesExtras_Insert";
 

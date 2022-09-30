@@ -12,13 +12,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly PaquetePredeterminadosRepository _paquetepredeterminadosRepository;
         private readonly TiposPagosRepository _tipospagosRepository;
         private readonly PaquetePredeterminadosDetallesRepository _paquetePredeterminadosDetallesRepository;
+        private readonly PaquetesHabitacionesRepository _paquetesHabitacionesRepository;
 
         public SaleService(PaquetePredeterminadosRepository paquetepredeterminados,
-            TiposPagosRepository tipospagos, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetalles)
+            TiposPagosRepository tipospagos, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetalles, PaquetesHabitacionesRepository paquetesHabitacionesRepository)
         {
             _paquetepredeterminadosRepository = paquetepredeterminados;
             _tipospagosRepository = tipospagos;
             _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetalles;
+            _paquetesHabitacionesRepository = paquetesHabitacionesRepository;
         }
 
         #region PaquetesPredeterminados
@@ -381,6 +383,132 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 city = _paquetePredeterminadosDetallesRepository.Find(id);
                 return result.Ok(city);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
+
+        #endregion
+
+        #region PaquetesHabitaciones
+        //LISTADO
+        public ServiceResult ListPackageRooms()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _paquetesHabitacionesRepository.List();
+                return result.Ok(list);
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreatePackageRooms(tbPaquetesHabitaciones item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _paquetesHabitacionesRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //ACTUALIZAR
+        public ServiceResult UpdatePackageRooms(int id, tbPaquetesHabitaciones paquetesHabitaciones)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _paquetesHabitacionesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _paquetesHabitacionesRepository.Update(paquetesHabitaciones, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //ELIMINAR
+        public ServiceResult DeletePackageRooms(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _paquetesHabitacionesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _paquetesHabitacionesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //BUSCAR
+        public ServiceResult FindPackagesRooms(int id)
+        {
+            var result = new ServiceResult();
+            var package = new VW_tbPaquetesHabitaciones();
+            try
+            {
+                package = _paquetesHabitacionesRepository.Find(id);
+                return result.Ok(package);
             }
             catch (Exception ex)
             {
