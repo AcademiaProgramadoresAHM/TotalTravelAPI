@@ -22,22 +22,26 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         {
             try
             {
+                Random r = new Random();
+                int rInt = r.Next(100000, 999999);
+
+                emailData.BodyData = "Su codigo de recuperación es: " + rInt;
+
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(_config["Jwt:Company"], _config["Jwt:Mail"]));
+                message.From.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
                 message.To.Add(new MailboxAddress(emailData.ToName, emailData.To));
                 message.Subject = emailData.Subject;
                 message.Body = new TextPart("plain")
                 {
                     Text = emailData.BodyData
-
                 };
 
-                using (var client = new MailKit.Net.Smtp.SmtpClient())                
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
                 {
-                    client.Connect(_config["ApiGmail:Host"], 
-                        int.Parse(_config["ApiGmail:Port"]), 
+                    client.Connect(_config["ApiGmail:Host"],
+                        int.Parse(_config["ApiGmail:Port"]),
                         false);
-                    client.Authenticate(_config["ApiGmail:Mail"], "ApiGmail:Password");
+                    client.Authenticate(_config["ApiGmail:Mail"], _config["ApiGmail:Password"]);
                     client.Send(message);
                     client.Disconnect(true);
                 }

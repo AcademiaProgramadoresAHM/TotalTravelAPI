@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using ConciertosProyecto.BusinessLogic;
 using AutoMapper;
+using AHM.Total.Travel.Common.Models;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -25,11 +26,13 @@ namespace AHM.Total.Travel.Api.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AccessService _accessService;
+        private readonly EmailSenderService _emailSenderService;
         private readonly IMapper _mapper;
-        public LoginController(IConfiguration config, AccessService accessService, IMapper mapper)
+        public LoginController(IConfiguration config,EmailSenderService emailSenderService, AccessService accessService, IMapper mapper)
         {
             _config = config;
             _accessService = accessService;
+            _emailSenderService = emailSenderService;
             _mapper = mapper;
         }
 
@@ -49,6 +52,15 @@ namespace AHM.Total.Travel.Api.Controllers
             return result.NotAcceptable("El usuario no fue encontrado");
         }
 
+        [AllowAnonymous]
+        [HttpPost("EmailSender")]
+        public ServiceResult EmailSender(EmailDataViewModel EmailDataViewModel)
+        {
+            ServiceResult result = new ServiceResult();
+
+            var user = _emailSenderService.RetrievePassword(EmailDataViewModel);
+            return user;
+        }
 
         private VW_tbUsuarios Authenticate(UserLoginModel userLoginModel)
         {
