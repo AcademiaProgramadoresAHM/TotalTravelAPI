@@ -59,6 +59,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[Gene].[tbTipoPartners]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Htel].[tbCategoriasHabitaciones]",
          "ObjectType": 0
       },
@@ -131,6 +135,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[Sale].[tbPaquetesHabitaciones]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Sale].[tbTiposPagos]",
          "ObjectType": 0
       },
@@ -196,6 +204,10 @@
       },
       {
          "Name": "[Gene].[VW_tbPartners]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbTipoPartners]",
          "ObjectType": 3
       },
       {
@@ -268,6 +280,10 @@
       },
       {
          "Name": "[Sale].[VW_tbPaquetePredeterminadosDetalles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_tbPaquetesHabitaciones]",
          "ObjectType": 3
       },
       {

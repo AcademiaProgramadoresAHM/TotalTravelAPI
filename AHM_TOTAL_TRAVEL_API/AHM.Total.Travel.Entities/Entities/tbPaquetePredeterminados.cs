@@ -25,6 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Paqu_UsuarioModifica { get; set; }
         public DateTime? Paqu_FechaModifica { get; set; }
         public bool? Paqu_Estado { get; set; }
+        public decimal? Paqu_Precio { get; set; }
 
         public virtual tbHoteles Hote { get; set; }
         public virtual tbUsuarios Paqu_UsuarioCreacionNavigation { get; set; }

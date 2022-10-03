@@ -170,6 +170,14 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.UsuarioCreacion)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbCiudades>(entity =>
@@ -522,6 +530,14 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Pais)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioCreacion)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbPaquetePredeterminados>(entity =>
@@ -551,6 +567,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
 
                 entity.Property(e => e.Restaurante)
                     .HasMaxLength(100)
@@ -653,6 +671,14 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.TipoPartner)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioCreacion)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
                     .IsUnicode(false);
             });
 
@@ -1832,6 +1858,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Paqu_Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Paqu_Precio).HasColumnType("money");
 
                 entity.HasOne(d => d.Hote)
                     .WithMany(p => p.tbPaquetePredeterminados)
