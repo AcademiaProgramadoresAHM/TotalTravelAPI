@@ -60,8 +60,9 @@ namespace AHM.Total.Travel.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("EmailVerification")]
-        public ServiceResult EmailVerification(String email)
+        public ServiceResult EmailVerification(EmailDataViewModel emailDataViewModel)
         {
+            string email = emailDataViewModel.To;
             var result = new ServiceResult();
             try
             {
