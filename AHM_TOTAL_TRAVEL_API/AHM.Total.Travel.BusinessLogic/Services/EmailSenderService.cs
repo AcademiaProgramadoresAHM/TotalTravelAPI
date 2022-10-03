@@ -6,6 +6,11 @@ using System.Collections.Generic;
 using System.Text;
 using MimeKit;
 using MailKit;
+using Dapper;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using AHM.Total.Travel.DataAccess;
+using AHM.Total.Travel.DataAccess.Repositories;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -18,13 +23,24 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             _config = configuration;
         }
 
+        public RequestStatus EmailVerification(String email)
+        {
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Email",email, DbType.String, ParameterDirection.Input);
+
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_EmailVerification, parameters, commandType: CommandType.StoredProcedure);
+        }
+
         public ServiceResult RetrievePassword(EmailDataViewModel emailData)
         {
             try
             {
                 Random r = new Random();
                 int rInt = r.Next(100000, 999999);
-
+                emailData.Subject = "Recuperación de contraseña - Agencia TotalTravel";
                 emailData.BodyData = "Su codigo de recuperación es: " + rInt;
 
                 var message = new MimeMessage();
@@ -45,7 +61,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     client.Send(message);
                     client.Disconnect(true);
                 }
-                return new ServiceResult().Ok(data: "Correo enviado con exito");
+                return new ServiceResult().Ok(data: rInt);
             }
             catch (Exception e)
             {

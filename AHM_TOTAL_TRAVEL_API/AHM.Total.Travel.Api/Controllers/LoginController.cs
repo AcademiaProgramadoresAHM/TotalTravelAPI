@@ -14,9 +14,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
-using ConciertosProyecto.BusinessLogic;
 using AutoMapper;
 using AHM.Total.Travel.Common.Models;
+using Dapper;
+using System.Data;
+using Microsoft.Data.SqlClient;
+using AHM.Total.Travel.DataAccess;
+using AHM.Total.Travel.DataAccess.Repositories;
+using AHM.Total.Travel.BusinessLogic;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -51,6 +56,34 @@ namespace AHM.Total.Travel.Api.Controllers
             }
             return result.NotAcceptable("El usuario no fue encontrado");
         }
+
+
+        [AllowAnonymous]
+        [HttpPost("EmailVerification")]
+        public ServiceResult EmailVerification(String email)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _emailSenderService.EmailVerification(email);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
 
         [AllowAnonymous]
         [HttpPost("EmailSender")]

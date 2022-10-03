@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace ConciertosProyecto.BusinessLogic
+namespace AHM.Total.Travel.BusinessLogic
 {
     public class ServiceResult
     {
