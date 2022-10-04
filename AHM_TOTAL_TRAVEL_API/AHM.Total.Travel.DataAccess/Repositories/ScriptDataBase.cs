@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public static string UDP_tbUsuarios_EmailVerification = "Acce.UDP_tbUsuarios_EmailVerification";
 
+        public static string UDP_tbUsuarios_ChangePassword = "Acce.UDP_tbUsuarios_ChangePassword";
         #endregion
 
         #region ActividadesExtras

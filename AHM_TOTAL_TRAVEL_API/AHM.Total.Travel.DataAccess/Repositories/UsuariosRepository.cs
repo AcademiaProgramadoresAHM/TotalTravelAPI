@@ -90,6 +90,17 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_Update, parameters, commandType: CommandType.StoredProcedure);
         }
 
+        public RequestStatus ChangePassword(tbUsuarios item)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", item.Usua_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Password", item.Usua_Password, DbType.String, ParameterDirection.Input);
+
+            using var db = new SqlConnection(TotalTravelContext.ConnectionString);
+            return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_ChangePassword, parameters, commandType: CommandType.StoredProcedure);
+        }
+
+
         public VW_tbUsuarios Login(string usu, string contra)
         {
             VW_tbUsuarios us = new VW_tbUsuarios();

@@ -49,6 +49,15 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
+        [HttpPut("UpdatePassword")]
+        public IActionResult changePassword(UsuariosViewModel items)
+        {
+            var item = _mapper.Map<tbUsuarios>(items);
+            var result = _accessService.UpdatePassword(item);
+            return Ok(result);
+        }
+
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int mod)
         {

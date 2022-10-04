@@ -444,6 +444,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
 
+
+        //ACTUALIZAR CONTRASEÑA
+        public ServiceResult UpdatePassword(tbUsuarios tbUsuarios)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                    var map = _usuariosRepository.ChangePassword(tbUsuarios);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         //ELIMINAR
         public ServiceResult DeleteUsers(int id, int Mod)
         {
