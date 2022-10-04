@@ -6,6 +6,7 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class UsuariosViewModel
     {
+        public int Usua_ID { get; set; }
         public string Usua_DNI { get; set; }
         public string Usua_Nombre { get; set; }
         public string Usua_Apellido { get; set; }
