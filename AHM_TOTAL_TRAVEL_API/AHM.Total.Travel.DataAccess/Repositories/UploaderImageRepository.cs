@@ -17,12 +17,34 @@ namespace AHM.Total.Travel.DataAccess.Repositories
                 string fullpath = Path.GetFullPath(fileModel.path);
                 string path = Path.Combine(fullpath, fileModel.FileName);
 
-                using (Stream stream = new FileStream(path, System.IO.FileMode.Create))
+                if (!Directory.Exists(fullpath))
                 {
-                    fileModel.file.CopyTo(stream);
+                    Directory.CreateDirectory(fullpath);
+
+                    if (!Directory.Exists(fullpath))
+                    {
+                        response.CodeStatus = 100;
+                        response.MessageStatus = "El directorio no existe.";
+                    }
+                    else
+                    {
+                        using (Stream stream = new FileStream(path, System.IO.FileMode.Create))
+                        {
+                            fileModel.file.CopyTo(stream);
+                        }
+                        response.CodeStatus = 200;
+                        response.MessageStatus = "Imagen guardada con éxito.";
+                    }
                 }
-                response.CodeStatus = 200;
-                response.MessageStatus = "Imagen guardada con éxito.";
+                else
+                {
+                    using (Stream stream = new FileStream(path, System.IO.FileMode.Create))
+                    {
+                        fileModel.file.CopyTo(stream);
+                    }
+                    response.CodeStatus = 200;
+                    response.MessageStatus = "Imagen guardada con éxito.";
+                }
             }
             catch (Exception)
             {
