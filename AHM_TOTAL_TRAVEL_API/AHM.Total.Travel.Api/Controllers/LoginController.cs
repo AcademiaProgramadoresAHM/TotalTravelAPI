@@ -29,16 +29,16 @@ namespace AHM.Total.Travel.Api.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _config;
-        private readonly AccessService _accessService;
         private readonly EmailSenderService _emailSenderService;
         private readonly IMapper _mapper;
-        public LoginController(IConfiguration config,EmailSenderService emailSenderService, AccessService accessService, IMapper mapper)
+        private readonly LoginService _loginService;
+        
+
+        public LoginController(EmailSenderService emailSenderService, IMapper mapper, LoginService loginService)
         {
-            _config = config;
-            _accessService = accessService;
             _emailSenderService = emailSenderService;
             _mapper = mapper;
+            _loginService = loginService;
         }
 
         [AllowAnonymous]
@@ -47,17 +47,19 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             ServiceResult result = new ServiceResult();
 
-            var user = Authenticate(userLoginModel);
+            var user = _loginService.Authenticate(userLoginModel);
             if (user != null)
             {
                 var response = _mapper.Map<UserLoggedModel>(user);
-                response.Token = GenerateJWT(user);
-                return result.Ok(data:response);
+                response.Token = _loginService.GenerateJWT(user);
+                var refreshToken = _loginService.setTokenCookie(response, HttpContext);
+
+                return result.Ok(data: response);
             }
             return result.NotAcceptable("El usuario no fue encontrado");
         }
 
-
+        
         [AllowAnonymous]
         [HttpPost("EmailVerification")]
         public ServiceResult EmailVerification(EmailDataViewModel emailDataViewModel)
@@ -83,9 +85,6 @@ namespace AHM.Total.Travel.Api.Controllers
             }
         }
 
-
-
-
         [AllowAnonymous]
         [HttpPost("EmailSender")]
         public ServiceResult EmailSender(EmailDataViewModel EmailDataViewModel)
@@ -95,40 +94,5 @@ namespace AHM.Total.Travel.Api.Controllers
             var user = _emailSenderService.RetrievePassword(EmailDataViewModel);
             return user;
         }
-
-        private VW_tbUsuarios Authenticate(UserLoginModel userLoginModel)
-        {
-            var user = _accessService.ApiLogin(userLoginModel);
-            
-            if (user.Data != null)
-            { 
-                return user.Data;
-            }
-            return null;
-        }
-
-        private string GenerateJWT(VW_tbUsuarios user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.nombre_completo),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Rol),
-                new Claim("UsuarioID",user.ID.ToString()),
-                new Claim("RolID",user.Role_ID.ToString())
-            };
-
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims,
-                expires:DateTime.Now.AddDays(15),
-                signingCredentials:credentials
-                );
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
     }
 }

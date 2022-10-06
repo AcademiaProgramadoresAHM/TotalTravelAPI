@@ -6,6 +6,10 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 {
     public class ScriptDataBase
     {
+        #region UsuariosLogin
+        public static string UDP_tbUsuariosLogins_Insert = "Acce.UDP_tbUsuariosLogins_Insert";
+        public static string UDP_tbUsuariosLogins_Update = "Acce.UDP_tbUsuariosLogins_Update";
+        #endregion
         #region Ciudades
         public static string UDP_tbCiudades_Insert = "Gene.UDP_tbCiudades_Insert";
 

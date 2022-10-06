@@ -14,14 +14,113 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly PermisosRepository _permisosRepository;
         private readonly RolesPermisosRepository _rolesPermisosRepository;
         private readonly UsuariosRepository _usuariosRepository;
+        private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
 
-        public AccessService(RolesRepository roles, PermisosRepository permisos, RolesPermisosRepository rolesPermisos, UsuariosRepository usuariosRepository)
+        public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository)
         {
-            _rolesRepository = roles;
-            _permisosRepository = permisos;
-            _rolesPermisosRepository = rolesPermisos;
+            _rolesRepository = rolesRepository;
+            _permisosRepository = permisosRepository;
+            _rolesPermisosRepository = rolesPermisosRepository;
             _usuariosRepository = usuariosRepository;
+            _usuariosLoginsRepository = usuariosLoginsRepository;
         }
+
+
+        #region UsuariosLogins
+
+        //CREAR
+        public ServiceResult CreateLogin(tbUsuariosLogins item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+
+                var map = _usuariosLoginsRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //ACTUALIZAR
+        public ServiceResult UpdateLogin(int id, tbUsuariosLogins tbUsuariosLogins)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _usuariosLoginsRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _usuariosLoginsRepository.Update(tbUsuariosLogins, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("No se pudo encontrar el registro");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+        //BUSCAR
+        public ServiceResult FindLogin(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var role = _usuariosLoginsRepository.Find(id);
+                return result.Ok(role);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //BUSCAR POR TOKEN
+        public ServiceResult AuthenticateTokenExistence(string token)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var logins = _usuariosLoginsRepository.FindByToken(token);
+                if (logins != null)
+                {
+                    return result.Ok(logins);
+                }
+
+                return result.BadRequest(message:"No se pudo autenticar la sesión");
+                
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
 
         #region Roles
         //LISTADO
@@ -504,25 +603,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 var user = _usuariosRepository.Find(id);
                 return result.Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return result.Error(ex.Message);
-            }
-        }
-        //BUSCAR POR EMAIL
-        public ServiceResult ApiLogin(UserLoginModel userLogin)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var user = _usuariosRepository.AuthenticateUser(userLogin.Email, userLogin.Password);
-                if (user != null)
-                {
-                    return result.Ok(user);
-                }
-                return result.NotFound("No se pudo encontrar el usuario");
-                
             }
             catch (Exception ex)
             {

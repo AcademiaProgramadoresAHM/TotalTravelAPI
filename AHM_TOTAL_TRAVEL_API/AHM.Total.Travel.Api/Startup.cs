@@ -1,5 +1,6 @@
 using AHM.Total.Travel.Api.Extensions;
 using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.DataAccess.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,8 +45,10 @@ namespace AHM.Total.Travel.Api
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = Configuration["Jwt:Issuer"],
                         ValidAudience = Configuration["Jwt:Audience"],
+                        ClockSkew = TimeSpan.Zero,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
+
                 });
             services.DataAccess(Configuration.GetConnectionString("TotalTravelDB"));
             services.BusinessLogic();
@@ -66,6 +69,7 @@ namespace AHM.Total.Travel.Api
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "TotalTravel API", Version = "v1" });
             });
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +89,6 @@ namespace AHM.Total.Travel.Api
             .AllowAnyMethod());
             
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 

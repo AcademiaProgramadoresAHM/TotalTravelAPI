@@ -31,6 +31,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[Acce].[tbUsuariosLogins]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Actv].[tbActividades]",
          "ObjectType": 0
       },
@@ -176,6 +180,10 @@
       },
       {
          "Name": "[Acce].[VW_tbUsuarios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Acce].[VW_tbUsuariosLogins]",
          "ObjectType": 3
       },
       {

@@ -12,8 +12,9 @@ namespace AHM.Total.Travel.BusinessLogic
     {
         public static void DataAccess(this IServiceCollection services, string connectionString)
         {
-   
+
             //Access
+            services.AddScoped<UsuariosLoginsRepository>();
             services.AddScoped<UsuariosRepository>();
             services.AddScoped<PermisosRepository>();
             services.AddScoped<RolesPermisosRepository>();
@@ -74,6 +75,7 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<RestaurantService>();
             services.AddScoped<ReservationService>();
             services.AddScoped<EmailSenderService>();
+            services.AddScoped<LoginService>();
         }
     }
 }
