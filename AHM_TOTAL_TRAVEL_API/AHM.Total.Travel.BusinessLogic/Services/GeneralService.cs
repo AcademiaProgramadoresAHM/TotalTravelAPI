@@ -2,6 +2,7 @@
 using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,14 +16,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly PaisesRepository _paisesRepository;
         private readonly PartnersRepository _partnersRepository;
         private readonly TipoPartnersRepository _tipoPartnersRepository;
+        private readonly UploaderImageRepository _uploaderImageRepository;
 
-        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository)
+        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository, UploaderImageRepository uploaderImageRepository)
         {
             _ciudadesRepository = ciudadesRepository;
             _direccionesRepository = direccionesRepository;
             _paisesRepository = paisesRepository;
             _partnersRepository = partnersRepository;
             _tipoPartnersRepository = tipoPartnersRepository;
+            _uploaderImageRepository = uploaderImageRepository;
         }
 
         #region Ciudades
@@ -396,7 +399,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreatePartner(tbPartners item)
+        public ServiceResult CreatePartner(tbPartners item, IFormFile file)
         {
 
             var result = new ServiceResult();
@@ -405,6 +408,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _partnersRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    FileModel img = new FileModel();
+                    img.FileName = "P-" + map.CodeStatus + ".jpg";
+                    img.path = "ImagesAPI/Profile_Photos/Partners";
+                    img.file = file;
+                    _uploaderImageRepository.UploaderFile(img);
                     return result.Ok(map);
                 }
                 else

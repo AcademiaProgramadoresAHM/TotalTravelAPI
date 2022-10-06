@@ -3,6 +3,7 @@ using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,11 +35,13 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost("Insert")]
-        public IActionResult Insert(PartnersViewModel partnersViewModel)
+        public IActionResult Insert([FromForm]PartnersViewModel partnersViewModel)
         {
+            IFormFile file = partnersViewModel.File;
             var items = _mapper.Map<tbPartners>(partnersViewModel);
-            var result = _generalService.CreatePartner(items);
+            var result = _generalService.CreatePartner(items, file);
             return Ok(result);
         }
 

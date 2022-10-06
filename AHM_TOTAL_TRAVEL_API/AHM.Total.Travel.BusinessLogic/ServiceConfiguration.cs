@@ -25,7 +25,8 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<PaisesRepository>();
             services.AddScoped<PartnersRepository>();
             services.AddScoped<TipoPartnersRepository>();
-            
+            services.AddScoped<UploaderImageRepository>();
+
             //Sales
             services.AddScoped<PaquetePredeterminadosDetallesRepository>();
             services.AddScoped<TiposPagosRepository>();
