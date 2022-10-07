@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +8,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 {
     public class UploaderImageRepository
     {
-        public RequestStatus UploaderFile([FromForm] FileModel fileModel)
+        public RequestStatus UploaderFile( FileModel fileModel)
         {
             RequestStatus response = new RequestStatus();
             try
@@ -55,6 +54,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             return response;
 
         }
+
     }
 
 

@@ -3,9 +3,11 @@ using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +20,10 @@ namespace AHM.Total.Travel.Api.Controllers
     {
         private readonly AccessService _accessService;
         private readonly IMapper _mapper;
-        public UsersController(AccessService accessService, IMapper mapper)
+        private readonly IWebHostEnvironment _IWebHostEnvironment;
+        public UsersController(AccessService accessService, IMapper mapper, IWebHostEnvironment IWebHostEnvironment)
         {
+            _IWebHostEnvironment = IWebHostEnvironment;
             _accessService = accessService;
             _mapper = mapper;
         }
