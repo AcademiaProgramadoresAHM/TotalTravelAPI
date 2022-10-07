@@ -412,7 +412,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     img.FileName = "P-" + map.CodeStatus + ".jpg";
                     img.path = "ImagesAPI/Profile_Photos/Partners";
                     img.file = file;
-                    _uploaderImageRepository.UploaderFile(img);
+                    var map2 = _uploaderImageRepository.UploaderFile(img);
+                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else
