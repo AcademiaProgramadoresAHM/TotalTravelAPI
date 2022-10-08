@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace AHM.Total.Travel.Api.Controllers
                 //return Ok(b);
                 return File(b, "image/jpg");
             }
-            return null;
+            return Ok();
         }
 
         [HttpGet("GetAllFiles")]

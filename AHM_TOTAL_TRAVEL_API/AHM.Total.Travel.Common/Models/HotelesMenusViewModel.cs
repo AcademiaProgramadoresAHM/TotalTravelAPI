@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Time_ID { get; set; }
         public int? HoMe_UsuarioCreacion { get; set; }
         public int? HoMe_UsuarioModifica { get; set; }
+
+        public IFormFile File { get; set; }
     }
 }

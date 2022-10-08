@@ -3,11 +3,9 @@ using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -32,12 +30,24 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
 
         }
-
         [HttpPost("Insert")]
-        public IActionResult Insert(MenusViewModel menusViewModel)
+        public IActionResult Insert([FromForm]MenusViewModel menusViewModel)
         {
+            IFormFile file;
+            if (menusViewModel.File != null)
+            {
+                file = menusViewModel.File;
+            }
+            else
+            {
+                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
+                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
+
+                var stream = new MemoryStream(byteFile);
+                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
+            }
             var items = _mapper.Map<tbMenus>(menusViewModel);
-            var result = _restaurantService.CreateMenus(items);
+            var result = _restaurantService.CreateMenus(items, file);
             return Ok(result);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Rest_ID { get; set; }
         public int? Menu_UsuarioCreacion { get; set; }
         public int? Menu_UsuarioModifica { get; set; }
+        public IFormFile File { get; set; }
     }
 
     public class MenusListViewModel

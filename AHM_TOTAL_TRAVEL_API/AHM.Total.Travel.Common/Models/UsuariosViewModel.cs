@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,6 +24,8 @@ namespace AHM.Total.Travel.Common.Models
         public int? Part_ID { get; set; }
         public int? Usua_UsuarioCreacion { get; set; }
         public int? Usua_UsuarioModifica { get; set; }
+
+        public IFormFile File { get; set; }
 
     }
         public class UsuariosListViewModel

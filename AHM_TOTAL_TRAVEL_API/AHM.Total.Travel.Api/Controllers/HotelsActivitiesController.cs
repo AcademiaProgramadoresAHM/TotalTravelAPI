@@ -4,9 +4,11 @@ using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using ConciertosProyecto.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,8 +39,21 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(HotelesActividadesViewModel hotelesActividadesViewModel)
         {
+            IFormFile file;
+            if (hotelesActividadesViewModel.File != null)
+            {
+                file = hotelesActividadesViewModel.File;
+            }
+            else
+            {
+                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
+                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
+
+                var stream = new MemoryStream(byteFile);
+                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
+            }
             var items = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
-            var result = _hotelService.CreateHotelsActivity(items);
+            var result = _hotelService.CreateHotelsActivity(items, file);
             return Ok(result);
         }
 

@@ -1,6 +1,7 @@
 ﻿using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +13,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ActividadesRepository _actividadesRepository;
         private readonly ActividadesExtrasRepository _actividadesExtrasRepository;
         private readonly TiposActividadesRepository _tiposActividadesRepository;
-
-        public ActivitiesService( ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
+        private readonly UploaderImageRepository _uploaderImageRepository;
+        public ActivitiesService(UploaderImageRepository uploaderImageRepository, ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
         {
             _actividadesRepository = actividades;
             _actividadesExtrasRepository = actividadesExtras;
             _tiposActividadesRepository = tiposActividades;
+            _uploaderImageRepository = uploaderImageRepository;
         }
       
         #region Actividades
@@ -157,7 +159,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateActiExt(tbActividadesExtras item)
+        public ServiceResult CreateActiExt(tbActividadesExtras item, IFormFile file)
         {
 
             var result = new ServiceResult();
@@ -166,6 +168,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _actividadesExtrasRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    FileModel img = new FileModel();
+                    img.FileName = "Acti-" + map.CodeStatus + ".jpg";
+                    img.path = "ImagesAPI/Activities/Part-" + item.Part_ID;
+                    img.file = file;
+
+                    var map2 = _uploaderImageRepository.UploaderFile(img);
+                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else

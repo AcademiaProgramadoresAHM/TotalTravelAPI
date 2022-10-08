@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,7 +19,8 @@ namespace AHM.Total.Travel.Common.Models
         public string Habi_url { get; set; }
         public int? Habi_UsuarioCreacion { get; set; }
         public int? Habi_UsuarioModifica { get; set; }
-        
-        
+        public IFormFile File { get; set; }
+
+
     }
 }

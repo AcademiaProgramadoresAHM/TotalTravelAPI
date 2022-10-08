@@ -3,9 +3,11 @@ using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,8 +36,22 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(ActividadesExtrasViewModel ActividadesExtras)
         {
+
+            IFormFile file;
+            if (ActividadesExtras.File != null)
+            {
+                file = ActividadesExtras.File;
+            }
+            else
+            {
+                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
+                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
+
+                var stream = new MemoryStream(byteFile);
+                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
+            }
             var item = _mapper.Map<tbActividadesExtras>(ActividadesExtras);
-            var response = _activitiesService.CreateActiExt(item);
+            var response = _activitiesService.CreateActiExt(item, file);
             return Ok(response);
         }
 

@@ -4,6 +4,7 @@ using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -38,10 +39,23 @@ namespace AHM.Total.Travel.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("Insert")]
-        public IActionResult Insert(UsuariosViewModel item)
+        public IActionResult Insert([FromForm] UsuariosViewModel item)
         {
+            IFormFile file;
+            if (item.File != null)
+            {
+                file = item.File;
+            }
+            else
+            {
+                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
+                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
+
+                var stream = new MemoryStream(byteFile);
+                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
+            }
             var items = _mapper.Map<tbUsuarios>(item);
-            var result = _accessService.CreateUsers(items);
+            var result = _accessService.CreateUsers(items, file);
             return Ok(result);
         }
 

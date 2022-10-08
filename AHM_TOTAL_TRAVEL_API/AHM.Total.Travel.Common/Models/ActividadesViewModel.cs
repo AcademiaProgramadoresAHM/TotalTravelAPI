@@ -10,5 +10,6 @@ namespace AHM.Total.Travel.Common.Models
         public int? TiAc_ID { get; set; }
         public int? Actv_UsuarioCreacion { get; set; }
         public int? Actv_UsuarioModifica { get; set; }
+
     }
 }

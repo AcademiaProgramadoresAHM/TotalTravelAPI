@@ -3,8 +3,11 @@ using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
@@ -409,9 +412,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 if (map.CodeStatus > 0)
                 {
                     FileModel img = new FileModel();
-                    img.FileName = "P-" + map.CodeStatus + ".jpg";
+                    img.FileName = "Part-" + map.CodeStatus + ".jpg";
                     img.path = "ImagesAPI/Profile_Photos/Partners";
                     img.file = file;
+                    
                     var map2 = _uploaderImageRepository.UploaderFile(img);
                     map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);

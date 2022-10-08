@@ -1,6 +1,7 @@
 ﻿using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,14 +13,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly MenusRepository _menusRepository;
         private readonly MenuTypesRepository _tiposMenusRepository;
         private readonly RestaurantesRepository _restaurantesRepository;
-
+        private readonly UploaderImageRepository _uploaderImageRepository;
         public RestaurantService(MenusRepository menusRepository,
                               MenuTypesRepository tiposMenusRepository,
-                              RestaurantesRepository restaurantesRepository)
+                              RestaurantesRepository restaurantesRepository,
+                              UploaderImageRepository uploaderImageRepository)
         {
             _menusRepository = menusRepository;
             _tiposMenusRepository = tiposMenusRepository;
             _restaurantesRepository = restaurantesRepository;
+            _uploaderImageRepository = uploaderImageRepository;
 
         }
 
@@ -40,16 +43,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateRestaurants(tbRestaurantes item)
+        public ServiceResult CreateRestaurants(tbRestaurantes item, IFormFile file)
         {
 
             var result = new ServiceResult();
             try
             {
                 var map = _restaurantesRepository.Insert(item);
-                if (map.CodeStatus > 0)
+                if (map.CodeStatus > 0) 
                 {
-
+                    FileModel img = new FileModel();
+                    img.FileName = "Restaurantplace.jpg";
+                    img.path = "ImagesAPI/Restaurants/Rest-" + map.CodeStatus + "/Place";
+                    img.file = file;
+                    var map2 = _uploaderImageRepository.UploaderFile(img);
+                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else
@@ -289,7 +297,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateMenus(tbMenus item)
+        public ServiceResult CreateMenus(tbMenus item, IFormFile file)
         {
 
             var result = new ServiceResult();
@@ -298,7 +306,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _menusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    FileModel img = new FileModel();
+                    img.FileName = map.CodeStatus + "-" + item.Menu_Nombre +   ".jpg";
+                    img.path = "ImagesAPI/Restaurants/Rest-"+item.Rest_ID+"/Food";
+                    img.file = file;
 
+                    var map2 = _uploaderImageRepository.UploaderFile(img);
+                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else

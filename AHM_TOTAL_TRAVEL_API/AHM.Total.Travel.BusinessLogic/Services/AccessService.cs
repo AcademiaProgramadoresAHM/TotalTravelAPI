@@ -2,6 +2,7 @@
 using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,14 +16,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly RolesPermisosRepository _rolesPermisosRepository;
         private readonly UsuariosRepository _usuariosRepository;
         private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
+        private readonly UploaderImageRepository _uploaderImageRepository;
 
-        public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository)
+        public AccessService(RolesRepository rolesRepository, UploaderImageRepository uploaderImageRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository)
         {
             _rolesRepository = rolesRepository;
             _permisosRepository = permisosRepository;
             _rolesPermisosRepository = rolesPermisosRepository;
             _usuariosRepository = usuariosRepository;
             _usuariosLoginsRepository = usuariosLoginsRepository;
+            _uploaderImageRepository = uploaderImageRepository;
         }
 
 
@@ -492,7 +495,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateUsers(tbUsuarios item)
+        public ServiceResult CreateUsers(tbUsuarios item, IFormFile file)
         {
             var result = new ServiceResult();
             try
@@ -500,6 +503,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _usuariosRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    FileModel img = new FileModel();
+                    img.FileName = "User-" + map.CodeStatus + ".jpg";
+                    img.path = "ImagesAPI/Profile_Photos/Users";
+                    img.file = file;
+
+                    var map2 = _uploaderImageRepository.UploaderFile(img);
+                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else
