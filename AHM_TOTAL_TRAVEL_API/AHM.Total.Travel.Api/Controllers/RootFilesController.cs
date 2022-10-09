@@ -17,16 +17,11 @@ namespace AHM.Total.Travel.Api.Controllers
     [AllowAnonymous]
     public class RootFilesController : Controller
     {
-        private readonly IWebHostEnvironment _IWebHostEnvironment;
-        public RootFilesController(IWebHostEnvironment IWebHostEnvironment)
-        {
-            _IWebHostEnvironment = IWebHostEnvironment;
-        }
 
         [HttpGet("GetFile")]
         public async Task<IActionResult> GetFile(string fileRoute)
         {
-            string path = Path.Combine(_IWebHostEnvironment.ContentRootPath, "ImagesAPI", fileRoute);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI", fileRoute);
             if (System.IO.File.Exists(path))
             {
                 byte[] b = System.IO.File.ReadAllBytes(path);
@@ -36,20 +31,39 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("GetAllFiles")]
-        public IActionResult GetAllFiles(string directory)
+        [HttpGet("GetDirectoryImageFile")]
+        public IActionResult GetDirectoryImageFile(string directory)
         {
-            string path = Path.Combine(_IWebHostEnvironment.ContentRootPath, "ImagesAPI", directory);
-            List<string> filesDirectory = Directory.GetFiles(path, "*", SearchOption.AllDirectories).ToList();
-            List<FileContentResult> DataAccess = new List<FileContentResult>();
-            foreach (var item in filesDirectory)
-            {
-                byte[] byteFile = System.IO.File.ReadAllBytes(item);
-                DataAccess.Add(File(byteFile, "image/jpg"));
-            }
+            List<ImagesDetail> fileNames = new List<ImagesDetail>();
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI", directory);
 
-            return Ok(DataAccess);
-            
+            if (Directory.Exists(path))
+            {
+                string[] fileEntries = Directory.GetFiles(path);
+                foreach (var item in fileEntries)
+                {
+                    string[] imagePath = item.Split("\\");
+                    string fileName = imagePath[imagePath.Length - 1];
+                    string[] fileExtension = fileName.Split(".");
+                    string fileDirectory = $"ImagesAPI/{directory}/{fileName}".Replace("\\", "/");
+                    ImagesDetail fileDetail = new ImagesDetail
+                    {
+                        FileName = fileName,
+                        Directory = fileDirectory,
+                        Extension = fileExtension[fileExtension.Length - 1]
+                    };
+                    fileNames.Add(fileDetail);
+
+                }
+            }
+            return Ok(fileNames);
         }
+    }
+
+    public class ImagesDetail
+    {
+        public string FileName { get; set; }
+        public string Directory { get; set; }
+        public string Extension { get; set; }
     }
 }
