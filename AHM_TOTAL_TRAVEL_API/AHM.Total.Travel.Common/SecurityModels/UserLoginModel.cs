@@ -16,7 +16,7 @@ namespace AHM.Total.Travel.Common.SecurityModels
     {
         public int ID { get; set; }
         public string DNI { get; set; }
-        public string nombre_completo { get; set; }
+        public string Nombre { get; set; }
         public string Email { get; set; }
         public string Rol { get; set; }
         public int Role_ID { get; set; }
