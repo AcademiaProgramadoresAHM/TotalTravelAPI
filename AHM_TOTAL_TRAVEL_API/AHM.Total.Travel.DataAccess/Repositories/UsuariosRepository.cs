@@ -73,13 +73,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Usua_DNI", item.Usua_DNI, DbType.String, ParameterDirection.Input);
             parameters.Add("@Usua_Nombre", item.Usua_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Usua_Apellido", item.Usua_Apellido, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Usua_FechaNaci", item.Usua_FechaNaci, DbType.Date, ParameterDirection.Input);
-            parameters.Add("@Usua_Email", item.Usua_Email, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Usua_Sexo", item.Usua_Sexo, DbType.String, ParameterDirection.Input);
             parameters.Add("@Usua_Telefono", item.Usua_Telefono, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Usua_Url", item.Usua_Url, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Usua_Password", item.Usua_Password, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Usua_esAdmin", item.Usua_esAdmin, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Role_ID", item.Role_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
