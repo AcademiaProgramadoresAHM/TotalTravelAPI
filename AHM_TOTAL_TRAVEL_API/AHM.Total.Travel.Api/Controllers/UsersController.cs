@@ -60,7 +60,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, UsuariosViewModel items)
+        public IActionResult Update(int id, [FromForm] UsuariosViewModel items)
         {
             var item = _mapper.Map<tbUsuarios>(items);
             var result = _accessService.UpdateUsers(id, item);
@@ -69,7 +69,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         [AllowAnonymous]
         [HttpPut("UpdatePassword")]
-        public IActionResult changePassword(UsuariosViewModel items)
+        public IActionResult changePassword([FromForm] UsuariosViewModel items)
         {
             var item = _mapper.Map<tbUsuarios>(items);
             var result = _accessService.UpdatePassword(item);
@@ -82,7 +82,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _accessService.DeleteUsers(id, mod);
             return Ok(result);
         }
-
+        [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int id)
         {

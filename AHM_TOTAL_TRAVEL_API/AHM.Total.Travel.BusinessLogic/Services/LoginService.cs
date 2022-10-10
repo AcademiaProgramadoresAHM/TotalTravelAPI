@@ -77,7 +77,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.nombre_completo),
+                new Claim(ClaimTypes.NameIdentifier, $"{user.Nombre} {user.Apellido}"),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Rol),
                 new Claim("UsuarioID",user.ID.ToString()),
@@ -147,7 +147,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 
                 VW_tbUsuarios Usuario = new VW_tbUsuarios {
                     ID = int.Parse( claims.FirstOrDefault(x => x.Type == "UsuarioID")?.Value),
-                    nombre_completo = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value,
+                    Nombre = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value,
                     Email = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value,
                     Rol = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value,
                     Role_ID = int.Parse(claims.FirstOrDefault(x => x.Type == "RolID")?.Value)

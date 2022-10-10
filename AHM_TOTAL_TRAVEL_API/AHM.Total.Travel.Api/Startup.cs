@@ -86,13 +86,6 @@ namespace AHM.Total.Travel.Api
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"ImagesAPI")),
-                RequestPath = new PathString("/ImagesAPI")
-            });
-
             app.UseCors(options =>
             options.WithOrigins("http://localhost:44313/")
             .AllowAnyHeader()

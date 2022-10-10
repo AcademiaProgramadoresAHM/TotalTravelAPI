@@ -42,7 +42,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
             VW_tbUsuarios userClaims = _loginService.getClaims(HttpContext);
 
-            return Ok($"Hola {userClaims.nombre_completo}, este endpoint es privado y tu eres un {userClaims.Rol} \n" +
+            return Ok($"Hola {userClaims.Nombre + " " + userClaims.Apellido}, este endpoint es privado y tu eres un {userClaims.Rol} \n" +
                 $"Tu email es: {userClaims.Email} y tu id es: {userClaims.ID} \n");
         }
 
