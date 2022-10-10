@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AHM.Total.Travel.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,11 @@ namespace AHM.Total.Travel.Api.Controllers
     [AllowAnonymous]
     public class RootFilesController : Controller
     {
+        private readonly UploaderImageRepository _UploaderImageRepository;
+        public RootFilesController(UploaderImageRepository UploaderImageRepository)
+        {
+            _UploaderImageRepository = UploaderImageRepository;
+        }
 
         [HttpGet("GetFile")]
         public async Task<IActionResult> GetFile(string fileRoute)
@@ -57,6 +63,13 @@ namespace AHM.Total.Travel.Api.Controllers
                 }
             }
             return Ok(fileNames);
+        }
+
+        [HttpGet("UploadFile")]
+        public IActionResult UploadFile([FromForm] FileModel FileData )
+        {
+            var result = _UploaderImageRepository.UploaderFile(FileData);
+            return Ok(result);
         }
     }
 

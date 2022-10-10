@@ -45,11 +45,11 @@ namespace AHM.Total.Travel.DataAccess.Repositories
                     response.MessageStatus = "Imagen guardada con éxito.";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 response.CodeStatus = 100;
-                response.MessageStatus = "Ha ocurrido un error.";
+                response.MessageStatus = ex.Message;
             }
             return response;
 
