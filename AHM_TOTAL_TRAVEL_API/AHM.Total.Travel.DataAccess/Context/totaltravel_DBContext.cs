@@ -1266,6 +1266,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Fecha_Nacimiento).HasColumnType("date");
 
+                entity.Property(e => e.Image_URL)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);

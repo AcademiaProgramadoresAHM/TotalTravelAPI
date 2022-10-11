@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.DataAccess.Repositories;
+﻿using AHM.Total.Travel.BusinessLogic.Services;
+using AHM.Total.Travel.DataAccess.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace AHM.Total.Travel.Api.Controllers
@@ -16,67 +19,58 @@ namespace AHM.Total.Travel.Api.Controllers
     [Route("API/[controller]")]
     [Authorize]
     [AllowAnonymous]
-    public class RootFilesController : Controller
+    public class RootFilesController : ControllerBase
     {
-        private readonly UploaderImageRepository _UploaderImageRepository;
-        public RootFilesController(UploaderImageRepository UploaderImageRepository)
+        private readonly ImagesService _imagesService;
+
+        public RootFilesController( ImagesService imagesService)
         {
-            _UploaderImageRepository = UploaderImageRepository;
+            _imagesService = imagesService;
         }
 
-        [HttpGet("GetFile")]
-        public async Task<IActionResult> GetFile(string fileRoute)
+
+        [HttpPost("UploadImage")]
+        public IActionResult UploadImage(List<IFormFile> file, string folderName)
         {
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI", fileRoute);
-            if (System.IO.File.Exists(path))
+            try
             {
-                byte[] b = System.IO.File.ReadAllBytes(path);
-                //return Ok(b);
-                return File(b, "image/jpg");
+                string imagesPaths = (_imagesService.saveImages(file, folderName).Data);
+                return Ok(imagesPaths);
             }
-            return Ok();
-        }
-
-        [HttpGet("GetDirectoryImageFile")]
-        public IActionResult GetDirectoryImageFile(string directory)
-        {
-            List<ImagesDetail> fileNames = new List<ImagesDetail>();
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI", directory);
-
-            if (Directory.Exists(path))
+            catch (Exception ex)
             {
-                string[] fileEntries = Directory.GetFiles(path);
-                foreach (var item in fileEntries)
-                {
-                    string[] imagePath = item.Split("\\");
-                    string fileName = imagePath[imagePath.Length - 1];
-                    string[] fileExtension = fileName.Split(".");
-                    string fileDirectory = $"ImagesAPI/{directory}/{fileName}".Replace("\\", "/");
-                    ImagesDetail fileDetail = new ImagesDetail
-                    {
-                        FileName = fileName,
-                        Directory = fileDirectory,
-                        Extension = fileExtension[fileExtension.Length - 1]
-                    };
-                    fileNames.Add(fileDetail);
-
-                }
+                return BadRequest(ex.Message);
             }
-            return Ok(fileNames);
         }
 
-        [HttpGet("UploadFile")]
-        public IActionResult UploadFile([FromForm] FileModel FileData )
+        [HttpGet("GetImage")]
+        public IActionResult GetImage(string folderName, string imageName)
         {
-            var result = _UploaderImageRepository.UploaderFile(FileData);
-            return Ok(result);
+            try
+            {
+                return _imagesService.getImage(folderName, imageName);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+        [HttpGet("GetAllImages")]
+        public IActionResult GetAllImages(string folderName)
+        {
+            try
+            {
+                var response = _imagesService.getAllImagesAsBase64(folderName);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
     }
 
-    public class ImagesDetail
-    {
-        public string FileName { get; set; }
-        public string Directory { get; set; }
-        public string Extension { get; set; }
-    }
+    
 }

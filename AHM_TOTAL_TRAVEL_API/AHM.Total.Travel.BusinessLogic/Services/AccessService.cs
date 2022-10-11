@@ -495,21 +495,15 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateUsers(tbUsuarios item, IFormFile file)
+        public ServiceResult CreateUsers(tbUsuarios item, string file)
         {
             var result = new ServiceResult();
             try
             {
+                item.Usua_Url = file;
                 var map = _usuariosRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = "User-" + map.CodeStatus + ".jpg";
-                    img.path = "ImagesAPI/Profile_Photos/Users";
-                    img.file = file;
-
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else

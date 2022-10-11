@@ -98,7 +98,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public string setTokenCookie(UserLoggedModel user, HttpContext httpContext)
         {
             string clientRefreshToken = httpContext.Request.Cookies["refresh-token"];
-
+            
             VW_tbUsuariosLogins UserLogin = _usuariosLoginsRepository.FindByToken(clientRefreshToken);
             
             if (string.IsNullOrEmpty(clientRefreshToken))
@@ -140,7 +140,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         //Extrae datos de los Claims del payload del JWT
         public VW_tbUsuarios getClaims(HttpContext context)
         {
-
+            
             IEnumerable<Claim> claims = context.User.Claims;
             if (claims != null)
             {

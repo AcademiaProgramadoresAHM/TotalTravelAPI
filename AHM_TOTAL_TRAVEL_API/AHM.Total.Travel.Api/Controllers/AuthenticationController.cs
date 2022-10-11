@@ -39,7 +39,8 @@ namespace AHM.Total.Travel.Api.Controllers
         [Authorize(Roles = "Administrador, Cliente")]
         public IActionResult Private()
         {
-
+            //extract jwt token from request
+            //var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
             VW_tbUsuarios userClaims = _loginService.getClaims(HttpContext);
 
             return Ok($"Hola {userClaims.Nombre + " " + userClaims.Apellido}, este endpoint es privado y tu eres un {userClaims.Rol} \n" +
