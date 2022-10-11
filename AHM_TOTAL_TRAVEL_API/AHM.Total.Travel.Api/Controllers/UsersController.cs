@@ -88,7 +88,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         [AllowAnonymous]
         [HttpPut("UpdatePassword")]
-        public IActionResult changePassword([FromForm] UsuariosViewModel items)
+        public IActionResult changePassword(UsuariosPasswordViewModel items)
         {
             var item = _mapper.Map<tbUsuarios>(items);
             var result = _accessService.UpdatePassword(item);
