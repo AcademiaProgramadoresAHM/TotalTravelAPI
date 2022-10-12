@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public string Ciudad { get; set; }
+        public int? PaisID { get; set; }
         public string Pais { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCrea { get; set; }
