@@ -52,7 +52,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@ReRe_ID", id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Resv_ID", item.Resv_ID, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReRe_FechaReservacion", item.ReRe_FechaReservacion, DbType.Date, ParameterDirection.Input);
             parameters.Add("@ReRe_HoraReservacion", item.ReRe_HoraReservacion, DbType.String, ParameterDirection.Input);
