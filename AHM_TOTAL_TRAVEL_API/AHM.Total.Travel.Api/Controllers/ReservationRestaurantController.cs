@@ -34,6 +34,8 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [AllowAnonymous]
+
         [HttpPost("Insert")]
         public IActionResult Insert( ReservacionRestaurantesViewModel items)
         {
@@ -44,6 +46,8 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [AllowAnonymous]
+
         [HttpPut("Update")]
         public IActionResult Update(int id, ReservacionRestaurantesViewModel items)
         {
@@ -53,6 +57,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
+        [AllowAnonymous]
+
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
@@ -61,6 +67,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
+
+        [AllowAnonymous]
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)

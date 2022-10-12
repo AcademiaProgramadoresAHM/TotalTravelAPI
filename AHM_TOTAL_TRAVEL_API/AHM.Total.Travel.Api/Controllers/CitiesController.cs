@@ -32,6 +32,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
+        [AllowAnonymous]
+
         [HttpPost("Insert")]
         public IActionResult Insert(CiudadesViewModel ciudadesViewModel)
         {
@@ -39,6 +41,9 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _generalService.CreateCity(items);
             return Ok(result);
         }
+
+
+        [AllowAnonymous]
 
         [HttpPut("Update")]
         public IActionResult Update(int id, CiudadesViewModel items)
@@ -50,6 +55,9 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+
+        [AllowAnonymous]
+
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
@@ -57,6 +65,9 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
+
+
+        [AllowAnonymous]
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)

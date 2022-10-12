@@ -33,6 +33,9 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
+
+        [AllowAnonymous]
+
         [Authorize(Roles = "Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesActividadesExtrasViewModel item)
@@ -42,6 +45,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
+
         [HttpPut("Update")]
         public IActionResult Update(int id, ReservacionesActividadesExtrasViewModel items)
         {
@@ -50,6 +55,8 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
+
         [Authorize(Roles = "Cliente")]
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
@@ -57,6 +64,8 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _reservationService.DeleteReservationActivitiesExtra(id, Mod);
             return Ok(result);
         }
+
+        [AllowAnonymous]
 
         [HttpGet("Find")]
         [Authorize(Roles = "Cliente")]
