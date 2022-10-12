@@ -24,7 +24,6 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
 
         [HttpGet("List")]
         public IActionResult List()
@@ -34,7 +33,6 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [AllowAnonymous]
 
         [HttpPost("Insert")]
         public IActionResult Insert( ReservacionRestaurantesViewModel items)
@@ -46,7 +44,6 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [AllowAnonymous]
 
         [HttpPut("Update")]
         public IActionResult Update(int id, ReservacionRestaurantesViewModel items)
@@ -57,7 +54,6 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
 
         }
-        [AllowAnonymous]
 
 
         [HttpDelete("Delete")]
@@ -68,7 +64,6 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [AllowAnonymous]
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
