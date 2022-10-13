@@ -36,7 +36,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [AllowAnonymous]
+       
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm] PartnersViewModel item)
         {

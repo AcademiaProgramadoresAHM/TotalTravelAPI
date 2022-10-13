@@ -30,7 +30,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
 
         }
-        [AllowAnonymous]
+        
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]MenusViewModel item)
         {
