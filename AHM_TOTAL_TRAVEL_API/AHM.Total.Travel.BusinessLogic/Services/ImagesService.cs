@@ -24,7 +24,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     public class ImagesService: ControllerBase
     {
         public readonly IHttpContextAccessor _httpContext;
-        private readonly string _ImagesPath = "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Api\\ImagesAPI";
+        private readonly string _ImagesPath =Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI") ;
         public ImagesService(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;

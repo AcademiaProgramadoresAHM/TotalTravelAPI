@@ -22,7 +22,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
 using System.Threading.Tasks;
+using System.Reflection.Metadata;
 
 
 namespace AHM.Total.Travel.Api
@@ -100,27 +102,23 @@ namespace AHM.Total.Travel.Api
             .AllowAnyHeader()
             .AllowAnyMethod());
 
+            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI"));
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"ImagesAPI")),
+                    Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI")),
                 RequestPath = new PathString("/Images")
             });
-
             app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"ImagesAPI")),
+                    Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI")),
                 RequestPath = new PathString("/Images")
             });
-
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
-            
-
 
             app.UseEndpoints(endpoints =>
             {
