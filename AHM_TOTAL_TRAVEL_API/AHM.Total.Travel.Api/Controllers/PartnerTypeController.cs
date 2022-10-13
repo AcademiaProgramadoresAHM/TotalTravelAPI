@@ -35,18 +35,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(TiposPartnersViewModel categoriasHabitacionesViewModel)
+        public IActionResult Insert(TiposPartnersViewModel tipoPartnersViewModel)
         {
-            var items = _mapper.Map<tbTipoPartners>(categoriasHabitacionesViewModel);
+            var items = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
             var result = _generalService.CreatePartnersType(items);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, TiposPartnersViewModel categoriasHabitacionesViewModel)
+        public IActionResult Update(int id, TiposPartnersViewModel tipoPartnersViewModel)
         {
 
-            var item = _mapper.Map<tbTipoPartners>(categoriasHabitacionesViewModel);
+            var item = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
             var result = _generalService.UpdatePartnersType(id, item);
             return Ok(result);
 
