@@ -55,6 +55,8 @@ namespace AHM.Total.Travel.Api.Extensions
             CreateMap<TiposTransportesViewModel, tbTiposTransportes>().ReverseMap();
             CreateMap<TransportesViewModel, tbTransportes>().ReverseMap();
             CreateMap<UsuariosViewModel, tbUsuarios>().ReverseMap();
+            CreateMap<UsuariosUpdateViewModel, tbUsuarios>().ReverseMap();
+            CreateMap<UsuariosInsertViewModel, tbUsuarios>().ReverseMap();
 
         }
     }

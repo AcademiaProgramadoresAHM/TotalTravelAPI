@@ -3,9 +3,12 @@ using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -16,17 +19,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly RolesPermisosRepository _rolesPermisosRepository;
         private readonly UsuariosRepository _usuariosRepository;
         private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
-        private readonly UploaderImageRepository _uploaderImageRepository;
+        private readonly ImagesService _imagesService;
+        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultAlbumRoute = "UsersProfilePics\\U-";
 
-        public AccessService(RolesRepository rolesRepository, UploaderImageRepository uploaderImageRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository)
+        public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
         {
             _rolesRepository = rolesRepository;
             _permisosRepository = permisosRepository;
             _rolesPermisosRepository = rolesPermisosRepository;
             _usuariosRepository = usuariosRepository;
             _usuariosLoginsRepository = usuariosLoginsRepository;
-            _uploaderImageRepository = uploaderImageRepository;
+            _imagesService = imagesService;
         }
+
+
 
 
         #region UsuariosLogins
@@ -495,15 +502,28 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateUsers(tbUsuarios item, string file)
+        public ServiceResult CreateUsers(tbUsuarios item, IFormFile file)
         {
             var result = new ServiceResult();
             try
             {
-                item.Usua_Url = file;
+                item.Usua_Url = _defaultImageRoute;
                 var map = _usuariosRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    if (file != null)
+                    {
+                        try
+                        {
+                            UpdateUsers(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+                    }
+                    
+
                     return result.Ok(map);
                 }
                 else
@@ -519,14 +539,37 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //ACTUALIZAR
-        public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios)
+        public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios, IFormFile file)
         {
             var result = new ServiceResult();
             try
             {
                 var itemID = _usuariosRepository.Find(id);
+                
                 if (itemID != null)
                 {
+                    if (file != null)
+                    {
+                        if (itemID.Image_URL != null)
+                        {
+                            if (!string.IsNullOrEmpty(itemID.Image_URL))
+                            {
+                                try
+                                {
+                                    ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
+                        }
+                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), file).Result.Data;
+                    }
+                    
+                    tbUsuarios.Usua_Url = _defaultImageRoute;
+
                     var map = _usuariosRepository.Update(tbUsuarios, id);
                     if (map.CodeStatus > 0)
                     {
@@ -606,6 +649,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var user = _usuariosRepository.Find(id);
+                user.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
+
                 return result.Ok(user);
             }
             catch (Exception ex)

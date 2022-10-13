@@ -1,5 +1,6 @@
 ﻿using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.DataAccess.Repositories;
+using Google.Apis.Gmail.v1.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,46 +31,43 @@ namespace AHM.Total.Travel.Api.Controllers
 
 
         [HttpPost("UploadImage")]
-        public IActionResult UploadImage(List<IFormFile> file, string folderName)
+        public async Task<IActionResult> UploadImage(List<IFormFile> file, [FromForm] string folderName)
         {
             try
             {
-                string imagesPaths = (_imagesService.saveImages(file, folderName).Data);
-                return Ok(imagesPaths);
+                return Ok(await _imagesService.saveImages(folderName, file.ToArray()));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Ocurrió un error al subir la imagen");
             }
         }
 
         [HttpGet("GetImage")]
-        public IActionResult GetImage(string folderName, string imageName)
+        public IActionResult GetImage(string path)
         {
             try
             {
-                return _imagesService.getImage(folderName, imageName);
+                return Ok(_imagesService.getImage(path));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpGet("GetAllImages")]
         public IActionResult GetAllImages(string folderName)
         {
             try
             {
-                var response = _imagesService.getAllImagesAsBase64(folderName);
-                return Ok(response);
+                return Ok(_imagesService.getAllImagesFromFolder(folderName, HttpContext));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound("La ruta no existe");
             }
         }
-        
+
     }
 
     

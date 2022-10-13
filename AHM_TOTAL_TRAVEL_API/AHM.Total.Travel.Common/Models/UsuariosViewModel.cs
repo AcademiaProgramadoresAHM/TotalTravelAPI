@@ -48,7 +48,38 @@ namespace AHM.Total.Travel.Common.Models
         public int? Usua_UsuarioModifica { get; set; }
 
     }
+    public class UsuariosInsertViewModel
+    {
+        public string Usua_DNI { get; set; }
+        public string Usua_Nombre { get; set; }
+        public string Usua_Apellido { get; set; }
+        public DateTime? Usua_FechaNaci { get; set; }
+        public string Usua_Email { get; set; }
+        public string Usua_Sexo { get; set; }
+        public string Usua_Telefono { get; set; }
+        public string Usua_Url { get; set; }
+        public string Usua_Password { get; set; }
+        public int? Usua_esAdmin { get; set; }
+        public int? Role_ID { get; set; }
+        public int? Dire_ID { get; set; }
+        public int? Part_ID { get; set; }
+        public int? Usua_UsuarioCreacion { get; set; }
+        public IFormFile File { get; set; }
 
+    }
+    public class UsuariosUpdateViewModel
+    {
+        public string Usua_DNI { get; set; }
+        public string Usua_Nombre { get; set; }
+        public string Usua_Apellido { get; set; }
+        public string Usua_Telefono { get; set; }
+        public IFormFile Usua_Url { get; set; }
+        public int? Role_ID { get; set; }
+        public int? Dire_ID { get; set; }
+        public int? Part_ID { get; set; }
+        public int? Usua_UsuarioModifica { get; set; }
+
+    }
     public class UsuariosListViewModel
     {
         public int ID { get; set; }

@@ -27,7 +27,6 @@ namespace AHM.Total.Travel.Api.Controllers
     {
         private readonly LoginService _loginService;
         private readonly AccessService _accessService;
-        private readonly IMapper _mapper;
 
         public AuthenticationController(LoginService loginService, AccessService accessService)
         {

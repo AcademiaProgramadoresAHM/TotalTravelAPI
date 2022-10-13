@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.29" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17">
       <PrivateAssets>all</PrivateAssets>
@@ -36,6 +37,10 @@
   <ItemGroup>
     <ProjectReference Include="..\AHM.Total.Travel.BusinessLogic\AHM.Total.Travel.BusinessLogic.csproj" />
     <ProjectReference Include="..\AHM.Total.Travel.Common\AHM.Total.Travel.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ImagesAPI\UsersProfilePics\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

@@ -1,30 +1,60 @@
 ﻿using AHM.Total.Travel.Common.Models;
+using MailKit.Net.Imap;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Net.WebRequestMethods;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
     public class ImagesService: ControllerBase
     {
-        private readonly string _ImagesPath = "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Api\\";
-        public ServiceResult saveImages(List<IFormFile> files, string folderName)
+        public readonly IHttpContextAccessor _httpContext;
+        private readonly string _ImagesPath = "C:\\Users\\andre\\OneDrive\\Documentos\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Api\\ImagesAPI";
+        public ImagesService(IHttpContextAccessor httpContext)
         {
+            _httpContext = httpContext;
+        }
+
+        //Regresa una routa de acceso a la imagen en el servidor
+        private string createImageUrlRoute(params string[] routes)
+        {
+            string baseUrl = Path.Combine("https://", _httpContext.HttpContext.Request.Host.Value, "API", "Images");
+            foreach (var item in routes)
+            {
+                baseUrl = Path.Combine(baseUrl, item);
+            }
+            return baseUrl.Replace("\\", "/");
+        }
+        
+
+        //Ingresa una o varias imagenes nuevas a la carpeta que se especifica, en caso de que no exista la carpeta, la crea
+        public async Task<ServiceResult> saveImages(string folderName, params IFormFile[] files)
+        {
+            ServiceResult result = new ServiceResult();
             if (folderName == null)
             {
-                folderName = "Default";
+                folderName = "Unspecified";
             }
-            ServiceResult result = new ServiceResult();
-            if (files.Count > 0)
+            
+            if (files.Length > 0)
             {
                 var ImagesPath = "";
-                var path = Path.Combine(_ImagesPath, "ImagesAPI", folderName);
+                var path = Path.Combine(_ImagesPath, folderName);
 
                 if (!Directory.Exists(path))
                 {
@@ -39,9 +69,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         var filePath = Path.Combine(path, fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            item.CopyToAsync(stream);
+                            await item.CopyToAsync(stream);
                         }
-                        ImagesPath += (Path.Combine("ImagesAPI", folderName, fileName) + ",");
+                        ImagesPath += (Path.Combine(folderName, fileName) + ",");
                     }
                 }
 
@@ -49,52 +79,121 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             else
             {
-                return result.BadRequest(message: "\\ImagesAPI\\Default\\DefaultPhoto.jpg");
+                return result.Ok(data:"\\Default\\DefaultPhoto.jpg");
             }
+        
         }
+
         //Elimina las imagenes anteriores y las actualiza con las que se ingresan en el update
-        public IActionResult deleteImage(string imageroute)
+        public ServiceResult deleteImage(string imageroute)
         {
             var path = Path.Combine(_ImagesPath, imageroute);
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);
-                return Ok("Se ha eliminado");
+                
+                return (new ServiceResult()).Ok(message: "Se ha eliminado la imagen");
             }
             else
             {
-                return BadRequest("No se encontro la imagen");
+                return (new ServiceResult()).BadRequest(message: "No se encontró la imagen");
             }
         }
 
-
-        //Obtiene la imagen con el nombre y la carpeta que se le pasa
-        public IActionResult getImage(string folderName, string imageName)
-        {
-            var path = Path.Combine(_ImagesPath, "ImagesAPI", folderName, imageName);
-            var stream = System.IO.File.OpenRead(path);
-            return File(stream, "image/jpeg");
-        }
-
-        public ServiceResult getAllImagesAsBase64(string folderName)
+        //Obtiene la imagen que se solicita por medio de la ruta guardada en la DB
+        public ServiceResult getImagesFilesByRoute(string imagesRoutes)
         {
             ServiceResult result = new ServiceResult();
-            var path = Path.Combine(_ImagesPath, "ImagesAPI", folderName);
+            List<ImagesDetails> imageFiles = new List<ImagesDetails>();
+
+            if (string.IsNullOrEmpty(imagesRoutes))
+            { return result.BadRequest("No se ha ingresado ningun valor como argumento"); }
+            
+            List<string> listOfImages = imagesRoutes.Split(",").ToList();
+            listOfImages.Remove("");
+            foreach (var image in listOfImages)
+            {
+                List<string> routeComponents = image.Split("\\").ToList();
+
+                ServiceResult response = getImage(routeComponents.ToArray());
+
+                if (response.Code == 404 || response.Code == 400)
+                {
+                    imageFiles.Add(new ImagesDetails { FileName = "NotFound", ImageUrl = "NotFound" });
+                }
+                else
+                {
+                    imageFiles.Add(response.Data);
+                }
+                
+            }
+            if (listOfImages.Count == 1)
+                return result.Ok(data: imageFiles[0]);
+            else
+                return result.Ok(data:imageFiles);
+        }
+
+
+
+        //Obtiene la imagen con el nombre y la carpeta que se le pasa
+        public ServiceResult getImage(params string[] routes)
+        {
+            ServiceResult result = new ServiceResult();
+
+            if (routes.Length == 0)
+            {
+                return result.BadRequest("No se ha ingresado ningun valor como argumento");
+            }
+            string path = _ImagesPath;
+
+            foreach (var route in routes)
+            {
+                path = Path.Combine(path, route);
+            }
+            
+            if (System.IO.File.Exists(path))
+            {
+                string imageName = Path.GetFileName(path);
+                string imageUrl = createImageUrlRoute(routes);
+
+                return result.Ok(data: new ImagesDetails { FileName = imageName, ImageRoute = path, ImageUrl = imageUrl });
+            }
+            else
+            {
+                return result.NotFound("La imagen no fue encontrada");
+            }
+        }
+
+        //Obtiene todas las rutas del URL de las imagenes dentro de cualquier folder
+        public ServiceResult getAllImagesFromFolder(string folderName, HttpContext context)
+        {
+            string path;
+            ServiceResult result = new ServiceResult();
+            
+            if (string.IsNullOrEmpty(folderName))
+            { path = _ImagesPath; }
+            else 
+            { path = Path.Combine(_ImagesPath, folderName); }
+            
             var files = Directory.GetFiles(path);
             List<ImagesDetails> images = new List<ImagesDetails>();
             foreach (var item in files)
             {
-                var image = Convert.ToBase64String(System.IO.File.ReadAllBytes(item));
+                string route = item;
                 var imageName = Path.GetFileName(item);
-                images.Add(new ImagesDetails { FileName = imageName, ImageAsBase64 = image });
-
+                string imgUrl = createImageUrlRoute(folderName, imageName);
+                images.Add(new ImagesDetails { FileName = imageName, ImageRoute = route, ImageUrl = imgUrl });
             }
-            return result.Ok(data: images);
+               return result.Ok(data: images);
         }
+
+
         public class ImagesDetails
         {
             public string FileName { get; set; }
-            public string ImageAsBase64 { get; set; }
+            [JsonIgnore]
+            public string ImageRoute { get; set; }
+            public string ImageUrl { get; set; }
         }
     }
 }

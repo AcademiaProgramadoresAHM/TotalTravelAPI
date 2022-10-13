@@ -2,11 +2,13 @@ using AHM.Total.Travel.Api.Extensions;
 using AHM.Total.Travel.BusinessLogic;
 using AHM.Total.Travel.DataAccess.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -53,11 +55,18 @@ namespace AHM.Total.Travel.Api
                     };
 
                 });
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
             services.DataAccess(Configuration.GetConnectionString("TotalTravelDB"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddCors();
+            services.AddHttpContextAccessor();
             services.AddSwaggerGen(x =>
             {
                 x.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
@@ -72,7 +81,7 @@ namespace AHM.Total.Travel.Api
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "TotalTravel API", Version = "v1" });
             });
 
-
+            services.AddDirectoryBrowser();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,10 +99,28 @@ namespace AHM.Total.Travel.Api
             options.WithOrigins("http://localhost:44313/")
             .AllowAnyHeader()
             .AllowAnyMethod());
-            
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"ImagesAPI")),
+                RequestPath = new PathString("/Images")
+            });
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"ImagesAPI")),
+                RequestPath = new PathString("/Images")
+            });
+
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            
+
 
             app.UseEndpoints(endpoints =>
             {
