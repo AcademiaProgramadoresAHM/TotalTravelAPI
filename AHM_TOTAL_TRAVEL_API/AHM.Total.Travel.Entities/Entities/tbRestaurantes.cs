@@ -23,9 +23,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Rest_UsuarioModifica { get; set; }
         public DateTime? Rest_FechaModifica { get; set; }
         public bool? Rest_Estado { get; set; }
+        public string Rest_Url { get; set; }
 
-        public virtual tbDirecciones Dire { get; set; }
-        public virtual tbPartners Part { get; set; }
+        public virtual tbDirecciones Dire_ { get; set; }
+        public virtual tbPartners Part_ { get; set; }
         public virtual tbUsuarios Rest_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Rest_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbMenus> tbMenus { get; set; }

@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios Menu_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Menu_UsuarioModificaNavigation { get; set; }
-        public virtual tbRestaurantes Rest { get; set; }
-        public virtual tbTipoMenus Time { get; set; }
+        public virtual tbRestaurantes Rest_ { get; set; }
+        public virtual tbTipoMenus Time_ { get; set; }
     }
 }

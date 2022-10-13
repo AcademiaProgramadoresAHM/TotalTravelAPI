@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? TiPar_FechaModifica { get; set; }
         public bool? TiPar_Estado { get; set; }
 
-        public virtual tbRoles Rol { get; set; }
+        public virtual tbRoles Rol_ { get; set; }
         public virtual tbUsuarios TiPar_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios TiPar_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPartners> tbPartners { get; set; }

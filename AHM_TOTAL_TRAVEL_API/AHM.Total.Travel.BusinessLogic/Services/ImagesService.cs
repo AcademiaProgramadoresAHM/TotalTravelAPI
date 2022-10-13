@@ -1,6 +1,7 @@
 ﻿using AHM.Total.Travel.Common.Models;
 using MailKit.Net.Imap;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -51,7 +52,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 folderName = "Unspecified";
             }
             
-            if (files.Length > 0)
+
+            if (files.Length > 0 && files[0]!= null)
             {
                 var ImagesPath = "";
                 var path = Path.Combine(_ImagesPath, folderName);
@@ -65,7 +67,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     if (item.Length > 0)
                     {
+                 
                         var fileName = Path.GetFileName(item.FileName);
+
                         var filePath = Path.Combine(path, fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
@@ -79,7 +83,28 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             else
             {
-                return result.Ok(data:"\\Default\\DefaultPhoto.jpg");
+                var path = Path.Combine(_ImagesPath, folderName);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string pathdefault = Path.GetFullPath("ImagesAPI/Default/DefaultPhoto.jpg");
+                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
+                var imageDefault = new MemoryStream(byteFile);
+
+
+                var fileName = "Restaurante.jpg";
+                var filePath = Path.Combine(path, fileName);
+               
+    
+                using (var streamDefault = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageDefault.CopyToAsync(streamDefault);
+                }
+
+                return result.Ok(data: Path.Combine("ImagesAPI",folderName, fileName));
             }
         
         }

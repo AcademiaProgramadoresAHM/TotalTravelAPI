@@ -26,8 +26,8 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios DeTr_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios DeTr_UsuarioModificaNavigation { get; set; }
-        public virtual tbHorariosTransportes HoTr { get; set; }
-        public virtual tbTransportes Tprt { get; set; }
+        public virtual tbHorariosTransportes HoTr_ { get; set; }
+        public virtual tbTransportes Tprt_ { get; set; }
         public virtual ICollection<tbReservacionTransporte> tbReservacionTransporte { get; set; }
     }
 }

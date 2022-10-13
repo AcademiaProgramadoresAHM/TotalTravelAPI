@@ -13,16 +13,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly MenusRepository _menusRepository;
         private readonly MenuTypesRepository _tiposMenusRepository;
         private readonly RestaurantesRepository _restaurantesRepository;
-        private readonly UploaderImageRepository _uploaderImageRepository;
+        private readonly ImagesService _imagesService;
+        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultAlbumRoute = "Restaurants\\Restaurant-";
         public RestaurantService(MenusRepository menusRepository,
                               MenuTypesRepository tiposMenusRepository,
                               RestaurantesRepository restaurantesRepository,
-                              UploaderImageRepository uploaderImageRepository)
+                              ImagesService imagesService)
         {
             _menusRepository = menusRepository;
             _tiposMenusRepository = tiposMenusRepository;
             _restaurantesRepository = restaurantesRepository;
-            _uploaderImageRepository = uploaderImageRepository;
+            _imagesService = imagesService;
 
         }
 
@@ -49,15 +51,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
+                item.Rest_Url = _defaultImageRoute;
                 var map = _restaurantesRepository.Insert(item);
-                if (map.CodeStatus > 0) 
+                if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = "Restaurantplace.jpg";
-                    img.path = "ImagesAPI/Restaurants/Rest-" + map.CodeStatus + "/Place";
-                    img.file = file;
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                        try
+                        {
+                            UpdateRestaurants(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
                     return result.Ok(map);
                 }
                 else
@@ -68,23 +73,44 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-
                 return result.Error(ex.Message);
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateRestaurants(int id, tbRestaurantes tbRestaurantes)
+        public ServiceResult UpdateRestaurants(int id, tbRestaurantes tbRestaurantes, IFormFile file)
         {
             var result = new ServiceResult();
             try
             {
                 var itemID = _restaurantesRepository.Find(id);
+
                 if (itemID != null)
                 {
+                    //if (file != null)
+                    //{
+                        if (itemID.Image_URL != null)
+                        {
+                            if (!string.IsNullOrEmpty(itemID.Image_URL))
+                            {
+                                try
+                                {
+                                    ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
+                        }
+                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), file).Result.Data;
+                    //}
+
+                    tbRestaurantes.Rest_Url = _defaultImageRoute;
+
                     var map = _restaurantesRepository.Update(tbRestaurantes, id);
                     if (map.CodeStatus > 0)
                     {
-
                         return result.Ok(map);
                     }
                     else
@@ -92,12 +118,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
                         return result.Error(map);
                     }
-
                 }
                 else
-                {
-                    return result.Error("Los datos ingresados son incorrectos");
-                }
+                    return result.Error("Los datos son incorrectos");
             }
             catch (Exception ex)
             {
@@ -306,13 +329,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _menusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = map.CodeStatus + "-" + item.Menu_Nombre +   ".jpg";
-                    img.path = "ImagesAPI/Restaurants/Rest-"+item.Rest_ID+"/Food";
-                    img.file = file;
 
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
                     return result.Ok(map);
                 }
                 else

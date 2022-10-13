@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios RePa_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios RePa_UsuarioModificaNavigation { get; set; }
-        public virtual tbReservaciones Resv { get; set; }
-        public virtual tbTiposPagos TiPa { get; set; }
+        public virtual tbReservaciones Resv_ { get; set; }
+        public virtual tbTiposPagos TiPa_ { get; set; }
     }
 }

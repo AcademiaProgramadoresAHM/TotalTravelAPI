@@ -30,10 +30,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Habi_capacidad { get; set; }
         public string Habi_url { get; set; }
 
-        public virtual tbCategoriasHabitaciones CaHa { get; set; }
+        public virtual tbCategoriasHabitaciones CaHa_ { get; set; }
         public virtual tbUsuarios Habi_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Habi_UsuarioModificaNavigation { get; set; }
-        public virtual tbHoteles Hote { get; set; }
+        public virtual tbHoteles Hote_ { get; set; }
         public virtual ICollection<tbPaquetesHabitaciones> tbPaquetesHabitaciones { get; set; }
         public virtual ICollection<tbReservacionesDetalles> tbReservacionesDetalles { get; set; }
     }

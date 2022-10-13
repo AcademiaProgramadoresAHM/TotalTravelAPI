@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios Ciud_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Ciud_UsuarioModificaNavigation { get; set; }
-        public virtual tbPaises Pais { get; set; }
+        public virtual tbPaises Pais_ { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_CiudadDestinoNavigation { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_CiudadSalidaNavigation { get; set; }
         public virtual ICollection<tbDirecciones> tbDirecciones { get; set; }

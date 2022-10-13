@@ -19,9 +19,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? ReTr_FechaModifica { get; set; }
         public bool? ReTr_Estado { get; set; }
 
-        public virtual tbDetallesTransportes Detr { get; set; }
+        public virtual tbDetallesTransportes Detr_ { get; set; }
         public virtual tbUsuarios ReTr_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios ReTr_UsuarioModificaNavigation { get; set; }
-        public virtual tbReservaciones Resv { get; set; }
+        public virtual tbReservaciones Resv_ { get; set; }
     }
 }

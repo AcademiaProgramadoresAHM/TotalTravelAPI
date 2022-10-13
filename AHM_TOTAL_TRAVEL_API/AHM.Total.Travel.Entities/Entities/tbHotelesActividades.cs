@@ -23,10 +23,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? HoAc_FechaModifica { get; set; }
         public bool? HoAc_Estado { get; set; }
 
-        public virtual tbActividades Actv { get; set; }
+        public virtual tbActividades Actv_ { get; set; }
         public virtual tbUsuarios HoAc_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios HoAc_UsuarioModificaNavigation { get; set; }
-        public virtual tbHoteles Hote { get; set; }
+        public virtual tbHoteles Hote_ { get; set; }
         public virtual ICollection<tbReservacionesActividadesHoteles> tbReservacionesActividadesHoteles { get; set; }
     }
 }

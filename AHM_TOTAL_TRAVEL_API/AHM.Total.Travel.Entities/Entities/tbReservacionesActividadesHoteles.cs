@@ -19,9 +19,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? ReAH_FechaModifica { get; set; }
         public bool? ReAH_Estado { get; set; }
 
-        public virtual tbHotelesActividades HoAc { get; set; }
+        public virtual tbHotelesActividades HoAc_ { get; set; }
         public virtual tbUsuarios ReAH_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios ReAH_UsuarioModificaNavigation { get; set; }
-        public virtual tbReservaciones Resv { get; set; }
+        public virtual tbReservaciones Resv_ { get; set; }
     }
 }

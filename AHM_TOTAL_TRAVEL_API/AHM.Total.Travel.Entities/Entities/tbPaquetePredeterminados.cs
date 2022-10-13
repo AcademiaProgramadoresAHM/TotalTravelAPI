@@ -27,10 +27,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Paqu_Estado { get; set; }
         public decimal? Paqu_Precio { get; set; }
 
-        public virtual tbHoteles Hote { get; set; }
+        public virtual tbHoteles Hote_ { get; set; }
         public virtual tbUsuarios Paqu_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Paqu_UsuarioModificaNavigation { get; set; }
-        public virtual tbRestaurantes Rest { get; set; }
+        public virtual tbRestaurantes Rest_ { get; set; }
         public virtual ICollection<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetalles { get; set; }
         public virtual ICollection<tbPaquetesHabitaciones> tbPaquetesHabitaciones { get; set; }
         public virtual ICollection<tbReservaciones> tbReservaciones { get; set; }

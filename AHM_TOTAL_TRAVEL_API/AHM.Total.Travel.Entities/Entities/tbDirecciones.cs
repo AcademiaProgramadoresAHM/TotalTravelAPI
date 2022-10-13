@@ -24,7 +24,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Dire_FechaModifica { get; set; }
         public bool? Dire_Estado { get; set; }
 
-        public virtual tbCiudades Ciud { get; set; }
+        public virtual tbCiudades Ciud_ { get; set; }
         public virtual tbUsuarios Dire_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Dire_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbHoteles> tbHoteles { get; set; }

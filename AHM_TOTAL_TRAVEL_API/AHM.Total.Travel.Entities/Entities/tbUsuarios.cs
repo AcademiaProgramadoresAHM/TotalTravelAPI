@@ -65,7 +65,7 @@ namespace AHM.Total.Travel.Entities.Entities
             tbReservacionesHotelesReHo_UsuarioModificaNavigation = new HashSet<tbReservacionesHoteles>();
             tbReservacionesResv_UsuarioCreacionNavigation = new HashSet<tbReservaciones>();
             tbReservacionesResv_UsuarioModificaNavigation = new HashSet<tbReservaciones>();
-            tbReservacionesUsua = new HashSet<tbReservaciones>();
+            tbReservacionesUsua_ = new HashSet<tbReservaciones>();
             tbRestaurantesRest_UsuarioCreacionNavigation = new HashSet<tbRestaurantes>();
             tbRestaurantesRest_UsuarioModificaNavigation = new HashSet<tbRestaurantes>();
             tbRolesPermisosRoPe_UsuarioCreacionNavigation = new HashSet<tbRolesPermisos>();
@@ -107,9 +107,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Usua_FechaModifica { get; set; }
         public bool? Usua_Estado { get; set; }
 
-        public virtual tbDirecciones Dire { get; set; }
-        public virtual tbPartners Part { get; set; }
-        public virtual tbRoles Role { get; set; }
+        public virtual tbDirecciones Dire_ { get; set; }
+        public virtual tbPartners Part_ { get; set; }
+        public virtual tbRoles Role_ { get; set; }
         public virtual tbUsuarios Usua_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Usua_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbUsuarios> InverseUsua_UsuarioCreacionNavigation { get; set; }
@@ -168,7 +168,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbReservacionesHoteles> tbReservacionesHotelesReHo_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbReservaciones> tbReservacionesResv_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbReservaciones> tbReservacionesResv_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbReservaciones> tbReservacionesUsua { get; set; }
+        public virtual ICollection<tbReservaciones> tbReservacionesUsua_ { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantesRest_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantesRest_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbRolesPermisos> tbRolesPermisosRoPe_UsuarioCreacionNavigation { get; set; }

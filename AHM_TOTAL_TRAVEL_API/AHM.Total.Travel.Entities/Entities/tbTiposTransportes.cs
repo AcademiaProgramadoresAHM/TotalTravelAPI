@@ -7,6 +7,11 @@ namespace AHM.Total.Travel.Entities.Entities
 {
     public partial class tbTiposTransportes
     {
+        public tbTiposTransportes()
+        {
+            tbTransportes = new HashSet<tbTransportes>();
+        }
+
         public int TiTr_ID { get; set; }
         public string TiTr_Descripcion { get; set; }
         public int? TiTr_UsuarioCreacion { get; set; }
@@ -17,6 +22,6 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios TiTr_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios TiTr_UsuarioModificaNavigation { get; set; }
-        public virtual tbTransportes tbTransportes { get; set; }
+        public virtual ICollection<tbTransportes> tbTransportes { get; set; }
     }
 }

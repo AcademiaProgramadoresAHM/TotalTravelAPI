@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios HoMe_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios HoMe_UsuarioModificaNavigation { get; set; }
-        public virtual tbHoteles Hote { get; set; }
-        public virtual tbTipoMenus Time { get; set; }
+        public virtual tbHoteles Hote_ { get; set; }
+        public virtual tbTipoMenus Time_ { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios Part_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Part_UsuarioModificaNavigation { get; set; }
-        public virtual tbTipoPartners TiPart { get; set; }
+        public virtual tbTipoPartners TiPart_ { get; set; }
         public virtual ICollection<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual ICollection<tbHoteles> tbHoteles { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantes { get; set; }

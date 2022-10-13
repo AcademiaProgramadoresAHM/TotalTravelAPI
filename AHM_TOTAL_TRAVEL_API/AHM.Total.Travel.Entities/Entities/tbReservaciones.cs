@@ -33,10 +33,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Resv_FechaModifica { get; set; }
         public bool? Resv_Estado { get; set; }
 
-        public virtual tbPaquetePredeterminados Paqu { get; set; }
+        public virtual tbPaquetePredeterminados Paqu_ { get; set; }
         public virtual tbUsuarios Resv_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Resv_UsuarioModificaNavigation { get; set; }
-        public virtual tbUsuarios Usua { get; set; }
+        public virtual tbUsuarios Usua_ { get; set; }
         public virtual ICollection<tbRegistrosPagos> tbRegistrosPagos { get; set; }
         public virtual ICollection<tbReservacionRestaurantes> tbReservacionRestaurantes { get; set; }
         public virtual ICollection<tbReservacionTransporte> tbReservacionTransporte { get; set; }

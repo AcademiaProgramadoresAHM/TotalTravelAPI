@@ -16,9 +16,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? PaDe_FechaModifica { get; set; }
         public bool? PaDe_Estado { get; set; }
 
-        public virtual tbActividades Actv { get; set; }
+        public virtual tbActividades Actv_ { get; set; }
         public virtual tbUsuarios PaDe_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios PaDe_UsuarioModificaNavigation { get; set; }
-        public virtual tbPaquetePredeterminados Paqu { get; set; }
+        public virtual tbPaquetePredeterminados Paqu_ { get; set; }
     }
 }

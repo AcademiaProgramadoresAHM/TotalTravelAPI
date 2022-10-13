@@ -22,9 +22,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Tprt_FechaModifica { get; set; }
         public bool? Tprt_Estado { get; set; }
 
-        public virtual tbDirecciones Dire { get; set; }
-        public virtual tbPartners Part { get; set; }
-        public virtual tbTiposTransportes Tprt { get; set; }
+        public virtual tbDirecciones Dire_ { get; set; }
+        public virtual tbPartners Part_ { get; set; }
+        public virtual tbTiposTransportes TiTr_ { get; set; }
         public virtual tbUsuarios Tprt_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Tprt_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbDetallesTransportes> tbDetallesTransportes { get; set; }

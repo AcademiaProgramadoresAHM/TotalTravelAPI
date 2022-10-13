@@ -27,10 +27,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Hote_Estado { get; set; }
         public string Hote_Url { get; set; }
 
-        public virtual tbDirecciones Dire { get; set; }
+        public virtual tbDirecciones Dire_ { get; set; }
         public virtual tbUsuarios Hote_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Hote_UsuarioModificaNavigation { get; set; }
-        public virtual tbPartners Part { get; set; }
+        public virtual tbPartners Part_ { get; set; }
         public virtual ICollection<tbHabitaciones> tbHabitaciones { get; set; }
         public virtual ICollection<tbHotelesActividades> tbHotelesActividades { get; set; }
         public virtual ICollection<tbHotelesMenus> tbHotelesMenus { get; set; }

@@ -21,7 +21,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
         private readonly ImagesService _imagesService;
         private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
-        private string _defaultAlbumRoute = "UsersProfilePics\\U-";
+        private string _defaultAlbumRoute = "UsersProfilePics\\User-";
 
         public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
         {

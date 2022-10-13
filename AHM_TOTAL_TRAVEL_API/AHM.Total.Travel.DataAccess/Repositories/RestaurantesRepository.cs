@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Rest_Nombre", item.Rest_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rest_UsuarioCreacion", item.Rest_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Rest_Url", item.Rest_Url, DbType.String, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -55,6 +56,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Rest_Nombre", item.Rest_Nombre, DbType.String, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rest_UsuarioModifica", item.Rest_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Rest_Url", item.Rest_Url, DbType.String, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbRestaurantes_Update, parameters, commandType: CommandType.StoredProcedure);

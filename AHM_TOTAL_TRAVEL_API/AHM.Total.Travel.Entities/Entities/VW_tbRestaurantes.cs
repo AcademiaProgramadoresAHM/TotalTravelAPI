@@ -16,5 +16,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
         public bool? Estado { get; set; }
+        public string Image_URL { get; set; }
     }
 }

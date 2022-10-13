@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public virtual tbUsuarios ReHo_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios ReHo_UsuarioModificaNavigation { get; set; }
-        public virtual tbReservaciones Resv { get; set; }
+        public virtual tbReservaciones Resv_ { get; set; }
         public virtual ICollection<tbReservacionesDetalles> tbReservacionesDetalles { get; set; }
     }
 }
