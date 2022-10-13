@@ -44,7 +44,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         
 
         //Ingresa una o varias imagenes nuevas a la carpeta que se especifica, en caso de que no exista la carpeta, la crea
-        public async Task<ServiceResult> saveImages(string folderName, params IFormFile[] files)
+        public async Task<ServiceResult> saveImages(string folderName, string _fileName,  List<IFormFile> files)
         {
             ServiceResult result = new ServiceResult();
             if (folderName == null)
@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             
 
-            if (files.Length > 0 && files[0]!= null)
+            if (files.Count > 0 && files[0]!= null)
             {
                 var ImagesPath = "";
                 var path = Path.Combine(_ImagesPath, folderName);
@@ -63,12 +63,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     Directory.CreateDirectory(path);
                 }
 
+                var i = 1;
                 foreach (var item in files)
                 {
                     if (item.Length > 0)
                     {
                  
-                        var fileName = Path.GetFileName(item.FileName);
+                        var fileName = string.Concat(_fileName, "_photo-", i, ".jpg");
+
 
                         var filePath = Path.Combine(path, fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
@@ -77,6 +79,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         }
                         ImagesPath += (Path.Combine(folderName, fileName) + ",");
                     }
+                    i++;
                 }
 
                 return result.Ok(data: ImagesPath);
@@ -95,7 +98,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var imageDefault = new MemoryStream(byteFile);
 
 
-                var fileName = "Restaurante.jpg";
+                var fileName = _fileName;
                 var filePath = Path.Combine(path, fileName);
                
     

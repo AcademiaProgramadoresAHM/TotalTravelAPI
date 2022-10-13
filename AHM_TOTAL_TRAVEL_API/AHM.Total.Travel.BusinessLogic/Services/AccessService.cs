@@ -502,7 +502,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateUsers(tbUsuarios item, IFormFile file)
+        public ServiceResult CreateUsers(tbUsuarios item, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -539,7 +539,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //ACTUALIZAR
-        public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios, IFormFile file)
+        public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios, List<IFormFile>file)
         {
             var result = new ServiceResult();
             try
@@ -565,7 +565,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                             }
                         }
-                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), file).Result.Data;
+                        var _fileName = "User-";
+                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
                     }
                     
                     tbUsuarios.Usua_Url = _defaultImageRoute;

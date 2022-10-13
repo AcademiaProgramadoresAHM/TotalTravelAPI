@@ -64,7 +64,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Dire_ID { get; set; }
         public int? Part_ID { get; set; }
         public int? Usua_UsuarioCreacion { get; set; }
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
 
     }
     public class UsuariosUpdateViewModel
@@ -73,7 +73,7 @@ namespace AHM.Total.Travel.Common.Models
         public string Usua_Nombre { get; set; }
         public string Usua_Apellido { get; set; }
         public string Usua_Telefono { get; set; }
-        public IFormFile Usua_Url { get; set; }
+        public List<IFormFile> Usua_Url { get; set; }
         public int? Role_ID { get; set; }
         public int? Dire_ID { get; set; }
         public int? Part_ID { get; set; }

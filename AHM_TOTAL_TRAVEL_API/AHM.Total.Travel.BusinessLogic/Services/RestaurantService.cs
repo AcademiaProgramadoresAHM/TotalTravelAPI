@@ -45,9 +45,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateRestaurants(tbRestaurantes item, IFormFile file)
+        public ServiceResult CreateRestaurants(tbRestaurantes item, List<IFormFile> file)
         {
-
             var result = new ServiceResult();
             try
             {
@@ -77,7 +76,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateRestaurants(int id, tbRestaurantes tbRestaurantes, IFormFile file)
+        public ServiceResult UpdateRestaurants(int id, tbRestaurantes tbRestaurantes, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -103,7 +102,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                             }
                         }
-                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), file).Result.Data;
+                        var _fileName = "Restaurant-";
+                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID, "\\Place"), string.Concat(_fileName, itemID.ID), file).Result.Data;
                     //}
 
                     tbRestaurantes.Rest_Url = _defaultImageRoute;
