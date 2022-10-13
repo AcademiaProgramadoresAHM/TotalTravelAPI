@@ -30,18 +30,18 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
 
-        [HttpPost("UploadImage")]
-        public async Task<IActionResult> UploadImage(List<IFormFile> file, [FromForm] string folderName)
-        {
-            try
-            {
-                return Ok(await _imagesService.saveImages(folderName, file.ToArray()));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Ocurrió un error al subir la imagen");
-            }
-        }
+        //[HttpPost("UploadImage")]
+        //public async Task<IActionResult> UploadImage(List<IFormFile> file, [FromForm] string folderName)
+        //{
+        //    try
+        //    {
+        //        return Ok(await _imagesService.saveImages(folderName, file.ToArray()));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Ocurrió un error al subir la imagen");
+        //    }
+        //}
 
         [HttpGet("GetImage")]
         public IActionResult GetImage(string path)

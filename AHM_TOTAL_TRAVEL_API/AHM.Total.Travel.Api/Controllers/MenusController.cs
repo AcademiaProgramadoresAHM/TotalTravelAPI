@@ -30,34 +30,22 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
 
         }
+        [AllowAnonymous]
         [HttpPost("Insert")]
-        public IActionResult Insert([FromForm]MenusViewModel menusViewModel)
+        public IActionResult Insert([FromForm]MenusViewModel item)
         {
-            IFormFile file;
-            if (menusViewModel.File != null)
-            {
-                file = menusViewModel.File;
-            }
-            else
-            {
-                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-                var stream = new MemoryStream(byteFile);
-                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
-            }
-            var items = _mapper.Map<tbMenus>(menusViewModel);
-            var result = _restaurantService.CreateMenus(items, file);
+            var menu = _mapper.Map<tbMenus>(item);
+            var result = _restaurantService.CreateMenus(menu, item.File);
             return Ok(result);
         }
 
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, MenusViewModel menusViewModel)
+        public IActionResult Update(int id, [FromForm] MenusViewModel items)
         {
 
-            var item = _mapper.Map<tbMenus>(menusViewModel);
-            var result = _restaurantService.UpdateMenus(id, item);
+            var item = _mapper.Map<tbMenus>(items);
+            var result = _restaurantService.UpdateMenus(id, item, items.File);
             return Ok(result);
 
         }

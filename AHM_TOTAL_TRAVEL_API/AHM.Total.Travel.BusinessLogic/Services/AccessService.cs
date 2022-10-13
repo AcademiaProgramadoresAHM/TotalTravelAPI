@@ -523,7 +523,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         }
                     }
                     
-
                     return result.Ok(map);
                 }
                 else

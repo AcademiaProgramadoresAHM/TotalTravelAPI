@@ -53,7 +53,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             
 
-            if (files.Count > 0 && files[0]!= null)
+            if (files != null)
             {
                 var ImagesPath = "";
                 var path = Path.Combine(_ImagesPath, folderName);
@@ -98,7 +98,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var imageDefault = new MemoryStream(byteFile);
 
 
-                var fileName = _fileName;
+                var fileName = _fileName + ".jpg";
                 var filePath = Path.Combine(path, fileName);
                
     

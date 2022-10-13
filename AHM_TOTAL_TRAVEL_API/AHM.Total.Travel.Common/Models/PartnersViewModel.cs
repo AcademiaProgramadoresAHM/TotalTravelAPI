@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Common.Models
 {
@@ -12,6 +13,6 @@ namespace AHM.Total.Travel.Common.Models
         public int? Part_UsuarioModifica { get; set; }
         public string Part_Url { get; set; }
         public int? TiPart_Id { get; set; }
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 }

@@ -481,6 +481,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
 
+                entity.Property(e => e.Image_Url)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Menu)
                     .HasMaxLength(150)
                     .IsUnicode(false);
@@ -658,6 +662,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Image_Url)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
@@ -1796,6 +1804,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.Menu_Precio).HasColumnType("money");
+
+                entity.Property(e => e.Menu_Url)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Menu_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbMenusMenu_UsuarioCreacionNavigation)
