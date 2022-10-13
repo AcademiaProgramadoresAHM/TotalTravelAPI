@@ -24,6 +24,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.0" />
     <PackageReference Include="Microsoft.Graph" Version="4.43.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.23.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
@@ -40,7 +41,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ImagesAPI\UsersProfilePics\" />
+	  <Content Include="ImagesAPI\**">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ImagesAPI\Prueba\**" />
+    <Content Remove="ImagesAPI\Prueba\**" />
+    <EmbeddedResource Remove="ImagesAPI\Prueba\**" />
+    <None Remove="ImagesAPI\Prueba\**" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
