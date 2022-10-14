@@ -238,11 +238,19 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbDetallesTransportes", "Trpt");
 
-                entity.Property(e => e.Fecha).HasColumnType("date");
+                entity.Property(e => e.Ciudad_Llegada)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ciudad_Salida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Fecha_Salida).HasColumnType("date");
 
                 entity.Property(e => e.Hora_Llegada)
                     .HasMaxLength(4)
@@ -258,8 +266,18 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Precio).HasColumnType("money");
 
-                entity.Property(e => e.Transporte)
+                entity.Property(e => e.Tipo_Transporte)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
                     .IsUnicode(false);
             });
 
