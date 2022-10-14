@@ -28,6 +28,14 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbActividades_Delete = "Actv.UDP_tbActividades_Delete";
 
         #endregion
+        #region Colonias
+        public static string UDP_tbColonias_Insert = "Gene.UDP_tbColonias_Insert";
+
+        public static string UDP_tbColonias_Update = "Gene.UDP_tbColonias_Update";
+
+        public static string UDP_tbColonias_Delete = "Gene.UDP_tbColonias_Delete";
+
+        #endregion
 
         #region Usuarios
         public static string UDP_tbUsuarios_Insert = "Acce.UDP_tbUsuarios_Insert";

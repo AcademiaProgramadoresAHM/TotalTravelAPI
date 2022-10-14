@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 0,
+   "CodeGenerationMode": 1,
    "ContextClassName": "totaltravel_DBContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
@@ -48,6 +48,10 @@
       },
       {
          "Name": "[Gene].[tbCiudades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbColonias]",
          "ObjectType": 0
       },
       {
@@ -200,6 +204,10 @@
       },
       {
          "Name": "[Gene].[VW_tbCiudades]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Gene].[VW_tbColonias]",
          "ObjectType": 3
       },
       {

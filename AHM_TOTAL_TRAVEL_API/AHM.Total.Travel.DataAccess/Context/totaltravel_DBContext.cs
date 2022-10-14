@@ -1369,12 +1369,20 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DNI)
-                    .HasMaxLength(13)
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DNI)
+                    .HasMaxLength(13)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Email)

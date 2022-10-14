@@ -17,6 +17,7 @@ namespace AHM.Total.Travel.Api.Extensions
             CreateMap<UserLoggedModel, VW_tbUsuarios>().ReverseMap();
             CreateMap<UsuariosPasswordViewModel, tbUsuarios>().ReverseMap();
             CreateMap<CiudadesViewModel, tbCiudades>().ReverseMap();
+            CreateMap <ColoniasViewModel, tbColonias>().ReverseMap();
             CreateMap<ActividadesExtrasViewModel, tbActividadesExtras>().ReverseMap();
             CreateMap<ActividadesViewModel, tbActividades>().ReverseMap();
             CreateMap<CategoriasHabitacionesViewModel, tbCategoriasHabitaciones>().ReverseMap();

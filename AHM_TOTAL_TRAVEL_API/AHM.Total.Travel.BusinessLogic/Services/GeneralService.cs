@@ -20,16 +20,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly PartnersRepository _partnersRepository;
         private readonly TipoPartnersRepository _tipoPartnersRepository;
         private readonly UploaderImageRepository _uploaderImageRepository;
+        private readonly ColoniasRepository _coloniasRepository;
         private readonly ImagesService _imagesService;
         private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
         private string _defaultAlbumPartner = "UsersProfilePics\\Partner-";
 
-        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository, UploaderImageRepository uploaderImageRepository, ImagesService imagesService)
+        public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository, UploaderImageRepository uploaderImageRepository, ColoniasRepository coloniasRepository, ImagesService imagesService)
         {
             _ciudadesRepository = ciudadesRepository;
             _direccionesRepository = direccionesRepository;
             _paisesRepository = paisesRepository;
             _partnersRepository = partnersRepository;
+            _coloniasRepository = coloniasRepository;
             _tipoPartnersRepository = tipoPartnersRepository;
             _uploaderImageRepository = uploaderImageRepository;
             _imagesService = imagesService;
@@ -149,6 +151,123 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
             
+        }
+
+        #endregion
+        #region Colonias
+        //LISTADO
+        public ServiceResult ListSuburbs()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _coloniasRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreateSuburbs(tbColonias item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _coloniasRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdateSuburbs(int id, tbColonias item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _coloniasRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _coloniasRepository.Update(item, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeleteSuburbs(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _coloniasRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _coloniasRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindSuburbs(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                VW_tbColonias suburb = _coloniasRepository.Find(id);
+                return result.Ok(suburb);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
         }
 
         #endregion

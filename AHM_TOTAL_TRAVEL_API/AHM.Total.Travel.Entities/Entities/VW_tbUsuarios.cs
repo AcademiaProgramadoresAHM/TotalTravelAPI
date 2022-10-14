@@ -15,8 +15,11 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Fecha_Nacimiento { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
-        public string Direccion { get; set; }
         public int DireccionID { get; set; }
+        public int? ColoniaID { get; set; }
+        public string Colonia { get; set; }
+        public string Calle { get; set; }
+        public string Avenida { get; set; }
         public string Partner { get; set; }
         public int? PartnerID { get; set; }
         public string Rol { get; set; }
