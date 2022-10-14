@@ -11,8 +11,13 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID_Partner { get; set; }
         public string Partner { get; set; }
         public string Restaurante { get; set; }
+        public int CiudadID { get; set; }
+        public string Ciudad { get; set; }
         public int ID_Direccion { get; set; }
-        public string Direccion { get; set; }
+        public int ID_Colonia { get; set; }
+        public string Colonia { get; set; }
+        public string Calle { get; set; }
+        public string Avenida { get; set; }
         public int ID_UsuarioCreacion { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }

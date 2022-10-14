@@ -451,12 +451,24 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbHoteles", "Htel");
 
-                entity.Property(e => e.Descripcion)
-                    .HasMaxLength(200)
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
@@ -1116,8 +1128,20 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbRestaurantes", "Rest");
 
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
@@ -1330,12 +1354,20 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbTransportes", "Trpt");
 
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Ciudad)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
