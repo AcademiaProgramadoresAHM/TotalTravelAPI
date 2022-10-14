@@ -52,11 +52,12 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPut("Update")]
         public IActionResult Update(int id, [FromForm] UsuariosUpdateViewModel items)
         {
             var item = _mapper.Map<tbUsuarios>(items);
-            var result = _accessService.UpdateUsers(id, item, items.Usua_Url);
+            var result = _accessService.UpdateUsers(id, item, items.File);
             return Ok(result);
         }
 
