@@ -9,11 +9,14 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int Id { get; set; }
         public int? Numero_Reservacacion { get; set; }
+        public int ID_Restaurante { get; set; }
         public string Restaurante { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }
+        public int ID_Usuario_Creacion { get; set; }
         public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
+        public int? ID_Usuario_Modifica { get; set; }
         public string Usuario_Modifica { get; set; }
         public DateTime? Fecha_Modifica { get; set; }
         public bool? Estado { get; set; }

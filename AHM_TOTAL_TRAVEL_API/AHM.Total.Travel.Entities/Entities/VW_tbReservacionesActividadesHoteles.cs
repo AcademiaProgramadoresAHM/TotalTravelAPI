@@ -8,14 +8,18 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbReservacionesActividadesHoteles
     {
         public int ID { get; set; }
-        public int Reservacion { get; set; }
+        public int ReservacionID { get; set; }
+        public int ID_Cliente { get; set; }
         public string Cliente { get; set; }
+        public int ID_Actividad { get; set; }
         public string Actividad { get; set; }
         public int? Cantidad { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }
+        public int ID_Usuario_Creacion { get; set; }
         public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
+        public int? ID_Usuario_Modifica { get; set; }
         public string Usuario_Modifica { get; set; }
         public DateTime? Fecha_Modifica { get; set; }
         public bool? Estado { get; set; }

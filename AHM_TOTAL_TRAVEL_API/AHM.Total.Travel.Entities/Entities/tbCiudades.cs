@@ -9,9 +9,9 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public tbCiudades()
         {
+            tbColonias = new HashSet<tbColonias>();
             tbDestinosTransportesDsTr_CiudadDestinoNavigation = new HashSet<tbDestinosTransportes>();
             tbDestinosTransportesDsTr_CiudadSalidaNavigation = new HashSet<tbDestinosTransportes>();
-            tbDirecciones = new HashSet<tbDirecciones>();
         }
 
         public int Ciud_ID { get; set; }
@@ -26,8 +26,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbUsuarios Ciud_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Ciud_UsuarioModificaNavigation { get; set; }
         public virtual tbPaises Pais_ { get; set; }
+        public virtual ICollection<tbColonias> tbColonias { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_CiudadDestinoNavigation { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_CiudadSalidaNavigation { get; set; }
-        public virtual ICollection<tbDirecciones> tbDirecciones { get; set; }
     }
 }

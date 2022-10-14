@@ -11,8 +11,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Ciudad { get; set; }
         public int? PaisID { get; set; }
         public string Pais { get; set; }
+        public int? ID_UsuaCrea { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCrea { get; set; }
+        public int? ID_UsuaModifica { get; set; }
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
     }

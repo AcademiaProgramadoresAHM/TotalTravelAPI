@@ -16,15 +16,16 @@ namespace AHM.Total.Travel.Entities.Entities
         }
 
         public int Dire_ID { get; set; }
-        public string Dire_Descripcion { get; set; }
-        public int? Ciud_ID { get; set; }
         public int? Dire_UsuarioCreacion { get; set; }
         public DateTime? Dire_FechaCreacion { get; set; }
         public int? Dire_UsuarioModifica { get; set; }
         public DateTime? Dire_FechaModifica { get; set; }
         public bool? Dire_Estado { get; set; }
+        public string Dire_Calle { get; set; }
+        public string Dire_Avenida { get; set; }
+        public int? Colo_ID { get; set; }
 
-        public virtual tbCiudades Ciud_ { get; set; }
+        public virtual tbColonias Colo_ { get; set; }
         public virtual tbUsuarios Dire_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Dire_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbHoteles> tbHoteles { get; set; }

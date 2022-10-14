@@ -18,5 +18,11 @@ namespace AHM.Total.Travel.Entities.Entities
         public decimal? Habitacion_Precio { get; set; }
         public int Categoria_Habitacion_Id { get; set; }
         public string Categoria_Habitacion { get; set; }
+        public int? UsuarioCreacion_Id { get; set; }
+        public string UsuarioCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
+        public int? UsuarioModifica_Id { get; set; }
+        public string UsuarioModifica { get; set; }
+        public DateTime? FechaModifica { get; set; }
     }
 }

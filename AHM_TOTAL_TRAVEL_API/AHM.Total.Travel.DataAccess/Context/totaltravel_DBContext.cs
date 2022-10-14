@@ -22,6 +22,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbActividadesExtras> VW_tbActividadesExtras { get; set; }
         public virtual DbSet<VW_tbCategoriasHabitaciones> VW_tbCategoriasHabitaciones { get; set; }
         public virtual DbSet<VW_tbCiudades> VW_tbCiudades { get; set; }
+        public virtual DbSet<VW_tbColonias> VW_tbColonias { get; set; }
         public virtual DbSet<VW_tbDestinosTransportes> VW_tbDestinosTransportes { get; set; }
         public virtual DbSet<VW_tbDetallesTransportes> VW_tbDetallesTransportes { get; set; }
         public virtual DbSet<VW_tbDirecciones> VW_tbDirecciones { get; set; }
@@ -60,6 +61,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual DbSet<tbCategoriasHabitaciones> tbCategoriasHabitaciones { get; set; }
         public virtual DbSet<tbCiudades> tbCiudades { get; set; }
+        public virtual DbSet<tbColonias> tbColonias { get; set; }
         public virtual DbSet<tbDestinosTransportes> tbDestinosTransportes { get; set; }
         public virtual DbSet<tbDetallesTransportes> tbDetallesTransportes { get; set; }
         public virtual DbSet<tbDirecciones> tbDirecciones { get; set; }
@@ -207,6 +209,35 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<VW_tbColonias>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbColonias", "Gene");
+
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<VW_tbDestinosTransportes>(entity =>
             {
                 entity.HasNoKey();
@@ -224,6 +255,14 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.PaisDestino)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaisSalida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UsuarioCreacionID)
                     .HasMaxLength(101)
@@ -255,11 +294,13 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Fecha_Salida).HasColumnType("date");
 
                 entity.Property(e => e.Hora_Llegada)
-                    .HasMaxLength(4)
+                    .IsRequired()
+                    .HasMaxLength(7)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Hora_Salida)
-                    .HasMaxLength(4)
+                    .IsRequired()
+                    .HasMaxLength(7)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Matricula)
@@ -289,12 +330,20 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbDirecciones", "Gene");
 
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Ciudad)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Direccion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FechaCrea).HasColumnType("datetime");
@@ -376,11 +425,23 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
 
                 entity.Property(e => e.Hora_Llegada)
-                    .HasMaxLength(4)
+                    .IsRequired()
+                    .HasMaxLength(7)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Hora_Salida)
-                    .HasMaxLength(4)
+                    .IsRequired()
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
                     .IsUnicode(false);
             });
 
@@ -406,9 +467,7 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Image_URL)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                entity.Property(e => e.Image_URL).IsUnicode(false);
 
                 entity.Property(e => e.Partners)
                     .HasMaxLength(50)
@@ -445,9 +504,7 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Image_URL)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Image_URL).IsUnicode(false);
 
                 entity.Property(e => e.Precio).HasColumnType("money");
 
@@ -476,9 +533,7 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Image_Url)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Image_Url).IsUnicode(false);
 
                 entity.Property(e => e.Menu)
                     .HasMaxLength(100)
@@ -604,8 +659,6 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Precio).HasColumnType("money");
-
                 entity.Property(e => e.Restaurante)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -619,6 +672,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
+
+                entity.Property(e => e.precio).HasColumnType("money");
             });
 
             modelBuilder.Entity<VW_tbPaquetePredeterminadosDetalles>(entity =>
@@ -664,6 +719,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
                 entity.Property(e => e.Habitacion_Descripcion)
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -680,6 +739,14 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Nombre_Hotel)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioCreacion)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
                     .IsUnicode(false);
             });
 
@@ -1242,10 +1309,18 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
 
-                entity.Property(e => e.ID).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Trasporte)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
                     .IsUnicode(false);
             });
 
@@ -1254,6 +1329,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbTransportes", "Trpt");
+
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Direccion)
                     .HasMaxLength(300)
@@ -1493,6 +1572,40 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasForeignKey(d => d.Pais_ID);
             });
 
+            modelBuilder.Entity<tbColonias>(entity =>
+            {
+                entity.HasKey(e => e.Colo_ID)
+                    .HasName("PK__tbColoni__894A01EB8393FE7B");
+
+                entity.ToTable("tbColonias", "Gene");
+
+                entity.Property(e => e.Colo_Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colo_Estado).HasDefaultValueSql("('1')");
+
+                entity.Property(e => e.Colo_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Colo_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Ciud_)
+                    .WithMany(p => p.tbColonias)
+                    .HasForeignKey(d => d.Ciud_ID);
+
+                entity.HasOne(d => d.Colo_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbColoniasColo_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.Colo_UsuarioCreacion)
+                    .HasConstraintName("FK_tbColonias_tbUsuarios_Usuario_Creacion");
+
+                entity.HasOne(d => d.Colo_UsuarioModificaNavigation)
+                    .WithMany(p => p.tbColoniasColo_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.Colo_UsuarioModifica)
+                    .HasConstraintName("FK_tbColonias_tbUsuarios_Usuario_Modifica");
+            });
+
             modelBuilder.Entity<tbDestinosTransportes>(entity =>
             {
                 entity.HasKey(e => e.DsTr_ID)
@@ -1576,8 +1689,12 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToTable("tbDirecciones", "Gene");
 
-                entity.Property(e => e.Dire_Descripcion)
-                    .HasMaxLength(300)
+                entity.Property(e => e.Dire_Avenida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Dire_Calle)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Dire_Estado).HasDefaultValueSql("('1')");
@@ -1588,9 +1705,9 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Dire_FechaModifica).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Ciud_)
+                entity.HasOne(d => d.Colo_)
                     .WithMany(p => p.tbDirecciones)
-                    .HasForeignKey(d => d.Ciud_ID);
+                    .HasForeignKey(d => d.Colo_ID);
 
                 entity.HasOne(d => d.Dire_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbDireccionesDire_UsuarioCreacionNavigation)

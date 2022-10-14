@@ -10,8 +10,12 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID { get; set; }
         public string CiudadSalida { get; set; }
         public int CiudadSalidaID { get; set; }
+        public int PaisSalidaID { get; set; }
+        public string PaisSalida { get; set; }
         public string CiudadDestino { get; set; }
         public int CiudadDestinoID { get; set; }
+        public int PaisDestinoID { get; set; }
+        public string PaisDestino { get; set; }
         public int? UsuarioCreacion { get; set; }
         public string UsuarioCreacionID { get; set; }
         public DateTime? FechaCreacion { get; set; }

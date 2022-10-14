@@ -8,11 +8,18 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbDirecciones
     {
         public int ID { get; set; }
-        public string Direccion { get; set; }
+        public int ID_Colonia { get; set; }
+        public string Colonia { get; set; }
+        public string Calle { get; set; }
+        public string Avenida { get; set; }
+        public int ID_Ciudad { get; set; }
         public string Ciudad { get; set; }
+        public int ID_Pais { get; set; }
         public string Pais { get; set; }
+        public int ID_UsuaCrea { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCrea { get; set; }
+        public int? ID_UsuaModifica { get; set; }
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
     }

@@ -5,14 +5,16 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_tbTiposTransportes
+    public partial class VW_tbColonias
     {
         public int ID { get; set; }
-        public string Trasporte { get; set; }
-        public int Usuario_Creacion_ID { get; set; }
+        public string Colonia { get; set; }
+        public int CiudadID { get; set; }
+        public string Ciudad { get; set; }
+        public int? Usuario_CreacionID { get; set; }
         public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
-        public int? Usuario_Modifica_ID { get; set; }
+        public int? Usuario_ModificaID { get; set; }
         public string Usuario_Modifica { get; set; }
         public DateTime? Fecha_Modifica { get; set; }
         public bool? Estado { get; set; }

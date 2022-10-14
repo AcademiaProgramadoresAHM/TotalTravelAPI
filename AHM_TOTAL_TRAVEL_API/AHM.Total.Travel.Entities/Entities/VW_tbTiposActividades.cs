@@ -9,8 +9,10 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public string Descripcion { get; set; }
+        public int? ID_UsuaCrea { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCrea { get; set; }
+        public int? ID_UsuaModifica { get; set; }
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
     }

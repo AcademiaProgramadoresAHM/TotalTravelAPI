@@ -19,6 +19,8 @@ namespace AHM.Total.Travel.Entities.Entities
             tbCategoriasHabitacionesCaHa_UsuarioModificaNavigation = new HashSet<tbCategoriasHabitaciones>();
             tbCiudadesCiud_UsuarioCreacionNavigation = new HashSet<tbCiudades>();
             tbCiudadesCiud_UsuarioModificaNavigation = new HashSet<tbCiudades>();
+            tbColoniasColo_UsuarioCreacionNavigation = new HashSet<tbColonias>();
+            tbColoniasColo_UsuarioModificaNavigation = new HashSet<tbColonias>();
             tbDestinosTransportesDsTr_UsuarioCreacionNavigation = new HashSet<tbDestinosTransportes>();
             tbDestinosTransportesDsTr_UsuarioModificaNavigation = new HashSet<tbDestinosTransportes>();
             tbDetallesTransportesDeTr_UsuarioCreacionNavigation = new HashSet<tbDetallesTransportes>();
@@ -122,6 +124,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbCategoriasHabitaciones> tbCategoriasHabitacionesCaHa_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbCiudades> tbCiudadesCiud_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbCiudades> tbCiudadesCiud_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbColonias> tbColoniasColo_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbColonias> tbColoniasColo_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbDetallesTransportes> tbDetallesTransportesDeTr_UsuarioCreacionNavigation { get; set; }
