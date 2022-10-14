@@ -552,21 +552,30 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                         if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                         {
-                                try
-                                {
-                                    ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
-                                }
-                                catch (Exception e)
-                                {
-                                    throw e;
-                                }
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
 
                         }
                         string _fileName = "User-";
                         _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
+                        tbUsuarios.Usua_Url = _defaultImageRoute;
+                    }
+                    else
+                    {
+                        tbUsuarios.Usua_Url = itemID.Image_URL;
                     }
                     
-                    tbUsuarios.Usua_Url = _defaultImageRoute;
+                    if (string.IsNullOrEmpty(itemID.Image_URL) || itemID.Image_URL == _defaultImageRoute)
+                    {
+                        tbUsuarios.Usua_Url = _defaultImageRoute;
+                    }
+                    
 
                     var map = _usuariosRepository.Update(tbUsuarios, id);
                     if (map.CodeStatus > 0)
