@@ -87,6 +87,22 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
+
+                    //if (itemID != null)
+                    //{
+                    //    if (!string.IsNullOrEmpty(itemID.Image_URL))
+                    //    {
+                    //        try
+                    //        {
+                    //            ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                    //        }
+                    //        catch (Exception e)
+                    //        {
+                    //            throw e;
+                    //        }
+
+                    //    }
+                    //}
                     var map = _hotelesRepository.Update(tbHoteles, id);
                     if (map.CodeStatus > 0)
                     {

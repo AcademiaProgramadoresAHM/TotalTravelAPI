@@ -14,6 +14,6 @@ namespace AHM.Total.Travel.Common.Models
         public int? Hote_UsuarioCreacion { get; set; }
         public int? Hote_UsuarioModifica { get; set; }
         public string Hote_Url { get; set; }
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 }
