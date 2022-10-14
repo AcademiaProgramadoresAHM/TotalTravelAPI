@@ -22,6 +22,7 @@ namespace AHM.Total.Travel.Common.SecurityModels
         public int Role_ID { get; set; }
         public string Partner { get; set; }
         public int? PartnerID { get; set; }
+        public string Image_URL { get; set; }
         public string Token { get; set; }
     }
 

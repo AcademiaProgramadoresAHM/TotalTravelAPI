@@ -20,7 +20,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly UsuariosRepository _usuariosRepository;
         private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
         private readonly ImagesService _imagesService;
-        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
         private string _defaultAlbumRoute = "UsersProfilePics\\User-";
 
         public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
@@ -549,10 +549,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     if (file != null)
                     {
-                        if (itemID.Image_URL != null)
+
+                        if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                         {
-                            if (!string.IsNullOrEmpty(itemID.Image_URL))
-                            {
                                 try
                                 {
                                     ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
@@ -562,9 +561,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                     throw e;
                                 }
 
-                            }
                         }
-                        var _fileName = "User-";
+                        string _fileName = "User-";
                         _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
                     }
                     

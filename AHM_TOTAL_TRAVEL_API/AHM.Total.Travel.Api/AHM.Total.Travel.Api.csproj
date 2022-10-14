@@ -46,13 +46,6 @@
 	  </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="ImagesAPI\Prueba\**" />
-    <Content Remove="ImagesAPI\Prueba\**" />
-    <EmbeddedResource Remove="ImagesAPI\Prueba\**" />
-    <None Remove="ImagesAPI\Prueba\**" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 

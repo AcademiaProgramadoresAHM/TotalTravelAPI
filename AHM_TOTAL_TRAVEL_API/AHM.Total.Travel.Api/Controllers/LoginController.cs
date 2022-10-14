@@ -22,6 +22,7 @@ using Microsoft.Data.SqlClient;
 using AHM.Total.Travel.DataAccess;
 using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.BusinessLogic;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
@@ -32,13 +33,14 @@ namespace AHM.Total.Travel.Api.Controllers
         private readonly EmailSenderService _emailSenderService;
         private readonly IMapper _mapper;
         private readonly LoginService _loginService;
-        
+        private readonly ImagesService _imagesService;
 
-        public LoginController(EmailSenderService emailSenderService, IMapper mapper, LoginService loginService)
+        public LoginController(EmailSenderService emailSenderService, IMapper mapper, LoginService loginService, ImagesService imagesService)
         {
             _emailSenderService = emailSenderService;
             _mapper = mapper;
             _loginService = loginService;
+            _imagesService = imagesService;
         }
 
         [AllowAnonymous]
@@ -47,11 +49,12 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             ServiceResult result = new ServiceResult();
 
-            var user = _loginService.Authenticate(userLoginModel);
+            VW_tbUsuarios user = _loginService.Authenticate(userLoginModel);
             if (user != null)
             {
-                var response = _mapper.Map<UserLoggedModel>(user);
+                UserLoggedModel response = _mapper.Map<UserLoggedModel>(user);
                 response.Token = _loginService.GenerateJWT(user);
+                response.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
                 var refreshToken = _loginService.setTokenCookie(response, HttpContext);
 
                 return result.Ok(data: response);

@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     public class ImagesService: ControllerBase
     {
         public readonly IHttpContextAccessor _httpContext;
-        private readonly string _ImagesPath =Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI") ;
+        private string _ImagesPath =Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI") ;
         public ImagesService(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
@@ -34,7 +34,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         //Regresa una routa de acceso a la imagen en el servidor
         private string createImageUrlRoute(params string[] routes)
         {
-            string baseUrl = Path.Combine("https://", _httpContext.HttpContext.Request.Host.Value, "API", "Images");
+            string baseUrl = Path.Combine("https://", _httpContext.HttpContext.Request.Host.Value, "Images");
             foreach (var item in routes)
             {
                 baseUrl = Path.Combine(baseUrl, item);
@@ -167,12 +167,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult getImage(params string[] routes)
         {
             ServiceResult result = new ServiceResult();
+            string path = _ImagesPath;
+
 
             if (routes.Length == 0)
             {
                 return result.BadRequest("No se ha ingresado ningun valor como argumento");
             }
-            string path = _ImagesPath;
 
             foreach (var route in routes)
             {
@@ -191,6 +192,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return result.NotFound("La imagen no fue encontrada");
             }
         }
+        
 
         //Obtiene todas las rutas del URL de las imagenes dentro de cualquier folder
         public ServiceResult getAllImagesFromFolder(string folderName, HttpContext context)
