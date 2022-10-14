@@ -8,11 +8,14 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbActividadesExtras
     {
         public int ID { get; set; }
+        public int ID_Partner { get; set; }
         public string Partner { get; set; }
+        public int ID_Actividad { get; set; }
         public string Actividad { get; set; }
         public decimal? Precio { get; set; }
         public string Descripcion { get; set; }
         public int? ID_Crea { get; set; }
+        public string ImageURL { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCreacion { get; set; }
         public int? ID_Modifica { get; set; }

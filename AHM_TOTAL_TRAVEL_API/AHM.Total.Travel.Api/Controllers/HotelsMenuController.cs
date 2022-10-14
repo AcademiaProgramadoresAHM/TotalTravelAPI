@@ -34,25 +34,21 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
+        [AllowAnonymous]
         [HttpPost("Insert")]
-        public IActionResult Insert(HotelesMenusViewModel hotelesMenusViewModel)
+        public IActionResult Insert([FromForm] HotelesMenusViewModel hotelesMenusViewModel)
         {
-            string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-            byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-            var stream = new MemoryStream(byteFile);
-            var file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
             var items = _mapper.Map<tbHotelesMenus>(hotelesMenusViewModel);
-            var result = _hotelService.CreateHotelsMenu(items, file);
+            var result = _hotelService.CreateHotelsMenu(items, hotelesMenusViewModel.File);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesMenusViewModel hotelesMenusViewModel)
+        public IActionResult Update(int id,[FromForm] HotelesMenusViewModel hotelesMenusViewModel)
         {
 
             var item = _mapper.Map<tbHotelesMenus>(hotelesMenusViewModel);
-            var result = _hotelService.UpdateHotelsMenu(id, item);
+            var result = _hotelService.UpdateHotelsMenu(id, item, hotelesMenusViewModel.File);
             return Ok(result);
 
         }

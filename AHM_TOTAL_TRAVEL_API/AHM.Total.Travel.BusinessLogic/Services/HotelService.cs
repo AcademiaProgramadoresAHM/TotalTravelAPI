@@ -470,7 +470,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotelsMenu(tbHotelesMenus item, IFormFile file)
+        public ServiceResult CreateHotelsMenu(tbHotelesMenus item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
@@ -479,13 +479,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesMenusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = item.HoMe_ID+"-"+item.HoMe_Descripcion + ".jpg";
-                    img.path = "ImagesAPI/Hotels/Hotel-" + item.Hote_ID + "/Food";
-                    img.file = file;
-
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                    try
+                    {
+                        UpdateHotelsMenu(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -501,7 +502,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotelsMenu(int id, tbHotelesMenus tbHotelesMenus)
+        public ServiceResult UpdateHotelsMenu(int id, tbHotelesMenus tbHotelesMenus, List<IFormFile> files)
         {
             var result = new ServiceResult();
             try
@@ -509,6 +510,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesMenusRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (itemID.Image_Url != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.Image_Url))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+
+                        }
+                    }
+                    var _fileName = "Hotel_Menu-";
+                    _defaultImageRoute = _imagesService.saveImages(
+                        string.Concat(_defaultAlbumRoute, tbHotelesMenus.Hote_ID, "\\Food\\Hotel_Menu-", itemID.ID),
+                        string.Concat(_fileName, itemID.ID),
+                        files
+                    ).Result.Data;
+                    tbHotelesMenus.HoMe_Url = _defaultImageRoute;
+
                     var map = _hotelesMenusRepository.Update(tbHotelesMenus, id);
                     if (map.CodeStatus > 0)
                     {

@@ -22,6 +22,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? AcEx_UsuarioModifica { get; set; }
         public DateTime? AcEx_FechaModifica { get; set; }
         public bool? AcEx_Estado { get; set; }
+        public string AcEx_Url { get; set; }
 
         public virtual tbUsuarios AcEx_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios AcEx_UsuarioModificaNavigation { get; set; }
