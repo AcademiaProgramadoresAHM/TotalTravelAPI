@@ -36,33 +36,21 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+       
         [HttpPost("Insert")]
-        public IActionResult Insert([FromForm] PartnersViewModel partnersViewModel)
+        public IActionResult Insert([FromForm] PartnersViewModel item)
         {
-            IFormFile file;
-            if (partnersViewModel.File != null)
-            {
-                file = partnersViewModel.File;
-            }
-            else
-            {
-                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-                var stream = new MemoryStream(byteFile);
-                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
-            }
-            var items = _mapper.Map<tbPartners>(partnersViewModel);
-            var result = _generalService.CreatePartner(items, file);
+            var user = _mapper.Map<tbPartners>(item);
+            var result = _generalService.CreatePartner(user, item.File);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PartnersViewModel partnersViewModel)
+        public IActionResult Update(int id, PartnersViewModel items)
         {
 
-            var item = _mapper.Map<tbPartners>(partnersViewModel);
-            var result = _generalService.UpdatePartner(id, item);
+            var item = _mapper.Map<tbPartners>(items);
+            var result = _generalService.UpdatePartner(id, item, items.File);
             return Ok(result);
 
         }

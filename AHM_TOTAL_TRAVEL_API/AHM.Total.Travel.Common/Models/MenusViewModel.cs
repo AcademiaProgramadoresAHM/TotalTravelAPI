@@ -14,7 +14,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Rest_ID { get; set; }
         public int? Menu_UsuarioCreacion { get; set; }
         public int? Menu_UsuarioModifica { get; set; }
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 
     public class MenusListViewModel

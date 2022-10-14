@@ -320,16 +320,24 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateMenus(tbMenus item, IFormFile file)
+        public ServiceResult CreateMenus(tbMenus item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
             try
             {
+                item.Menu_Url = _defaultImageRoute;
                 var map = _menusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-
+                    try
+                    {
+                        UpdateMenus(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -337,27 +345,48 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
                     return result.Error(map);
                 }
-
             }
             catch (Exception ex)
             {
-
                 return result.Error(ex.Message);
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateMenus(int id, tbMenus tbMenus)
+        public ServiceResult UpdateMenus(int id, tbMenus tbMenus, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
             {
-                var itemID = _menusRepository.Find(id);
+                var itemID = _restaurantesRepository.Find(tbMenus.Rest_ID);
+
                 if (itemID != null)
                 {
+                    //if (file != null)
+                    //{
+                    if (itemID.Image_URL != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+
+                        }
+                    }
+                    var _fileName = "Menu-";
+                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, tbMenus.Rest_ID, "\\Food"), string.Concat(_fileName, itemID.ID), file).Result.Data;
+                    //}
+
+                    tbMenus.Menu_Url = _defaultImageRoute;
+
                     var map = _menusRepository.Update(tbMenus, id);
                     if (map.CodeStatus > 0)
                     {
-
                         return result.Ok(map);
                     }
                     else
@@ -367,10 +396,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     }
                 }
                 else
-                {
-                    
-                    return result.Error("Los datos ingresados son incorrectos");
-                }
+                    return result.Error("Los datos son incorrectos");
             }
             catch (Exception ex)
             {

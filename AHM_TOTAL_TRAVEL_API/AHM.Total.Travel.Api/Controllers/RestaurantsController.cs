@@ -27,14 +27,12 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {
             var list = _restaurantService.ListRestaurants ();
             return Ok(list);
         }
-        [AllowAnonymous]
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]RestaurantesViewModel item)
         {
