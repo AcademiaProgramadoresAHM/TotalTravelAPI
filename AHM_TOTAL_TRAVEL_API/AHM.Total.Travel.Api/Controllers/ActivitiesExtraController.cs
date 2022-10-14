@@ -34,32 +34,19 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(ActividadesExtrasViewModel ActividadesExtras)
+        public IActionResult Insert([FromForm]ActividadesExtrasViewModel item)
         {
 
-            IFormFile file;
-            if (ActividadesExtras.File != null)
-            {
-                file = ActividadesExtras.File;
-            }
-            else
-            {
-                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-                var stream = new MemoryStream(byteFile);
-                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
-            }
-            var item = _mapper.Map<tbActividadesExtras>(ActividadesExtras);
-            var response = _activitiesService.CreateActiExt(item, file);
-            return Ok(response);
+            var user = _mapper.Map<tbActividadesExtras>(item);
+            var result = _activitiesService.CreateActiExt(user, item.File);
+            return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, ActividadesExtrasViewModel items)
+        public IActionResult Update(int id,[FromForm] ActividadesExtrasViewModel items)
         {
             var item = _mapper.Map<tbActividadesExtras>(items);
-            var result = _activitiesService.UpdateActiExt(id, item);
+            var result = _activitiesService.UpdateActiExt(id, item, items.File);
             return Ok(result);
         }
 

@@ -14,12 +14,20 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ActividadesExtrasRepository _actividadesExtrasRepository;
         private readonly TiposActividadesRepository _tiposActividadesRepository;
         private readonly UploaderImageRepository _uploaderImageRepository;
-        public ActivitiesService(UploaderImageRepository uploaderImageRepository, ActividadesRepository actividades, ActividadesExtrasRepository actividadesExtras, TiposActividadesRepository tiposActividades )
+        private readonly ImagesService _imagesService;
+        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultAlbumRoute = "Activities_Extra\\ActivitiesExtra-";
+        public ActivitiesService(UploaderImageRepository uploaderImageRepository, 
+            ActividadesRepository actividades, 
+            ActividadesExtrasRepository actividadesExtras, 
+            TiposActividadesRepository tiposActividades,
+            ImagesService imagesService)
         {
             _actividadesRepository = actividades;
             _actividadesExtrasRepository = actividadesExtras;
             _tiposActividadesRepository = tiposActividades;
             _uploaderImageRepository = uploaderImageRepository;
+            _imagesService = imagesService;
         }
       
         #region Actividades
@@ -159,22 +167,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateActiExt(tbActividadesExtras item, IFormFile file)
+        public ServiceResult CreateActiExt(tbActividadesExtras item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
             try
             {
+                item.AcEx_Url = _defaultImageRoute;
                 var map = _actividadesExtrasRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = "Acti-" + map.CodeStatus + ".jpg";
-                    img.path = "ImagesAPI/Activities/Part-" + item.Part_ID;
-                    img.file = file;
+                    try
+                    {
+                        UpdateActiExt(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
 
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -190,7 +201,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateActiExt(int id, tbActividadesExtras tbActividadesExtras)
+        public ServiceResult UpdateActiExt(int id, tbActividadesExtras tbActividadesExtras, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -198,6 +209,27 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _actividadesExtrasRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (itemID.ImageURL != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.ImageURL))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.ImageURL);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+
+                        }
+                    }
+                    var _fileName = "Activities_Extra-";
+                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
+
+
+                    tbActividadesExtras.AcEx_Url = _defaultImageRoute;
+
                     var map = _actividadesExtrasRepository.Update(tbActividadesExtras, id);
                     if (map.CodeStatus > 0)
                     {

@@ -31,8 +31,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public RequestStatus Insert(tbDirecciones item)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@Dire_Descripcion", item.Dire_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Ciud_ID", item.Ciud_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_Calle", item.Dire_Calle, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Dire_Avenida", item.Dire_Avenida, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Colo_ID", item.Colo_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Usuario_Creacion", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -49,8 +50,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Dire_ID", id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Dire_Descripcion", item.Dire_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Ciud_ID", item.Ciud_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_Calle", item.Dire_Calle, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Dire_Avenida", item.Dire_Avenida, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Colo_ID", item.Colo_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Usuario_Modifica", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -61,8 +63,9 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Dire_ID", id, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Dire_Descripcion", item.Dire_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Ciud_ID", item.Ciud_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_Calle", item.Dire_Calle, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Dire_Avenida", item.Dire_Avenida, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Colo_ID", item.Colo_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Usuario_Modifica", item.Dire_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
