@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -171,6 +172,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var hotel = _hotelesRepository.Find(id);
+                hotel.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotel.Image_URL).Data).ImageUrl;
                 return result.Ok(hotel);
             }
             catch (Exception ex)
@@ -319,6 +321,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var hotelactivities = _hotelesActividadesRepository.Find(id);
+                hotelactivities.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotelactivities.Image_URL).Data).ImageUrl;
                 return result.Ok(hotelactivities);
             }
             catch (Exception ex)
@@ -346,7 +349,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHabitaciones(tbHabitaciones item, IFormFile file)
+        public ServiceResult CreateHabitaciones(tbHabitaciones item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
@@ -355,13 +358,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _habitacionesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName =  "Habi-" + item.Habi_ID + ".jpg";
-                    img.path = "ImagesAPI/Hotels/Hotel-" + item.Hote_ID + "/Rooms";
-                    img.file = file;
-
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                    try
+                    {
+                        UpdateHabitaciones(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -377,7 +381,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHabitaciones(int id, tbHabitaciones tbHabitaciones)
+        public ServiceResult UpdateHabitaciones(int id, tbHabitaciones tbHabitaciones, List<IFormFile> files)
         {
             var result = new ServiceResult();
             try
@@ -385,6 +389,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _habitacionesRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (itemID.Image_Url != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.Image_Url))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+
+                        }
+                    }
+                    var _fileName = "Hotel_Room-";
+                    _defaultImageRoute = _imagesService.saveImages(
+                        string.Concat(_defaultAlbumRoute, tbHabitaciones.Hote_ID, "\\Rooms\\Hotel_Room-", itemID.ID),
+                        string.Concat(_fileName, itemID.ID),
+                        files
+                    ).Result.Data;
+                    tbHabitaciones.Habi_url = _defaultImageRoute;
+
                     var map = _habitacionesRepository.Update(tbHabitaciones, id);
                     if (map.CodeStatus > 0)
                     {
@@ -443,6 +470,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var habitaciones = _habitacionesRepository.Find(id);
+                habitaciones.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(habitaciones.Image_Url).Data).ImageUrl;
                 return result.Ok(habitaciones);
             }
             catch (Exception ex)
@@ -591,6 +619,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var hotelesmenus = _hotelesMenusRepository.Find(id);
+                hotelesmenus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotelesmenus.Image_Url).Data).ImageUrl;
                 return result.Ok(hotelesmenus);
             }
             catch (Exception ex)

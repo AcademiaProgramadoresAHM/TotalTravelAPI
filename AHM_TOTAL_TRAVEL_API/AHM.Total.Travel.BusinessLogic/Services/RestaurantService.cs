@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -168,6 +169,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 restaurantes = _restaurantesRepository.Find(id);
+                restaurantes.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(restaurantes.Image_URL).Data).ImageUrl;
                 return result.Ok(restaurantes);
             }
             catch (Exception ex)
@@ -443,6 +445,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 menus = _menusRepository.Find(id);
+                menus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(menus.Image_Url).Data).ImageUrl;
                 return result.Ok(menus);
             }
             catch (Exception ex)
