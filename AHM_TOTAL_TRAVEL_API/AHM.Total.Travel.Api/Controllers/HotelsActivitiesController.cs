@@ -37,32 +37,19 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert(HotelesActividadesViewModel hotelesActividadesViewModel)
+        public IActionResult Insert([FromForm]HotelesActividadesViewModel hotelesActividadesViewModel)
         {
-            IFormFile file;
-            if (hotelesActividadesViewModel.File != null)
-            {
-                file = hotelesActividadesViewModel.File;
-            }
-            else
-            {
-                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-                var stream = new MemoryStream(byteFile);
-                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
-            }
             var items = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
-            var result = _hotelService.CreateHotelsActivity(items, file);
+            var result = _hotelService.CreateHotelsActivity(items, hotelesActividadesViewModel.File);
             return Ok(result);
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesActividadesViewModel hotelesActividadesViewModel)
+        public IActionResult Update(int id, [FromForm] HotelesActividadesViewModel hotelesActividadesViewModel)
         {
 
             var item = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
-            var result = _hotelService.UpdateHotelsActivity(id, item);
+            var result = _hotelService.UpdateHotelsActivity(id, item, hotelesActividadesViewModel.File);
             return Ok(result);
 
         }

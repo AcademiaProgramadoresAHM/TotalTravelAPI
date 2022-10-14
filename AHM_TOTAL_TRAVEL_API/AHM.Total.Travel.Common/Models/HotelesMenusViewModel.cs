@@ -11,9 +11,9 @@ namespace AHM.Total.Travel.Common.Models
         public decimal? HoMe_Precio { get; set; }
         public int? Hote_ID { get; set; }
         public int? Time_ID { get; set; }
+        public string HoMe_Url { get; set; }
         public int? HoMe_UsuarioCreacion { get; set; }
         public int? HoMe_UsuarioModifica { get; set; }
-
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
     }
 }

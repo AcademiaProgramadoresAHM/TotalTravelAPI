@@ -16,13 +16,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly HotelesMenusRepository _hotelesMenusRepository;
         private readonly CategoriasHabitacionesRepository _categoriasHabitacionesRepository;
         private readonly UploaderImageRepository _uploaderImageRepository;
+        private readonly ImagesService _imagesService;
+        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultAlbumRoute = "Hotels\\Hotel-";
 
         public HotelService(HotelesRepository hotelesRepository,
            HotelesActividadesRepository hotelesActividadesRepository, 
            HabitacionesRepository habitacionesRepository, 
            HotelesMenusRepository hotelesMenusRepository, 
            CategoriasHabitacionesRepository categoriasHabitacionesRepository,
-           UploaderImageRepository uploaderImageRepository)
+           UploaderImageRepository uploaderImageRepository,
+           ImagesService imagesService)
         {
             _hotelesRepository = hotelesRepository;
             _hotelesActividadesRepository = hotelesActividadesRepository;
@@ -30,6 +34,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             _hotelesMenusRepository = hotelesMenusRepository;
             _categoriasHabitacionesRepository = categoriasHabitacionesRepository;
             _uploaderImageRepository = uploaderImageRepository;
+            _imagesService = imagesService;
         }
 
         #region Hoteles
@@ -48,7 +53,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotels(tbHoteles item, IFormFile file)
+        public ServiceResult CreateHotels(tbHoteles item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
@@ -57,13 +62,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = "Hotel-" + item.Hote_Nombre + ".jpg";
-                    img.path = "ImagesAPI/Hotels/Hotel-" + map.CodeStatus + "/Place";
-                    img.file = file;
-
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                    try
+                    {
+                        UpdateHotels(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -79,7 +85,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotels(int id, tbHoteles tbHoteles)
+        public ServiceResult UpdateHotels(int id, tbHoteles tbHoteles, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -87,22 +93,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (itemID.Image_URL != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
 
-                    //if (itemID != null)
-                    //{
-                    //    if (!string.IsNullOrEmpty(itemID.Image_URL))
-                    //    {
-                    //        try
-                    //        {
-                    //            ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
-                    //        }
-                    //        catch (Exception e)
-                    //        {
-                    //            throw e;
-                    //        }
+                        }
+                    }
+                    var _fileName = "Hotel-";
+                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID, "\\Place"), string.Concat(_fileName, itemID.ID), file).Result.Data;
+                    tbHoteles.Hote_Url = _defaultImageRoute;
 
-                    //    }
-                    //}
                     var map = _hotelesRepository.Update(tbHoteles, id);
                     if (map.CodeStatus > 0)
                     {
@@ -130,6 +139,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
+
                 var itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
@@ -188,7 +198,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult CreateHotelsActivity(tbHotelesActividades item, IFormFile file)
+        public ServiceResult CreateHotelsActivity(tbHotelesActividades item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
@@ -197,13 +207,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _hotelesActividadesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    FileModel img = new FileModel();
-                    img.FileName = item.HoAc_ID + "-" + item.HoAc_Descripcion + ".jpg";
-                    img.path = "ImagesAPI/Hotels/Hotel-" + item.Hote_ID + "/Activities";
-                    img.file = file;
-
-                    var map2 = _uploaderImageRepository.UploaderFile(img);
-                    map.MessageStatus = map.MessageStatus + ", " + map2.MessageStatus;
+                    try
+                    {
+                        UpdateHotelsActivity(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -219,7 +230,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult UpdateHotelsActivity(int id, tbHotelesActividades tbHotelesActividades)
+        public ServiceResult UpdateHotelsActivity(int id, tbHotelesActividades tbHotelesActividades, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -227,6 +238,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _hotelesActividadesRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (itemID.Image_URL != null)
+                    {
+                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        {
+                            try
+                            {
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+
+                        }
+                    }
+                    var _fileName = "Hotel_Activity-";
+                    _defaultImageRoute = _imagesService.saveImages(
+                        string.Concat(_defaultAlbumRoute, tbHotelesActividades.Hote_ID, "\\Activities\\Hotel_Activity-", itemID.ID), 
+                        string.Concat(_fileName, itemID.ID), 
+                        file
+                    ).Result.Data;
+                    tbHotelesActividades.HoAc_Url = _defaultImageRoute;
+
                     var map = _hotelesActividadesRepository.Update(tbHotelesActividades, id);
                     if (map.CodeStatus > 0)
                     {

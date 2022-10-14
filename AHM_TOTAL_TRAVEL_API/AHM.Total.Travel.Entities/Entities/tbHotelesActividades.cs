@@ -22,6 +22,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? HoAc_UsuarioModifica { get; set; }
         public DateTime? HoAc_FechaModifica { get; set; }
         public bool? HoAc_Estado { get; set; }
+        public string HoAc_Url { get; set; }
 
         public virtual tbActividades Actv_ { get; set; }
         public virtual tbUsuarios HoAc_UsuarioCreacionNavigation { get; set; }

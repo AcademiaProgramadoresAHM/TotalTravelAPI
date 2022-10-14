@@ -12,6 +12,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Descripcion { get; set; }
         public string Direccion { get; set; }
         public string Partners { get; set; }
+        public string Image_URL { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
         public string UsuarioModifica { get; set; }

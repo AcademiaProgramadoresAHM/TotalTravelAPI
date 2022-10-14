@@ -36,26 +36,11 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [AllowAnonymous]
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]HotelesViewModel hotelesViewModel)
         {
-
-            IFormFile file;
-            if (hotelesViewModel.File != null)
-            {
-                file = hotelesViewModel.File;
-            }
-            else
-            {
-                string pathdefault = Path.GetFullPath("ImagesAPI/Assets_System_Photos/ImageDefault.jpg");
-                byte[] byteFile = System.IO.File.ReadAllBytes(pathdefault);
-
-                var stream = new MemoryStream(byteFile);
-                file = new FormFile(stream, 0, stream.Length, "ImageDefault", "ImageDefault.jpg");
-            }
             var items = _mapper.Map<tbHoteles>(hotelesViewModel);
-            var result = _hotelService.CreateHotels(items, file);
+            var result = _hotelService.CreateHotels(items, hotelesViewModel.File);
             return Ok(result);
         }
 
@@ -64,7 +49,7 @@ namespace AHM.Total.Travel.Api.Controllers
         {
 
             var item = _mapper.Map<tbHoteles>(hotelesViewModel);
-            var result = _hotelService.UpdateHotels(id, item);
+            var result = _hotelService.UpdateHotels(id, item, hotelesViewModel.File);
             return Ok(result);
 
         }

@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoAc_Precio", item.HoAc_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoAc_UsuarioCreacion", item.HoAc_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@HoAc_Url", item.HoAc_Url, DbType.String, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
@@ -56,6 +57,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@HoAc_Precio", item.HoAc_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@HoAc_UsuarioModifica", item.HoAc_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@HoAc_Url", item.HoAc_Url, DbType.String, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbHotelesActividades_Update, parameters, commandType: CommandType.StoredProcedure);
