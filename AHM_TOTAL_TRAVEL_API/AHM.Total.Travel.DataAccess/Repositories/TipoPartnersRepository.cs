@@ -50,7 +50,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@TiPar_Id", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiPar_Descripcion", item.TiPar_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@TiPar_UsuarioCreacion", item.TiPar_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@TiPar_UsuarioModifica", item.TiPar_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Role_Id", item.Rol_Id, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
