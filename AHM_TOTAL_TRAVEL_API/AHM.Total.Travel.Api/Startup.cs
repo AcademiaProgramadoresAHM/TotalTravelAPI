@@ -24,6 +24,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection.Metadata;
+using AHM.Total.Travel.Api.ModelsAPI;
+using AHM.Total.Travel.Api.ServiceAPI;
+using static AHM.Total.Travel.Api.ServiceAPI.NotificationHubsService;
 
 
 namespace AHM.Total.Travel.Api
@@ -81,6 +84,12 @@ namespace AHM.Total.Travel.Api
                 x.EnableAnnotations();
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "TotalTravel API", Version = "v1" });
             });
+
+            services.AddSingleton<INotificationService, NotificationHubService>();
+
+            services.AddOptions<NotificationHubOptions>()
+                .Configure(Configuration.GetSection("NotificationHub").Bind)
+                .ValidateDataAnnotations();
 
             services.AddDirectoryBrowser();
         }
