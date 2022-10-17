@@ -49,7 +49,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@TiAc_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiAc_Descripcion", item.TiAc_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@TiAc_UsuarioModifica", item.TiAc_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@TiAc_UsuarioModifica", item.TiAc_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbTiposActividades_Update, parameters, commandType: CommandType.StoredProcedure);
