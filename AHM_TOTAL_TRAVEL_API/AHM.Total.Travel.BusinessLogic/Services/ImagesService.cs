@@ -25,7 +25,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     public class ImagesService: ControllerBase
     {
         public readonly IHttpContextAccessor _httpContext;
-        private string _ImagesPath =Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI") ;
+        private readonly string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
+        private readonly string _ImagesPath =Path.Combine(Directory.GetCurrentDirectory(), "ImagesAPI") ;
         public ImagesService(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
@@ -147,7 +148,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                 if (response.Code == 404 || response.Code == 400)
                 {
-                    imageFiles.Add(new ImagesDetails { FileName = "NotFound", ImageUrl = "NotFound" });
+                    imageFiles.Add(new ImagesDetails { FileName = "Default", ImageUrl = response.Message });
                 }
                 else
                 {
@@ -172,7 +173,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
             if (routes.Length == 0)
             {
-                return result.BadRequest("No se ha ingresado ningun valor como argumento");
+                return result.BadRequest(_defaultImageRoute);
             }
 
             foreach (var route in routes)
@@ -189,7 +190,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             else
             {
-                return result.NotFound("La imagen no fue encontrada");
+                return result.NotFound(_defaultImageRoute);
             }
         }
         

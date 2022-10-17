@@ -60,6 +60,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Menu_Precio", item.Menu_Precio, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Menu_UsuarioModifica", item.Menu_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Menu_Url", item.Menu_Url, DbType.String, ParameterDirection.Input);
+
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

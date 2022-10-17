@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador, Cliente")]
     public class ReservationActivitiesExtraController : Controller
     {
         private readonly ReservationService _reservationService;
@@ -31,10 +31,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _reservationService.ListReservationActivitiesExtra();
             return Ok(list);
         }
-
-
-
-        [Authorize(Roles = "Cliente")]
+        
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesActividadesExtrasViewModel item)
         {
@@ -53,7 +50,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
 
-        [Authorize(Roles = "Cliente")]
+        
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {

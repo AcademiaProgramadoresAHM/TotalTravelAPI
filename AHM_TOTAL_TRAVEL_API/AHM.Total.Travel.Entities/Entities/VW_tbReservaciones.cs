@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public int? NumeroPersonas { get; set; }
+        public int? CantidadPagos { get; set; }
         public int? Id_Paquete { get; set; }
         public decimal? precio { get; set; }
         public int Id_Cliente { get; set; }

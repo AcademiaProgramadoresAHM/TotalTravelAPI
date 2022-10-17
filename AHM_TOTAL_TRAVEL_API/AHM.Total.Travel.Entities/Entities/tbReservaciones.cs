@@ -21,6 +21,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Usua_ID { get; set; }
         public int? Paqu_ID { get; set; }
         public bool? Resv_esPersonalizado { get; set; }
+        public int? Resv_CantidadPagos { get; set; }
         public int? Resv_NumeroPersonas { get; set; }
         public bool? Resv_ConfirmacionPago { get; set; }
         public bool? Resv_ConfirmacionHotel { get; set; }
