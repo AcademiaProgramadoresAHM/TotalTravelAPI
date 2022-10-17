@@ -12,8 +12,9 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("API/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrador")]
     public class NotificationsController : ControllerBase
     {
         readonly INotificationService _notificationService;
@@ -23,6 +24,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _notificationService = notificationService;
         }
 
+        [AllowAnonymous]
         [HttpPut]
         [Route("installations")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -40,6 +42,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return new OkResult();
         }
 
+        [AllowAnonymous]
         [HttpDelete()]
         [Route("installations/{installationId}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -57,6 +60,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return new OkResult();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("requests")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
