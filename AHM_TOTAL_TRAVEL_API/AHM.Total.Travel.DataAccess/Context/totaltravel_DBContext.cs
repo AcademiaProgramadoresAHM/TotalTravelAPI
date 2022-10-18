@@ -2000,9 +2000,7 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Menu_Precio).HasColumnType("money");
 
-                entity.Property(e => e.Menu_Url)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.Menu_Url).IsUnicode(false);
 
                 entity.HasOne(d => d.Menu_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbMenusMenu_UsuarioCreacionNavigation)
