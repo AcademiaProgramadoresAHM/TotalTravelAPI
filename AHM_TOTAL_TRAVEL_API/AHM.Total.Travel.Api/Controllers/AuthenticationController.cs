@@ -87,7 +87,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost("Refresh-token")]
         public IActionResult RefreshToken(RefreshAccessToken token)
         {

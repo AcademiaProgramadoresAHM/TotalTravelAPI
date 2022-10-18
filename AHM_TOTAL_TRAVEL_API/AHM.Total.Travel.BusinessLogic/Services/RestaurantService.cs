@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -95,11 +96,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             {
                                 try
                                 {
-                                    var imagesRoute = (_imagesService.getImagesFilesByRoute(itemID.Image_URL).Data);
-                                    foreach (ImagesDetails image in imagesRoute)
+                                    ServiceResult imagesResult = _imagesService.getImagesFilesByRoute(itemID.Image_URL);
+                                    if (!imagesResult.Success)
                                     {
-                                        ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        ServiceResult response = _imagesService.deleteImage(((ImagesDetails)(imagesResult.Data)).ImageUrl);
+
                                     }
+                                    else
+                                    {
+                                        List<ImagesDetails> imagesRoute = (List<ImagesDetails>)imagesResult.Data;
+                                        foreach (ImagesDetails image in imagesRoute)
+                                        {
+                                            ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        }
+                                    }
+                                    
                                 }
                                 catch (Exception e)
                                 {
