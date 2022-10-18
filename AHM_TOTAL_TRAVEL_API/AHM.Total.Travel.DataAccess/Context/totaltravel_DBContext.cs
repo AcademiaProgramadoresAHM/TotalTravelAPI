@@ -957,6 +957,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(13)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DescripcionPaquete).IsUnicode(false);
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);

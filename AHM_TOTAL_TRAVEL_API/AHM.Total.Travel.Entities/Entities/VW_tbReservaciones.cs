@@ -11,6 +11,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? NumeroPersonas { get; set; }
         public int? CantidadPagos { get; set; }
         public int? Id_Paquete { get; set; }
+        public string DescripcionPaquete { get; set; }
         public decimal? precio { get; set; }
         public int Id_Cliente { get; set; }
         public string Nombre { get; set; }
