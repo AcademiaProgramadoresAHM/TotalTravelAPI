@@ -10,16 +10,16 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID { get; set; }
         public string Habitacion { get; set; }
         public string Descripcion { get; set; }
-        public int ID_Categoria { get; set; }
         public string Categoria { get; set; }
-        public int ID_Hotel { get; set; }
         public string Hotel { get; set; }
         public decimal? Precio { get; set; }
-        public string Image_Url { get; set; }
-        public int ID_UsuaCrea { get; set; }
+        public int? Balcon { get; set; }
+        public bool? Wifi { get; set; }
+        public bool? Camas { get; set; }
+        public int? Capacidad { get; set; }
+        public string Urls { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
-        public int? ID_UsuaModifica { get; set; }
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
         public bool? Estado { get; set; }

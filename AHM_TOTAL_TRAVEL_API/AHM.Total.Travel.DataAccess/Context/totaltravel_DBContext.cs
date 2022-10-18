@@ -389,9 +389,9 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Image_Url).IsUnicode(false);
-
                 entity.Property(e => e.Precio).HasColumnType("money");
+
+                entity.Property(e => e.Urls).IsUnicode(false);
 
                 entity.Property(e => e.UsuarioCreacion)
                     .IsRequired()
