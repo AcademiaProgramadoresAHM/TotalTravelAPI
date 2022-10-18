@@ -17,7 +17,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Wifi { get; set; }
         public bool? Camas { get; set; }
         public int? Capacidad { get; set; }
-        public string Urls { get; set; }
+        public string ImageUrl { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
         public string UsuarioModifica { get; set; }

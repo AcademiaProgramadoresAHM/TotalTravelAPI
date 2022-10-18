@@ -60,7 +60,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
 
         [HttpGet("Find")]
-        [Authorize(Roles = "Cliente")]
+        [Authorize(Roles = "Administrador, Cliente")]
         public IActionResult Find(int id)
         {
             var item = _reservationService.FindReservationActivitiesExtra(id);
