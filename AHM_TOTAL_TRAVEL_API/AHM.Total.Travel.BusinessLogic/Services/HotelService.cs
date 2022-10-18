@@ -389,13 +389,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _habitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    if (itemID.Image_Url != null)
+                    if (itemID.Urls != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_Url))
+                        if (!string.IsNullOrEmpty(itemID.Urls))
                         {
                             try
                             {
-                                ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
+                                ServiceResult response = _imagesService.deleteImage(itemID.Urls);
                             }
                             catch (Exception e)
                             {
@@ -470,7 +470,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var habitaciones = _habitacionesRepository.Find(id);
-                habitaciones.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(habitaciones.Image_Url).Data).ImageUrl;
+                habitaciones.Urls = ((ImagesDetails)_imagesService.getImagesFilesByRoute(habitaciones.Urls).Data).ImageUrl;
                 return result.Ok(habitaciones);
             }
             catch (Exception ex)
