@@ -9,6 +9,11 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public int? Paquete_Id { get; set; }
+        public string Paquete_Nombre { get; set; }
+        public string Paquete_Descripcion { get; set; }
+        public string Paquete_Duracion { get; set; }
+        public decimal? Paquete_Precio { get; set; }
+        public int Hotel_ID { get; set; }
         public string Nombre_Hotel { get; set; }
         public string Hotel_Descripcion { get; set; }
         public int? Habitacion_Id { get; set; }

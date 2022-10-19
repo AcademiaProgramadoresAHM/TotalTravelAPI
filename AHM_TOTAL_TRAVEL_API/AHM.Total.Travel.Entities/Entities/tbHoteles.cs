@@ -13,6 +13,7 @@ namespace AHM.Total.Travel.Entities.Entities
             tbHotelesActividades = new HashSet<tbHotelesActividades>();
             tbHotelesMenus = new HashSet<tbHotelesMenus>();
             tbPaquetePredeterminados = new HashSet<tbPaquetePredeterminados>();
+            tbReservacionesHoteles = new HashSet<tbReservacionesHoteles>();
         }
 
         public int Hote_ID { get; set; }
@@ -35,5 +36,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbHotelesActividades> tbHotelesActividades { get; set; }
         public virtual ICollection<tbHotelesMenus> tbHotelesMenus { get; set; }
         public virtual ICollection<tbPaquetePredeterminados> tbPaquetePredeterminados { get; set; }
+        public virtual ICollection<tbReservacionesHoteles> tbReservacionesHoteles { get; set; }
     }
 }

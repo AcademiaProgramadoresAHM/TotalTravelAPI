@@ -12,7 +12,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID_Cliente { get; set; }
         public string Cliente { get; set; }
         public int ID_Actividad { get; set; }
-        public string Actividad { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
         public int? Cantidad { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }

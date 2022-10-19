@@ -649,6 +649,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbPaquetePredeterminados", "Sale");
 
+                entity.Property(e => e.Actividad)
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Descripcion_Hotel)
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -752,6 +756,18 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Nombre_Hotel)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Paquete_Descripcion).IsUnicode(false);
+
+                entity.Property(e => e.Paquete_Duracion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Paquete_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Paquete_Precio).HasColumnType("money");
 
                 entity.Property(e => e.UsuarioCreacion)
                     .HasMaxLength(101)
@@ -967,7 +983,15 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
 
+                entity.Property(e => e.Fecha_Entrada).HasColumnType("date");
+
+                entity.Property(e => e.Fecha_Salida).HasColumnType("date");
+
                 entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre_Hotel)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -1028,12 +1052,12 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbReservacionesActividadesHoteles", "Resv");
 
-                entity.Property(e => e.Actividad).IsUnicode(false);
-
                 entity.Property(e => e.Cliente)
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion).IsUnicode(false);
 
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
 
@@ -1043,6 +1067,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Hora_Reservacion)
                     .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(70)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Usuario_Creacion)
@@ -2557,6 +2585,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.ReHo_FechaSalida).HasColumnType("date");
 
                 entity.Property(e => e.ReHo_PrecioTotal).HasColumnType("money");
+
+                entity.HasOne(d => d.Hote_)
+                    .WithMany(p => p.tbReservacionesHoteles)
+                    .HasForeignKey(d => d.Hote_ID)
+                    .HasConstraintName("FK_tbReservacionesHoteles_tbHoteles_HoteID");
 
                 entity.HasOne(d => d.ReHo_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbReservacionesHotelesReHo_UsuarioCreacionNavigation)
