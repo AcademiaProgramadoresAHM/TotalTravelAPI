@@ -157,9 +157,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 
             }
             if (listOfImages.Count == 1)
-                return result.Ok(data: imageFiles[0]);
+            {
+                return result.Error(data: imageFiles[0]);
+            }
             else
-                return result.Ok(data:imageFiles);
+            {
+                return result.Ok(data: imageFiles);
+            }
         }
 
 

@@ -656,7 +656,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var user = _usuariosRepository.Find(id);
-                user.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
+                if (user != null)
+                {
+                    user.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
+                }
 
                 return result.Ok(user);
             }

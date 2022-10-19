@@ -4,8 +4,10 @@ using ConciertosProyecto.BusinessLogic;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -15,8 +17,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly MenuTypesRepository _tiposMenusRepository;
         private readonly RestaurantesRepository _restaurantesRepository;
         private readonly ImagesService _imagesService;
-        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
-        private string _defaultAlbumRoute = "Restaurants\\Restaurant-";
+        private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
+        private readonly string _defaultAlbumRoute = "Restaurants\\Restaurant-";
         public RestaurantService(MenusRepository menusRepository,
                               MenuTypesRepository tiposMenusRepository,
                               RestaurantesRepository restaurantesRepository,
@@ -86,15 +88,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                 if (itemID != null)
                 {
-                    //if (file != null)
-                    //{
+                    if (file != null)
+                    {
                         if (itemID.Image_URL != null)
                         {
-                            if (!string.IsNullOrEmpty(itemID.Image_URL))
+                            if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                             {
                                 try
                                 {
-                                    ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                                    ServiceResult imagesResult = _imagesService.getImagesFilesByRoute(itemID.Image_URL);
+                                    if (!imagesResult.Success)
+                                    {
+                                        ServiceResult response = _imagesService.deleteImage(((ImagesDetails)(imagesResult.Data)).ImageUrl);
+
+                                    }
+                                    else
+                                    {
+                                        List<ImagesDetails> imagesRoute = (List<ImagesDetails>)imagesResult.Data;
+                                        foreach (ImagesDetails image in imagesRoute)
+                                        {
+                                            ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        }
+                                    }
+                                    
                                 }
                                 catch (Exception e)
                                 {
@@ -105,11 +121,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         }
                         var _fileName = "Restaurant-";
                         _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID, "\\Place"), string.Concat(_fileName, itemID.ID), file).Result.Data;
-                    //}
+                        tbRestaurantes.Rest_Url = _defaultImageRoute;
+                    }
+                    else
+                    {
+                        tbRestaurantes.Rest_Url = itemID.Image_URL;
+                    }
 
+                    if (string.IsNullOrEmpty(tbRestaurantes.Rest_Url) || itemID.Image_URL == _defaultImageRoute)
+                    {
+                        tbRestaurantes.Rest_Url = _defaultImageRoute;
+                    }
                     tbRestaurantes.Rest_Url = _defaultImageRoute;
 
                     var map = _restaurantesRepository.Update(tbRestaurantes, id);
+                    
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);
@@ -169,7 +195,24 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 restaurantes = _restaurantesRepository.Find(id);
-                restaurantes.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(restaurantes.Image_URL).Data).ImageUrl;
+                if (restaurantes != null)
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(restaurantes.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        restaurantes.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var item in images)
+                        {
+                            url = string.Concat(url, item.ImageUrl, ",");
+                        }
+                        restaurantes.Image_URL = url;
+                    }
+                }
                 return result.Ok(restaurantes);
             }
             catch (Exception ex)

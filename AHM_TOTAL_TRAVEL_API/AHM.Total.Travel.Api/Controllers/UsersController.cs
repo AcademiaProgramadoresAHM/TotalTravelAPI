@@ -76,6 +76,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _accessService.DeleteUsers(id, mod);
             return Ok(result);
         }
+
         [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int id)
