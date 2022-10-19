@@ -21,6 +21,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Pais_UsuarioModifica { get; set; }
         public DateTime? Pais_FechaModifica { get; set; }
         public bool? Pais_Estado { get; set; }
+        public string Pais_ISO { get; set; }
 
         public virtual tbUsuarios Pais_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Pais_UsuarioModificaNavigation { get; set; }

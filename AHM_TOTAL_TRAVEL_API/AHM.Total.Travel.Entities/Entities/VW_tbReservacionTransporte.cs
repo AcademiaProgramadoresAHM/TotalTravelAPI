@@ -13,6 +13,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Cancelado { get; set; }
         public DateTime? Fecha_Cancelado { get; set; }
         public int ID_detalle_Transporte { get; set; }
+        public string Tipo_Transporte { get; set; }
         public int? Capacidad { get; set; }
         public decimal? Precio { get; set; }
         public int ID_Usuario_Creacion { get; set; }

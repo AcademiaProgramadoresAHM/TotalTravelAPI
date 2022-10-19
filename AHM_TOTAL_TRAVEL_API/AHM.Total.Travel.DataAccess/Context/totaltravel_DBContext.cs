@@ -386,7 +386,7 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.Hotel)
-                    .HasMaxLength(200)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImageUrl).IsUnicode(false);
@@ -648,10 +648,6 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbPaquetePredeterminados", "Sale");
-
-                entity.Property(e => e.Actividad)
-                    .HasMaxLength(70)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Descripcion_Hotel)
                     .HasMaxLength(200)
@@ -947,6 +943,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
 
                 entity.Property(e => e.Precio).HasColumnType("money");
+
+                entity.Property(e => e.Tipo_Transporte)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Usuario_Creacion)
                     .IsRequired()
@@ -2078,6 +2078,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Pais_FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Pais_ISO)
+                    .HasMaxLength(5)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Pais_Nacionalidad)
                     .HasMaxLength(50)
