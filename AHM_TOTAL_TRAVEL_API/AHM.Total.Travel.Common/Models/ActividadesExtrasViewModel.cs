@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Common.Models
     {
         public int? Part_ID { get; set; }
         public int? Actv_ID { get; set; }
+        public int? Dire_ID { get; set; }
         public decimal? AcEx_Precio { get; set; }
         public string AcEx_Descripcion { get; set; }
         public int? AcEx_UsuarioCreacion { get; set; }

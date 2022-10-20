@@ -136,6 +136,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(70)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Descripcion).IsUnicode(false);
 
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
@@ -1576,6 +1580,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasOne(d => d.Actv_)
                     .WithMany(p => p.tbActividadesExtras)
                     .HasForeignKey(d => d.Actv_ID);
+
+                entity.HasOne(d => d.Dire_)
+                    .WithMany(p => p.tbActividadesExtras)
+                    .HasForeignKey(d => d.Dire_ID);
 
                 entity.HasOne(d => d.Part_)
                     .WithMany(p => p.tbActividadesExtras)

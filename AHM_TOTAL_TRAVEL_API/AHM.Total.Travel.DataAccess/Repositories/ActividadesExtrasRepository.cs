@@ -33,7 +33,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@AcEx_Precio", item.AcEx_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_ID", item.AcEx_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@AcEx_Precio", item.Dire_ID, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_UsuarioCreacion", item.AcEx_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_Url", item.AcEx_Url, DbType.String, ParameterDirection.Input);
@@ -54,6 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@AcEx_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Dire_ID", item.Dire_ID, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_Precio", item.AcEx_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_UsuarioModifica", item.AcEx_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

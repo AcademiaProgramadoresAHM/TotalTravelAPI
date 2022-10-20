@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert([FromForm]HotelesViewModel hotelesViewModel)
+        public IActionResult Insert([FromForm] HotelesViewModel hotelesViewModel)
         {
             var items = _mapper.Map<tbHoteles>(hotelesViewModel);
             var result = _hotelService.CreateHotels(items, hotelesViewModel.File);
@@ -45,7 +45,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, HotelesViewModel hotelesViewModel)
+        public IActionResult Update(int id,[FromForm] HotelesViewModel hotelesViewModel)
         {
 
             var item = _mapper.Map<tbHoteles>(hotelesViewModel);

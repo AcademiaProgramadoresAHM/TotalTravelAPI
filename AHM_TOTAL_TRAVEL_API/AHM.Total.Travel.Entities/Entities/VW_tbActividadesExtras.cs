@@ -10,6 +10,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID { get; set; }
         public int ID_Partner { get; set; }
         public string Partner { get; set; }
+        public int CiudadID { get; set; }
+        public string Ciudad { get; set; }
         public int ID_Actividad { get; set; }
         public string Actividad { get; set; }
         public decimal? Precio { get; set; }

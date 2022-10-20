@@ -18,8 +18,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly CategoriasHabitacionesRepository _categoriasHabitacionesRepository;
         private readonly UploaderImageRepository _uploaderImageRepository;
         private readonly ImagesService _imagesService;
-        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
-        private string _defaultAlbumRoute = "Hotels\\Hotel-";
+        private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
+        private string _defaultActivityAlbumRoute = "Activities\\Hotel_Activity-";
+        private string _defaultMenuAlbumRoute = "Food\\Hotel_Menu-";
+        private string _defaultRoomAlbumRoute = "Place\\Hotel_Room-";
+        private string _defaultHotelAlbumRoute = "Place\\Hotel_Images-";
 
         public HotelService(HotelesRepository hotelesRepository,
            HotelesActividadesRepository hotelesActividadesRepository, 
@@ -60,6 +63,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
+                item.Hote_Url = _defaultImageRoute;
                 var map = _hotelesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
@@ -91,29 +95,59 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var itemID = _hotelesRepository.Find(id);
+                VW_tbHoteles itemID = _hotelesRepository.Find(id);
                 if (itemID != null)
                 {
-                    if (itemID.Image_URL != null)
+                    if (file != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        if (itemID.Image_URL != null)
                         {
-                            try
+                            if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                             {
-                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
-                            }
-                            catch (Exception e)
-                            {
-                                throw e;
-                            }
+                                try
+                                {
+                                    ServiceResult imagesResult = _imagesService.getImagesFilesByRoute(itemID.Image_URL);
+                                    if (!imagesResult.Success)
+                                    {
+                                        ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
 
+                                    }
+                                    else
+                                    {
+                                        List<ImagesDetails> imagesRoute = (List<ImagesDetails>)imagesResult.Data;
+                                        foreach (ImagesDetails image in imagesRoute)
+                                        {
+                                            ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        }
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
                         }
+                        var _fileName = "Hotel-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat("Hotels\\Hotel-", itemID.ID, "\\", _defaultHotelAlbumRoute, itemID.ID),
+                            string.Concat(_fileName, itemID.ID), file).Result.Data;
+
+                        tbHoteles.Hote_Url = _defaultImageRoute;
                     }
-                    var _fileName = "Hotel-";
-                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID, "\\Place"), string.Concat(_fileName, itemID.ID), file).Result.Data;
+                    else
+                    {
+                        tbHoteles.Hote_Url = itemID.Image_URL;
+                    }
+
+                    if (string.IsNullOrEmpty(tbHoteles.Hote_Url) || itemID.Image_URL == _defaultImageRoute)
+                    {
+                        tbHoteles.Hote_Url = _defaultImageRoute;
+                    }
                     tbHoteles.Hote_Url = _defaultImageRoute;
 
                     var map = _hotelesRepository.Update(tbHoteles, id);
+
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);
@@ -171,8 +205,27 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var hotel = _hotelesRepository.Find(id);
-                hotel.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotel.Image_URL).Data).ImageUrl;
+                VW_tbHoteles hotel = _hotelesRepository.Find(id);
+
+                if(hotel != null)
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(hotel.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        hotel.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var item in images)
+                        {
+                            url = string.Concat(url, item.ImageUrl, ",");
+                        }
+                        hotel.Image_URL = url;
+                    }
+                }
+
                 return result.Ok(hotel);
             }
             catch (Exception ex)
@@ -204,19 +257,29 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         {
 
             var result = new ServiceResult();
+
+            
             try
             {
+                item.HoAc_Url = _defaultImageRoute;
                 var map = _hotelesActividadesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    try
+                    if (file != null)
                     {
-                        UpdateHotelsActivity(map.CodeStatus, item, file);
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        try
+                        {
+                            UpdateHotelsActivity(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
+                    
                     return result.Ok(map);
                 }
                 else
@@ -235,14 +298,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult UpdateHotelsActivity(int id, tbHotelesActividades tbHotelesActividades, List<IFormFile> file)
         {
             var result = new ServiceResult();
+
+            
             try
             {
                 var itemID = _hotelesActividadesRepository.Find(id);
                 if (itemID != null)
                 {
-                    if (itemID.Image_URL != null)
+                    if (file != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                         {
                             try
                             {
@@ -254,14 +322,23 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             }
 
                         }
+                        var _fileName = "Hotel_Activity-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat("Hotels\\Hotel-", itemID.ID_Hotel, "\\", _defaultActivityAlbumRoute, itemID.ID),
+                            string.Concat(_fileName, itemID.ID),
+                            file).Result.Data;
+
+                        tbHotelesActividades.HoAc_Url = _defaultImageRoute;
                     }
-                    var _fileName = "Hotel_Activity-";
-                    _defaultImageRoute = _imagesService.saveImages(
-                        string.Concat(_defaultAlbumRoute, tbHotelesActividades.Hote_ID, "\\Activities\\Hotel_Activity-", itemID.ID), 
-                        string.Concat(_fileName, itemID.ID), 
-                        file
-                    ).Result.Data;
-                    tbHotelesActividades.HoAc_Url = _defaultImageRoute;
+                    else
+                    {
+                        tbHotelesActividades.HoAc_Url = itemID.Image_URL;
+                    }
+
+                    if (string.IsNullOrEmpty(itemID.Image_URL) || itemID.Image_URL == _defaultImageRoute)
+                    {
+                        tbHotelesActividades.HoAc_Url = _defaultImageRoute;
+                    }
 
                     var map = _hotelesActividadesRepository.Update(tbHotelesActividades, id);
                     if (map.CodeStatus > 0)
@@ -321,7 +398,27 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var hotelactivities = _hotelesActividadesRepository.Find(id);
-                hotelactivities.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotelactivities.Image_URL).Data).ImageUrl;
+                if (hotelactivities != null)
+                {
+
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(hotelactivities.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        hotelactivities.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var item in images)
+                        {
+                            url = string.Concat(url, item.ImageUrl, ",");
+                        }
+                        hotelactivities.Image_URL = url;
+                    }
+
+                }
+               
                 return result.Ok(hotelactivities);
             }
             catch (Exception ex)
@@ -355,6 +452,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
+                item.Habi_url = _defaultRoomAlbumRoute;
                 var map = _habitacionesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
@@ -389,30 +487,59 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _habitacionesRepository.Find(id);
                 if (itemID != null)
                 {
-                    if (itemID.ImageUrl != null)
+                    if (files != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.ImageUrl))
+                        if (itemID.ImageUrl != null)
                         {
-                            try
+                            if (!string.IsNullOrEmpty(itemID.ImageUrl) && itemID.ImageUrl != _defaultRoomAlbumRoute)
                             {
-                                ServiceResult response = _imagesService.deleteImage(itemID.ImageUrl);
-                            }
-                            catch (Exception e)
-                            {
-                                throw e;
-                            }
+                                try
+                                {
+                                    ServiceResult imagesResult = _imagesService.getImagesFilesByRoute(itemID.ImageUrl);
+                                    if (!imagesResult.Success)
+                                    {
+                                        ServiceResult response = _imagesService.deleteImage(((ImagesDetails)(imagesResult.Data)).ImageUrl);
 
+                                    }
+                                    else
+                                    {
+                                        List<ImagesDetails> imagesRoute = (List<ImagesDetails>)imagesResult.Data;
+                                        foreach (ImagesDetails image in imagesRoute)
+                                        {
+                                            ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        }
+                                    }
+
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
                         }
+                        var _fileName = "Hotel_Room-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat("Hotel\\Hotel-", itemID.HotelID, "\\", _defaultRoomAlbumRoute, itemID.HotelID),
+                            string.Concat(_fileName, itemID.ID),
+                            files
+                        ).Result.Data;
+                        tbHabitaciones.Habi_url = _defaultImageRoute;
+
                     }
-                    var _fileName = "Hotel_Room-";
-                    _defaultImageRoute = _imagesService.saveImages(
-                        string.Concat(_defaultAlbumRoute, tbHabitaciones.Hote_ID, "\\Rooms\\Hotel_Room-", itemID.ID),
-                        string.Concat(_fileName, itemID.ID),
-                        files
-                    ).Result.Data;
+                    else
+                    {
+                        tbHabitaciones.Habi_url = itemID.ImageUrl;
+                    }
+
+                    if (string.IsNullOrEmpty(tbHabitaciones.Habi_url) || itemID.ImageUrl == _defaultImageRoute)
+                    {
+                        tbHabitaciones.Habi_url = _defaultImageRoute;
+                    }
                     tbHabitaciones.Habi_url = _defaultImageRoute;
 
                     var map = _habitacionesRepository.Update(tbHabitaciones, id);
+
                     if (map.CodeStatus > 0)
                     {
                         return result.Ok(map);
@@ -467,10 +594,30 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindHabitaciones(int id)
         {
             var result = new ServiceResult();
+            
             try
             {
-                var habitaciones = _habitacionesRepository.Find(id);
-                habitaciones.ImageUrl = ((ImagesDetails)_imagesService.getImagesFilesByRoute(habitaciones.ImageUrl).Data).ImageUrl;
+                VW_tbHabitaciones habitaciones = _habitacionesRepository.Find(id);
+
+                if (habitaciones != null)
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(habitaciones.ImageUrl);
+                    if (!imageResult.Success)
+                    {
+                        habitaciones.ImageUrl = ((ImagesDetails)_imagesService.getImagesFilesByRoute(habitaciones.ImageUrl).Data).ImageUrl;
+
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var item in images)
+                        {
+                            url = string.Concat(url, item.ImageUrl, ",");
+                        }
+                        habitaciones.ImageUrl = url;
+                    }
+                }
                 return result.Ok(habitaciones);
             }
             catch (Exception ex)
@@ -504,17 +651,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
+                item.HoMe_Url = _defaultImageRoute;
                 var map = _hotelesMenusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    try
+                    if (file != null)
                     {
-                        UpdateHotelsMenu(map.CodeStatus, item, file);
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        try
+                        {
+                            UpdateHotelsMenu(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
+                    
                     return result.Ok(map);
                 }
                 else
@@ -529,6 +684,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
         //ACTUALIZAR
         public ServiceResult UpdateHotelsMenu(int id, tbHotelesMenus tbHotelesMenus, List<IFormFile> files)
         {
@@ -536,30 +692,49 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var itemID = _hotelesMenusRepository.Find(id);
+
                 if (itemID != null)
                 {
-                    if (itemID.Image_Url != null)
+                    if (files != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_Url))
-                        {
-                            try
-                            {
-                                ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
-                            }
-                            catch (Exception e)
-                            {
-                                throw e;
-                            }
+                        if (files.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
 
+                        if (itemID.Image_Url != null)
+                        {
+                            if (!string.IsNullOrEmpty(itemID.Image_Url) && itemID.Image_Url != _defaultImageRoute)
+                            {
+
+                                try
+                                {
+                                    ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
                         }
+                        var _fileName = "Hotel_Menu-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat("Hotels\\Hotel-", itemID.ID_Hotel, "\\", _defaultMenuAlbumRoute, itemID.ID),
+                            string.Concat(_fileName, itemID.ID),
+                            files
+                        ).Result.Data;
+
+                        tbHotelesMenus.HoMe_Url = _defaultImageRoute;
+
                     }
-                    var _fileName = "Hotel_Menu-";
-                    _defaultImageRoute = _imagesService.saveImages(
-                        string.Concat(_defaultAlbumRoute, tbHotelesMenus.Hote_ID, "\\Food\\Hotel_Menu-", itemID.ID),
-                        string.Concat(_fileName, itemID.ID),
-                        files
-                    ).Result.Data;
-                    tbHotelesMenus.HoMe_Url = _defaultImageRoute;
+                    else
+                    {
+                        tbHotelesMenus.HoMe_Url = itemID.Image_Url;
+                    }
+
+                    if (string.IsNullOrEmpty(itemID.Image_Url) || itemID.Image_Url == _defaultImageRoute)
+                    {
+                        tbHotelesMenus.HoMe_Url = _defaultImageRoute;
+                    }
 
                     var map = _hotelesMenusRepository.Update(tbHotelesMenus, id);
                     if (map.CodeStatus > 0)
@@ -619,7 +794,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 var hotelesmenus = _hotelesMenusRepository.Find(id);
-                hotelesmenus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotelesmenus.Image_Url).Data).ImageUrl;
+                if (hotelesmenus != null)
+                {
+                    try
+                    {
+                        hotelesmenus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(hotelesmenus.Image_Url).Data).ImageUrl;
+                    }
+                    catch (Exception)
+                    {
+                        return result.BadRequest("You have inserted multiple images on a single image field");
+                    }
+                    
+                }
+                
                 return result.Ok(hotelesmenus);
             }
             catch (Exception ex)

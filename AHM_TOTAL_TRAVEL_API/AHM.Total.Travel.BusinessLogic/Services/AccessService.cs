@@ -505,6 +505,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult CreateUsers(tbUsuarios item, List<IFormFile> file)
         {
             var result = new ServiceResult();
+
+            
             try
             {
                 item.Usua_Url = _defaultImageRoute;
@@ -513,6 +515,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     if (file != null)
                     {
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+
                         try
                         {
                             UpdateUsers(map.CodeStatus, item, file);
@@ -541,6 +547,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios, List<IFormFile>file)
         {
             var result = new ServiceResult();
+
+            
             try
             {
                 var itemID = _usuariosRepository.Find(id);
@@ -549,6 +557,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     if (file != null)
                     {
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
 
                         if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
                         {
@@ -563,7 +573,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                         }
                         string _fileName = "User-";
-                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat(_defaultAlbumRoute, itemID.ID), 
+                            string.Concat(_fileName, itemID.ID), 
+                            file).Result.Data;
+                        
                         tbUsuarios.Usua_Url = _defaultImageRoute;
                     }
                     else
@@ -655,10 +669,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var user = _usuariosRepository.Find(id);
+                VW_tbUsuarios user = _usuariosRepository.Find(id);
                 if (user != null)
                 {
-                    user.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
+                    try
+                    {
+                        user.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(user.Image_URL).Data).ImageUrl;
+                    }
+                    catch (Exception)
+                    {
+
+                        return result.BadRequest("You have inserted multiple images on a single image field");
+                    }
+                    
                 }
 
                 return result.Ok(user);

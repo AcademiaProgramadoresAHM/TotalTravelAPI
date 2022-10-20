@@ -57,14 +57,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _restaurantesRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                        try
-                        {
-                            UpdateRestaurants(map.CodeStatus, item, file);
-                        }
-                        catch (Exception e)
-                        {
-                            throw e;
-                        }
+                    try
+                    {
+                        UpdateRestaurants(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
                     return result.Ok(map);
                 }
                 else
@@ -191,10 +191,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindRestaurants(int id)
         {
             var result = new ServiceResult();
-            var restaurantes = new VW_tbRestaurantes();
+            
             try
             {
-                restaurantes = _restaurantesRepository.Find(id);
+                VW_tbRestaurantes restaurantes = _restaurantesRepository.Find(id);
                 if (restaurantes != null)
                 {
                     ServiceResult imageResult = _imagesService.getImagesFilesByRoute(restaurantes.Image_URL);

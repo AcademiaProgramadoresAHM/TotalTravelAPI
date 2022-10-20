@@ -23,10 +23,12 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? AcEx_FechaModifica { get; set; }
         public bool? AcEx_Estado { get; set; }
         public string AcEx_Url { get; set; }
+        public int? Dire_ID { get; set; }
 
         public virtual tbUsuarios AcEx_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios AcEx_UsuarioModificaNavigation { get; set; }
         public virtual tbActividades Actv_ { get; set; }
+        public virtual tbDirecciones Dire_ { get; set; }
         public virtual tbPartners Part_ { get; set; }
         public virtual ICollection<tbReservacionesActividadesExtras> tbReservacionesActividadesExtras { get; set; }
     }

@@ -63,7 +63,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [Authorize(Roles = "Cliente")]
+        [Authorize(Roles = "Cliente, Administrador")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

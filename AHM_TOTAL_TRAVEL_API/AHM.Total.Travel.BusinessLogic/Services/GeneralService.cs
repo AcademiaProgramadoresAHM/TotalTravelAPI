@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -22,7 +23,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly UploaderImageRepository _uploaderImageRepository;
         private readonly ColoniasRepository _coloniasRepository;
         private readonly ImagesService _imagesService;
-        private string _defaultImageRoute = "\\ImagesAPI\\Default\\DefaultPhoto.jpg";
+        private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
         private string _defaultAlbumPartner = "UsersProfilePics\\Partner-";
 
         public GeneralService(CiudadesRepository ciudadesRepository, DireccionesRepository direccionesRepository, PaisesRepository paisesRepository, PartnersRepository partnersRepository,TipoPartnersRepository tipoPartnersRepository, UploaderImageRepository uploaderImageRepository, ColoniasRepository coloniasRepository, ImagesService imagesService)
@@ -534,14 +535,20 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _partnersRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    try
+                    if (file != null)
                     {
-                        UpdatePartner(map.CodeStatus, item, file);
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+                        try
+                        {
+                            UpdatePartner(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
+                    
                     return result.Ok(map);
                 }
                 else
@@ -559,17 +566,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult UpdatePartner(int id, tbPartners tbPartners, List<IFormFile> file)
         {
             var result = new ServiceResult();
+
             try
             {
                 var itemID = _partnersRepository.Find(id);
 
                 if (itemID != null)
                 {
-                    //if (file != null)
-                    //{
-                    if (itemID.Image_Url != null)
+                    if (file != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_Url))
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        if (!string.IsNullOrEmpty(itemID.Image_Url) && itemID.Image_Url != _defaultImageRoute)
                         {
                             try
                             {
@@ -581,12 +590,24 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             }
 
                         }
-                    }
-                    var _fileName = "Partner-";
-                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumPartner, itemID.ID), string.Concat(_fileName, itemID.ID), file).Result.Data;
-                    //}
 
-                    tbPartners.Part_Url = _defaultImageRoute;
+                        var _fileName = "Partner-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat(_defaultAlbumPartner, itemID.ID),
+                            string.Concat(_fileName, itemID.ID),
+                            file).Result.Data;
+                        tbPartners.Part_Url = _defaultImageRoute;
+                    }
+                    else
+                    {
+                        tbPartners.Part_Url = itemID.Image_Url;
+                    }
+
+                    if (string.IsNullOrEmpty(itemID.Image_Url) || itemID.Image_Url == _defaultImageRoute)
+                    {
+                        tbPartners.Part_Url = _defaultImageRoute;
+                    }
+
 
                     var map = _partnersRepository.Update(tbPartners, id);
                     if (map.CodeStatus > 0)
@@ -644,6 +665,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             try
             {
                 VW_tbPartners partner = _partnersRepository.Find(id);
+                if (partner != null)
+                {
+                    try
+                    {
+                        partner.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(partner.Image_Url).Data).ImageUrl;
+
+                    }
+                    catch (Exception)
+                    {
+
+                        return result.BadRequest("You have inserted multiple images on a single image field");
+                    }
+                }
                 return result.Ok(partner);
             }
             catch (Exception ex)

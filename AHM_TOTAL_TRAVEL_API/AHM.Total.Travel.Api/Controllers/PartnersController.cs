@@ -46,9 +46,8 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(int id, PartnersViewModel items)
+        public IActionResult Update(int id,[FromForm] PartnersViewModel items)
         {
-
             var item = _mapper.Map<tbPartners>(items);
             var result = _generalService.UpdatePartner(id, item, items.File);
             return Ok(result);
