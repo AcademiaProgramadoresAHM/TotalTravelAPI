@@ -13,8 +13,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public int Id_TipoPago { get; set; }
         public string TipoPago { get; set; }
         public int Id_Reservacion { get; set; }
-        public int? Id_Paquete { get; set; }
+        public int Id_Paquete { get; set; }
+        public string Descripcion_Paquete { get; set; }
         public int Id_Cliente { get; set; }
+        public string NombreCompleto { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string DNI { get; set; }

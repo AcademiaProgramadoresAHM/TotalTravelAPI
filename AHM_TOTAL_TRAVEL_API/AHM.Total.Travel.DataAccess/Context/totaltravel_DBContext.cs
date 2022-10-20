@@ -876,6 +876,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(13)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Descripcion_Paquete).IsUnicode(false);
+
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
@@ -884,6 +886,11 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreCompleto)
+                    .IsRequired()
+                    .HasMaxLength(101)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Telefono)
