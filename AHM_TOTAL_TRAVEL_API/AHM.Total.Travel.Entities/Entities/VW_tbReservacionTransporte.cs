@@ -8,7 +8,7 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbReservacionTransporte
     {
         public int Id { get; set; }
-        public int? Reservacion { get; set; }
+        public int Reservacion { get; set; }
         public int? Asientos { get; set; }
         public bool? Cancelado { get; set; }
         public DateTime? Fecha_Cancelado { get; set; }

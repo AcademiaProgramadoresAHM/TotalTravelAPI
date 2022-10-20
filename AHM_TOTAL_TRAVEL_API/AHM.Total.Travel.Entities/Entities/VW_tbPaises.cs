@@ -11,6 +11,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Codigo { get; set; }
         public string Pais { get; set; }
         public string Nacionalidad { get; set; }
+        public string ISO { get; set; }
         public int? UsuarioCreacionID { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
