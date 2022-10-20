@@ -1033,7 +1033,9 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbReservacionesActividadesExtras", "Resv");
 
-                entity.Property(e => e.Actividad_Extra).IsUnicode(false);
+                entity.Property(e => e.Actividad_Extra)
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Cliente)
                     .IsRequired()

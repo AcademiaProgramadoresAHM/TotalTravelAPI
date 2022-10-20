@@ -547,8 +547,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult UpdateUsers(int id, tbUsuarios tbUsuarios, List<IFormFile>file)
         {
             var result = new ServiceResult();
-
-            
             try
             {
                 var itemID = _usuariosRepository.Find(id);

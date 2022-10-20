@@ -32,6 +32,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Pais_Codigo", item.Pais_Codigo, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Pais_ISO", item.Pais_ISO, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_Descripcion", item.Pais_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_Nacionalidad", item.Pais_Nacionalidad, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_UsuarioCreacion", item.Pais_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
@@ -51,6 +52,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@Pais_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Pais_Codigo", item.Pais_Codigo, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Pais_ISO", item.Pais_ISO, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_Descripcion", item.Pais_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_Nacionalidad", item.Pais_Nacionalidad, DbType.String, ParameterDirection.Input);
             parameters.Add("@Pais_UsuarioModifica", item.Pais_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

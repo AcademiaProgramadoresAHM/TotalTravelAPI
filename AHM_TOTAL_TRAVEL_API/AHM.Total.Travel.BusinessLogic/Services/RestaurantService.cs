@@ -375,14 +375,21 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var map = _menusRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
-                    try
+                    if (file != null)
                     {
-                        UpdateMenus(map.CodeStatus, item, file);
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        try
+                        {
+                            UpdateMenus(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
+                    
                     return result.Ok(map);
                 }
                 else
@@ -402,19 +409,20 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var itemID = _restaurantesRepository.Find(tbMenus.Rest_ID);
+                var itemID = _menusRepository.Find(id);
 
                 if (itemID != null)
                 {
-                    //if (file != null)
-                    //{
-                    if (itemID.Image_URL != null)
+                    if (file != null)
                     {
-                        if (!string.IsNullOrEmpty(itemID.Image_URL))
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+                        if (!string.IsNullOrEmpty(itemID.Image_Url) && itemID.Image_Url != _defaultImageRoute)
                         {
                             try
                             {
-                                ServiceResult response = _imagesService.deleteImage(itemID.Image_URL);
+                                ServiceResult response = _imagesService.deleteImage(itemID.Image_Url);
                             }
                             catch (Exception e)
                             {
@@ -422,12 +430,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             }
 
                         }
-                    }
-                    var _fileName = "Menu-";
-                    _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, tbMenus.Rest_ID, "\\Food"), string.Concat(_fileName, itemID.ID), file).Result.Data;
-                    //}
 
-                    tbMenus.Menu_Url = _defaultImageRoute;
+                        var _fileName = "Menu-";
+                        _defaultImageRoute = _imagesService.saveImages(
+                            string.Concat(_defaultAlbumRoute, itemID.ID_Restaurante, "\\Food"),
+                            string.Concat(_fileName, itemID.ID),
+                            file).Result.Data;
+
+                        tbMenus.Menu_Url = _defaultImageRoute;
+                    }
+                    else
+                    {
+                        tbMenus.Menu_Url = _defaultImageRoute;
+                    }
+
+                    if (string.IsNullOrEmpty(itemID.Image_Url) || itemID.Image_Url == _defaultImageRoute)
+                    {
+                        tbMenus.Menu_Url = _defaultImageRoute;
+                    }
+
 
                     var map = _menusRepository.Update(tbMenus, id);
                     if (map.CodeStatus > 0)
@@ -484,11 +505,23 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindMenus(int id)
         {
             var result = new ServiceResult();
-            var menus = new VW_tbMenus();
+            
             try
             {
-                menus = _menusRepository.Find(id);
-                menus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(menus.Image_Url).Data).ImageUrl;
+                VW_tbMenus menus = _menusRepository.Find(id);
+                if (menus != null)
+                {
+                    try
+                    {
+                        menus.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(menus.Image_Url).Data).ImageUrl;
+
+                    }
+                    catch (Exception)
+                    {
+
+                        return result.BadRequest("You have inserted multiple images on a single image field");
+                    }
+                }
                 return result.Ok(menus);
             }
             catch (Exception ex)

@@ -4,6 +4,8 @@ using ConciertosProyecto.BusinessLogic;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
@@ -243,7 +245,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _hotelesActividadesRepository.List();
+                List<VW_tbHotelesActividades> list = _hotelesActividadesRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    item.Image_URL = ((ImagesDetails)(_imagesService.getImagesFilesByRoute(item.Image_URL).Data)).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)
