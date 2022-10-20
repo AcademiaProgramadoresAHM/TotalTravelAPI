@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public tbDirecciones()
         {
+            tbActividadesExtras = new HashSet<tbActividadesExtras>();
             tbHoteles = new HashSet<tbHoteles>();
             tbRestaurantes = new HashSet<tbRestaurantes>();
             tbTransportes = new HashSet<tbTransportes>();
@@ -28,6 +29,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbColonias Colo_ { get; set; }
         public virtual tbUsuarios Dire_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Dire_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual ICollection<tbHoteles> tbHoteles { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantes { get; set; }
         public virtual ICollection<tbTransportes> tbTransportes { get; set; }

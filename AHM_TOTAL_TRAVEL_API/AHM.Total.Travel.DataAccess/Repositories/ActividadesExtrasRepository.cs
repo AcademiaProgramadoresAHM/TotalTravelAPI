@@ -37,7 +37,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_UsuarioCreacion", item.AcEx_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_Url", item.AcEx_Url, DbType.String, ParameterDirection.Input);
-
+            parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbActividadesExtra_Insert, parameters, commandType: CommandType.StoredProcedure);
@@ -58,7 +58,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@AcEx_Descripcion", item.AcEx_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@AcEx_UsuarioModifica", item.AcEx_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_Url", item.AcEx_Url, DbType.String, ParameterDirection.Input);
-           
+            parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
+
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbActividadesExtra_Update, parameters, commandType: CommandType.StoredProcedure);
