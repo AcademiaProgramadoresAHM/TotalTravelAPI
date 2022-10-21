@@ -47,7 +47,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
         public IEnumerable<VW_tbMenus> List()
         {
-            return db.VW_tbMenus.ToList();
+            return db.VW_tbMenus.AsList();
         }
 
         public RequestStatus Update(tbMenus item, int id)

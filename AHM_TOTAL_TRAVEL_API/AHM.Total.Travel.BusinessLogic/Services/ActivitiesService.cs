@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -158,7 +160,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _actividadesExtrasRepository.List();
+                List<VW_tbActividadesExtras> list = _actividadesExtrasRepository.List().ToList();
+                list.ForEach(item => 
+                {
+                    item.ImageURL = ((ImagesDetails)(_imagesService.getImagesFilesByRoute(item.ImageURL).Data)).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)

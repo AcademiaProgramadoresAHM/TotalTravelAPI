@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
@@ -516,7 +517,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _partnersRepository.List();
+                List<VW_tbPartners> list = _partnersRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    item.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(item.Image_Url).Data).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)

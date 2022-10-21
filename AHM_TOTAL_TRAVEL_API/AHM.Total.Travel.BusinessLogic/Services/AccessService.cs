@@ -7,6 +7,7 @@ using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
@@ -492,7 +493,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _usuariosRepository.List();
+                List<VW_tbUsuarios> list = _usuariosRepository.List().ToList();
+                list.ForEach(item => 
+                {
+                    item.Image_URL = ((ImagesDetails)_imagesService.getImagesFilesByRoute(item.Image_URL).Data).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)

@@ -194,7 +194,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
             else
             {
-                return result.NotFound(_defaultImageRoute);
+                return result.NotFound(createImageUrlRoute(_defaultImageRoute));
             }
         }
         

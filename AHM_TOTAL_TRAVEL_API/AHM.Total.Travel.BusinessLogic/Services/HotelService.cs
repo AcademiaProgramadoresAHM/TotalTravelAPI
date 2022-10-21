@@ -49,7 +49,26 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _hotelesRepository.List();
+                List<VW_tbHoteles> list = _hotelesRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(item.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        item.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var routes in images)
+                        {
+                            url = string.Concat(url, routes.ImageUrl, ",");
+                        }
+                        item.Image_URL = url;
+                    }
+                    
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -442,7 +461,26 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _habitacionesRepository.List();
+                List<VW_tbHabitaciones> list = _habitacionesRepository.List().ToList();
+                list.ForEach(item => 
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(item.ImageUrl);
+                    if (!imageResult.Success)
+                    {
+                        item.ImageUrl = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var routes in images)
+                        {
+                            url = string.Concat(url, routes.ImageUrl, ",");
+                        }
+                        item.ImageUrl = url;
+                    }
+                });
+
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -641,7 +679,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _hotelesMenusRepository.List();
+                List<VW_tbHotelesMenus> list = _hotelesMenusRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    item.Image_Url = ((ImagesDetails)(_imagesService.getImagesFilesByRoute(item.Image_Url).Data)).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)

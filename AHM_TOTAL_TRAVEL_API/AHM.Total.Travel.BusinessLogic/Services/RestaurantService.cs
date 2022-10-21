@@ -38,7 +38,24 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _restaurantesRepository.List();
+                List<VW_tbRestaurantes> list = _restaurantesRepository.List().ToList();
+                list.ForEach(item => {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(item.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        item.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var routes in images)
+                        {
+                            url = string.Concat(url, routes.ImageUrl, ",");
+                        }
+                        item.Image_URL = url;
+                    }
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -355,7 +372,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _menusRepository.List();
+                List<VW_tbMenus> list = _menusRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    item.Image_Url = ((ImagesDetails)_imagesService.getImagesFilesByRoute(item.Image_Url).Data).ImageUrl;
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)
