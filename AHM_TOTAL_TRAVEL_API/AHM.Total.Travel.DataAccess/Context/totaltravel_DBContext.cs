@@ -920,6 +920,11 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToView("VW_tbReservacionRestaurante", "Resv");
 
+                entity.Property(e => e.Cliente)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
@@ -950,6 +955,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbReservacionTransporte", "Resv");
+
+                entity.Property(e => e.Cliente)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Fecha_Cancelado).HasColumnType("date");
 
