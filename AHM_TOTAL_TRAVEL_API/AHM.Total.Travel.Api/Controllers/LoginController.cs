@@ -100,11 +100,11 @@ namespace AHM.Total.Travel.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("EmailContact")]
-        public ServiceResult EmailContact(EmailDataViewModel EmailDataViewModel, string body)
+        public ServiceResult EmailContact(EmailDataViewModel EmailDataViewModel)
         {
             ServiceResult result = new ServiceResult();
 
-            var user = _emailSenderService.ContactEmail(EmailDataViewModel, body);
+            var user = _emailSenderService.ContactEmail(EmailDataViewModel);
             return user;
         }
     }

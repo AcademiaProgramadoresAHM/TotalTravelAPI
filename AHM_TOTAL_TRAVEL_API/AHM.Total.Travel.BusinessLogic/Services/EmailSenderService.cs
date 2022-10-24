@@ -70,17 +70,16 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
 
-        public ServiceResult ContactEmail(EmailDataViewModel emailData, String body)
+        public ServiceResult ContactEmail(EmailDataViewModel emailData)
         {
             try
             {
-                emailData.To = "totaltravelenterprise@gmail.com";
+                
                 emailData.Subject = "Contáctanos - Agencia Total Travel";
-                emailData.BodyData = body;
 
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(_config["ApiGmail:Mail"], _config["ApiGmail:Company"]));
-                message.To.Add(new MailboxAddress(emailData.ToName, emailData.To));
+                message.From.Add(new MailboxAddress(emailData.ToName, emailData.To));
+                message.To.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
                 message.Subject = emailData.Subject;
                 message.Body = new TextPart("plain")
                 {
@@ -96,7 +95,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     client.Send(message);
                     client.Disconnect(true);
                 }
-                return new ServiceResult().Ok(data: body);
+                return new ServiceResult().Ok();
             }
             catch (Exception e)
             {
