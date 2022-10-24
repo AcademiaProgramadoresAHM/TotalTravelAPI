@@ -69,5 +69,40 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return new ServiceResult().BadRequest(message: "Ocurrio un error al enviar el email");
             }
         }
+
+        public ServiceResult ContactEmail(EmailDataViewModel emailData, String body)
+        {
+            try
+            {
+                emailData.To = "totaltravelenterprise@gmail.com";
+                emailData.Subject = "Contáctanos - Agencia Total Travel";
+                emailData.BodyData = body;
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(_config["ApiGmail:Mail"], _config["ApiGmail:Company"]));
+                message.To.Add(new MailboxAddress(emailData.ToName, emailData.To));
+                message.Subject = emailData.Subject;
+                message.Body = new TextPart("plain")
+                {
+                    Text = emailData.BodyData
+                };
+
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    client.Connect(_config["ApiGmail:Host"],
+                        int.Parse(_config["ApiGmail:Port"]),
+                        false);
+                    client.Authenticate(_config["ApiGmail:Mail"], _config["ApiGmail:Password"]);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                return new ServiceResult().Ok(data: body);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ServiceResult().BadRequest(message: "Ocurrio un error al enviar el email");
+            }
+        }
     }
 }

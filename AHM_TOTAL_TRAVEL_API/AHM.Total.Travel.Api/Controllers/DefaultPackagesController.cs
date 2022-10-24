@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[Controller]")]
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador, Cliente")]
     public class DefaultPackagesController : Controller
     {
         private readonly SaleService _saleService;

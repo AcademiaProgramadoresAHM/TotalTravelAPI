@@ -97,5 +97,15 @@ namespace AHM.Total.Travel.Api.Controllers
             var user = _emailSenderService.RetrievePassword(EmailDataViewModel);
             return user;
         }
+
+        [AllowAnonymous]
+        [HttpPost("EmailContact")]
+        public ServiceResult EmailContact(EmailDataViewModel EmailDataViewModel, string body)
+        {
+            ServiceResult result = new ServiceResult();
+
+            var user = _emailSenderService.ContactEmail(EmailDataViewModel, body);
+            return user;
+        }
     }
 }
