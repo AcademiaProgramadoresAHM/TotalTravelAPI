@@ -33,7 +33,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
-        [Authorize(Roles = "Cliente")]
+        [Authorize(Roles = "Administrador, Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesActividadesHotelesViewModel item)
         {

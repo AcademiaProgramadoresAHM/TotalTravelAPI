@@ -60,6 +60,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [Authorize(Roles = "Administrador, Moderador de Restaurante")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

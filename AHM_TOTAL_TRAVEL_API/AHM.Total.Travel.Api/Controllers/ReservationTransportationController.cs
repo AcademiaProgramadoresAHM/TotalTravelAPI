@@ -35,8 +35,8 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        
 
+        [Authorize(Roles = "Administrador, Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionTransporteViewModel items)
         {

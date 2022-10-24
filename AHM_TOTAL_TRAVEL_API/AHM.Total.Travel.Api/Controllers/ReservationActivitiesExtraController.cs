@@ -31,7 +31,8 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _reservationService.ListReservationActivitiesExtra();
             return Ok(list);
         }
-        
+
+        [Authorize(Roles = "Administrador, Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesActividadesExtrasViewModel item)
         {
