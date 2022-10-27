@@ -24,5 +24,11 @@ namespace AHM.Total.Travel.Entities.Entities
         public string UsuarioModifica { get; set; }
         public DateTime? FechaModifica { get; set; }
         public bool? Estado { get; set; }
+        public int? ColoniaID { get; set; }
+        public string Colonia { get; set; }
+        public string Avenida { get; set; }
+        public string Calle { get; set; }
+        public int? DireccionID { get; set; }
+        public string TipoActividad { get; set; }
     }
 }
