@@ -29,6 +29,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Avenida { get; set; }
         public string Calle { get; set; }
         public int? DireccionID { get; set; }
+        public int? TipoActividadID { get; set; }
         public string TipoActividad { get; set; }
     }
 }
