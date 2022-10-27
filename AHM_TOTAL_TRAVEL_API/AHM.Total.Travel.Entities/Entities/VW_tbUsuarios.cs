@@ -11,6 +11,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string DNI { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+        public string Nombrecompleto { get; set; }
         public string Sexo { get; set; }
         public DateTime? Fecha_Nacimiento { get; set; }
         public string Email { get; set; }

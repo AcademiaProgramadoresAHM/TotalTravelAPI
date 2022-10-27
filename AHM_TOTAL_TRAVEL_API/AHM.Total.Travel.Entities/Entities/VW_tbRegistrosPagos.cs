@@ -9,14 +9,14 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public decimal? MontoPago { get; set; }
-        public DateTime? fechaPago { get; set; }
-        public int Id_TipoPago { get; set; }
+        public DateTime? FechaPago { get; set; }
+        public int? Id_TipoPago { get; set; }
         public string TipoPago { get; set; }
-        public int Id_Reservacion { get; set; }
-        public int Id_Paquete { get; set; }
+        public int? Id_Reservacion { get; set; }
+        public int? Id_Paquete { get; set; }
         public string Descripcion_Paquete { get; set; }
-        public int Id_Cliente { get; set; }
-        public string NombreCompleto { get; set; }
+        public int? Id_Cliente { get; set; }
+        public string Nombre_Completo { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string DNI { get; set; }
