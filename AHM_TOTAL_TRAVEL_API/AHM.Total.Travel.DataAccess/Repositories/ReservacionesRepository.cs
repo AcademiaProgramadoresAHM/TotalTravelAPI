@@ -35,6 +35,13 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Resv_UsuarioCreacion", item.Resv_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Resv_Precio", item.Resv_Precio, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@Paqu_ID", item.Paqu_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Resv_esPersonalizado", item.Resv_esPersonalizado, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Resv_CantidadPagos", item.Resv_CantidadPagos, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Resv_NumeroPersonas", item.Resv_NumeroPersonas, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Resv_ConfirmacionPago", item.Resv_ConfirmacionPago, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Resv_ConfirmacionHotel", item.Resv_ConfirmacionHotel, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Resv_ConfirmacionRestaurante", item.Resv_ConfirmacionRestaurante, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Resv_ConfirmacionTrans", item.Resv_ConfirmacionTrans, DbType.Boolean, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
