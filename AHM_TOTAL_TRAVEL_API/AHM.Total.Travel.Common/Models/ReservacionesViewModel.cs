@@ -17,6 +17,7 @@ namespace AHM.Total.Travel.Common.Models
         public bool? Resv_ConfirmacionRestaurante { get; set; }
         public bool? Resv_ConfirmacionTrans { get; set; }
         public decimal? Resv_Precio { get; set; }
+        public int? Resv_UsuarioCreacion { get; set; }
 
     }
 }
