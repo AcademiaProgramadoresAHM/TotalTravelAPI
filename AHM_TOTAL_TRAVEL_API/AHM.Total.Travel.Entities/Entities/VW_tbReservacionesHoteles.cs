@@ -8,6 +8,7 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbReservacionesHoteles
     {
         public int ID { get; set; }
+        public int? Hotel_ID { get; set; }
         public DateTime? Fecha_Entrada { get; set; }
         public DateTime? Fecha_Salida { get; set; }
         public int ReservacionID { get; set; }
