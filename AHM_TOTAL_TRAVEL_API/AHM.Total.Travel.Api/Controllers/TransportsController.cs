@@ -31,6 +31,14 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _transportService.ListTransports();
             return Ok(list);
         }
+        [AllowAnonymous]
+        [HttpGet("ListComplete")]
+        public IActionResult ListComplete()
+        {
+            var list = _transportService.ListTransportsComplete();
+            return Ok(list);
+        }
+
 
         [HttpPost("Insert")]
         public IActionResult Insert(TransportesViewModel item)
