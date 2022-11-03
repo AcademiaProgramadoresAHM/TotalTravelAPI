@@ -994,6 +994,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
 
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Precio).HasColumnType("money");
 
                 entity.Property(e => e.Tipo_Transporte)
