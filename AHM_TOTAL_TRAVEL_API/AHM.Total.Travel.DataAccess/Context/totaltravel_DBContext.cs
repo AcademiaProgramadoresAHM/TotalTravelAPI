@@ -1539,8 +1539,6 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.UsuarioModifica)
                     .HasMaxLength(101)
                     .IsUnicode(false);
-
-                entity.Property(e => e.image_URL).IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbUsuarios>(entity =>
