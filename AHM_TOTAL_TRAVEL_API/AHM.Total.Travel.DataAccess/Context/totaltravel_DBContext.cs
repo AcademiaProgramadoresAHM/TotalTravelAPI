@@ -56,6 +56,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbTiposPagos> VW_tbTiposPagos { get; set; }
         public virtual DbSet<VW_tbTiposTransportes> VW_tbTiposTransportes { get; set; }
         public virtual DbSet<VW_tbTransportes> VW_tbTransportes { get; set; }
+        public virtual DbSet<VW_tbTransportesCompleto> VW_tbTransportesCompleto { get; set; }
         public virtual DbSet<VW_tbUsuarios> VW_tbUsuarios { get; set; }
         public virtual DbSet<VW_tbUsuariosLogins> VW_tbUsuariosLogins { get; set; }
         public virtual DbSet<tbActividades> tbActividades { get; set; }
@@ -1527,6 +1528,63 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.NombrePartner)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.TipoTransporte)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioCreacion)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.image_URL).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbTransportesCompleto>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbTransportesCompleto", "Trpt");
+
+                entity.Property(e => e.Avenida)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Calle)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Colonia)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.HoraLlegada)
+                    .IsRequired()
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HoraSalida)
+                    .IsRequired()
+                    .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombrePartner)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
 
                 entity.Property(e => e.TipoTransporte)
                     .HasMaxLength(50)

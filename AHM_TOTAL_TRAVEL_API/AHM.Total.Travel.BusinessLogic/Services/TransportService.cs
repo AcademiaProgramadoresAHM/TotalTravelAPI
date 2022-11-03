@@ -171,6 +171,20 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+        //LISTADO COMPLETO
+        public ServiceResult ListTransportsComplete()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _transportesRepository.ListComplete();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
 
         //CREAR
         public ServiceResult CreateTransports(tbTransportes item)

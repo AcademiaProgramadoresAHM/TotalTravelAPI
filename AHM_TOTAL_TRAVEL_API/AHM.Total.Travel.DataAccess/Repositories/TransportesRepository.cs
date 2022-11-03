@@ -46,6 +46,10 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             return DB.VW_tbTransportes.AsList();
         }
+        public IEnumerable<VW_tbTransportesCompleto> ListComplete()
+        {
+            return DB.VW_tbTransportesCompleto.AsList();
+        }
 
         public RequestStatus Update(tbTransportes item, int id)
         {
