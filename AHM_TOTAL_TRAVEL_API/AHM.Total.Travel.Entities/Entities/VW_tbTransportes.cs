@@ -12,6 +12,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string TipoTransporte { get; set; }
         public int? PartnerID { get; set; }
         public string NombrePartner { get; set; }
+        public string image_URL { get; set; }
         public int Ciudad_ID { get; set; }
         public string Ciudad { get; set; }
         public int? DireccionId { get; set; }
