@@ -5,28 +5,25 @@ using System.Collections.Generic;
 
 namespace AHM.Total.Travel.Entities.Entities
 {
-    public partial class VW_tbReservaciones
+    public partial class VW_tbReservacionesInfo
     {
-        public int ID { get; set; }
+        public int id { get; set; }
         public int? NumeroPersonas { get; set; }
         public int? CantidadPagos { get; set; }
         public int? Id_Paquete { get; set; }
         public string DescripcionPaquete { get; set; }
-        public string DurecionPaquete { get; set; }
-        public decimal? precio { get; set; }
-        public int ReservacionHotelID { get; set; }
+        public string DuracionPaquete { get; set; }
+        public decimal? Precio { get; set; }
+        public int? ReservacionHotelID { get; set; }
         public DateTime? Fecha_Entrada { get; set; }
         public DateTime? Fecha_Salida { get; set; }
         public int? Hotel_ID { get; set; }
         public string Nombre_Hotel { get; set; }
-        public int? PartnerID { get; set; }
         public int Id_Cliente { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string Nombrecompleto { get; set; }
         public string DNI { get; set; }
         public string Email { get; set; }
-        public string Telefono { get; set; }
         public bool? ConfirmacionHotel { get; set; }
         public bool? ConfirmacionRestaurante { get; set; }
         public bool? ConfirmacionTransporte { get; set; }

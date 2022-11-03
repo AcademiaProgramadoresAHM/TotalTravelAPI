@@ -46,6 +46,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbReservacionesActividadesHoteles> VW_tbReservacionesActividadesHoteles { get; set; }
         public virtual DbSet<VW_tbReservacionesDetalles> VW_tbReservacionesDetalles { get; set; }
         public virtual DbSet<VW_tbReservacionesHoteles> VW_tbReservacionesHoteles { get; set; }
+        public virtual DbSet<VW_tbReservacionesInfo> VW_tbReservacionesInfo { get; set; }
         public virtual DbSet<VW_tbRestaurantes> VW_tbRestaurantes { get; set; }
         public virtual DbSet<VW_tbRoles> VW_tbRoles { get; set; }
         public virtual DbSet<VW_tbRolesPermisos> VW_tbRolesPermisos { get; set; }
@@ -325,6 +326,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Matricula)
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Parter)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Precio).HasColumnType("money");
@@ -989,6 +994,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
 
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Precio).HasColumnType("money");
 
                 entity.Property(e => e.Tipo_Transporte)
@@ -1016,10 +1025,6 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Categoria_Habitacion)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.DNI)
                     .HasMaxLength(13)
                     .IsUnicode(false);
@@ -1041,11 +1046,6 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Fecha_Entrada).HasColumnType("date");
 
                 entity.Property(e => e.Fecha_Salida).HasColumnType("date");
-
-                entity.Property(e => e.Habitacion)
-                    .IsRequired()
-                    .HasMaxLength(101)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
@@ -1215,6 +1215,59 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.UsuarioModifica)
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbReservacionesInfo>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbReservacionesInfo", "Resv");
+
+                entity.Property(e => e.Apellido)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DNI)
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DescripcionPaquete).IsUnicode(false);
+
+                entity.Property(e => e.DuracionPaquete)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Fecha_Entrada).HasColumnType("date");
+
+                entity.Property(e => e.Fecha_Salida).HasColumnType("date");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre_Hotel)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
+
+                entity.Property(e => e.UsuarioCrea)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsuarioModifica)
+                    .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
             });
@@ -2496,6 +2549,14 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasName("PK__tbReserv__0E88BC1165A19FFD");
 
                 entity.ToTable("tbReservaciones", "Resv");
+
+                entity.Property(e => e.Resv_ConfirmacionHotel).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Resv_ConfirmacionPago).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Resv_ConfirmacionRestaurante).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Resv_ConfirmacionTrans).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Resv_Estado).HasDefaultValueSql("('1')");
 
