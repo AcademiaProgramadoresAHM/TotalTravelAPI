@@ -348,6 +348,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
+
+                entity.Property(e => e.image_URL).IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbDirecciones>(entity =>
