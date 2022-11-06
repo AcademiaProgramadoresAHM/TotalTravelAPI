@@ -10,6 +10,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ReAH_ID { get; set; }
         public int? Resv_ID { get; set; }
         public int? HoAc_ID { get; set; }
+        public decimal? ReAH_Precio { get; set; }
         public int? ReAH_Cantidad { get; set; }
         public DateTime? ReAH_FechaReservacion { get; set; }
         public string ReAH_HoraReservacion { get; set; }
