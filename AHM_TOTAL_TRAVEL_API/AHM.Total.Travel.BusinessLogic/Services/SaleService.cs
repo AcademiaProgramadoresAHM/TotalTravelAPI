@@ -3,6 +3,7 @@ using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
@@ -13,14 +14,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly TiposPagosRepository _tipospagosRepository;
         private readonly PaquetePredeterminadosDetallesRepository _paquetePredeterminadosDetallesRepository;
         private readonly PaquetesHabitacionesRepository _paquetesHabitacionesRepository;
+        private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesRepository;
 
-        public SaleService(PaquetePredeterminadosRepository paquetepredeterminados,
-            TiposPagosRepository tipospagos, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetalles, PaquetesHabitacionesRepository paquetesHabitacionesRepository)
+        
+
+        public SaleService(PaquetePredeterminadosRepository paquetepredeterminadosRepository, TiposPagosRepository tipospagosRepository, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetallesRepository, PaquetesHabitacionesRepository paquetesHabitacionesRepository, PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesRepository)
         {
-            _paquetepredeterminadosRepository = paquetepredeterminados;
-            _tipospagosRepository = tipospagos;
-            _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetalles;
+            _paquetepredeterminadosRepository = paquetepredeterminadosRepository;
+            _tipospagosRepository = tipospagosRepository;
+            _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetallesRepository;
             _paquetesHabitacionesRepository = paquetesHabitacionesRepository;
+            _actividadesHotelesRepository = actividadesHotelesRepository;
         }
 
         #region PaquetesPredeterminados
@@ -147,6 +151,131 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
         }
 
+        #endregion
+
+        #region PaquetesPredeterminadosActividadesHoteles
+        //LISTADO
+        public ServiceResult ListPackagesHotelsActivities()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _actividadesHotelesRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreatePackagesHotelsActivities(tbPaquetePredeterminadosActividadesHoteles item)
+        {
+
+            var result = new ServiceResult();
+            try
+            {
+                var map = _actividadesHotelesRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        //ACTUALIZAR
+        public ServiceResult UpdatePackagesHotelsActivities(int id, tbPaquetePredeterminadosActividadesHoteles tbPaquetePredeterminados)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _actividadesHotelesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _actividadesHotelesRepository.Update(tbPaquetePredeterminados, id);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //ELIMINAR
+        public ServiceResult DeletePackagesHotelsActivities(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _actividadesHotelesRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _actividadesHotelesRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+
+
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        //BUSCAR
+        public ServiceResult FindPackagesHotelsActivities(int id)
+        {
+            var result = new ServiceResult();
+            var city = new VW_tbPaquetePredeterminadosActividadesHoteles();
+            try
+            {
+                city = _actividadesHotelesRepository.Find(id);
+                return result.Ok(city);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+
+        }
         #endregion
 
         #region TipoPagos
