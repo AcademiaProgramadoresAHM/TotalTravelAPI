@@ -8,6 +8,7 @@ using System.Text;
 using Org.BouncyCastle.Crypto;
 using System.Linq;
 using Org.BouncyCastle.Utilities;
+using Newtonsoft.Json.Serialization;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -884,45 +885,56 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                                 var resultDetails = _reservacionesDetallesRepository.Insert(reservacionesDetalles);
                             }
+
+
+                            if (itemViewModel.ActividadesExtras != null)
+                            {
+                                //Creates a reservation for the extra activities
+                                List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = (List<VW_tbPaquetePredeterminadosDetalles>)_saleService.ListPackagesdetail().Data;
+                                List<VW_tbPaquetePredeterminadosDetalles> filteredPackageExtraActivities = packageExtraActivities.Where(x => x.PaqueteID == packID).ToList();
+                                foreach (var actvExtra in filteredPackageExtraActivities)
+                                {
+
+                                    tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        AcEx_ID = actvExtra.ActividadID,
+                                        ReAE_Precio = actvExtra.Precio,
+                                        ReAE_Cantidad = actvExtra.Cantidad,
+                                        ReAE_FechaReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_FechaReservacion,
+                                        ReAE_HoraReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_HoraReservacion,
+                                        ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                    };
+                                    _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
+                                }
+                            }
+
+
+                            if (itemViewModel.ActividadesHoteles != null)
+                            {
+
+                                //Create a reservation of the extra activities in the hotel
+                                List<VW_tbPaquetePredeterminadosActividadesHoteles> hotelsActivities = (List<VW_tbPaquetePredeterminadosActividadesHoteles>)_saleService.ListPackagesHotelsActivities().Data;
+                                List<VW_tbPaquetePredeterminadosActividadesHoteles> filteredhotelsActivities = hotelsActivities.Where(x => x.ID_Paque == packID).ToList();
+
+                                foreach (var actvHotel in filteredhotelsActivities)
+                                {
+                                    tbReservacionesActividadesHoteles actividadesHoteles = new tbReservacionesActividadesHoteles
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        HoAc_ID = actvHotel.ID_HoAc,
+                                        ReAH_Cantidad = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Cantidad,
+                                        ReAH_Precio = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Precio,
+                                        ReAH_FechaReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_FechaReservacion,
+                                        ReAH_HoraReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_HoraReservacion,
+                                        ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                    };
+                                    var hotelActivities = _reservacionesActividadesHotelesRepository.Insert(actividadesHoteles);
+                                }
+                            }
                             
-                            //Creates a reservation for the extra activities
-                            List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = (List<VW_tbPaquetePredeterminadosDetalles>)_saleService.ListPackagesdetail().Data;
-                            List<VW_tbPaquetePredeterminadosDetalles> filteredPackageExtraActivities = packageExtraActivities.Where(x => x.PaqueteID == packID).ToList();
-                            foreach (var actvExtra in filteredPackageExtraActivities)
-                            {
-                                tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
-                                {
-                                    Resv_ID = ResvIDInt,
-                                    AcEx_ID = actvExtra.ActividadID,
-                                    ReAE_Precio = actvExtra.Precio,
-                                    ReAE_Cantidad = actvExtra.Cantidad,
-                                    ReAE_FechaReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_FechaReservacion,
-                                    ReAE_HoraReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_HoraReservacion,
-                                    ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-
-                                };
-                                _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
-                            }
-
-                            //Create a reservation of the extra activities in the hotel
-                            List<VW_tbPaquetePredeterminadosActividadesHoteles> hotelsActivities = (List<VW_tbPaquetePredeterminadosActividadesHoteles>)_saleService.ListPackagesHotelsActivities().Data;
-                            List<VW_tbPaquetePredeterminadosActividadesHoteles> filteredhotelsActivities = hotelsActivities.Where(x => x.ID_Paque == packID).ToList();
-
-                            foreach (var actvHotel in filteredhotelsActivities)
-                            {
-                                tbReservacionesActividadesHoteles actividadesHoteles = new tbReservacionesActividadesHoteles
-                                {
-                                    Resv_ID = ResvIDInt,
-                                    HoAc_ID = actvHotel.ID_HoAc,
-                                    ReAH_Cantidad = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Cantidad,
-                                    ReAH_Precio = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Precio,
-                                    ReAH_FechaReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_FechaReservacion,
-                                    ReAH_HoraReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_HoraReservacion,
-                                    ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-
-                                };
-                                var hotelActivities = _reservacionesActividadesHotelesRepository.Insert(actividadesHoteles);
-                            }
                     }
                         else
                         {

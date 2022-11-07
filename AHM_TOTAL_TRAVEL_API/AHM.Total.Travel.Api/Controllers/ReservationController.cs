@@ -34,7 +34,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult Insert([FromForm] ReservacionesViewModel item)
+        public IActionResult Insert(ReservacionesViewModel item)
         {
             try
             {

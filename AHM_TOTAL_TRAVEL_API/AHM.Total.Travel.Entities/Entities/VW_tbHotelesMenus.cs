@@ -10,6 +10,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID { get; set; }
         public int ID_Hotel { get; set; }
         public string Hotel { get; set; }
+        public int? PartnerID { get; set; }
         public int ID_TipoMenu { get; set; }
         public string Tipo { get; set; }
         public string Menu { get; set; }

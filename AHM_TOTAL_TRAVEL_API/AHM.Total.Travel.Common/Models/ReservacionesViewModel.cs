@@ -8,7 +8,7 @@ namespace AHM.Total.Travel.Common.Models
 {
     public class ReservacionesViewModel
     {
-        public int Resv_ID { get; set; }
+        public int? Resv_ID { get; set; } = 0;
         public int? Usua_ID { get; set; }
         public int? Paqu_ID { get; set; }
         public bool Resv_esPersonalizado { get; set; }
@@ -33,9 +33,9 @@ namespace AHM.Total.Travel.Common.Models
 
         //Need this in order to make a reservation of a custom package
         public int? Hote_ID { get; set; }
-        public List<ReservacionesActividadesExtrasViewModel> ActividadesExtras { get; set; }
-        public List<ReservacionRestaurantesViewModel> Restaurantes { get; set; }
-        public List<ReservacionesActividadesHotelesViewModel> ActividadesHoteles { get; set; }
+        public List<ReservacionesActividadesExtrasViewModel> ActividadesExtras { get; set; } = null;
+        public List<ReservacionRestaurantesViewModel> Restaurantes { get; set; } = null;
+        public List<ReservacionesActividadesHotelesViewModel> ActividadesHoteles { get; set; } = null; 
         public int? TipoPago { get; set; }
         public int? Habi_ID { get; set; }
         public int? Habi_Cantidad { get; set;  }
