@@ -32,7 +32,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
-        [Authorize(Roles = "Cliente")]
+        [Authorize(Roles = "Administrador,Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(RegistrosPagosViewModel item)
         {
@@ -56,7 +56,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Cliente")]
+        [Authorize(Roles = "Administrador, Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

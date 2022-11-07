@@ -35,7 +35,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@TipoPagoID", item.TiPa_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Monto", item.RePa_Monto, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("@FechaPago", item.RePa_FechaPago, DbType.Date, ParameterDirection.Input);
-            parameters.Add("@UsuarioCreacion", item.RePa_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@UsuarioCrea", item.RePa_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

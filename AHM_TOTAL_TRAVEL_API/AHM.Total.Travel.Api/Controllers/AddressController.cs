@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
-    [Authorize(Roles = "Administrador")]
+    [AllowAnonymous]
     public class AddressController : ControllerBase
     {
         private readonly GeneralService _generalService;
@@ -58,7 +58,6 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
-        [Authorize(Roles = "Administrador, Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {

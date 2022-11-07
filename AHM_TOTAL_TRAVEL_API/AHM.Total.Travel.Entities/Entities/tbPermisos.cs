@@ -12,12 +12,15 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Perm_Descripcion { get; set; }
         public string Perm_Controlador { get; set; }
         public string Perm_Action { get; set; }
+        public int? Modu_ID { get; set; }
+        public bool? Perm_esVisible { get; set; }
         public int? Perm_UsuarioCreacion { get; set; }
         public DateTime? Perm_FechaCreacion { get; set; }
         public int? Perm_UsuarioModifica { get; set; }
         public DateTime? Perm_FechaModifica { get; set; }
         public bool? Perm_Estado { get; set; }
 
+        public virtual tbModulos Modu_ { get; set; }
         public virtual tbUsuarios Perm_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Perm_UsuarioModificaNavigation { get; set; }
     }

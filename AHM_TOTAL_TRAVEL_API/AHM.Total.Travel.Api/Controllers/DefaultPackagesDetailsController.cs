@@ -31,7 +31,6 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var list = _saleService.ListPackagesdetail();
             return Ok(list);
-
         }
 
         [HttpPost("Insert")]
@@ -45,7 +44,6 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPut("Update")]
         public IActionResult Update(int id, PaquetePredeterminadosDetallesViewModel paquetePredeterminadosDetallesViewModel)
         {
-
             var item = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
             var result = _saleService.UpdatePackagesdetail(id, item);
             return Ok(result);
@@ -57,13 +55,11 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             var result = _saleService.DeletePackagesdetail(id, Mod);
             return Ok(result);
-
         }
-
+        [Authorize(Roles = "Administrador, Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
             var result = _saleService.FindPackagesdetail(Id);
             return Ok(result);
         }

@@ -10,6 +10,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int PaDe_ID { get; set; }
         public int? Paqu_ID { get; set; }
         public int? Actv_ID { get; set; }
+        public decimal? PaDe_Precio { get; set; }
+        public int? PaDe_Cantidad { get; set; }
         public int? PaDe_UsuarioCreacion { get; set; }
         public DateTime? PaDe_FechaCreacion { get; set; }
         public int? PaDe_UsuarioModifica { get; set; }

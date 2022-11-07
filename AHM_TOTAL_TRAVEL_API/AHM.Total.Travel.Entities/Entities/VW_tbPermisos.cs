@@ -12,6 +12,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Descripcion { get; set; }
         public string Controlador { get; set; }
         public string Action { get; set; }
+        public int? id_modulo { get; set; }
+        public string modulo { get; set; }
         public int ID_UsuaCrea { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }

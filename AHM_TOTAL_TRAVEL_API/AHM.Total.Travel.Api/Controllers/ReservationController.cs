@@ -4,6 +4,7 @@ using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +33,21 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(list);
         }
 
-        [Authorize(Roles = "Administrador, Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesViewModel item)
         {
-            var items = _mapper.Map<tbReservaciones>(item);
-            var result = _reservationService.CreateReservation(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbReservaciones>(item);
+                var result = _reservationService.InsertReservation(items, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Ha ocurrido un error al momento de realizar la operación");
+            }
+            
         }
 
         [HttpPut("Update")]

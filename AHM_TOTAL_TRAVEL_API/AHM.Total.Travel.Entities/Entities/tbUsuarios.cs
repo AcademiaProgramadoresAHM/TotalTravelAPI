@@ -41,6 +41,8 @@ namespace AHM.Total.Travel.Entities.Entities
             tbMenusMenu_UsuarioModificaNavigation = new HashSet<tbMenus>();
             tbPaisesPais_UsuarioCreacionNavigation = new HashSet<tbPaises>();
             tbPaisesPais_UsuarioModificaNavigation = new HashSet<tbPaises>();
+            tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioCreacionNavigation = new HashSet<tbPaquetePredeterminadosActividadesHoteles>();
+            tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioModificaNavigation = new HashSet<tbPaquetePredeterminadosActividadesHoteles>();
             tbPaquetePredeterminadosDetallesPaDe_UsuarioCreacionNavigation = new HashSet<tbPaquetePredeterminadosDetalles>();
             tbPaquetePredeterminadosDetallesPaDe_UsuarioModificaNavigation = new HashSet<tbPaquetePredeterminadosDetalles>();
             tbPaquetePredeterminadosPaqu_UsuarioCreacionNavigation = new HashSet<tbPaquetePredeterminados>();
@@ -146,6 +148,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbMenus> tbMenusMenu_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPaises> tbPaisesPais_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbPaises> tbPaisesPais_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbPaquetePredeterminadosActividadesHoteles> tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbPaquetePredeterminadosActividadesHoteles> tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetallesPaDe_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetallesPaDe_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbPaquetePredeterminados> tbPaquetePredeterminadosPaqu_UsuarioCreacionNavigation { get; set; }

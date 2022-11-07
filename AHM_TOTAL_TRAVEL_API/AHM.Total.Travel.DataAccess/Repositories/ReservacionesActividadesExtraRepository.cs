@@ -33,6 +33,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_ID", item.AcEx_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ReAE_Precio", item.ReAE_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAE_Cantidad", item.ReAE_Cantidad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAE_FechaReservacion", item.ReAE_FechaReservacion, DbType.Date, ParameterDirection.Input);
             parameters.Add("@ReAE_HoraReservacion", item.ReAE_HoraReservacion, DbType.String, ParameterDirection.Input);
@@ -54,6 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@ReAE_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Resv_ID", item.Resv_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@AcEx_ID", item.AcEx_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ReAE_Precio", item.ReAE_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAE_Cantidad", item.ReAE_Cantidad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@ReAE_FechaReservacion", item.ReAE_FechaReservacion, DbType.Date, ParameterDirection.Input);
             parameters.Add("@ReAE_HoraReservacion", item.ReAE_HoraReservacion, DbType.String, ParameterDirection.Input);

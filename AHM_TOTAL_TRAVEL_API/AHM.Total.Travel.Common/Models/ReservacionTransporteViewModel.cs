@@ -13,5 +13,10 @@ namespace AHM.Total.Travel.Common.Models
         public DateTime? ReTr_FechaCancelado { get; set; }
         public int? ReTr_UsuarioCreacion { get; set; }
         public int? ReTr_UsuarioModifica { get; set; }
+
+        public ReservacionTransporteViewModel()
+        {
+            ReTr_Cancelado = false;
+        }
     }
 }

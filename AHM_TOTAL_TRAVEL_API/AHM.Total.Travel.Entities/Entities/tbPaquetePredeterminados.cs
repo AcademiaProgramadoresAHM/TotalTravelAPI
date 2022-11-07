@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public tbPaquetePredeterminados()
         {
+            tbPaquetePredeterminadosActividadesHoteles = new HashSet<tbPaquetePredeterminadosActividadesHoteles>();
             tbPaquetePredeterminadosDetalles = new HashSet<tbPaquetePredeterminadosDetalles>();
             tbPaquetesHabitaciones = new HashSet<tbPaquetesHabitaciones>();
             tbReservaciones = new HashSet<tbReservaciones>();
@@ -31,6 +32,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbUsuarios Paqu_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Paqu_UsuarioModificaNavigation { get; set; }
         public virtual tbRestaurantes Rest_ { get; set; }
+        public virtual ICollection<tbPaquetePredeterminadosActividadesHoteles> tbPaquetePredeterminadosActividadesHoteles { get; set; }
         public virtual ICollection<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetalles { get; set; }
         public virtual ICollection<tbPaquetesHabitaciones> tbPaquetesHabitaciones { get; set; }
         public virtual ICollection<tbReservaciones> tbReservaciones { get; set; }

@@ -14,6 +14,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Categoria { get; set; }
         public int HotelID { get; set; }
         public string Hotel { get; set; }
+        public int? PartnerID { get; set; }
         public decimal? Precio { get; set; }
         public int? Balcon { get; set; }
         public bool? Wifi { get; set; }
