@@ -42,6 +42,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbRegistrosPagos> VW_tbRegistrosPagos { get; set; }
         public virtual DbSet<VW_tbReservacionRestaurante> VW_tbReservacionRestaurante { get; set; }
         public virtual DbSet<VW_tbReservacionTransporte> VW_tbReservacionTransporte { get; set; }
+        public virtual DbSet<VW_tbReservacionTransporteCompleto> VW_tbReservacionTransporteCompleto { get; set; }
         public virtual DbSet<VW_tbReservaciones> VW_tbReservaciones { get; set; }
         public virtual DbSet<VW_tbReservacionesActividadesExtras> VW_tbReservacionesActividadesExtras { get; set; }
         public virtual DbSet<VW_tbReservacionesActividadesHoteles> VW_tbReservacionesActividadesHoteles { get; set; }
@@ -1013,6 +1014,44 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbReservacionTransporte", "Resv");
+
+                entity.Property(e => e.Cliente)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fecha_Cancelado).HasColumnType("date");
+
+                entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
+
+                entity.Property(e => e.Tipo_Transporte)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbReservacionTransporteCompleto>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbReservacionTransporteCompleto", "Resv");
 
                 entity.Property(e => e.Cliente)
                     .IsRequired()
