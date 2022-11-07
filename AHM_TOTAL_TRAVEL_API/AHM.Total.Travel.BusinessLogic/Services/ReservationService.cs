@@ -1,11 +1,16 @@
 ﻿using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.DataAccess.Repositories;
-using AHM.Total.Travel.Entities.Entities;
+using AHM.Total.Travel.Common.Models;
 using ConciertosProyecto.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Org.BouncyCastle.Crypto;
+using System.Linq;
+using Org.BouncyCastle.Utilities;
+using Newtonsoft.Json.Serialization;
+using AHM.Total.Travel.Entities.Entities;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -19,16 +24,18 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ReservacionesHotelesRepository _reservacionesHotelesRepository;
         private readonly ReservacionRestaurantesRepository _reservacionRestaurantesRepository;
         private readonly ReservacionTransporteRepository _reservacionTransporteRepository;
+        private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesRepository;
+        private readonly SaleService _saleService;
 
         private readonly HotelService _hotelService;
         private readonly TransportService _transportService;
 
 
         public ReservationService(
-            ReservacionesActividadesExtraRepository reservacionesActividadesExtra,
+            ReservacionesActividadesExtraRepository reservacionesActividadesExtraRepository,
             RegistrosPagosRepository registrosPagosRepository,
             ReservacionesRepository reservacionesRepository,
-            ReservacionesActividadesHotelesRepository reservacionesActividadesHoteles,
+            ReservacionesActividadesHotelesRepository reservacionesActividadesHotelesRepository,
 
             ReservacionesDetallesRepository reservacionesDetallesRepository,
             ReservacionRestaurantesRepository reservacionRestaurantesRepository,
@@ -39,16 +46,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             TransportService transportService
         )
         {
-            _reservacionesActividadesExtraRepository = reservacionesActividadesExtra;
+            _reservacionesActividadesExtraRepository = reservacionesActividadesExtraRepository;
             _registrosPagosRepository = registrosPagosRepository;
             _reservacionesRepository = reservacionesRepository;
-            _reservacionesActividadesHotelesRepository = reservacionesActividadesHoteles;
+            _reservacionesActividadesHotelesRepository = reservacionesActividadesHotelesRepository;
             _reservacionesDetallesRepository = reservacionesDetallesRepository;
             _reservacionesHotelesRepository = reservacionesHotelesRepository;
             _reservacionRestaurantesRepository = reservacionRestaurantesRepository;
             _reservacionTransporteRepository = reservacionTransporteRepository;
             _hotelService = hotelService;
             _transportService = transportService;
+
         }
 
         #region ReservacionesDetalles
@@ -841,6 +849,234 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
                     return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult InsertReservation(tbReservaciones item, ReservacionesViewModel itemViewModel)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                
+                var ResvID = _reservacionesRepository.Insert(item);
+                int ResvIDInt = ResvID.CodeStatus;
+                if (ResvIDInt > 0)
+                {
+                    if (!itemViewModel.Resv_esPersonalizado)
+                    {
+                        
+                        int packID = item.Paqu_ID.Value;
+
+                        VW_tbPaquetePredeterminados package = _saleService.FindPackage(packID).Data;
+                        VW_tbPaquetePredeterminadosDetalles packageDetails = _saleService.FindPackagesdetail(packID).Data;
+
+
+                        //Create the reservation of the hotel
+                        tbReservacionesHoteles resvHotel = new tbReservacionesHoteles
+                        {
+                            ReHo_FechaEntrada = itemViewModel.ReHo_FechaEntrada,
+                            ReHo_FechaSalida = itemViewModel.ReHo_FechaSalida,
+                            Hote_ID = package.ID_Hotel,
+                            Resv_ID = ResvIDInt,
+                            ReHo_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                        };
+
+                        RequestStatus ResvHotelID = _reservacionesHotelesRepository.Insert(resvHotel);
+                        int ResvHotelIDInt = ResvHotelID.CodeStatus;
+                        if (ResvHotelIDInt > 0)
+                        {
+                            //Create the reservation of the rooms
+                            
+                            List<VW_tbPaquetesHabitaciones> packageRooms = (List<VW_tbPaquetesHabitaciones>)_saleService.ListPackageRooms().Data;
+                            List<VW_tbPaquetesHabitaciones> filteredPackageRooms = packageRooms.Where(x => x.Paquete_Id == packID).ToList();
+                            foreach (var room in filteredPackageRooms)
+                            {
+                                tbReservacionesDetalles reservacionesDetalles = new tbReservacionesDetalles();
+
+                                reservacionesDetalles.Habi_ID = room.Habitacion_Id;
+                                reservacionesDetalles.ReHo_ID = ResvHotelIDInt;
+                                reservacionesDetalles.ReDe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion;
+
+                                var resultDetails = _reservacionesDetallesRepository.Insert(reservacionesDetalles);
+                            }
+
+
+                            if (itemViewModel.ActividadesExtras != null)
+                            {
+                                //Creates a reservation for the extra activities
+                                List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = (List<VW_tbPaquetePredeterminadosDetalles>)_saleService.ListPackagesdetail().Data;
+                                List<VW_tbPaquetePredeterminadosDetalles> filteredPackageExtraActivities = packageExtraActivities.Where(x => x.PaqueteID == packID).ToList();
+                                foreach (var actvExtra in filteredPackageExtraActivities)
+                                {
+
+                                    tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        AcEx_ID = actvExtra.ActividadID,
+                                        ReAE_Precio = actvExtra.Precio,
+                                        ReAE_Cantidad = actvExtra.Cantidad,
+                                        ReAE_FechaReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_FechaReservacion,
+                                        ReAE_HoraReservacion = itemViewModel.ActividadesExtras.Find(x => x.ReAE_ID == actvExtra.ActividadID).ReAE_HoraReservacion,
+                                        ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                    };
+                                    _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
+                                }
+                            }
+
+
+                            if (itemViewModel.ActividadesHoteles != null)
+                            {
+
+                                //Create a reservation of the extra activities in the hotel
+                                List<VW_tbPaquetePredeterminadosActividadesHoteles> hotelsActivities = (List<VW_tbPaquetePredeterminadosActividadesHoteles>)_saleService.ListPackagesHotelsActivities().Data;
+                                List<VW_tbPaquetePredeterminadosActividadesHoteles> filteredhotelsActivities = hotelsActivities.Where(x => x.ID_Paque == packID).ToList();
+
+                                foreach (var actvHotel in filteredhotelsActivities)
+                                {
+                                    tbReservacionesActividadesHoteles actividadesHoteles = new tbReservacionesActividadesHoteles
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        HoAc_ID = actvHotel.ID_HoAc,
+                                        ReAH_Cantidad = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Cantidad,
+                                        ReAH_Precio = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_Precio,
+                                        ReAH_FechaReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_FechaReservacion,
+                                        ReAH_HoraReservacion = itemViewModel.ActividadesHoteles.Find(x => x.HoAc_ID == actvHotel.ID_HoAc).ReAH_HoraReservacion,
+                                        ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                    };
+                                    var hotelActivities = _reservacionesActividadesHotelesRepository.Insert(actividadesHoteles);
+                                }
+                            }
+                            
+                    }
+                        else
+                        {
+                            ResvHotelID.MessageStatus = (ResvHotelID.CodeStatus == 0) ? "401 Error de consulta a la hora de ingresar una reservacion de hotel" : ResvHotelID.MessageStatus + " (Reservacion de hotel)";
+                            return result.Error(ResvHotelID);
+                        }
+                    }
+                    else
+                    {
+                        //CUSTOM PACKAGE
+
+
+                        //Create the reservation of the hotel
+                        tbReservacionesHoteles resvHotel = new tbReservacionesHoteles
+                        {
+                            ReHo_FechaEntrada = itemViewModel.ReHo_FechaEntrada,
+                            ReHo_FechaSalida = itemViewModel.ReHo_FechaSalida,
+                            Hote_ID = itemViewModel.Hote_ID,
+                            Resv_ID = ResvIDInt,
+                            ReHo_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                        };
+
+                        RequestStatus ResvHotelID = _reservacionesHotelesRepository.Insert(resvHotel);
+                        int ResvHotelIDInt = ResvHotelID.CodeStatus;
+                        
+                        if (ResvHotelIDInt > 0)
+                        {
+                            //Create the reservation of the rooms
+                            for (int i = 0; i < itemViewModel.Habi_Cantidad; i++)
+                            {
+                                tbReservacionesDetalles reservacionesDetalles = new tbReservacionesDetalles();
+
+                                reservacionesDetalles.Habi_ID = itemViewModel.Habi_ID;
+                                reservacionesDetalles.ReHo_ID = ResvHotelIDInt;
+                                reservacionesDetalles.ReDe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion;
+
+                                try
+                                {
+                                    var resultDetails = _reservacionesDetallesRepository.Insert(reservacionesDetalles);
+                                }
+                                catch (Exception e)
+                                {
+
+                                    continue;
+                                }
+                            }
+                            
+                            //Create the reservation of the extra activities
+                            foreach (ReservacionesActividadesExtrasViewModel actividad in itemViewModel.ActividadesExtras)
+                            {
+                                tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
+                                {
+                                    Resv_ID = ResvIDInt,
+                                    AcEx_ID = actividad.AcEx_ID,
+                                    ReAE_Precio = decimal.Parse(actividad.ReAE_Precio),
+                                    ReAE_Cantidad = actividad.ReAE_Cantidad,
+                                    ReAE_FechaReservacion = actividad.ReAE_FechaReservacion,
+                                    ReAE_HoraReservacion = actividad.ReAE_HoraReservacion,
+                                    ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                };
+
+
+                                var resultActivitiesExtra = _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
+                            }
+
+                            //Create the reservation of the extra activities in the hotel
+                            foreach (ReservacionesActividadesHotelesViewModel actividadesHoteles in itemViewModel.ActividadesHoteles)
+                            {
+                                tbReservacionesActividadesHoteles reservacionesActividadesHoteles = new tbReservacionesActividadesHoteles
+                                {
+                                    Resv_ID = ResvIDInt,
+                                    HoAc_ID = actividadesHoteles.HoAc_ID,
+                                    ReAH_Precio = actividadesHoteles.ReAH_Precio,
+                                    ReAH_Cantidad = actividadesHoteles.ReAH_Cantidad,
+                                    ReAH_FechaReservacion = actividadesHoteles.ReAH_FechaReservacion,
+                                    ReAH_HoraReservacion = actividadesHoteles.ReAH_HoraReservacion,
+                                    ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                };
+                                var resultActivitiesHotels = _reservacionesActividadesHotelesRepository.Insert(reservacionesActividadesHoteles);
+                            }
+
+                            //Create the reservation of the restaurants
+                            foreach (ReservacionRestaurantesViewModel restaurantes in itemViewModel.Restaurantes)
+                            {
+                                tbReservacionRestaurantes reservacionRestaurantes = new tbReservacionRestaurantes {
+                                    Resv_ID = ResvIDInt,
+                                    Rest_ID = restaurantes.Rest_ID,
+                                    ReRe_FechaReservacion = restaurantes.ReRe_FechaReservacion,
+                                    ReRe_HoraReservacion = restaurantes.ReRe_HoraReservacion,
+                                    ReRe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                };
+                                
+                                var resultRestaurants = _reservacionRestaurantesRepository.Insert(reservacionRestaurantes);
+                            }
+
+                            //Creates a reservation for a transport
+                            foreach (ReservacionTransporteViewModel transportes in itemViewModel.reservacionTransportes)
+                            {
+                                tbReservacionTransporte reservacionTransporte = new tbReservacionTransporte
+                                {
+                                    Detr_ID = transportes.Detr_ID,
+                                    Resv_ID = ResvIDInt,
+                                    ReTr_CantidadAsientos = transportes.ReTr_CantidadAsientos,
+                                    ReTr_FechaCancelado = transportes.ReTr_FechaCancelado,
+                                    ReTr_Cancelado = transportes.ReTr_Cancelado,
+                                    ReTr_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                };
+                            }
+
+                        }
+                        else
+                        {
+                            ResvHotelID.MessageStatus = (ResvHotelID.CodeStatus == 0) ? "401 Error de consulta a la hora de ingresar una reservacion de hotel" : ResvHotelID.MessageStatus + " (Reservacion de hotel)";
+                            return result.Error(ResvHotelID);
+                        }
+                    }
+                    return result.Ok(ResvID);
+                }
+                else
+                {
+                    ResvID.MessageStatus = (ResvID.CodeStatus == 0) ? "401 Error de consulta" : ResvID.MessageStatus;
+                    return result.Error(ResvID);
                 }
             }
             catch (Exception ex)
