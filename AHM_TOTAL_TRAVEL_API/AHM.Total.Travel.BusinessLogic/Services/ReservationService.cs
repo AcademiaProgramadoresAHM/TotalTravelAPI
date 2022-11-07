@@ -977,7 +977,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                 {
                                     Resv_ID = ResvIDInt,
                                     AcEx_ID = actividad.AcEx_ID,
-                                    ReAE_Precio = actividad.ReAE_Precio,
+                                    ReAE_Precio = decimal.Parse(actividad.ReAE_Precio),
                                     ReAE_Cantidad = actividad.ReAE_Cantidad,
                                     ReAE_FechaReservacion = actividad.ReAE_FechaReservacion,
                                     ReAE_HoraReservacion = actividad.ReAE_HoraReservacion,
