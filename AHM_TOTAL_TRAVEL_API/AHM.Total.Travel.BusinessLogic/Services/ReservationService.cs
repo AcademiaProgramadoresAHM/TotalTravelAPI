@@ -1,8 +1,10 @@
-﻿using AHM.Total.Travel.DataAccess.Repositories;
+﻿using AHM.Total.Travel.Common.Models;
+using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
@@ -18,6 +20,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ReservacionRestaurantesRepository _reservacionRestaurantesRepository;
         private readonly ReservacionTransporteRepository _reservacionTransporteRepository;
 
+        private readonly HotelService _hotelService;
+        private readonly TransportService _transportService;
+
 
         public ReservationService(
             ReservacionesActividadesExtraRepository reservacionesActividadesExtra,
@@ -28,7 +33,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             ReservacionesDetallesRepository reservacionesDetallesRepository,
             ReservacionRestaurantesRepository reservacionRestaurantesRepository,
             ReservacionTransporteRepository reservacionTransporteRepository,
-            ReservacionesHotelesRepository reservacionesHotelesRepository
+            ReservacionesHotelesRepository reservacionesHotelesRepository,
+
+            HotelService hotelService,
+            TransportService transportService
         )
         {
             _reservacionesActividadesExtraRepository = reservacionesActividadesExtra;
@@ -39,6 +47,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             _reservacionesHotelesRepository = reservacionesHotelesRepository;
             _reservacionRestaurantesRepository = reservacionRestaurantesRepository;
             _reservacionTransporteRepository = reservacionTransporteRepository;
+            _hotelService = hotelService;
+            _transportService = transportService;
         }
 
         #region ReservacionesDetalles
@@ -1043,6 +1053,83 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 city = _registrosPagosRepository.Find(id);
                 return result.Ok(city);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        #endregion
+
+        #region LineaTiempoInfo
+        public ServiceResult Timeline (int id_reservation)
+        {
+            LineaTiempoViewModel lineaTiempo = new LineaTiempoViewModel();
+            var result = new ServiceResult();
+            try
+            {
+                List<LineaTiempoActividadesViewModel> actividades = new List<LineaTiempoActividadesViewModel>();
+                //Rellena las actividades extras
+                var listActivities = (IEnumerable<VW_tbReservacionesActividadesExtras>)ListReservationActivitiesExtra().Data;
+                listActivities = listActivities.Where(x => x.Reservacion == id_reservation).ToList();
+                foreach (var item in listActivities)
+                {
+                    LineaTiempoActividadesViewModel lineaTiempoActividades = new LineaTiempoActividadesViewModel();
+                    lineaTiempoActividades.ID = item.ID;
+                    lineaTiempoActividades.Actividad = item.Actividad_Extra;
+                    lineaTiempoActividades.Fecha = (DateTime)item.Fecha_Reservacion;
+
+                    actividades.Add(lineaTiempoActividades);
+                }
+
+                //Rellena actividades de hoteles
+                var lisActivitiestHoteles = (IEnumerable<VW_tbReservacionesActividadesHoteles>)ListReservationActivitiesHotels().Data;
+                lisActivitiestHoteles = lisActivitiestHoteles.Where(x => x.ReservacionID == id_reservation).ToList();
+                foreach (var item in lisActivitiestHoteles)
+                {
+                    LineaTiempoActividadesViewModel lineaTiempoActividadesHoteles = new LineaTiempoActividadesViewModel();
+                    lineaTiempoActividadesHoteles.ID = item.ID;
+                    lineaTiempoActividadesHoteles.Actividad = item.Nombre;
+                    lineaTiempoActividadesHoteles.Fecha = (DateTime)item.Fecha_Reservacion;
+                }
+
+                //Rellena hotel
+                var listHoteles = (IEnumerable<VW_tbReservacionesHoteles>)ListReservationHotel().Data;
+                var hotel = listHoteles.Where(x => x.ReservacionID == id_reservation).ToList()[0];
+                var hotelInfo = (VW_tbHoteles)_hotelService.FindHotels((int)hotel.Hotel_ID).Data;
+                LineaTiempoHotelesViewModel lineaTiempoHoteles = new LineaTiempoHotelesViewModel();
+                lineaTiempoHoteles.ID_Hotel = (int)hotel.Hotel_ID;
+                lineaTiempoHoteles.Hotel = hotelInfo.Hotel;
+                lineaTiempoHoteles.Fecha_Entrada = hotel.Fecha_Entrada;
+                lineaTiempoHoteles.Fecha_Salida = hotel.Fecha_Salida;
+
+                //Rellena transportes
+                var listTransportes = (IEnumerable<VW_tbReservacionTransporteCompleto>)ListReservationTransport().Data;
+                var transporte = listTransportes.Where(x => x.Reservacion == id_reservation).ToList()[0];
+                var transporteInfo = (VW_tbTransportesCompleto)_transportService.FindTransports(transporte.Id_Transportes).Data;
+                LineaTiempoTransportesViewModel lineaTiempoTransportes = new LineaTiempoTransportesViewModel();
+                lineaTiempoTransportes.ID_Transporte = transporte.Id;
+                lineaTiempoTransportes.Transporte = transporteInfo.NombrePartner;
+                lineaTiempoTransportes.HoraSalida = transporteInfo.HoraSalida;
+                lineaTiempoTransportes.HoraLlegada = transporteInfo.HoraLlegada;
+
+                //Rellena cliente
+                var listUsuarios = (IEnumerable<VW_tbReservaciones>)ListReservation().Data;
+                var usuario = listUsuarios.Where(x => x.ID == id_reservation).ToList()[0];
+                LineaTiempoUsuariosViewModel lineaTiempoUsuarios = new LineaTiempoUsuariosViewModel();
+                lineaTiempoUsuarios.ID_Usuario = usuario.Id_Cliente;
+                lineaTiempoUsuarios.Nombre = usuario.Nombre;
+                lineaTiempoUsuarios.Apellido = usuario.Apellido;
+
+                //Rellena view mdoel de linea de tiempo
+                lineaTiempo.Actividades = actividades.GroupBy(x => x.Fecha).ToList();
+                lineaTiempo.Hotel_Info = lineaTiempoHoteles;
+                lineaTiempo.Transporte_Info = lineaTiempoTransportes;
+                lineaTiempo.Cliente_Info = lineaTiempoUsuarios;
+
+                return result.Ok(lineaTiempo);
+
+
             }
             catch (Exception ex)
             {

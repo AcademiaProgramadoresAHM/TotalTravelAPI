@@ -62,5 +62,13 @@ namespace AHM.Total.Travel.Api.Controllers
             var result = _reservationService.FindReservation(Id);
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [HttpGet("Find/Timeline")]
+        public IActionResult Timeline(int id)
+        {
+            var result = _reservationService.Timeline(id);
+            return Ok(result);
+        }
     }
 }

@@ -15,6 +15,10 @@
    "SelectedToBeGenerated": 1,
    "Tables": [
       {
+         "Name": "[Acce].[tbModulos]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Acce].[tbPermisos]",
          "ObjectType": 0
       },
@@ -136,6 +140,10 @@
       },
       {
          "Name": "[Sale].[tbPaquetePredeterminados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Sale].[tbPaquetePredeterminadosActividadesHoteles]",
          "ObjectType": 0
       },
       {
@@ -295,7 +303,15 @@
          "ObjectType": 3
       },
       {
+         "Name": "[Resv].[VW_tbReservacionTransporteCompleto]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Sale].[VW_tbPaquetePredeterminados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Sale].[VW_tbPaquetePredeterminadosActividadesHoteles]",
          "ObjectType": 3
       },
       {
@@ -328,6 +344,10 @@
       },
       {
          "Name": "[Trpt].[VW_tbTransportes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[Trpt].[VW_tbTransportesCompleto]",
          "ObjectType": 3
       }
    ],

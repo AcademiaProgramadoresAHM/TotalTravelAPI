@@ -34,6 +34,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbMenus> VW_tbMenus { get; set; }
         public virtual DbSet<VW_tbPaises> VW_tbPaises { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminados> VW_tbPaquetePredeterminados { get; set; }
+        public virtual DbSet<VW_tbPaquetePredeterminadosActividadesHoteles> VW_tbPaquetePredeterminadosActividadesHoteles { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminadosDetalles> VW_tbPaquetePredeterminadosDetalles { get; set; }
         public virtual DbSet<VW_tbPaquetesHabitaciones> VW_tbPaquetesHabitaciones { get; set; }
         public virtual DbSet<VW_tbPartners> VW_tbPartners { get; set; }
@@ -41,6 +42,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbRegistrosPagos> VW_tbRegistrosPagos { get; set; }
         public virtual DbSet<VW_tbReservacionRestaurante> VW_tbReservacionRestaurante { get; set; }
         public virtual DbSet<VW_tbReservacionTransporte> VW_tbReservacionTransporte { get; set; }
+        public virtual DbSet<VW_tbReservacionTransporteCompleto> VW_tbReservacionTransporteCompleto { get; set; }
         public virtual DbSet<VW_tbReservaciones> VW_tbReservaciones { get; set; }
         public virtual DbSet<VW_tbReservacionesActividadesExtras> VW_tbReservacionesActividadesExtras { get; set; }
         public virtual DbSet<VW_tbReservacionesActividadesHoteles> VW_tbReservacionesActividadesHoteles { get; set; }
@@ -73,8 +75,10 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbHotelesActividades> tbHotelesActividades { get; set; }
         public virtual DbSet<tbHotelesMenus> tbHotelesMenus { get; set; }
         public virtual DbSet<tbMenus> tbMenus { get; set; }
+        public virtual DbSet<tbModulos> tbModulos { get; set; }
         public virtual DbSet<tbPaises> tbPaises { get; set; }
         public virtual DbSet<tbPaquetePredeterminados> tbPaquetePredeterminados { get; set; }
+        public virtual DbSet<tbPaquetePredeterminadosActividadesHoteles> tbPaquetePredeterminadosActividadesHoteles { get; set; }
         public virtual DbSet<tbPaquetePredeterminadosDetalles> tbPaquetePredeterminadosDetalles { get; set; }
         public virtual DbSet<tbPaquetesHabitaciones> tbPaquetesHabitaciones { get; set; }
         public virtual DbSet<tbPartners> tbPartners { get; set; }
@@ -720,6 +724,25 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.precio).HasColumnType("money");
             });
 
+            modelBuilder.Entity<VW_tbPaquetePredeterminadosActividadesHoteles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbPaquetePredeterminadosActividadesHoteles", "Sale");
+
+                entity.Property(e => e.Actividad)
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion_HotelActv).IsUnicode(false);
+
+                entity.Property(e => e.Descripcion_Paquete).IsUnicode(false);
+
+                entity.Property(e => e.Paquete)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<VW_tbPaquetePredeterminadosDetalles>(entity =>
             {
                 entity.HasNoKey();
@@ -743,6 +766,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.NombrePaquete)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
 
                 entity.Property(e => e.UsuarioCreacion)
                     .HasMaxLength(101)
@@ -884,6 +909,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
+
+                entity.Property(e => e.modulo)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbRegistrosPagos>(entity =>
@@ -1018,6 +1047,44 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<VW_tbReservacionTransporteCompleto>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbReservacionTransporteCompleto", "Resv");
+
+                entity.Property(e => e.Cliente)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Fecha_Cancelado).HasColumnType("date");
+
+                entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("money");
+
+                entity.Property(e => e.Tipo_Transporte)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usuario_Modifica)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<VW_tbReservaciones>(entity =>
             {
                 entity.HasNoKey();
@@ -1104,6 +1171,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Hora_Reservacion)
                     .HasMaxLength(4)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Precio).HasColumnType("numeric(10, 2)");
 
                 entity.Property(e => e.Usuario_Creacion)
                     .IsRequired()
@@ -2240,6 +2309,18 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasConstraintName("FK_tbMenu_tbTipoMenu_Tme_ID");
             });
 
+            modelBuilder.Entity<tbModulos>(entity =>
+            {
+                entity.HasKey(e => e.Modu_Id)
+                    .HasName("PK__tbModulo__6F3FB45DA8922E4E");
+
+                entity.ToTable("tbModulos", "Acce");
+
+                entity.Property(e => e.Modu_Descripcion)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<tbPaises>(entity =>
             {
                 entity.HasKey(e => e.Pais_ID)
@@ -2335,6 +2416,42 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasConstraintName("FK_tbPaquetes_tbRestaurantes_Rest_ID");
             });
 
+            modelBuilder.Entity<tbPaquetePredeterminadosActividadesHoteles>(entity =>
+            {
+                entity.HasKey(e => e.PaAc_ID)
+                    .HasName("PK__tbPaquet__A9F9B994BA53C3BE");
+
+                entity.ToTable("tbPaquetePredeterminadosActividadesHoteles", "Sale");
+
+                entity.Property(e => e.PaAc_ID).ValueGeneratedNever();
+
+                entity.Property(e => e.PaAc_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.PaAc_FechaCreacion).HasColumnType("date");
+
+                entity.Property(e => e.PaAc_FechaModifica).HasColumnType("date");
+
+                entity.HasOne(d => d.HoAc_)
+                    .WithMany(p => p.tbPaquetePredeterminadosActividadesHoteles)
+                    .HasForeignKey(d => d.HoAc_ID)
+                    .HasConstraintName("FK_tbPaqueteActividadesHoteles_tbHotelesActividades_HoAc_ID");
+
+                entity.HasOne(d => d.PaAc_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.PaAc_UsuarioCreacion)
+                    .HasConstraintName("FK_tbPaqueteActividadesHoteles_tbUsuarios_PaAc_UsuarioCreacion");
+
+                entity.HasOne(d => d.PaAc_UsuarioModificaNavigation)
+                    .WithMany(p => p.tbPaquetePredeterminadosActividadesHotelesPaAc_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.PaAc_UsuarioModifica)
+                    .HasConstraintName("FK_tbPaquetesActividadeshoteles_tbUsuarios_PaAc_UsuarioModifica");
+
+                entity.HasOne(d => d.Paqu_)
+                    .WithMany(p => p.tbPaquetePredeterminadosActividadesHoteles)
+                    .HasForeignKey(d => d.Paqu_ID)
+                    .HasConstraintName("FK_tbPaqueteActividadesHoteles_tbpAQUETESpREDETERMINADOS_Paqu_ID");
+            });
+
             modelBuilder.Entity<tbPaquetePredeterminadosDetalles>(entity =>
             {
                 entity.HasKey(e => e.PaDe_ID)
@@ -2349,6 +2466,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PaDe_FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.PaDe_Precio).HasColumnType("money");
 
                 entity.HasOne(d => d.Actv_)
                     .WithMany(p => p.tbPaquetePredeterminadosDetalles)
@@ -2449,7 +2568,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbPermisos>(entity =>
             {
                 entity.HasKey(e => e.Perm_ID)
-                    .HasName("PK__tbPermis__4C3E538DE96124E1");
+                    .HasName("PK__tbPermis__4C3E538DE3A0CD48");
 
                 entity.ToTable("tbPermisos", "Acce");
 
@@ -2476,6 +2595,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Perm_Icono)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.Modu_)
+                    .WithMany(p => p.tbPermisos)
+                    .HasForeignKey(d => d.Modu_ID);
 
                 entity.HasOne(d => d.Perm_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbPermisosPerm_UsuarioCreacionNavigation)
@@ -2672,6 +2795,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ReAE_Precio).HasColumnType("numeric(10, 2)");
+
                 entity.HasOne(d => d.AcEx_)
                     .WithMany(p => p.tbReservacionesActividadesExtras)
                     .HasForeignKey(d => d.AcEx_ID)
@@ -2712,6 +2837,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.ReAH_HoraReservacion)
                     .HasMaxLength(4)
                     .IsUnicode(false);
+
+                entity.Property(e => e.ReAH_Precio).HasColumnType("numeric(10, 2)");
 
                 entity.HasOne(d => d.HoAc_)
                     .WithMany(p => p.tbReservacionesActividadesHoteles)
@@ -2881,7 +3008,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbRolesPermisos>(entity =>
             {
                 entity.HasKey(e => e.RoPe_ID)
-                    .HasName("PK__tbRolesP__897DEC3297308135");
+                    .HasName("PK__tbRolesP__897DEC32B29E73CC");
 
                 entity.ToTable("tbRolesPermisos", "Acce");
 
