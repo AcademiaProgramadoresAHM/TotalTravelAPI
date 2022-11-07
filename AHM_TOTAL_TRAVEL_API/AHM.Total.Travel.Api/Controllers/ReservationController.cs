@@ -32,7 +32,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _reservationService.ListReservation();
             return Ok(list);
         }
-
+        
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesViewModel item)
         {

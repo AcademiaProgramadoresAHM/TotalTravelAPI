@@ -843,7 +843,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                
+                if (itemViewModel.Resv_esPersonalizado)
+                {
+                    item.Paqu_ID = 1017;
+                };
+
                 var ResvID = _reservacionesRepository.Insert(item);
                 int ResvIDInt = ResvID.CodeStatus;
                 if (ResvIDInt > 0)
@@ -978,73 +982,90 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                 catch (Exception e)
                                 {
 
-                                    continue;
+                                    return result.Error("Error al ingresar la reservacion de habitacion");
+                                }
+                            }
+
+
+                            if (itemViewModel.ActividadesExtras != null)
+                            {
+                                //Create the reservation of the extra activities
+                                foreach (ReservacionesActividadesExtrasViewModel actividad in itemViewModel.ActividadesExtras)
+                                {
+                                    tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        AcEx_ID = actividad.AcEx_ID,
+                                        ReAE_Precio = decimal.Parse(actividad.ReAE_Precio),
+                                        ReAE_Cantidad = actividad.ReAE_Cantidad,
+                                        ReAE_FechaReservacion = actividad.ReAE_FechaReservacion,
+                                        ReAE_HoraReservacion = actividad.ReAE_HoraReservacion,
+                                        ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                    };
+
+
+                                    var resultActivitiesExtra = _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
+                                }
+
+                            }
+
+                            if (itemViewModel.ActividadesHoteles != null)
+                            {
+                                //Create the reservation of the extra activities in the hotel
+                                foreach (ReservacionesActividadesHotelesViewModel actividadesHoteles in itemViewModel.ActividadesHoteles)
+                                {
+                                    tbReservacionesActividadesHoteles reservacionesActividadesHoteles = new tbReservacionesActividadesHoteles
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        HoAc_ID = actividadesHoteles.HoAc_ID,
+                                        ReAH_Precio = actividadesHoteles.ReAH_Precio,
+                                        ReAH_Cantidad = actividadesHoteles.ReAH_Cantidad,
+                                        ReAH_FechaReservacion = actividadesHoteles.ReAH_FechaReservacion,
+                                        ReAH_HoraReservacion = actividadesHoteles.ReAH_HoraReservacion,
+                                        ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+
+                                    };
+                                    var resultActivitiesHotels = _reservacionesActividadesHotelesRepository.Insert(reservacionesActividadesHoteles);
+                                }
+                            }
+
+
+                            if (itemViewModel.Restaurantes != null)
+                            {
+                                //Create the reservation of the restaurants
+                                foreach (ReservacionRestaurantesViewModel restaurantes in itemViewModel.Restaurantes)
+                                {
+                                    tbReservacionRestaurantes reservacionRestaurantes = new tbReservacionRestaurantes
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        Rest_ID = restaurantes.Rest_ID,
+                                        ReRe_FechaReservacion = restaurantes.ReRe_FechaReservacion,
+                                        ReRe_HoraReservacion = restaurantes.ReRe_HoraReservacion,
+                                        ReRe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                    };
+
+                                    var resultRestaurants = _reservacionRestaurantesRepository.Insert(reservacionRestaurantes);
+                                }
+                            }
+
+
+                            if (itemViewModel.reservacionTransportes != null)
+                            {
+                                //Creates a reservation for a transport
+                                foreach (ReservacionTransporteViewModel transportes in itemViewModel.reservacionTransportes)
+                                {
+                                    tbReservacionTransporte reservacionTransporte = new tbReservacionTransporte
+                                    {
+                                        Detr_ID = transportes.Detr_ID,
+                                        Resv_ID = ResvIDInt,
+                                        ReTr_CantidadAsientos = transportes.ReTr_CantidadAsientos,
+                                        ReTr_FechaCancelado = transportes.ReTr_FechaCancelado,
+                                        ReTr_Cancelado = transportes.ReTr_Cancelado,
+                                        ReTr_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                    };
                                 }
                             }
                             
-                            //Create the reservation of the extra activities
-                            foreach (ReservacionesActividadesExtrasViewModel actividad in itemViewModel.ActividadesExtras)
-                            {
-                                tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
-                                {
-                                    Resv_ID = ResvIDInt,
-                                    AcEx_ID = actividad.AcEx_ID,
-                                    ReAE_Precio = decimal.Parse(actividad.ReAE_Precio),
-                                    ReAE_Cantidad = actividad.ReAE_Cantidad,
-                                    ReAE_FechaReservacion = actividad.ReAE_FechaReservacion,
-                                    ReAE_HoraReservacion = actividad.ReAE_HoraReservacion,
-                                    ReAE_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-                                };
-
-
-                                var resultActivitiesExtra = _reservacionesActividadesExtraRepository.Insert(reservacionesActividadesExtras);
-                            }
-
-                            //Create the reservation of the extra activities in the hotel
-                            foreach (ReservacionesActividadesHotelesViewModel actividadesHoteles in itemViewModel.ActividadesHoteles)
-                            {
-                                tbReservacionesActividadesHoteles reservacionesActividadesHoteles = new tbReservacionesActividadesHoteles
-                                {
-                                    Resv_ID = ResvIDInt,
-                                    HoAc_ID = actividadesHoteles.HoAc_ID,
-                                    ReAH_Precio = actividadesHoteles.ReAH_Precio,
-                                    ReAH_Cantidad = actividadesHoteles.ReAH_Cantidad,
-                                    ReAH_FechaReservacion = actividadesHoteles.ReAH_FechaReservacion,
-                                    ReAH_HoraReservacion = actividadesHoteles.ReAH_HoraReservacion,
-                                    ReAH_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-
-                                };
-                                var resultActivitiesHotels = _reservacionesActividadesHotelesRepository.Insert(reservacionesActividadesHoteles);
-                            }
-
-                            //Create the reservation of the restaurants
-                            foreach (ReservacionRestaurantesViewModel restaurantes in itemViewModel.Restaurantes)
-                            {
-                                tbReservacionRestaurantes reservacionRestaurantes = new tbReservacionRestaurantes {
-                                    Resv_ID = ResvIDInt,
-                                    Rest_ID = restaurantes.Rest_ID,
-                                    ReRe_FechaReservacion = restaurantes.ReRe_FechaReservacion,
-                                    ReRe_HoraReservacion = restaurantes.ReRe_HoraReservacion,
-                                    ReRe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-                                };
-                                
-                                var resultRestaurants = _reservacionRestaurantesRepository.Insert(reservacionRestaurantes);
-                            }
-
-                            //Creates a reservation for a transport
-                            foreach (ReservacionTransporteViewModel transportes in itemViewModel.reservacionTransportes)
-                            {
-                                tbReservacionTransporte reservacionTransporte = new tbReservacionTransporte
-                                {
-                                    Detr_ID = transportes.Detr_ID,
-                                    Resv_ID = ResvIDInt,
-                                    ReTr_CantidadAsientos = transportes.ReTr_CantidadAsientos,
-                                    ReTr_FechaCancelado = transportes.ReTr_FechaCancelado,
-                                    ReTr_Cancelado = transportes.ReTr_Cancelado,
-                                    ReTr_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
-                                };
-                            }
-
                         }
                         else
                         {
