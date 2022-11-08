@@ -8,6 +8,7 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbDetallesTransportes
     {
         public int ID { get; set; }
+        public int ID_Transporte { get; set; }
         public int Tipo_Transporte_ID { get; set; }
         public string Tipo_Transporte { get; set; }
         public int? Partner_ID { get; set; }

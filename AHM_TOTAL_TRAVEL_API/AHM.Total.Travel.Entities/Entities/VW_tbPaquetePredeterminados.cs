@@ -15,6 +15,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID_Hotel { get; set; }
         public string Hotel { get; set; }
         public string Descripcion_Hotel { get; set; }
+        public int Ciudad_ID { get; set; }
+        public string Ciudad { get; set; }
         public int? ID_Restaurante { get; set; }
         public string Restaurante { get; set; }
         public int ID_Usuario_Creacion { get; set; }

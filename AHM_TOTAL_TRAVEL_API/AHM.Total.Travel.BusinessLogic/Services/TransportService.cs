@@ -279,7 +279,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindTransports(int id)
         {
             var result = new ServiceResult();
-            var transports = new VW_tbTransportesCompleto();
+            var transports = new VW_tbTransportes();
             try
             {
                 transports = _transportesRepository.Find(id);

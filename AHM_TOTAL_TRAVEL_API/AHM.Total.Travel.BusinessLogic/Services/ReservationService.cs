@@ -1363,12 +1363,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 //Rellena transportes
                 var listTransportes = (IEnumerable<VW_tbReservacionTransporteCompleto>)ListReservationTransport().Data;
                 var transporte = listTransportes.Where(x => x.Reservacion == id_reservation).ToList()[0];
-                var transporteInfo = (VW_tbTransportesCompleto)_transportService.FindTransports(transporte.Id_Transportes).Data;
+                var transporteInfo = _transportService.ListDetallesTransports();
+                IEnumerable<VW_tbDetallesTransportes> transporteInfo2 = (IEnumerable<VW_tbDetallesTransportes>)transporteInfo.Data;
+                var infoTransport = transporteInfo2.Where(c => c.ID == Convert.ToInt32(transporte.Id_Transportes)).ToList()[0];
                 LineaTiempoTransportesViewModel lineaTiempoTransportes = new LineaTiempoTransportesViewModel();
                 lineaTiempoTransportes.ID_Transporte = transporte.Id;
-                lineaTiempoTransportes.Transporte = transporteInfo.NombrePartner;
-                lineaTiempoTransportes.HoraSalida = transporteInfo.HoraSalida;
-                lineaTiempoTransportes.HoraLlegada = transporteInfo.HoraLlegada;
+                lineaTiempoTransportes.Transporte = infoTransport.Parter;
+                lineaTiempoTransportes.HoraSalida = infoTransport.Hora_Salida;
+                lineaTiempoTransportes.HoraLlegada = infoTransport.Hora_Llegada;
 
                 //Rellena cliente
                 var listUsuarios = (IEnumerable<VW_tbReservaciones>)ListReservation().Data;
