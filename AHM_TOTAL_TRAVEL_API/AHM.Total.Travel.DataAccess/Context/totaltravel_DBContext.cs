@@ -544,8 +544,12 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
 
-                entity.Property(e => e.Hotel)
+                entity.Property(e => e.HotelDescripcion)
                     .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HotelNombre)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Image_URL).IsUnicode(false);
