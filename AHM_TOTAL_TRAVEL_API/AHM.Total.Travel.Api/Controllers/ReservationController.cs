@@ -72,7 +72,7 @@ namespace AHM.Total.Travel.Api.Controllers
             return Ok(result);
         }
 
-        
+        [AllowAnonymous]
         [HttpGet("Find/Timeline")]
         public IActionResult Timeline(int id)
         {
