@@ -1,10 +1,12 @@
 ﻿using AHM.Total.Travel.DataAccess.Repositories;
 using AHM.Total.Travel.Entities.Entities;
 using ConciertosProyecto.BusinessLogic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static AHM.Total.Travel.BusinessLogic.Services.ImagesService;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -15,16 +17,23 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly PaquetePredeterminadosDetallesRepository _paquetePredeterminadosDetallesRepository;
         private readonly PaquetesHabitacionesRepository _paquetesHabitacionesRepository;
         private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesRepository;
+        private readonly ImagesService _imagesService;
+        private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
+        private readonly string _defaultAlbumRoute = "DefaultPackage\\DefaultPackage-";
 
-        
 
-        public SaleService(PaquetePredeterminadosRepository paquetepredeterminadosRepository, TiposPagosRepository tipospagosRepository, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetallesRepository, PaquetesHabitacionesRepository paquetesHabitacionesRepository, PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesRepository)
+        public SaleService(PaquetePredeterminadosRepository paquetepredeterminadosRepository,
+            TiposPagosRepository tipospagosRepository, PaquetePredeterminadosDetallesRepository paquetePredeterminadosDetallesRepository,
+            PaquetesHabitacionesRepository paquetesHabitacionesRepository,
+            PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesRepository,
+            ImagesService imagesService)
         {
             _paquetepredeterminadosRepository = paquetepredeterminadosRepository;
             _tipospagosRepository = tipospagosRepository;
             _paquetePredeterminadosDetallesRepository = paquetePredeterminadosDetallesRepository;
             _paquetesHabitacionesRepository = paquetesHabitacionesRepository;
             _actividadesHotelesRepository = actividadesHotelesRepository;
+            _imagesService = imagesService;
         }
 
         #region PaquetesPredeterminados
@@ -44,15 +53,25 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         }
 
         //CREAR
-        public ServiceResult Createpackages(tbPaquetePredeterminados item)
+        public ServiceResult Createpackages(tbPaquetePredeterminados item, List<IFormFile> file)
         {
 
             var result = new ServiceResult();
             try
             {
+                item.Paqu_Url = _defaultImageRoute;
                 var map = _paquetepredeterminadosRepository.Insert(item);
                 if (map.CodeStatus > 0)
                 {
+                    try
+                    {
+                        Updatepackages(map.CodeStatus, item, file);
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw;
+                    }
 
                     return result.Ok(map);
                 }
@@ -69,7 +88,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
         //ACTUALIZAR
-        public ServiceResult Updatepackages(int id, tbPaquetePredeterminados tbPaquetePredeterminados)
+        public ServiceResult Updatepackages(int id, tbPaquetePredeterminados tbPaquetePredeterminados, List<IFormFile> file)
         {
             var result = new ServiceResult();
             try
@@ -77,6 +96,52 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var itemID = _paquetepredeterminadosRepository.Find(id);
                 if (itemID != null)
                 {
+                    if (file != null)
+                    {
+                        if (itemID.Image_URL != null)
+                        {
+                            if (!string.IsNullOrEmpty(itemID.Image_URL) && itemID.Image_URL != _defaultImageRoute)
+                            {
+                                try
+                                {
+                                    ServiceResult imagesResult = _imagesService.getImagesFilesByRoute(itemID.Image_URL);
+                                    if (!imagesResult.Success)
+                                    {
+                                        ServiceResult response = _imagesService.deleteImage(((ImagesDetails)(imagesResult.Data)).ImageUrl);
+
+                                    }
+                                    else
+                                    {
+                                        List<ImagesDetails> imagesRoute = (List<ImagesDetails>)imagesResult.Data;
+                                        foreach (ImagesDetails image in imagesRoute)
+                                        {
+                                            ServiceResult response = _imagesService.deleteImage(image.ImageUrl);
+                                        }
+                                    }
+
+                                }
+                                catch (Exception e)
+                                {
+                                    throw e;
+                                }
+
+                            }
+                        }
+                        var _fileName = "DefaultPackage-";
+                        _defaultImageRoute = _imagesService.saveImages(string.Concat(_defaultAlbumRoute, itemID.Id, "\\Place"), string.Concat(_fileName, itemID.Id), file).Result.Data;
+                        tbPaquetePredeterminados.Paqu_Url = _defaultImageRoute;
+                    }
+                    else
+                    {
+                        tbPaquetePredeterminados.Paqu_Url = itemID.Image_URL;
+                    }
+
+                    if (string.IsNullOrEmpty(tbPaquetePredeterminados.Paqu_Url) || itemID.Image_URL == _defaultImageRoute)
+                    {
+                        tbPaquetePredeterminados.Paqu_Url = _defaultImageRoute;
+                    }
+                    tbPaquetePredeterminados.Paqu_Url = _defaultImageRoute;
+
                     var map = _paquetepredeterminadosRepository.Update(tbPaquetePredeterminados, id);
                     if (map.CodeStatus > 0)
                     {
