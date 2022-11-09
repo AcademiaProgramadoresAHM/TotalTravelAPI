@@ -43,7 +43,26 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             var result = new ServiceResult();
             try
             {
-                var list = _paquetepredeterminadosRepository.List();
+                List<VW_tbPaquetePredeterminados> list = _paquetepredeterminadosRepository.List().ToList();
+                list.ForEach(item =>
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(item.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        item.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var routes in images)
+                        {
+                            url = string.Concat(url, routes.ImageUrl, ",");
+                        }
+                        item.Image_URL = url;
+                    }
+
+                });
                 return result.Ok(list);
             }
             catch (Exception ex)
@@ -203,11 +222,28 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindPackage(int id)
         {
             var result = new ServiceResult();
-            var city = new VW_tbPaquetePredeterminados();
             try
             {
-                city = _paquetepredeterminadosRepository.Find(id);
-                return result.Ok(city);
+                VW_tbPaquetePredeterminados packge = _paquetepredeterminadosRepository.Find(id);
+                if (packge != null)
+                {
+                    ServiceResult imageResult = _imagesService.getImagesFilesByRoute(packge.Image_URL);
+                    if (!imageResult.Success)
+                    {
+                        packge.Image_URL = ((ImagesDetails)(imageResult.Data)).ImageUrl;
+                    }
+                    else
+                    {
+                        List<ImagesDetails> images = ((List<ImagesDetails>)(imageResult.Data));
+                        string url = "";
+                        foreach (var item in images)
+                        {
+                            url = string.Concat(url, item.ImageUrl, ",");
+                        }
+                        packge.Image_URL = url;
+                    }
+                }
+                return result.Ok(packge);
             }
             catch (Exception ex)
             {
