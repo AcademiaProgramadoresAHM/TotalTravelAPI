@@ -15,7 +15,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
-    [Authorize(Roles = "Administrador, Moderador de Transporte, Moderador de Hotel")]
+    [Authorize(Roles = "Administrador, Moderador de Transporte, Moderador de Hotel, Moderador de Restaurante, Moderador de Actividades")]
     public class PartnersController : Controller
     {
         private readonly GeneralService _generalService;

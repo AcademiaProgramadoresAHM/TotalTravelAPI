@@ -13,7 +13,7 @@ namespace AHM.Total.Travel.Api.Controllers
 {
     [ApiController]
     [Route("API/[controller]")]
-    [Authorize(Roles = "Administrador, Cliente")]
+    [Authorize(Roles = "Administrador, Cliente, Moderador de Hotel")]
     public class ReservationHotelsController : Controller
     {
         
