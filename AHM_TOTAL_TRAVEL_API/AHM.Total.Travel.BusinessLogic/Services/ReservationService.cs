@@ -864,7 +864,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 if (itemViewModel.Resv_esPersonalizado)
                 {
-                    item.Paqu_ID = 1017;
+                    item.Paqu_ID = 1;
                 };
 
                 var ResvID = _reservacionesRepository.Insert(item);
@@ -1009,13 +1009,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             if (itemViewModel.ActividadesExtras != null)
                             {
                                 //Create the reservation of the extra activities
-                                foreach (ReservacionesActividadesExtrasViewModel actividad in itemViewModel.ActividadesExtras)
+                                foreach (var actividad in itemViewModel.ActividadesExtras)
                                 {
                                     tbReservacionesActividadesExtras reservacionesActividadesExtras = new tbReservacionesActividadesExtras
                                     {
                                         Resv_ID = ResvIDInt,
                                         AcEx_ID = actividad.AcEx_ID,
-                                        ReAE_Precio = decimal.Parse(actividad.ReAE_Precio),
+                                        ReAE_Precio = actividad.ReAE_Precio,
                                         ReAE_Cantidad = actividad.ReAE_Cantidad,
                                         ReAE_FechaReservacion = actividad.ReAE_FechaReservacion,
                                         ReAE_HoraReservacion = actividad.ReAE_HoraReservacion,
@@ -1031,7 +1031,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             if (itemViewModel.ActividadesHoteles != null)
                             {
                                 //Create the reservation of the extra activities in the hotel
-                                foreach (ReservacionesActividadesHotelesViewModel actividadesHoteles in itemViewModel.ActividadesHoteles)
+                                foreach (var actividadesHoteles in itemViewModel.ActividadesHoteles)
                                 {
                                     tbReservacionesActividadesHoteles reservacionesActividadesHoteles = new tbReservacionesActividadesHoteles
                                     {
@@ -1052,7 +1052,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             if (itemViewModel.Restaurantes != null)
                             {
                                 //Create the reservation of the restaurants
-                                foreach (ReservacionRestaurantesViewModel restaurantes in itemViewModel.Restaurantes)
+                                foreach (var restaurantes in itemViewModel.Restaurantes)
                                 {
                                     tbReservacionRestaurantes reservacionRestaurantes = new tbReservacionRestaurantes
                                     {
@@ -1071,7 +1071,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             if (itemViewModel.reservacionTransportes != null)
                             {
                                 //Creates a reservation for a transport
-                                foreach (ReservacionTransporteViewModel transportes in itemViewModel.reservacionTransportes)
+                                foreach (var transportes in itemViewModel.reservacionTransportes)
                                 {
                                     tbReservacionTransporte reservacionTransporte = new tbReservacionTransporte
                                     {
