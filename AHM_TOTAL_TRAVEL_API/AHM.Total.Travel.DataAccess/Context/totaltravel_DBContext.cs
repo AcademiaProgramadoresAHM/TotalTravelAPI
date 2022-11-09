@@ -2401,6 +2401,8 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Paqu_Precio).HasColumnType("money");
 
+                entity.Property(e => e.Paqu_Url).IsUnicode(false);
+
                 entity.HasOne(d => d.Hote_)
                     .WithMany(p => p.tbPaquetePredeterminados)
                     .HasForeignKey(d => d.Hote_ID)
