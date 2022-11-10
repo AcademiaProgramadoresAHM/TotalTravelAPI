@@ -19,6 +19,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Tipo_Transporte { get; set; }
         public int Partner_ID { get; set; }
         public string Partner_Nombre { get; set; }
+        public string Hora_Salida { get; set; }
+        public string Hora_Llegada { get; set; }
         public int? Capacidad { get; set; }
         public decimal? Precio { get; set; }
         public int ID_Usuario_Creacion { get; set; }
