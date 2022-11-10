@@ -1612,6 +1612,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
 
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.NombrePartner)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -3212,6 +3216,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Tprt_FechaModifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Tprt_Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Dire_)
                     .WithMany(p => p.tbTransportes)

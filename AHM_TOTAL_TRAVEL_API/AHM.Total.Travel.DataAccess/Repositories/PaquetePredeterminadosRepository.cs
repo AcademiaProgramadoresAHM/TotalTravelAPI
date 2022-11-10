@@ -38,6 +38,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Paqu_Precio", item.Paqu_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Paqu_CantPer", item.Paqu_CantPersonas, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Paqu_Url", item.Paqu_Url, DbType.String, ParameterDirection.Input);
             parameters.Add("@Paqu_UsuarioCreacion", item.Paqu_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
@@ -60,6 +61,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Paqu_Duracion", item.Paqu_Duracion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Hote_ID", item.Hote_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Rest_ID", item.Rest_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Paqu_CantPer", item.Paqu_CantPersonas, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Paqu_Precio", item.Paqu_Precio, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Paqu_Url", item.Paqu_Url, DbType.String, ParameterDirection.Input);
             parameters.Add("@Paqu_UsuarioModifica", item.Paqu_UsuarioModifica, DbType.Int32, ParameterDirection.Input);

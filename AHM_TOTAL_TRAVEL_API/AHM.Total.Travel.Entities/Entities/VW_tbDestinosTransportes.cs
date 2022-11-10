@@ -16,6 +16,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int CiudadDestinoID { get; set; }
         public int PaisDestinoID { get; set; }
         public string PaisDestino { get; set; }
+        public int? Partner_ID { get; set; }
         public int? UsuarioCreacion { get; set; }
         public string UsuarioCreacionID { get; set; }
         public DateTime? FechaCreacion { get; set; }

@@ -20,6 +20,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? DsTr_UsuarioModifica { get; set; }
         public DateTime? DsTr_FechaModifica { get; set; }
         public bool? DsTr_Estado { get; set; }
+        public int? Partner_ID { get; set; }
 
         public virtual tbCiudades DsTr_CiudadDestinoNavigation { get; set; }
         public virtual tbCiudades DsTr_CiudadSalidaNavigation { get; set; }

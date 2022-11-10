@@ -19,6 +19,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? TiTr_UsuarioModifica { get; set; }
         public DateTime? TiTr_FechaModifica { get; set; }
         public bool? TiTr_Estado { get; set; }
+        public int? Partner_ID { get; set; }
 
         public virtual tbUsuarios TiTr_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios TiTr_UsuarioModificaNavigation { get; set; }

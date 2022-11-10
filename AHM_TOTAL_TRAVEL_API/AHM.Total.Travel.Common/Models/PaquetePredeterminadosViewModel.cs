@@ -12,6 +12,7 @@ namespace AHM.Total.Travel.Common.Models
         public string Paqu_Duracion { get; set; }
         public int? Hote_ID { get; set; }
         public int? Rest_ID { get; set; }
+        public int? Paqu_CantPersonas { get; set; }
         public decimal? Paqu_Precio { get; set; }
         public List<IFormFile> File { get; set; }
         public int? Paqu_UsuarioCreacion { get; set; }
