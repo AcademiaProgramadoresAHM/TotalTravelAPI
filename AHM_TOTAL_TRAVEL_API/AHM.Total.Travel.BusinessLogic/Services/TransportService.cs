@@ -652,10 +652,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         public ServiceResult FindDetallesTransports(int id)
         {
             var result = new ServiceResult();
-            var Detallestransports = new VW_tbDetallesTransportes();
+            //var Detallestransports = new VW_tbDetallesTransportes();
             try
             {
-                Detallestransports = _detallesTransportesRepository.Find(id);
+                VW_tbDetallesTransportes Detallestransports = _detallesTransportesRepository.Find(id);
                 return result.Ok(Detallestransports);
             }
             catch (Exception ex)

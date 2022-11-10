@@ -1366,7 +1366,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var transporteInfo = (VW_tbDetallesTransportes)_transportService.FindDetallesTransports(transporte.Id_Transportes).Data;
                 LineaTiempoTransportesViewModel lineaTiempoTransportes = new LineaTiempoTransportesViewModel();
                 lineaTiempoTransportes.ID_Transporte = transporte.Id;
-                lineaTiempoTransportes.Transporte = transporteInfo.Parter;
+                lineaTiempoTransportes.Transporte = transporte.Partner_Nombre;
                 lineaTiempoTransportes.HoraSalida = transporteInfo.Hora_Salida;
                 lineaTiempoTransportes.HoraLlegada = transporteInfo.Hora_Llegada;
 
