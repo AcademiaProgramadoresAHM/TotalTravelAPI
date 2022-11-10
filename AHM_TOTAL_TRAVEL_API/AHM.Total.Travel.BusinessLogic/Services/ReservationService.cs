@@ -1339,6 +1339,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     actividades.Add(lineaTiempoActividades);
                 }
 
+                
                 //Rellena actividades de hoteles
                 var lisActivitiestHoteles = (IEnumerable<VW_tbReservacionesActividadesHoteles>)ListReservationActivitiesHotels().Data;
                 lisActivitiestHoteles = lisActivitiestHoteles.Where(x => x.ReservacionID == id_reservation).ToList();
@@ -1348,6 +1349,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     lineaTiempoActividadesHoteles.ID = item.ID;
                     lineaTiempoActividadesHoteles.Actividad = item.Nombre;
                     lineaTiempoActividadesHoteles.Fecha = (DateTime)item.Fecha_Reservacion;
+
+                    //actividades.Add(lineaTiempoActividadesHoteles);
                 }
 
                 //Rellena hotel
@@ -1378,7 +1381,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 lineaTiempoUsuarios.Apellido = usuario.Apellido;
 
                 //Rellena view mdoel de linea de tiempo
-                lineaTiempo.Actividades = actividades.GroupBy(x => x.Fecha).ToList();
+                //alineamiento por fechas GroupBy(x => x.Fecha).
+                lineaTiempo.Actividades = actividades.OrderBy(x => x.Fecha).ToList();
                 lineaTiempo.Hotel_Info = lineaTiempoHoteles;
                 lineaTiempo.Transporte_Info = lineaTiempoTransportes;
                 lineaTiempo.Cliente_Info = lineaTiempoUsuarios;
