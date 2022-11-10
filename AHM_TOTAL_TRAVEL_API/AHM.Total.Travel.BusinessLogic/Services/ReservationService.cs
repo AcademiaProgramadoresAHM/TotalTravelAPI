@@ -1362,35 +1362,32 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var listHoteles = (IEnumerable<VW_tbReservacionesHoteles>)ListReservationHotel().Data;
                 var hotel = listHoteles.Where(x => x.ReservacionID == id_reservation).ToList()[0];
                 var hotelInfo = (VW_tbHoteles)_hotelService.FindHotels((int)hotel.Hotel_ID).Data;
-                LineaTiempoHotelesViewModel lineaTiempoHoteles = new LineaTiempoHotelesViewModel();
-                lineaTiempoHoteles.ID_Hotel = (int)hotel.Hotel_ID;
-                lineaTiempoHoteles.Hotel = hotelInfo.Hotel;
-                lineaTiempoHoteles.Fecha_Entrada = hotel.Fecha_Entrada;
-                lineaTiempoHoteles.Fecha_Salida = hotel.Fecha_Salida;
+                lineaTiempo.ID_Hotel = (int)hotel.Hotel_ID;
+                lineaTiempo.Hotel = hotelInfo.Hotel;
+                lineaTiempo.Fecha_Entrada = hotel.Fecha_Entrada;
+                lineaTiempo.Fecha_Salida = hotel.Fecha_Salida;
 
                 //Rellena transportes
                 var listTransportes = (IEnumerable<VW_tbReservacionTransporteCompleto>)ListReservationTransport().Data;
                 var transporte = listTransportes.Where(x => x.Reservacion == id_reservation).ToList()[0];
-                LineaTiempoTransportesViewModel lineaTiempoTransportes = new LineaTiempoTransportesViewModel();
-                lineaTiempoTransportes.ID_Transporte = transporte.Id;
-                lineaTiempoTransportes.Transporte = transporte.Partner_Nombre;
-                lineaTiempoTransportes.HoraSalida = transporte.Hora_Salida;
-                lineaTiempoTransportes.HoraLlegada = transporte.Hora_Llegada;
+                lineaTiempo.ID_Transporte = transporte.Id;
+                lineaTiempo.Transporte = transporte.Partner_Nombre;
+                lineaTiempo.HoraSalida = transporte.Hora_Salida;
+                lineaTiempo.HoraLlegada = transporte.Hora_Llegada;
 
                 //Rellena cliente
                 var listUsuarios = (IEnumerable<VW_tbReservaciones>)ListReservation().Data;
                 var usuario = listUsuarios.Where(x => x.ID == id_reservation).ToList()[0];
-                LineaTiempoUsuariosViewModel lineaTiempoUsuarios = new LineaTiempoUsuariosViewModel();
-                lineaTiempoUsuarios.ID_Usuario = usuario.Id_Cliente;
-                lineaTiempoUsuarios.Nombre = usuario.Nombre;
-                lineaTiempoUsuarios.Apellido = usuario.Apellido;
+                lineaTiempo.ID_Usuario = usuario.Id_Cliente;
+                lineaTiempo.Nombre = usuario.Nombre;
+                lineaTiempo.Apellido = usuario.Apellido;
 
                 //Rellena view mdoel de linea de tiempo
                 //alineamiento por fechas GroupBy(x => x.Fecha).
                 lineaTiempo.Actividades = actividades.OrderBy(x => x.Fecha).ToList();
-                lineaTiempo.Hotel_Info = lineaTiempoHoteles;
-                lineaTiempo.Transporte_Info = lineaTiempoTransportes;
-                lineaTiempo.Cliente_Info = lineaTiempoUsuarios;
+                //lineaTiempo.Hotel_Info = lineaTiempoHoteles;
+                //lineaTiempo.Transporte_Info = lineaTiempoTransportes;
+                //lineaTiempo.Cliente_Info = lineaTiempoUsuarios;
 
                 return result.Ok(lineaTiempo);
 
