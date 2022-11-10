@@ -227,6 +227,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 VW_tbPaquetePredeterminados packge = _paquetepredeterminadosRepository.Find(id);
                 if (packge != null)
                 {
+                    /*
                     ServiceResult imageResult = _imagesService.getImagesFilesByRoute(packge.Image_URL);
                     if (!imageResult.Success)
                     {
@@ -241,7 +242,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             url = string.Concat(url, item.ImageUrl, ",");
                         }
                         packge.Image_URL = url;
+                    
                     }
+                    */
                 }
                 return result.Ok(packge);
             }

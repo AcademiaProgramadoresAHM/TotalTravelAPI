@@ -26,25 +26,13 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ReservacionTransporteRepository _reservacionTransporteRepository;
         private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesRepository;
         private readonly SaleService _saleService;
+        private readonly PaquetePredeterminadosRepository _predeterminadosRepository;
+        private readonly PaquetePredeterminadosDetallesRepository _paquetesDetallesRepository;
 
         private readonly HotelService _hotelService;
         private readonly TransportService _transportService;
 
-
-        public ReservationService(
-            ReservacionesActividadesExtraRepository reservacionesActividadesExtraRepository,
-            RegistrosPagosRepository registrosPagosRepository,
-            ReservacionesRepository reservacionesRepository,
-            ReservacionesActividadesHotelesRepository reservacionesActividadesHotelesRepository,
-
-            ReservacionesDetallesRepository reservacionesDetallesRepository,
-            ReservacionRestaurantesRepository reservacionRestaurantesRepository,
-            ReservacionTransporteRepository reservacionTransporteRepository,
-            ReservacionesHotelesRepository reservacionesHotelesRepository,
-
-            HotelService hotelService,
-            TransportService transportService
-        )
+        public ReservationService(ReservacionesActividadesExtraRepository reservacionesActividadesExtraRepository, RegistrosPagosRepository registrosPagosRepository, ReservacionesRepository reservacionesRepository, ReservacionesActividadesHotelesRepository reservacionesActividadesHotelesRepository, ReservacionesDetallesRepository reservacionesDetallesRepository, ReservacionesHotelesRepository reservacionesHotelesRepository, ReservacionRestaurantesRepository reservacionRestaurantesRepository, ReservacionTransporteRepository reservacionTransporteRepository, PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesRepository, SaleService saleService, PaquetePredeterminadosRepository predeterminadosRepository, PaquetePredeterminadosDetallesRepository paquetesDetallesRepository, HotelService hotelService, TransportService transportService)
         {
             _reservacionesActividadesExtraRepository = reservacionesActividadesExtraRepository;
             _registrosPagosRepository = registrosPagosRepository;
@@ -54,10 +42,17 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             _reservacionesHotelesRepository = reservacionesHotelesRepository;
             _reservacionRestaurantesRepository = reservacionRestaurantesRepository;
             _reservacionTransporteRepository = reservacionTransporteRepository;
+            _actividadesHotelesRepository = actividadesHotelesRepository;
+            _saleService = saleService;
+            _predeterminadosRepository = predeterminadosRepository;
+            _paquetesDetallesRepository = paquetesDetallesRepository;
             _hotelService = hotelService;
             _transportService = transportService;
-
         }
+
+
+
+
 
         #region ReservacionesDetalles
 
@@ -876,9 +871,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         
                         int packID = item.Paqu_ID.Value;
 
-                        VW_tbPaquetePredeterminados package = _saleService.FindPackage(packID).Data;
-                        VW_tbPaquetePredeterminadosDetalles packageDetails = _saleService.FindPackagesdetail(packID).Data;
+                        VW_tbPaquetePredeterminados package = _predeterminadosRepository.Find(packID);
+                        if (package == null)
+                        {
+                            return result.Error("No se encontró el paquete");
+                        }
 
+                        VW_tbPaquetePredeterminadosDetalles packageDetails = _paquetesDetallesRepository.Find(packID);
+                        if (packageDetails == null)
+                        {
+                            return result.Error("No se encontró los detalles del paquete");
+                        }
+
+                        
 
                         //Create the reservation of the hotel
                         tbReservacionesHoteles resvHotel = new tbReservacionesHoteles
