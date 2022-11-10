@@ -40,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AHM.Total.Travel.BusinessLogic\AHM.Total.Travel.BusinessLogic.csproj" />
     <ProjectReference Include="..\AHM.Total.Travel.Common\AHM.Total.Travel.Common.csproj" />
+    <ProjectReference Include="..\AHM.Total.Travel.Entities\AHM.Total.Travel.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

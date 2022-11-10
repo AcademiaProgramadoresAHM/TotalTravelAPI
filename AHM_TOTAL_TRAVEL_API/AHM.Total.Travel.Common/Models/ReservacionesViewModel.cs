@@ -14,7 +14,7 @@ namespace AHM.Total.Travel.Common.Models
         public bool Resv_esPersonalizado { get; set; }
         public int? Resv_CantidadPagos { get; set; }
         public int? Resv_NumeroPersonas { get; set; }
-        [DefaultValue (false)]
+        [DefaultValue(false)]
         public bool? Resv_ConfirmacionPago { get; set; }
         [DefaultValue(false)]
         public bool? Resv_ConfirmacionHotel { get; set; }
@@ -27,21 +27,21 @@ namespace AHM.Total.Travel.Common.Models
         public int? Resv_UsuarioModifica { get; set; }
 
         //Need this data in order to make a reservation in HotelReservation
-        
+
         public DateTime? ReHo_FechaEntrada { get; set; }
         public DateTime? ReHo_FechaSalida { get; set; }
 
         //Need this in order to make a reservation of a custom package
         public int? Hote_ID { get; set; }
-        public List<ReservacionesActividadesExtrasViewModel> ActividadesExtras { get; set; } = null;
-        public List<ReservacionRestaurantesViewModel> Restaurantes { get; set; } = null;
-        public List<ReservacionesActividadesHotelesViewModel> ActividadesHoteles { get; set; } = null; 
+        public List<ReservacionesActividadesExtras> ActividadesExtras { get; set; } = null;
+        public List<ReservacionRestaurantes> Restaurantes { get; set; } = null;
+        public List<ReservacionesActividadesHoteles> ActividadesHoteles { get; set; } = null;
         public int? TipoPago { get; set; }
         public int? Habi_ID { get; set; }
-        public int? Habi_Cantidad { get; set;  }
+        public int? Habi_Cantidad { get; set; }
 
         //Need this to make the reservation of a transport
-        public List<ReservacionTransporteViewModel> reservacionTransportes { get; set; }
+        public List<ReservacionTransporte> reservacionTransportes { get; set; }
         public ReservacionesViewModel()
         {
             Resv_ConfirmacionPago = false;
@@ -49,5 +49,45 @@ namespace AHM.Total.Travel.Common.Models
             Resv_ConfirmacionRestaurante = false;
             Resv_ConfirmacionTrans = false;
         }
+
+
+        public class ReservacionesActividadesExtras
+        {
+            public int? AcEx_ID { get; set; }
+            public int ReAE_ID { get; set; }
+            public decimal ReAE_Precio { get; set; }
+            public int? ReAE_Cantidad { get; set; }
+            public DateTime? ReAE_FechaReservacion { get; set; }
+            public string ReAE_HoraReservacion { get; set; }
+        }
+        public class ReservacionRestaurantes
+        {
+            public int? Resv_ID { get; set; }
+            public int? Rest_ID { get; set; }
+            public DateTime? ReRe_FechaReservacion { get; set; }
+            public string ReRe_HoraReservacion { get; set; }
+        }
+        public class ReservacionesActividadesHoteles
+        {
+            public int? HoAc_ID { get; set; }
+            public decimal? ReAH_Precio { get; set; }
+            public int? ReAH_Cantidad { get; set; }
+            public DateTime? ReAH_FechaReservacion { get; set; }
+            public string ReAH_HoraReservacion { get; set; }
+        }
+        public class ReservacionTransporte
+        {
+            public int? Detr_ID { get; set; }
+            public int? ReTr_CantidadAsientos { get; set; }
+            public bool? ReTr_Cancelado { get; set; }
+            public DateTime? ReTr_FechaCancelado { get; set; }
+
+            public ReservacionTransporte()
+            {
+                ReTr_Cancelado = false;
+            }
+        }
+
     }
+    
 }
