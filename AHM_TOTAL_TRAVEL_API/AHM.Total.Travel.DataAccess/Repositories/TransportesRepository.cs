@@ -35,6 +35,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@TiTr_ID", item.TiTr_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Tprt_Nombre", item.Tprt_Nombre, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Tprt_UsuarioCreacion", item.Tprt_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -58,6 +59,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@TiTr_ID", item.TiTr_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Tprt_Nombre", item.Tprt_Nombre, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Tprt_UsuarioModifica", item.Tprt_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Fecha", item.HoTr_Fecha, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@HoraSalida", item.HoTr_HoraSalida, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoraLlegada", item.HoTr_HoraLlegada, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Partner_ID", item.Partner_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioCrea", item.HoTr_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -55,6 +56,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Fecha", item.HoTr_Fecha, DbType.DateTime, ParameterDirection.Input);
             parameters.Add("@HoraSalida", item.HoTr_HoraSalida, DbType.String, ParameterDirection.Input);
             parameters.Add("@HoraLlegada", item.HoTr_HoraLlegada, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Partner_ID", item.Partner_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", item.HoTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

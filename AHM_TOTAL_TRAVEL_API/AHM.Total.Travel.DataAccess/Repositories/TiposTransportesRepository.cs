@@ -33,6 +33,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@TiTr_Descripcion", item.TiTr_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Partner_ID", item.Partner_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiTr_UsuarioCreacion", item.TiTr_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -50,6 +51,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@TiTr_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiTr_Descripcion", item.TiTr_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Partner_ID", item.Partner_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@TiTr_UsuarioModifica", item.TiTr_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
