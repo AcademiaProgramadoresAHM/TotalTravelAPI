@@ -877,13 +877,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             return result.Error("No se encontró el paquete");
                         }
 
-                        VW_tbPaquetePredeterminadosDetalles packageDetails = _paquetesDetallesRepository.Find(packID);
-                        if (packageDetails == null)
-                        {
-                            return result.Error("No se encontró los detalles del paquete");
-                        }
-
-                        
 
                         //Create the reservation of the hotel
                         tbReservacionesHoteles resvHotel = new tbReservacionesHoteles
@@ -918,7 +911,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                             if (itemViewModel.ActividadesExtras != null)
                             {
                                 //Creates a reservation for the extra activities
-                                List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = (List<VW_tbPaquetePredeterminadosDetalles>)_saleService.ListPackagesdetail().Data;
+                                List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = _paquetesDetallesRepository.List().ToList();
                                 List<VW_tbPaquetePredeterminadosDetalles> filteredPackageExtraActivities = packageExtraActivities.Where(x => x.PaqueteID == packID).ToList();
                                 foreach (var actvExtra in filteredPackageExtraActivities)
                                 {
