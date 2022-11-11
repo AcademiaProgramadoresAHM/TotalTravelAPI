@@ -27,7 +27,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-
+        [Authorize(Roles = "Cliente")]
         [HttpGet("List")]
         public IActionResult List()
         {
