@@ -60,6 +60,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@ReAE_FechaReservacion", item.ReAE_FechaReservacion, DbType.Date, ParameterDirection.Input);
             parameters.Add("@ReAE_HoraReservacion", item.ReAE_HoraReservacion, DbType.String, ParameterDirection.Input);
             parameters.Add("@ReAE_UsuarioModifica", item.ReAE_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@ReAe_Confirmado", item.ReAE_Confirmado, DbType.Boolean, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
