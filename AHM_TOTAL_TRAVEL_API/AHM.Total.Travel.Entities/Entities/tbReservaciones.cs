@@ -27,6 +27,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Resv_ConfirmacionHotel { get; set; }
         public bool? Resv_ConfirmacionRestaurante { get; set; }
         public bool? Resv_ConfirmacionTrans { get; set; }
+        public bool? Resv_ConfirmacionActividades { get; set; }
         public decimal? Resv_Precio { get; set; }
         public int? Resv_UsuarioCreacion { get; set; }
         public DateTime? Resv_FechaCreacion { get; set; }

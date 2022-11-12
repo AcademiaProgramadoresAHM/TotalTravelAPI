@@ -27,6 +27,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet("List")]
         public IActionResult List()
         {

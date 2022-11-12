@@ -1365,6 +1365,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 var transporte = listTransportes.Where(x => x.Reservacion == id_reservation).ToList()[0];
                 lineaTiempo.ID_Transporte = transporte.Id;
                 lineaTiempo.Transporte = transporte.Partner_Nombre;
+                lineaTiempo.TransporteFechaSalida = transporte.Transporte_FechaSalida;
                 lineaTiempo.HoraSalida = transporte.Hora_Salida;
                 lineaTiempo.HoraLlegada = transporte.Hora_Llegada;
 
