@@ -14,6 +14,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? ReAE_Cantidad { get; set; }
         public DateTime? ReAE_FechaReservacion { get; set; }
         public string ReAE_HoraReservacion { get; set; }
+        public bool? ReAE_Confirmado { get; set; }
         public int? ReAE_UsuarioCreacion { get; set; }
         public DateTime? ReAE_FechaCreacion { get; set; }
         public int? ReAE_UsuarioModifica { get; set; }

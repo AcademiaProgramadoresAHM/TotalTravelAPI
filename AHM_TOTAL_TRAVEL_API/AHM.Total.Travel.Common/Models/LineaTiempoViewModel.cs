@@ -14,6 +14,7 @@ namespace AHM.Total.Travel.Common.Models
         public DateTime? Fecha_Salida { get; set; }
         public int ID_Transporte { get; set; }
         public string Transporte { get; set; }
+        public DateTime? TransporteFechaSalida { get; set; }
         public string HoraSalida { get; set; }
         public string HoraLlegada { get; set; }
         public int ID_Usuario { get; set; }

@@ -1092,6 +1092,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Transporte_FechaSalida).HasColumnType("date");
+
                 entity.Property(e => e.Usuario_Creacion)
                     .IsRequired()
                     .HasMaxLength(101)
@@ -2757,6 +2759,8 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToTable("tbReservaciones", "Resv");
 
+                entity.Property(e => e.Resv_ConfirmacionActividades).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Resv_ConfirmacionHotel).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Resv_ConfirmacionPago).HasDefaultValueSql("((0))");
@@ -2802,6 +2806,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasName("PK__tbReserv__4B5820A3816AA137");
 
                 entity.ToTable("tbReservacionesActividadesExtras", "Resv");
+
+                entity.Property(e => e.ReAE_Confirmado).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.ReAE_Estado).HasDefaultValueSql("('1')");
 

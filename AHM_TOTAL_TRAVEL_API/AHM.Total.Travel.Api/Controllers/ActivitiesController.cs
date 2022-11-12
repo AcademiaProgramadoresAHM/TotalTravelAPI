@@ -26,7 +26,6 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpGet("List")]
-        [AllowAnonymous]
         public IActionResult List()
         {
             var list = _activitiesService.ListActivities();
