@@ -34,6 +34,8 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@Paqu_ID", item.Paqu_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Actv_ID", item.Actv_ID, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PaDe_Precio", item.PaDe_Precio, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@PaDe_Cantidad", item.PaDe_Cantidad, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@PaDe_UsuarioCreacion", item.PaDe_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
