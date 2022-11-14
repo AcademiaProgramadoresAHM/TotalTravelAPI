@@ -9,6 +9,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Dire_ID { get; set; }
         public int? Tprt_UsuarioCreacion { get; set; }
         public int? Tprt_UsuarioModifica { get; set; }
+        public string Tprt_Nombre { get; set; }
 
     }
 }

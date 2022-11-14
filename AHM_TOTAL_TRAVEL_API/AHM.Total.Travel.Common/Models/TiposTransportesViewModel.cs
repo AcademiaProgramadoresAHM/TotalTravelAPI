@@ -9,5 +9,6 @@ namespace AHM.Total.Travel.Common.Models
         public string TiTr_Descripcion { get; set; }
         public int? TiTr_UsuarioCreacion { get; set; }
         public int? TiTr_UsuarioModifica { get; set; }
+        public int? Partner_ID { get; set; }
     }
 }

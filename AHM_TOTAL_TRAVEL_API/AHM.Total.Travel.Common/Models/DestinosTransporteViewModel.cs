@@ -11,5 +11,6 @@ namespace AHM.Total.Travel.Common.Models
         public int? DsTr_CiudadDestino { get; set; }
         public int? DsTr_UsuarioCreacion { get; set; }
         public int? DsTr_UsuarioModifica { get; set; }
+        public int? Partner_ID { get; set; }
     }
 }
