@@ -1712,6 +1712,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Ciudad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Colonia)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -1739,6 +1743,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Nombrecompleto)
                     .IsRequired()
                     .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Pais)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Partner)
