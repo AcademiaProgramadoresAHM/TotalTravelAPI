@@ -35,7 +35,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [HttpGet("Private")]
-        [Authorize(Roles = "Administrador, Cliente")]
+        [Authorize]
         public IActionResult Private()
         {
             //extract jwt token from request

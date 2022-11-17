@@ -36,6 +36,7 @@ namespace AHM.Total.Travel.Common.Models
         public List<ReservacionesActividadesExtras> ActividadesExtras { get; set; } = null;
         public List<ReservacionRestaurantes> Restaurantes { get; set; } = null;
         public List<ReservacionesActividadesHoteles> ActividadesHoteles { get; set; } = null;
+        public List<ReservacionHabitaciones> Resv_Habitaciones { get; set; } = null;
         public int? TipoPago { get; set; }
         public int? Habi_ID { get; set; }
         public int? Habi_Cantidad { get; set; }
@@ -53,8 +54,8 @@ namespace AHM.Total.Travel.Common.Models
 
         public class ReservacionesActividadesExtras
         {
-            public int? AcEx_ID { get; set; }
             public int ReAE_ID { get; set; }
+            public int? AcEx_ID { get; set; }
             public decimal ReAE_Precio { get; set; }
             public int? ReAE_Cantidad { get; set; }
             public DateTime? ReAE_FechaReservacion { get; set; }
@@ -62,6 +63,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionRestaurantes
         {
+            public int ReRe_ID { get; set; }
             public int? Resv_ID { get; set; }
             public int? Rest_ID { get; set; }
             public DateTime? ReRe_FechaReservacion { get; set; }
@@ -69,6 +71,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionesActividadesHoteles
         {
+            public int ReAH_ID { get; set; }
             public int? HoAc_ID { get; set; }
             public decimal? ReAH_Precio { get; set; }
             public int? ReAH_Cantidad { get; set; }
@@ -77,6 +80,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionTransporte
         {
+            public int ReTr_ID { get; set; }
             public int? Detr_ID { get; set; }
             public int? ReTr_CantidadAsientos { get; set; }
             public bool? ReTr_Cancelado { get; set; }
@@ -87,7 +91,12 @@ namespace AHM.Total.Travel.Common.Models
                 ReTr_Cancelado = false;
             }
         }
-
+        public class ReservacionHabitaciones
+        {
+            public int ReDe_ID { get; set; }
+            public int Habi_ID { get; set; }
+            public int Habi_Cantidad { get; set; }
+        }
     }
     
 }

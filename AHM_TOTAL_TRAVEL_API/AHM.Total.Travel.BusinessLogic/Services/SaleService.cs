@@ -86,7 +86,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     {
                         Updatepackages(map.CodeStatus, item, file);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
 
                         throw;
