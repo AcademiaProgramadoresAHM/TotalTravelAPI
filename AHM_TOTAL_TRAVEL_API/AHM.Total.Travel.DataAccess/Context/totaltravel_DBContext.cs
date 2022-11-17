@@ -1004,6 +1004,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Restaurante)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -1192,6 +1196,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Precio).HasColumnType("numeric(10, 2)");
 
                 entity.Property(e => e.Usuario_Creacion)
@@ -1293,6 +1301,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbReservacionesHoteles", "Resv");
+
+                entity.Property(e => e.Cliente)
+                    .IsRequired()
+                    .HasMaxLength(101)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 

@@ -25,6 +25,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Colonia { get; set; }
         public string Calle { get; set; }
         public string Avenida { get; set; }
+        public int? tipoPartner_Id { get; set; }
         public string Partner { get; set; }
         public int? PartnerID { get; set; }
         public string Rol { get; set; }
