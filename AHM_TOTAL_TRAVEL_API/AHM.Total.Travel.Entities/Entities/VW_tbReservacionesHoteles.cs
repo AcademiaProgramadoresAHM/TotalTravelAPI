@@ -9,9 +9,11 @@ namespace AHM.Total.Travel.Entities.Entities
     {
         public int ID { get; set; }
         public int? Hotel_ID { get; set; }
+        public string Cliente { get; set; }
         public DateTime? Fecha_Entrada { get; set; }
         public DateTime? Fecha_Salida { get; set; }
         public int ReservacionID { get; set; }
+        public int? PartnerID { get; set; }
         public int? UsuarioCreacionID { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }
