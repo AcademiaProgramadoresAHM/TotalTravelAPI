@@ -16,6 +16,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
     public class AccessService
     {
         private readonly RolesRepository _rolesRepository;
+        private readonly ModulosRepository _ModulosRepository;
         private readonly PermisosRepository _permisosRepository;
         private readonly RolesPermisosRepository _rolesPermisosRepository;
         private readonly UsuariosRepository _usuariosRepository;
@@ -24,9 +25,14 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
         private string _defaultAlbumRoute = "UsersProfilePics\\User-";
 
-        public AccessService(RolesRepository rolesRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
+        public AccessService(
+            RolesRepository rolesRepository, PermisosRepository permisosRepository, 
+            RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, 
+            UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService,
+            ModulosRepository ModulosRepository)
         {
             _rolesRepository = rolesRepository;
+            _ModulosRepository = ModulosRepository;
             _permisosRepository = permisosRepository;
             _rolesPermisosRepository = rolesPermisosRepository;
             _usuariosRepository = usuariosRepository;
@@ -695,6 +701,22 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
 
+        #endregion
+
+        #region modulos
+        public ServiceResult ListModules()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ModulosRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
     }
 }
