@@ -17,10 +17,15 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Email { get; set; }
         public string Telefono { get; set; }
         public int DireccionID { get; set; }
+        public int PaisID { get; set; }
+        public string Pais { get; set; }
+        public int CiudadID { get; set; }
+        public string Ciudad { get; set; }
         public int ColoniaID { get; set; }
         public string Colonia { get; set; }
         public string Calle { get; set; }
         public string Avenida { get; set; }
+        public int? tipoPartner_Id { get; set; }
         public string Partner { get; set; }
         public int? PartnerID { get; set; }
         public string Rol { get; set; }

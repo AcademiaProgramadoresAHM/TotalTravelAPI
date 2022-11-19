@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Update(int id, ReservacionesViewModel items)
         {
             var item = _mapper.Map<tbReservaciones>(items);
-            var result = _reservationService.UpdateReservation(id, item);
+            var result = _reservationService.EditReservation(id, item, items);
             return Ok(result);
         }
 

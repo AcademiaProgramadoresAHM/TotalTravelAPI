@@ -8,10 +8,12 @@ namespace AHM.Total.Travel.Entities.Entities
     public partial class VW_tbReservacionRestaurante
     {
         public int Id { get; set; }
-        public int DescripcionReservacion { get; set; }
+        public int Resv_ID { get; set; }
         public string Cliente { get; set; }
         public int ID_Restaurante { get; set; }
         public string Restaurante { get; set; }
+        public int? ID_Parter { get; set; }
+        public string Partner_Nombre { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }
         public int ID_Usuario_Creacion { get; set; }
