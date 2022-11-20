@@ -18,6 +18,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public decimal? Precio { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }
+        public bool? ConfirmacionReservacion { get; set; }
         public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
         public string Usuario_Modifica { get; set; }

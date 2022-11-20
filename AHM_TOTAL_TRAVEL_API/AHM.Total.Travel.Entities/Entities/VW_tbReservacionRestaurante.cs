@@ -16,6 +16,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Partner_Nombre { get; set; }
         public DateTime? Fecha_Reservacion { get; set; }
         public string Hora_Reservacion { get; set; }
+        public bool? ConfirmacionReservacion { get; set; }
         public int ID_Usuario_Creacion { get; set; }
         public string Usuario_Creacion { get; set; }
         public DateTime? Fecha_Creacion { get; set; }
