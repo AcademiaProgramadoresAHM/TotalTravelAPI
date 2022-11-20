@@ -14,6 +14,7 @@ namespace AHM.Total.Travel.Entities.Entities
 
         public int Modu_Id { get; set; }
         public string Modu_Descripcion { get; set; }
+        public bool? Modu_Estado { get; set; }
 
         public virtual ICollection<tbPermisos> tbPermisos { get; set; }
     }

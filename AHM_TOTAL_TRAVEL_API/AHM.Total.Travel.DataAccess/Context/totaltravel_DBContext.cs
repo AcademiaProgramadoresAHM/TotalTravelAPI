@@ -32,6 +32,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbHotelesActividades> VW_tbHotelesActividades { get; set; }
         public virtual DbSet<VW_tbHotelesMenus> VW_tbHotelesMenus { get; set; }
         public virtual DbSet<VW_tbMenus> VW_tbMenus { get; set; }
+        public virtual DbSet<VW_tbModulos> VW_tbModulos { get; set; }
         public virtual DbSet<VW_tbPaises> VW_tbPaises { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminados> VW_tbPaquetePredeterminados { get; set; }
         public virtual DbSet<VW_tbPaquetePredeterminadosActividadesHoteles> VW_tbPaquetePredeterminadosActividadesHoteles { get; set; }
@@ -646,6 +647,19 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.UsuarioModifica)
                     .IsRequired()
                     .HasMaxLength(101)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VW_tbModulos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbModulos", "Acce");
+
+                entity.Property(e => e.id_modulo).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.modulo)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
             });
 
@@ -1806,7 +1820,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbActividades>(entity =>
             {
                 entity.HasKey(e => e.Actv_ID)
-                    .HasName("PK__tbActivi__E5CC8281177A6758");
+                    .HasName("PK__tbActivi__E5CC828147E7060E");
 
                 entity.ToTable("tbActividades", "Actv");
 
@@ -1840,7 +1854,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbActividadesExtras>(entity =>
             {
                 entity.HasKey(e => e.AcEx_ID)
-                    .HasName("PK__tbActivi__30F0381922DC84EC");
+                    .HasName("PK__tbActivi__30F0381978C505AB");
 
                 entity.ToTable("tbActividadesExtras", "Actv");
 
@@ -1882,7 +1896,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbCategoriasHabitaciones>(entity =>
             {
                 entity.HasKey(e => e.CaHa_ID)
-                    .HasName("PK__tbCatego__D14A1D87112B3E5A");
+                    .HasName("PK__tbCatego__D14A1D870981CE46");
 
                 entity.ToTable("tbCategoriasHabitaciones", "Htel");
 
@@ -1912,7 +1926,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbCiudades>(entity =>
             {
                 entity.HasKey(e => e.Ciud_ID)
-                    .HasName("PK__tbCiudad__D04530A8642B1E91");
+                    .HasName("PK__tbCiudad__D04530A8E3F44D66");
 
                 entity.ToTable("tbCiudades", "Gene");
 
@@ -1946,7 +1960,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbColonias>(entity =>
             {
                 entity.HasKey(e => e.Colo_ID)
-                    .HasName("PK__tbColoni__894A01EBF7E558F3");
+                    .HasName("PK__tbColoni__894A01EBB32FF441");
 
                 entity.ToTable("tbColonias", "Gene");
 
@@ -1980,7 +1994,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbDestinosTransportes>(entity =>
             {
                 entity.HasKey(e => e.DsTr_ID)
-                    .HasName("PK__tbDestin__8D3D09A2A77F30F9");
+                    .HasName("PK__tbDestin__8D3D09A2A29DC304");
 
                 entity.ToTable("tbDestinosTransportes", "Trpt");
 
@@ -2016,7 +2030,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbDetallesTransportes>(entity =>
             {
                 entity.HasKey(e => e.DeTr_ID)
-                    .HasName("PK__tbDetall__F5E4BFD5655580D9");
+                    .HasName("PK__tbDetall__F5E4BFD58481422B");
 
                 entity.ToTable("tbDetallesTransportes", "Trpt");
 
@@ -2056,7 +2070,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbDirecciones>(entity =>
             {
                 entity.HasKey(e => e.Dire_ID)
-                    .HasName("PK__tbDirecc__011551326939C7B2");
+                    .HasName("PK__tbDirecc__01155132CA59F400");
 
                 entity.ToTable("tbDirecciones", "Gene");
 
@@ -2140,7 +2154,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbHorariosTransportes>(entity =>
             {
                 entity.HasKey(e => e.HoTr_ID)
-                    .HasName("PK__tbHorari__570BB7B764EC6904");
+                    .HasName("PK__tbHorari__570BB7B7A02CE1BC");
 
                 entity.ToTable("tbHorariosTransportes", "Trpt");
 
@@ -2355,24 +2369,26 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbModulos>(entity =>
             {
                 entity.HasKey(e => e.Modu_Id)
-                    .HasName("PK__tbModulo__6F3FB45D34EABFAF");
+                    .HasName("PK__tbModulo__6F3FB45D10F80D07");
 
                 entity.ToTable("tbModulos", "Acce");
 
                 entity.Property(e => e.Modu_Descripcion)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Modu_Estado).HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<tbPaises>(entity =>
             {
                 entity.HasKey(e => e.Pais_ID)
-                    .HasName("PK__tbPaises__6356B8539C545089");
+                    .HasName("PK__tbPaises__6356B853F8BBB57D");
 
                 entity.ToTable("tbPaises", "Gene");
 
                 entity.HasIndex(e => e.Pais_Codigo)
-                    .HasName("UQ__tbPaises__BC5364F94DFFB5A5")
+                    .HasName("UQ__tbPaises__BC5364F95A7D12C6")
                     .IsUnique();
 
                 entity.Property(e => e.Pais_Codigo)
@@ -2414,7 +2430,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbPaquetePredeterminados>(entity =>
             {
                 entity.HasKey(e => e.Paqu_ID)
-                    .HasName("PK__tbPaquet__39E5491D23EAAAF6");
+                    .HasName("PK__tbPaquet__39E5491D11AEAEA5");
 
                 entity.ToTable("tbPaquetePredeterminados", "Sale");
 
@@ -2464,7 +2480,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbPaquetePredeterminadosActividadesHoteles>(entity =>
             {
                 entity.HasKey(e => e.PaAc_ID)
-                    .HasName("PK__tbPaquet__A9F9B994E01B42C7");
+                    .HasName("PK__tbPaquet__A9F9B99446BEE7C9");
 
                 entity.ToTable("tbPaquetePredeterminadosActividadesHoteles", "Sale");
 
@@ -2536,7 +2552,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbPaquetesHabitaciones>(entity =>
             {
                 entity.HasKey(e => e.PaHa_Id)
-                    .HasName("PK__tbPaquet__4EE768E7A6F9C4D2");
+                    .HasName("PK__tbPaquet__4EE768E73CC60EDE");
 
                 entity.ToTable("tbPaquetesHabitaciones", "Sale");
 
@@ -2613,7 +2629,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbPermisos>(entity =>
             {
                 entity.HasKey(e => e.Perm_ID)
-                    .HasName("PK__tbPermis__4C3E538DDBA4F6F8");
+                    .HasName("PK__tbPermis__4C3E538D5AB6FE03");
 
                 entity.ToTable("tbPermisos", "Acce");
 
@@ -2659,7 +2675,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbRegistrosPagos>(entity =>
             {
                 entity.HasKey(e => e.RePa_ID)
-                    .HasName("PK__tbRegist__78BD24BA092AE64C");
+                    .HasName("PK__tbRegist__78BD24BAC96F821B");
 
                 entity.ToTable("tbRegistrosPagos", "Resv");
 
@@ -2697,7 +2713,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbReservacionRestaurantes>(entity =>
             {
                 entity.HasKey(e => e.ReRe_ID)
-                    .HasName("PK__tbReserv__0DFE33EB5C2DB172");
+                    .HasName("PK__tbReserv__0DFE33EBC9E29361");
 
                 entity.ToTable("tbReservacionRestaurantes", "Resv");
 
@@ -2739,7 +2755,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbReservacionTransporte>(entity =>
             {
                 entity.HasKey(e => e.ReTr_ID)
-                    .HasName("PK__tbReserv__BA5C74AC17D9985B");
+                    .HasName("PK__tbReserv__BA5C74AC1299126B");
 
                 entity.ToTable("tbReservacionTransporte", "Resv");
 
@@ -2911,7 +2927,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbReservacionesDetalles>(entity =>
             {
                 entity.HasKey(e => e.ReDe_ID)
-                    .HasName("PK__tbReserv__E2709EF96632ECB7");
+                    .HasName("PK__tbReserv__E2709EF97F5D655D");
 
                 entity.ToTable("tbReservacionesDetalles", "Resv");
 
@@ -2945,7 +2961,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbReservacionesHoteles>(entity =>
             {
                 entity.HasKey(e => e.ReHo_ID)
-                    .HasName("PK__tbReserv__9019459B56381D52");
+                    .HasName("PK__tbReserv__9019459B698AFEDD");
 
                 entity.ToTable("tbReservacionesHoteles", "Resv");
 
@@ -3027,7 +3043,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbRoles>(entity =>
             {
                 entity.HasKey(e => e.Role_ID)
-                    .HasName("PK__tbRoles__D80AB49B65272DF5");
+                    .HasName("PK__tbRoles__D80AB49B304B5970");
 
                 entity.ToTable("tbRoles", "Acce");
 
@@ -3057,7 +3073,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbRolesPermisos>(entity =>
             {
                 entity.HasKey(e => e.RoPe_ID)
-                    .HasName("PK__tbRolesP__897DEC3208E74C10");
+                    .HasName("PK__tbRolesP__897DEC321C45CD71");
 
                 entity.ToTable("tbRolesPermisos", "Acce");
 
@@ -3083,7 +3099,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbTipoMenus>(entity =>
             {
                 entity.HasKey(e => e.Time_ID)
-                    .HasName("PK__tbTipoMe__5D2DFC2AEB394518");
+                    .HasName("PK__tbTipoMe__5D2DFC2A2FAC18C5");
 
                 entity.ToTable("tbTipoMenus", "Rest");
 
@@ -3144,7 +3160,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbTiposActividades>(entity =>
             {
                 entity.HasKey(e => e.TiAc_ID)
-                    .HasName("PK__tbTiposA__A65FBF7DC6E36593");
+                    .HasName("PK__tbTiposA__A65FBF7D71F96DE7");
 
                 entity.ToTable("tbTiposActividades", "Actv");
 
@@ -3172,7 +3188,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbTiposPagos>(entity =>
             {
                 entity.HasKey(e => e.TiPa_ID)
-                    .HasName("PK__tbTiposP__BF9C3341CB285194");
+                    .HasName("PK__tbTiposP__BF9C3341854ACCC0");
 
                 entity.ToTable("tbTiposPagos", "Sale");
 
@@ -3202,7 +3218,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbTiposTransportes>(entity =>
             {
                 entity.HasKey(e => e.TiTr_ID)
-                    .HasName("PK__tbTiposT__A09FE06B76CDC5D0");
+                    .HasName("PK__tbTiposT__A09FE06B5810C355");
 
                 entity.ToTable("tbTiposTransportes", "Trpt");
 
@@ -3232,7 +3248,7 @@ namespace AHM.Total.Travel.DataAccess.Context
             modelBuilder.Entity<tbTransportes>(entity =>
             {
                 entity.HasKey(e => e.Tprt_ID)
-                    .HasName("PK__tbTransp__3B458E1CC609DEB2");
+                    .HasName("PK__tbTransp__3B458E1C4CBD667E");
 
                 entity.ToTable("tbTransportes", "Trpt");
 

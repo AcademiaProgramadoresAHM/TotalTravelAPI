@@ -31,6 +31,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? ConfirmacionRestaurante { get; set; }
         public bool? ConfirmacionTransporte { get; set; }
         public bool? ConfirmacionPago { get; set; }
+        public bool? ConfirmacionActividades { get; set; }
         public int? Id_UsuarioCrea { get; set; }
         public string UsuarioCrea { get; set; }
         public DateTime? FechaCreacion { get; set; }

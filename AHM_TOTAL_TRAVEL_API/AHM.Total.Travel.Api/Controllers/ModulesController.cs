@@ -21,6 +21,7 @@ namespace AHM.Total.Travel.Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult List()
         {
             var data = _AccessService.ListModules();
