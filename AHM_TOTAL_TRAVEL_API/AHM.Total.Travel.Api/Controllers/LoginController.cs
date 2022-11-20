@@ -107,5 +107,15 @@ namespace AHM.Total.Travel.Api.Controllers
             var user = _emailSenderService.ContactEmail(EmailDataViewModel);
             return user;
         }
+
+        [AllowAnonymous]
+        [HttpPost("ReservationConfirmed")]
+        public ServiceResult ReservationConfirmed(EmailDataViewModel EmailDataViewModel, string reservation)
+        {
+            ServiceResult result = new ServiceResult();
+
+            var emailConfirmed = _emailSenderService.ConfirmationReservation(EmailDataViewModel, reservation);
+            return emailConfirmed;
+        }
     }
 }
