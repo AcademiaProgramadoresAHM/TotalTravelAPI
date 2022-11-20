@@ -110,7 +110,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             {
                 
                 emailData.Subject = "Reservación Confirmada - Agencia TotalTravel";
-                emailData.BodyData = "Usted ha confirmado su reservación para" + reservation;
+                emailData.BodyData = "Usted ha confirmado su reservación para " + reservation;
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
@@ -135,8 +135,43 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new ServiceResult().BadRequest(message: "Ocurrio un error al enviar el email");
+                return new ServiceResult().BadRequest(message: "Ocurrió un error al enviar el email");
             }
         }
+
+        public ServiceResult CancelReservation(EmailDataViewModel emailData)
+        {
+            try
+            {
+
+                emailData.Subject = "Reservación Cancelada - Agencia Total Travel";
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(emailData.ToName, emailData.To));
+                message.To.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
+                message.Subject = emailData.Subject;
+                message.Body = new TextPart("plain")
+                {
+                    Text = emailData.BodyData
+                };
+
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    client.Connect(_config["ApiGmail:Host"],
+                        int.Parse(_config["ApiGmail:Port"]),
+                        false);
+                    client.Authenticate(_config["ApiGmail:Mail"], _config["ApiGmail:Password"]);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                return new ServiceResult().Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ServiceResult().BadRequest(message: "Ocurrió un error al enviar el email");
+            }
+        }
+
     }
 }
