@@ -11,7 +11,6 @@ namespace AHM.Total.Travel.Entities.Entities
         {
             tbMenus = new HashSet<tbMenus>();
             tbPaquetePredeterminados = new HashSet<tbPaquetePredeterminados>();
-            tbReservacionRestaurantes = new HashSet<tbReservacionRestaurantes>();
         }
 
         public int Rest_ID { get; set; }
@@ -25,12 +24,9 @@ namespace AHM.Total.Travel.Entities.Entities
         public bool? Rest_Estado { get; set; }
         public string Rest_Url { get; set; }
 
-        public virtual tbDirecciones Dire_ { get; set; }
-        public virtual tbPartners Part_ { get; set; }
         public virtual tbUsuarios Rest_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Rest_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbMenus> tbMenus { get; set; }
         public virtual ICollection<tbPaquetePredeterminados> tbPaquetePredeterminados { get; set; }
-        public virtual ICollection<tbReservacionRestaurantes> tbReservacionRestaurantes { get; set; }
     }
 }

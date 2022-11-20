@@ -179,6 +179,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[Acce].[VW_tbModulos]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[Acce].[VW_tbPermisos]",
          "ObjectType": 3
       },
@@ -351,7 +355,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "totaltravel.totaltravel_DB",
+   "UiHint": "389b5d2fd45fffe.TotalTravel_DB",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

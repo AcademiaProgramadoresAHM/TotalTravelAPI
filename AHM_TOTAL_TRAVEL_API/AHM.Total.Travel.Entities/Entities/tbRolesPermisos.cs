@@ -15,8 +15,5 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? RoPe_UsuarioModifica { get; set; }
         public DateTime? RoPe_FechaModifica { get; set; }
         public bool? RoPe_Estado { get; set; }
-
-        public virtual tbUsuarios RoPe_UsuarioCreacionNavigation { get; set; }
-        public virtual tbUsuarios RoPe_UsuarioModificaNavigation { get; set; }
     }
 }

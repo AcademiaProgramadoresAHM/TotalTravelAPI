@@ -23,8 +23,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Ciud_FechaModifica { get; set; }
         public bool? Ciud_Estado { get; set; }
 
-        public virtual tbUsuarios Ciud_UsuarioCreacionNavigation { get; set; }
-        public virtual tbUsuarios Ciud_UsuarioModificaNavigation { get; set; }
         public virtual tbPaises Pais_ { get; set; }
         public virtual ICollection<tbColonias> tbColonias { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_CiudadDestinoNavigation { get; set; }

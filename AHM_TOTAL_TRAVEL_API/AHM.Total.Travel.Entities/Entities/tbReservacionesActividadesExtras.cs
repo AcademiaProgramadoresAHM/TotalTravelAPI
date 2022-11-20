@@ -21,9 +21,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? ReAE_FechaModifica { get; set; }
         public bool? ReAE_Estado { get; set; }
 
-        public virtual tbActividadesExtras AcEx_ { get; set; }
         public virtual tbUsuarios ReAE_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios ReAE_UsuarioModificaNavigation { get; set; }
-        public virtual tbReservaciones Resv_ { get; set; }
     }
 }

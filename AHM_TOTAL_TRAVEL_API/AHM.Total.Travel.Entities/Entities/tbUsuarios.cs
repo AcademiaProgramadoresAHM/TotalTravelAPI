@@ -17,8 +17,6 @@ namespace AHM.Total.Travel.Entities.Entities
             tbActividadesExtrasAcEx_UsuarioModificaNavigation = new HashSet<tbActividadesExtras>();
             tbCategoriasHabitacionesCaHa_UsuarioCreacionNavigation = new HashSet<tbCategoriasHabitaciones>();
             tbCategoriasHabitacionesCaHa_UsuarioModificaNavigation = new HashSet<tbCategoriasHabitaciones>();
-            tbCiudadesCiud_UsuarioCreacionNavigation = new HashSet<tbCiudades>();
-            tbCiudadesCiud_UsuarioModificaNavigation = new HashSet<tbCiudades>();
             tbColoniasColo_UsuarioCreacionNavigation = new HashSet<tbColonias>();
             tbColoniasColo_UsuarioModificaNavigation = new HashSet<tbColonias>();
             tbDestinosTransportesDsTr_UsuarioCreacionNavigation = new HashSet<tbDestinosTransportes>();
@@ -55,8 +53,6 @@ namespace AHM.Total.Travel.Entities.Entities
             tbPermisosPerm_UsuarioModificaNavigation = new HashSet<tbPermisos>();
             tbRegistrosPagosRePa_UsuarioCreacionNavigation = new HashSet<tbRegistrosPagos>();
             tbRegistrosPagosRePa_UsuarioModificaNavigation = new HashSet<tbRegistrosPagos>();
-            tbReservacionRestaurantesReRe_UsuarioCreacionNavigation = new HashSet<tbReservacionRestaurantes>();
-            tbReservacionRestaurantesReRe_UsuarioModificaNavigation = new HashSet<tbReservacionRestaurantes>();
             tbReservacionTransporteReTr_UsuarioCreacionNavigation = new HashSet<tbReservacionTransporte>();
             tbReservacionTransporteReTr_UsuarioModificaNavigation = new HashSet<tbReservacionTransporte>();
             tbReservacionesActividadesExtrasReAE_UsuarioCreacionNavigation = new HashSet<tbReservacionesActividadesExtras>();
@@ -72,8 +68,6 @@ namespace AHM.Total.Travel.Entities.Entities
             tbReservacionesUsua_ = new HashSet<tbReservaciones>();
             tbRestaurantesRest_UsuarioCreacionNavigation = new HashSet<tbRestaurantes>();
             tbRestaurantesRest_UsuarioModificaNavigation = new HashSet<tbRestaurantes>();
-            tbRolesPermisosRoPe_UsuarioCreacionNavigation = new HashSet<tbRolesPermisos>();
-            tbRolesPermisosRoPe_UsuarioModificaNavigation = new HashSet<tbRolesPermisos>();
             tbRolesRole_UsuarioCreacionNavigation = new HashSet<tbRoles>();
             tbRolesRole_UsuarioModificaNavigation = new HashSet<tbRoles>();
             tbTipoMenusTime_UsuarioCreacionNavigation = new HashSet<tbTipoMenus>();
@@ -124,8 +118,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbActividadesExtras> tbActividadesExtrasAcEx_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbCategoriasHabitaciones> tbCategoriasHabitacionesCaHa_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbCategoriasHabitaciones> tbCategoriasHabitacionesCaHa_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbCiudades> tbCiudadesCiud_UsuarioCreacionNavigation { get; set; }
-        public virtual ICollection<tbCiudades> tbCiudadesCiud_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbColonias> tbColoniasColo_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbColonias> tbColoniasColo_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbDestinosTransportes> tbDestinosTransportesDsTr_UsuarioCreacionNavigation { get; set; }
@@ -162,8 +154,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbPermisos> tbPermisosPerm_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbRegistrosPagos> tbRegistrosPagosRePa_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbRegistrosPagos> tbRegistrosPagosRePa_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbReservacionRestaurantes> tbReservacionRestaurantesReRe_UsuarioCreacionNavigation { get; set; }
-        public virtual ICollection<tbReservacionRestaurantes> tbReservacionRestaurantesReRe_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbReservacionTransporte> tbReservacionTransporteReTr_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbReservacionTransporte> tbReservacionTransporteReTr_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbReservacionesActividadesExtras> tbReservacionesActividadesExtrasReAE_UsuarioCreacionNavigation { get; set; }
@@ -179,8 +169,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbReservaciones> tbReservacionesUsua_ { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantesRest_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbRestaurantes> tbRestaurantesRest_UsuarioModificaNavigation { get; set; }
-        public virtual ICollection<tbRolesPermisos> tbRolesPermisosRoPe_UsuarioCreacionNavigation { get; set; }
-        public virtual ICollection<tbRolesPermisos> tbRolesPermisosRoPe_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbRoles> tbRolesRole_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbRoles> tbRolesRole_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbTipoMenus> tbTipoMenusTime_UsuarioCreacionNavigation { get; set; }
