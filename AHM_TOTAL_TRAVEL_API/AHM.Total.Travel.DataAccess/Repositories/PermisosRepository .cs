@@ -31,10 +31,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public RequestStatus Insert(tbPermisos item)
         {
             var parameters = new DynamicParameters();
+            parameters.Add("@Perm_EsVisible", item.Perm_esVisible, DbType.Boolean, ParameterDirection.Input);
             parameters.Add("@Perm_Icono", item.Perm_Icono, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Perm_Action", item.Perm_Action, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Perm_Action", item.Perm_Action, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Modu_ID", item.Modu_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioCreacion", item.Perm_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
@@ -51,10 +53,12 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Perm_ID", id, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Perm_EsVisible", item.Perm_esVisible, DbType.Boolean, ParameterDirection.Input);
             parameters.Add("@Perm_Icono", item.Perm_Icono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@Perm_Action", item.Perm_Action, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Perm_Action", item.Perm_Action, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Modu_ID", item.Modu_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@UsuarioModifica", item.Perm_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 

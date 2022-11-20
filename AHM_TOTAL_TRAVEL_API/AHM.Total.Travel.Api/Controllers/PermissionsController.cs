@@ -15,6 +15,7 @@ namespace AHM.Total.Travel.Api.Controllers
     [ApiController]
     [Route("API/[Controller]")]
     [Authorize(Roles = "Administrador")]
+    [AllowAnonymous]
     public class PermissionsController : Controller
     {
         private readonly AccessService _AccessService;
@@ -25,8 +26,8 @@ namespace AHM.Total.Travel.Api.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet("List")]
+        [AllowAnonymous]
         public IActionResult List()
         {
             var list = _AccessService.ListPermission();
