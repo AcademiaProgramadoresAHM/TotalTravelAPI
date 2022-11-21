@@ -25,7 +25,7 @@ namespace AHM.Total.Travel.Api.Controllers
             _AccessService = AccessService;
             _mapper = mapper;
         }
-
+        
         [HttpGet("List")]
         [AllowAnonymous]
         public IActionResult List()

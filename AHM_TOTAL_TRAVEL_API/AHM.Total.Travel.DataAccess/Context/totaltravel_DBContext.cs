@@ -291,6 +291,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.UsuarioCreacionID)
                     .HasMaxLength(101)
                     .IsUnicode(false);
@@ -332,6 +336,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Matricula)
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre_Transporte)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Parter)
@@ -465,6 +473,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Hora_Salida)
                     .IsRequired()
                     .HasMaxLength(7)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Usuario_Creacion)
@@ -1488,6 +1500,18 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(101)
                     .IsUnicode(false);
+
+                entity.Property(e => e.accion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.controlador)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.modulo)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VW_tbTipoPartners>(entity =>
@@ -1597,6 +1621,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
+
+                entity.Property(e => e.Partner_Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Trasporte)
                     .HasMaxLength(50)

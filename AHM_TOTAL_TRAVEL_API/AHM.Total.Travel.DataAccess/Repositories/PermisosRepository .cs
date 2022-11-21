@@ -59,7 +59,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Action", item.Perm_Action, DbType.String, ParameterDirection.Input);
             parameters.Add("@Modu_ID", item.Modu_ID, DbType.Int32, ParameterDirection.Input);
-            parameters.Add("@UsuarioModifica", item.Perm_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
+            parameters.Add("@Usuario_Modifica", item.Perm_UsuarioModifica, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbPermisos_Update, parameters, commandType: CommandType.StoredProcedure);
