@@ -21,18 +21,20 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly RolesPermisosRepository _rolesPermisosRepository;
         private readonly UsuariosRepository _usuariosRepository;
         private readonly UsuariosLoginsRepository _usuariosLoginsRepository;
+        private readonly NavbarRepository _navbarRepository;
         private readonly ImagesService _imagesService;
         private string _defaultImageRoute = "Default\\DefaultPhoto.jpg";
         private string _defaultAlbumRoute = "UsersProfilePics\\User-";
 
 
-            public AccessService(RolesRepository rolesRepository, ModulosRepository modulosRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
+            public AccessService(NavbarRepository navbarRepository,RolesRepository rolesRepository, ModulosRepository modulosRepository, PermisosRepository permisosRepository, RolesPermisosRepository rolesPermisosRepository, UsuariosRepository usuariosRepository, UsuariosLoginsRepository usuariosLoginsRepository, ImagesService imagesService)
             {
                 _rolesRepository = rolesRepository;
                 _modulosRepository = modulosRepository;
                 _permisosRepository = permisosRepository;
                 _rolesPermisosRepository = rolesPermisosRepository;
                 _usuariosRepository = usuariosRepository;
+                _navbarRepository = navbarRepository;
                 _usuariosLoginsRepository = usuariosLoginsRepository;
                 _imagesService = imagesService;
             }
@@ -252,12 +254,130 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 }
             }
 
-            #endregion
+        #endregion
 
 
-            #region Permisos
-            //LISTADO
-            public ServiceResult ListPermission()
+        #region Navbar
+        //LISTADO
+        public ServiceResult ListNavbarGroups()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _navbarRepository.List();
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //CREAR
+        public ServiceResult CreateNavbarGroups(tblGruposElementosNavbar item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+
+                var map = _navbarRepository.Insert(item);
+                if (map.CodeStatus > 0)
+                {
+                    return result.Ok(map);
+                }
+                else
+                {
+                    map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    return result.Error(map);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //ACTUALIZAR
+        public ServiceResult UpdateNavbarGroups(int id, tblGruposElementosNavbar item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _navbarRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _navbarRepository.Update(item, id);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                {
+                    return result.Error("Los datos ingresados son incorrectos");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //ELIMINAR
+        public ServiceResult DeleteNavbarGroups(int id, int Mod)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var itemID = _navbarRepository.Find(id);
+                if (itemID != null)
+                {
+                    var map = _navbarRepository.Delete(id, Mod);
+                    if (map.CodeStatus > 0)
+                    {
+                        return result.Ok(map);
+                    }
+                    else
+                    {
+                        map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                        return result.Error(map);
+                    }
+                }
+                else
+                    return result.Error("Los datos ingresados son incorrectos");
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        //BUSCAR
+        public ServiceResult FindNavbarGroups(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var role = _navbarRepository.Find(id);
+                return result.Ok(role);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Permisos
+        //LISTADO
+        public ServiceResult ListPermission()
             {
                 var result = new ServiceResult();
                 try

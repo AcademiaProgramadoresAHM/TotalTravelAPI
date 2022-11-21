@@ -21,6 +21,7 @@ namespace AHM.Total.Travel.BusinessLogic
             services.AddScoped<RolesPermisosRepository>();
             services.AddScoped<RolesRepository>();
             services.AddScoped<ModulosRepository>();
+            services.AddScoped<NavbarRepository>();
             //General
             services.AddScoped<CiudadesRepository>();
             services.AddScoped<ColoniasRepository>();

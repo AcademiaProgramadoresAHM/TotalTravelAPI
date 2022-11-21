@@ -160,6 +160,16 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         public static string UDP_tbRoles_Find = "Acce.tbRoles_Find";
 
         #endregion
+        #region NavbarGroups
+
+        public static string UDP_tblGruposElementosNavbar_Insert = "Acce.UPD_tblGruposElementosNavbar_INSERT";
+
+        public static string UDP_tblGruposElementosNavbar_Update = "Acce.UPD_tblGruposElementosNavbar_UPDATE";
+
+        public static string UDP_tblGruposElementosNavbar_Delete = "Acce.UPD_tblGruposElementosNavbar_DELETE";
+
+        #endregion
+
 
         #region RolesPermisos
 

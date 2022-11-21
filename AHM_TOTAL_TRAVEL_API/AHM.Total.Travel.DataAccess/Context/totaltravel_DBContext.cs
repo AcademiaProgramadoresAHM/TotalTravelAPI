@@ -62,6 +62,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<VW_tbTransportesCompleto> VW_tbTransportesCompleto { get; set; }
         public virtual DbSet<VW_tbUsuarios> VW_tbUsuarios { get; set; }
         public virtual DbSet<VW_tbUsuariosLogins> VW_tbUsuariosLogins { get; set; }
+        public virtual DbSet<VW_tblGruposElementosNavbar> VW_tblGruposElementosNavbar { get; set; }
         public virtual DbSet<tbActividades> tbActividades { get; set; }
         public virtual DbSet<tbActividadesExtras> tbActividadesExtras { get; set; }
         public virtual DbSet<tbCategoriasHabitaciones> tbCategoriasHabitaciones { get; set; }
@@ -103,6 +104,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbTransportes> tbTransportes { get; set; }
         public virtual DbSet<tbUsuarios> tbUsuarios { get; set; }
         public virtual DbSet<tbUsuariosLogins> tbUsuariosLogins { get; set; }
+        public virtual DbSet<tblGruposElementosNavbar> tblGruposElementosNavbar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -667,6 +669,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_tbModulos", "Acce");
+
+                entity.Property(e => e.id_modulo).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.modulo)
                     .HasMaxLength(30)
@@ -1841,6 +1845,19 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Revoked).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<VW_tblGruposElementosNavbar>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tblGruposElementosNavbar", "Acce");
+
+                entity.Property(e => e.ID).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.nombre_grupo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<tbActividades>(entity =>
             {
                 entity.HasKey(e => e.Actv_ID);
@@ -2638,6 +2655,15 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.GrEN_)
+                    .WithMany(p => p.tbPermisos)
+                    .HasForeignKey(d => d.GrEN_Id);
+
+                entity.HasOne(d => d.Modu_)
+                    .WithMany(p => p.tbPermisos)
+                    .HasForeignKey(d => d.Modu_ID)
+                    .HasConstraintName("FK_tbPermisos_tbModulos_Modu_Id");
+
                 entity.HasOne(d => d.Perm_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbPermisosPerm_UsuarioCreacionNavigation)
                     .HasForeignKey(d => d.Perm_UsuarioCreacion)
@@ -3028,6 +3054,8 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToTable("tbRolesPermisos", "Acce");
 
+                entity.Property(e => e.RoPe_Estado).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.RoPe_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.RoPe_FechaModifica).HasColumnType("datetime");
@@ -3301,6 +3329,20 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Expires).HasColumnType("datetime");
 
                 entity.Property(e => e.Revoked).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<tblGruposElementosNavbar>(entity =>
+            {
+                entity.HasKey(e => e.GrEN_Id)
+                    .HasName("PK__tblGrupo__7FED5CC951805D43");
+
+                entity.ToTable("tblGruposElementosNavbar", "Acce");
+
+                entity.Property(e => e.GrEN_Estado).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.GrEN_NombreGrupo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
