@@ -1,4 +1,7 @@
 ﻿using AHM.Total.Travel.BusinessLogic.Services;
+using AHM.Total.Travel.Common.Models;
+using AHM.Total.Travel.Entities.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,18 +17,54 @@ namespace AHM.Total.Travel.Api.Controllers
     public class ModulesController : Controller
     {
         private readonly AccessService _AccessService;
-
-        public ModulesController(AccessService AccessService)
+        private readonly IMapper _mapper;
+        public ModulesController(AccessService AccessService, IMapper mapper)
         {
             _AccessService = AccessService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("List")]
         public IActionResult List()
         {
-            var data = _AccessService.ListModules();
-            return View(data);
+            var list = _AccessService.ListModules();
+            return Ok(list);
+        }
+        [AllowAnonymous]
+        [HttpPost("Insert")]
+        public IActionResult Insert(ModulosViewModel item)
+        {
+            var items = _mapper.Map<tbModulos>(item);
+            var result = _AccessService.CreateModules(items);
+            return Ok(result);
+        }
+
+
+        [HttpPut("Update")]
+        public IActionResult Update(int id, ModulosViewModel items)
+        {
+
+            var item = _mapper.Map<tbModulos>(items);
+            var result = _AccessService.UpdateModulos(id, item);
+            return Ok(result);
+
+        }
+
+        [HttpDelete("Delete")]
+        public IActionResult Delete(int id, int Mod)
+        {
+            var result = _AccessService.DeleteModulos(id, Mod);
+            return Ok(result);
+
+        }
+
+        [HttpGet("Find")]
+        public IActionResult Details(int Id)
+        {
+
+            var result = _AccessService.FindModulos(Id);
+            return Ok(result);
         }
     }
 }

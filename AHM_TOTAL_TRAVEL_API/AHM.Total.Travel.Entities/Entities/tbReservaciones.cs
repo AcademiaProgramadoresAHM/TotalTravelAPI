@@ -10,9 +10,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public tbReservaciones()
         {
             tbRegistrosPagos = new HashSet<tbRegistrosPagos>();
-            tbReservacionRestaurantes = new HashSet<tbReservacionRestaurantes>();
             tbReservacionTransporte = new HashSet<tbReservacionTransporte>();
-            tbReservacionesActividadesExtras = new HashSet<tbReservacionesActividadesExtras>();
             tbReservacionesActividadesHoteles = new HashSet<tbReservacionesActividadesHoteles>();
             tbReservacionesHoteles = new HashSet<tbReservacionesHoteles>();
         }
@@ -40,9 +38,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbUsuarios Resv_UsuarioModificaNavigation { get; set; }
         public virtual tbUsuarios Usua_ { get; set; }
         public virtual ICollection<tbRegistrosPagos> tbRegistrosPagos { get; set; }
-        public virtual ICollection<tbReservacionRestaurantes> tbReservacionRestaurantes { get; set; }
         public virtual ICollection<tbReservacionTransporte> tbReservacionTransporte { get; set; }
-        public virtual ICollection<tbReservacionesActividadesExtras> tbReservacionesActividadesExtras { get; set; }
         public virtual ICollection<tbReservacionesActividadesHoteles> tbReservacionesActividadesHoteles { get; set; }
         public virtual ICollection<tbReservacionesHoteles> tbReservacionesHoteles { get; set; }
     }

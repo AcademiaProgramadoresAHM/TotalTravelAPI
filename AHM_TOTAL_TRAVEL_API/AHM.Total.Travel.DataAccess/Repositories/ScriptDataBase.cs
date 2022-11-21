@@ -140,7 +140,15 @@ namespace AHM.Total.Travel.DataAccess.Repositories
 
 
         #endregion
+        #region Modulos
 
+        public static string UDP_tbModulos_Insert = "Acce.UDP_tbModulos_Insert";
+
+        public static string UDP_tbModulos_Update = "Acce.UDP_tbModulos_Update";
+
+        public static string UDP_tbModulos_Delete = "Acce.UDP_tbModulos_Delete";
+
+        #endregion
         #region Roles
 
         public static string UDP_tbRoles_Insert = "Acce.UDP_tbRoles_Insert";

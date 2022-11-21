@@ -20,7 +20,6 @@ namespace AHM.Total.Travel.Entities.Entities
         public DateTime? Perm_FechaModifica { get; set; }
         public bool? Perm_Estado { get; set; }
 
-        public virtual tbModulos Modu_ { get; set; }
         public virtual tbUsuarios Perm_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Perm_UsuarioModificaNavigation { get; set; }
     }

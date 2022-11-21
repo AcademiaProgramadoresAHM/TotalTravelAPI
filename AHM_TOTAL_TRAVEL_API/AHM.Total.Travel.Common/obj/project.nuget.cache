@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "tmXiCeRJpF2QuWGJJu393ACvof/0+KeDBk+fX92Gc44GbntXzQlwC7XAuyoGzoTFNsGfg6xKpoS7W9VtdfbUqQ==",
+  "dgSpecHash": "BqYW4LYrnLt8Z7AOWmpp33tAjKb6PDSW+oat19OpV8TQyZTrkF9HjjCCSFeSVDx4Ph7BYTaPpyKr9aEwM+vivQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Angel Macea\\Documents\\GitHub\\TotalTravelAPI\\AHM_TOTAL_TRAVEL_API\\AHM.Total.Travel.Common\\AHM.Total.Travel.Common.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Angel Macea\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\Angel Macea\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\Angel Macea\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
+    "C:\\Users\\Angel Macea\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -7,11 +7,6 @@ namespace AHM.Total.Travel.Entities.Entities
 {
     public partial class tbActividadesExtras
     {
-        public tbActividadesExtras()
-        {
-            tbReservacionesActividadesExtras = new HashSet<tbReservacionesActividadesExtras>();
-        }
-
         public int AcEx_ID { get; set; }
         public int? Part_ID { get; set; }
         public int? Actv_ID { get; set; }
@@ -30,6 +25,5 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual tbActividades Actv_ { get; set; }
         public virtual tbDirecciones Dire_ { get; set; }
         public virtual tbPartners Part_ { get; set; }
-        public virtual ICollection<tbReservacionesActividadesExtras> tbReservacionesActividadesExtras { get; set; }
     }
 }
