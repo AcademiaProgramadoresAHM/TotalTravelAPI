@@ -6,9 +6,9 @@ namespace AHM.Total.Travel.Common.Models
 {
    public  class RolesPermisosViewModel
     {
-        public string Perm_ID { get; set; }
-        public string Role_ID { get; set; }
-        public string RoPe_UsuarioCreacion { get; set; }
-        public string RoPe_UsuarioModifica { get; set; }
+        public int Perm_ID { get; set; }
+        public int Role_ID { get; set; }
+        public int? RoPe_UsuarioCreacion { get; set; }
+        public int? RoPe_UsuarioModifica { get; set; }
     }
 }
