@@ -30,7 +30,7 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _AccessService.ListNavbarGroups();
             return Ok(list);
         }
-        [AllowAnonymous]
+
         [HttpPost("Insert")]
         public IActionResult Insert(NavbarViewModel item)
         {
@@ -58,6 +58,7 @@ namespace AHM.Total.Travel.Api.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
