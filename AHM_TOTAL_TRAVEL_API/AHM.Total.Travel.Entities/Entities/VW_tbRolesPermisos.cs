@@ -12,11 +12,14 @@ namespace AHM.Total.Travel.Entities.Entities
         public string Rol { get; set; }
         public int? id_modulo { get; set; }
         public string modulo { get; set; }
+        public int? id_grupo { get; set; }
+        public string grupo { get; set; }
         public int ID_Permiso { get; set; }
         public string Permiso { get; set; }
         public string controlador { get; set; }
         public string accion { get; set; }
         public bool? esVisible { get; set; }
+        public bool EsDashboard { get; set; }
         public int ID_UsuaCrea { get; set; }
         public string UsuarioCreacion { get; set; }
         public DateTime? FechaCreacion { get; set; }

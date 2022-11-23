@@ -104,13 +104,12 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             }
         }
 
-        public ServiceResult ConfirmationReservation(EmailDataViewModel emailData, string reservation)
+        public ServiceResult ConfirmationReservation(EmailDataViewModel emailData)
         {
             try
             {
                 
                 emailData.Subject = "Reservación Confirmada - Agencia TotalTravel";
-                emailData.BodyData = "Usted ha confirmado su reservación para " + reservation;
 
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
@@ -143,7 +142,6 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         {
             try
             {
-
                 emailData.Subject = "Reservación Cancelada - Agencia Total Travel";
 
                 var message = new MimeMessage();

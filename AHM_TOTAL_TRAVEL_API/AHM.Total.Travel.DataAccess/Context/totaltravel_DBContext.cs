@@ -948,6 +948,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(101)
                     .IsUnicode(false);
 
+                entity.Property(e => e.grupo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.modulo)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -1144,6 +1148,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.ToView("VW_tbReservaciones", "Resv");
 
                 entity.Property(e => e.Apellido)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ciudad)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -1510,6 +1518,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .IsUnicode(false);
 
                 entity.Property(e => e.controlador)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.grupo)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -2654,6 +2666,8 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Perm_Icono)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Perm_esDashboard).HasDefaultValueSql("((0))");
 
                 entity.HasOne(d => d.GrEN_)
                     .WithMany(p => p.tbPermisos)

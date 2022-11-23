@@ -114,7 +114,7 @@ namespace AHM.Total.Travel.Api.Controllers
         {
             ServiceResult result = new ServiceResult();
 
-            var emailConfirmed = _emailSenderService.ConfirmationReservation(EmailDataViewModel, reservation);
+            var emailConfirmed = _emailSenderService.ConfirmationReservation(EmailDataViewModel);
             return emailConfirmed;
         }
 

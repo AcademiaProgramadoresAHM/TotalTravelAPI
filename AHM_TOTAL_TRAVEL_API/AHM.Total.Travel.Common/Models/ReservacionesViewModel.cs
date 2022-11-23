@@ -22,6 +22,9 @@ namespace AHM.Total.Travel.Common.Models
         public bool? Resv_ConfirmacionRestaurante { get; set; }
         [DefaultValue(false)]
         public bool? Resv_ConfirmacionTrans { get; set; }
+        public bool? Resv_ConfirmacionActividades { get; set; }
+
+        public bool JustConfirmation { get; set; }
         public decimal? Resv_Precio { get; set; }
         public int? Resv_UsuarioCreacion { get; set; }
         public int? Resv_UsuarioModifica { get; set; }

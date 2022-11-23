@@ -1173,6 +1173,9 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 int ResvIDInt = ResvID.CodeStatus;
                 if (ResvIDInt > 0)
                 {
+                    if (reservacionesView.JustConfirmation)
+                        return result.Ok(ResvID);
+
                     if (!reservacionesView.Resv_esPersonalizado)
                     {
 
