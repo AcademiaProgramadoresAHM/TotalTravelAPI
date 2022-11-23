@@ -32,6 +32,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Perm_EsVisible", item.Perm_esVisible, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Perm_esDashboard", item.Perm_esDashboard, DbType.Boolean, ParameterDirection.Input);
             parameters.Add("@Perm_Icono", item.Perm_Icono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.String, ParameterDirection.Input);
@@ -54,6 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             var parameters = new DynamicParameters();
             parameters.Add("@Perm_ID", id, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Perm_EsVisible", item.Perm_esVisible, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@Perm_esDashboard", item.Perm_esDashboard, DbType.Boolean, ParameterDirection.Input);
             parameters.Add("@Perm_Icono", item.Perm_Icono, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Descripcion", item.Perm_Descripcion, DbType.String, ParameterDirection.Input);
             parameters.Add("@Perm_Controlador", item.Perm_Controlador, DbType.String, ParameterDirection.Input);

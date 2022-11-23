@@ -14,6 +14,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Modu_ID { get; set; }
         public int? GrEN_Id { get; set; }
         public bool? Perm_esVisible { get; set; }
+        public bool? Perm_esDashboard { get; set; }
         public int Perm_UsuarioCreacion { get; set; }
         public int? Perm_UsuarioModifica { get; set; }
     } 

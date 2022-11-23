@@ -15,6 +15,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Modu_ID { get; set; }
         public int? GrEN_Id { get; set; }
         public bool? Perm_esVisible { get; set; }
+        public bool? Perm_esDashboard { get; set; }
         public int? Perm_UsuarioCreacion { get; set; }
         public DateTime? Perm_FechaCreacion { get; set; }
         public int? Perm_UsuarioModifica { get; set; }
