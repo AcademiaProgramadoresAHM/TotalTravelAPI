@@ -758,29 +758,49 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 {
                     item.Usua_Url = _defaultImageRoute;
                     var map = _usuariosRepository.Insert(item);
-                    if (map.CodeStatus > 0)
+                if (map.CodeStatus > 0)
+                {
+                    if (file != null)
                     {
-                        if (file != null)
+                        if (file.Count > 1)
+                            return result.BadRequest("You have inserted multiple images on a single image field");
+
+
+                        try
                         {
-                            if (file.Count > 1)
-                                return result.BadRequest("You have inserted multiple images on a single image field");
+                            UpdateUsers(map.CodeStatus, item, file);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+                    }
 
-
-                            try
-                            {
-                                UpdateUsers(map.CodeStatus, item, file);
-                            }
-                            catch (Exception e)
-                            {
-                                throw e;
-                            }
+                    return result.Ok(map);
+                }
+                else
+                {
+                    var message = map.MessageStatus;
+                    message = message.Substring(0, 23);
+                    if (message == "Violation of UNIQUE KEY")
+                    {
+                        var Unique = map.MessageStatus.Substring(36,11);
+                        if (Unique == "UK_Usua_DNI")
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "El DNI ya existe." : map.MessageStatus;
+                        }
+                        else
+                        {
+                            map.MessageStatus = (map.CodeStatus == 0) ? "El EMAIL ya existe." : map.MessageStatus;
                         }
 
-                        return result.Ok(map);
                     }
                     else
                     {
                         map.MessageStatus = (map.CodeStatus == 0) ? "401 Error de consulta" : map.MessageStatus;
+                    }
+                        
+                       
                         return result.Error(map);
                     }
                 }
