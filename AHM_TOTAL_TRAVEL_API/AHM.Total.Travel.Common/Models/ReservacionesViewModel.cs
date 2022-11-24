@@ -101,5 +101,54 @@ namespace AHM.Total.Travel.Common.Models
             public int Habi_Cantidad { get; set; }
         }
     }
-    
+
+    public class ReservacionesDetalleViewModel
+    {
+        public VW_tbReservaciones reservacionDetalle { get; set; } = null;
+        public List<ReservacionesActividadesExtrasDetail> ActividadesExtras { get; set; } = null;
+        public List<ReservacionRestaurantesDetail> Restaurantes { get; set; } = null;
+        public List<ReservacionesActividadesHotelesDetail> ActividadesHoteles { get; set; } = null;
+        public List<ReservacionHabitacionesDetail> Habitaciones { get; set; } = null;
+        public List<ReservacionTransporteDetail> Transportes { get; set; }
+
+        public class ReservacionesActividadesExtrasDetail
+        {
+            public VW_tbActividadesExtras details { get; set; }
+            public int? AcEx_ID { get; set; }
+            public decimal ReAE_Precio { get; set; }
+            public int? ReAE_Cantidad { get; set; }
+            public DateTime? ReAE_FechaReservacion { get; set; }
+            public string ReAE_HoraReservacion { get; set; }
+        }
+        public class ReservacionRestaurantesDetail
+        {
+            public VW_tbRestaurantes details { get; set; }
+            public int? Rest_ID { get; set; }
+            public DateTime? ReRe_FechaReservacion { get; set; }
+            public string ReRe_HoraReservacion { get; set; }
+        }
+        public class ReservacionesActividadesHotelesDetail
+        {
+            public VW_tbHotelesActividades details { get; set; }
+            public int? HoAc_ID { get; set; }
+            public decimal? ReAH_Precio { get; set; }
+            public int? ReAH_Cantidad { get; set; }
+            public DateTime? ReAH_FechaReservacion { get; set; }
+            public string ReAH_HoraReservacion { get; set; }
+        }
+        public class ReservacionTransporteDetail
+        {
+            public VW_tbDetallesTransportes details { get; set; }
+            public int? Detr_ID { get; set; }
+            public int? ReTr_CantidadAsientos { get; set; }
+            public DateTime? ReTr_FechaCancelado { get; set; }
+        }
+        public class ReservacionHabitacionesDetail
+        {
+            public VW_tbHabitaciones details { get; set; }
+            public int Habi_ID { get; set; }
+            public int Habi_Cantidad { get; set; }
+        }
+    }
+
 }
