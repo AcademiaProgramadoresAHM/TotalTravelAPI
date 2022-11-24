@@ -11,6 +11,9 @@ using Newtonsoft.Json.Serialization;
 using AHM.Total.Travel.Entities.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Runtime.CompilerServices;
+using AHM.Total.Travel.DataAccess.Context;
+using static AHM.Total.Travel.Common.Models.ReservacionesViewModel;
+using static AHM.Total.Travel.Common.Models.ReservacionesDetalleViewModel;
 
 namespace AHM.Total.Travel.BusinessLogic.Services
 {
@@ -24,15 +27,26 @@ namespace AHM.Total.Travel.BusinessLogic.Services
         private readonly ReservacionesHotelesRepository _reservacionesHotelesRepository;
         private readonly ReservacionRestaurantesRepository _reservacionRestaurantesRepository;
         private readonly ReservacionTransporteRepository _reservacionTransporteRepository;
-        private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesRepository;
+        private readonly PaquetesPredeterminadosActividadesHotelesRepository _actividadesHotelesPaquetesRepository;
         private readonly SaleService _saleService;
         private readonly PaquetePredeterminadosRepository _predeterminadosRepository;
         private readonly PaquetePredeterminadosDetallesRepository _paquetesDetallesRepository;
 
         private readonly HotelService _hotelService;
         private readonly TransportService _transportService;
+        private readonly DetallesTransportesRepository _DetallesTransportesRepository;
+        private readonly HotelesActividadesRepository _HotelesActividadesRepository;
+        private readonly ActividadesExtrasRepository _ActividadesExtraRepository;
+        private readonly RestaurantesRepository _RestaurantesRepository;
+        private readonly HabitacionesRepository _HabitacionesRepository;
 
-        public ReservationService(ReservacionesActividadesExtraRepository reservacionesActividadesExtraRepository, RegistrosPagosRepository registrosPagosRepository, ReservacionesRepository reservacionesRepository, ReservacionesActividadesHotelesRepository reservacionesActividadesHotelesRepository, ReservacionesDetallesRepository reservacionesDetallesRepository, ReservacionesHotelesRepository reservacionesHotelesRepository, ReservacionRestaurantesRepository reservacionRestaurantesRepository, ReservacionTransporteRepository reservacionTransporteRepository, PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesRepository, SaleService saleService, PaquetePredeterminadosRepository predeterminadosRepository, PaquetePredeterminadosDetallesRepository paquetesDetallesRepository, HotelService hotelService, TransportService transportService)
+        public ReservationService(ReservacionesActividadesExtraRepository reservacionesActividadesExtraRepository, RegistrosPagosRepository registrosPagosRepository, ReservacionesRepository reservacionesRepository, 
+                                ReservacionesActividadesHotelesRepository reservacionesActividadesHotelesRepository, ReservacionesDetallesRepository reservacionesDetallesRepository, ReservacionesHotelesRepository reservacionesHotelesRepository, 
+                                ReservacionRestaurantesRepository reservacionRestaurantesRepository, ReservacionTransporteRepository reservacionTransporteRepository, PaquetesPredeterminadosActividadesHotelesRepository actividadesHotelesPaquetesRepository, 
+                                SaleService saleService, PaquetePredeterminadosRepository predeterminadosRepository, PaquetePredeterminadosDetallesRepository paquetesDetallesRepository, 
+                                HotelService hotelService, TransportService transportService, HotelesActividadesRepository HotelesActividadesRepository,
+                                ActividadesExtrasRepository ActividadesExtrasRepository, RestaurantesRepository RestaurantesRepository, DetallesTransportesRepository DetallesTransportesRepository,
+                                HabitacionesRepository HabitacionesRepository)
         {
             _reservacionesActividadesExtraRepository = reservacionesActividadesExtraRepository;
             _registrosPagosRepository = registrosPagosRepository;
@@ -42,16 +56,19 @@ namespace AHM.Total.Travel.BusinessLogic.Services
             _reservacionesHotelesRepository = reservacionesHotelesRepository;
             _reservacionRestaurantesRepository = reservacionRestaurantesRepository;
             _reservacionTransporteRepository = reservacionTransporteRepository;
-            _actividadesHotelesRepository = actividadesHotelesRepository;
+            _actividadesHotelesPaquetesRepository = actividadesHotelesPaquetesRepository;
             _saleService = saleService;
             _predeterminadosRepository = predeterminadosRepository;
             _paquetesDetallesRepository = paquetesDetallesRepository;
+
             _hotelService = hotelService;
             _transportService = transportService;
+            _HotelesActividadesRepository = HotelesActividadesRepository;
+            _ActividadesExtraRepository = ActividadesExtrasRepository;
+            _RestaurantesRepository = RestaurantesRepository;
+            _DetallesTransportesRepository = DetallesTransportesRepository;
+            _HabitacionesRepository = HabitacionesRepository;
         }
-
-
-
 
 
         #region ReservacionesDetalles
@@ -910,7 +927,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                             if (itemViewModel.ActividadesExtras != null)
                             {
-                                //Creates a reservation for the extra activities
+                                //Creates a reservation for the extra activities 
                                 List<VW_tbPaquetePredeterminadosDetalles> packageExtraActivities = _paquetesDetallesRepository.List().ToList();
                                 List<VW_tbPaquetePredeterminadosDetalles> filteredPackageExtraActivities = packageExtraActivities.Where(x => x.PaqueteID == packID).ToList();
                                 foreach (var actvExtra in filteredPackageExtraActivities)
@@ -1625,6 +1642,154 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult FindReservationWithDetail(int id)
+        {
+            totaltravel_DBContext db =  new totaltravel_DBContext();
+            ServiceResult response = new ServiceResult();
+            ReservacionesDetalleViewModel responseModel = new ReservacionesDetalleViewModel();
+
+            try
+            {
+                var reservation = _reservacionesRepository.Find(id);
+                var reservationHotels = _reservacionesHotelesRepository.List().Where(x => x.ReservacionID == id).ToList();
+                var reservationActivitiesExtra = _reservacionesActividadesExtraRepository.List().Where(x => x.Reservacion == id).ToList();
+                var reservationActivitiesHotels = _reservacionesActividadesHotelesRepository.List().Where(x => x.ReservacionID == id).ToList();
+                var reservationRestaurant = _reservacionRestaurantesRepository.List().Where(x => x.Resv_ID == id).ToList();
+                var reservationTransport = _reservacionTransporteRepository.List().Where(x => x.Reservacion == id).ToList();
+
+                responseModel.reservacionDetalle = reservation;
+
+                #region hotels details
+
+                if (reservationHotels.Count() > 0)
+                {
+                    var hotel = reservationHotels[0];
+
+                    var RoomsList = _reservacionesDetallesRepository.List().Where(x => x.ReservacionHotelID == hotel.ID).GroupBy(x => x.HabitacionID).ToList();
+                    responseModel.Habitaciones = new List<ReservacionHabitacionesDetail>();
+                    foreach (var item in RoomsList)
+                    {
+
+                        var Rooms = _HabitacionesRepository.Find(item.Key);
+
+                        ReservacionHabitacionesDetail model = new ReservacionHabitacionesDetail();
+                        model.details = Rooms;
+                        model.Habi_ID = model.details.ID;
+                        model.Habi_Cantidad = item.Count();
+
+                        responseModel.Habitaciones.Add(model);
+                    }
+                }
+
+                #endregion
+
+                #region Extra Activities
+
+                responseModel.ActividadesExtras = new List<ReservacionesActividadesExtrasDetail>();
+
+                if(reservationActivitiesExtra.Count() > 0)
+                {
+
+                    foreach (var item in reservationActivitiesExtra)
+                    {
+
+                        var activity = _ActividadesExtraRepository.Find(item.Id_Actividad_Extra);
+                        var model = new ReservacionesActividadesExtrasDetail();
+
+                        model.AcEx_ID = item.Id_Actividad_Extra;
+                        model.ReAE_Cantidad = item.Cantidad;
+                        model.ReAE_Precio = (decimal)item.Precio;
+                        model.ReAE_FechaReservacion = item.Fecha_Reservacion;
+                        model.ReAE_HoraReservacion = item.Hora_Reservacion;
+                        model.details = activity;
+
+                        responseModel.ActividadesExtras.Add(model);
+                    }
+                }
+
+                #endregion
+
+                #region Hotels Activities
+
+                responseModel.ActividadesHoteles = new List<ReservacionesActividadesHotelesDetail>();
+
+                if(reservationActivitiesHotels.Count() > 0)
+                {
+                    
+                    foreach (var item in reservationActivitiesHotels)
+                    {
+
+                        var activity = _HotelesActividadesRepository.Find(item.ID);
+                        var model = new ReservacionesActividadesHotelesDetail();
+                        model.HoAc_ID = item.ID_Actividad;
+                        model.ReAH_Cantidad = item.Cantidad;
+                        model.ReAH_Precio = activity.Precio;
+                        model.ReAH_FechaReservacion = item.Fecha_Reservacion;
+                        model.ReAH_HoraReservacion = item.Hora_Reservacion;
+                        model.details = activity;
+
+                        responseModel.ActividadesHoteles.Add(model);
+                    }
+                    
+                }
+
+                #endregion
+
+                #region restaurant details
+
+                responseModel.Restaurantes = new List<ReservacionRestaurantesDetail>();
+
+                if(reservationRestaurant.Count() > 0)
+                {
+
+                    foreach (var item in reservationRestaurant)
+                    {
+                        var restaurant = _RestaurantesRepository.Find(item.ID_Restaurante);
+                        var model = new ReservacionRestaurantesDetail();
+                        model.Rest_ID = item.ID_Restaurante;
+                        model.details = restaurant;
+                        model.ReRe_FechaReservacion = item.Fecha_Reservacion;
+                        model.ReRe_HoraReservacion = item.Hora_Reservacion;
+
+                        responseModel.Restaurantes.Add(model);
+                    }
+
+                }
+                #endregion
+
+                #region transport details
+
+                responseModel.Transportes = new List<ReservacionTransporteDetail>();
+
+                if(reservationTransport.Count() > 0)
+                {
+                    foreach (var item in reservationTransport)
+                    {
+
+                        var transport = _DetallesTransportesRepository.Find(item.ID_detalle_Transporte);
+                        var model = new ReservacionTransporteDetail();
+                        model.Detr_ID = item.ID_detalle_Transporte;
+                        model.ReTr_CantidadAsientos = item.Asientos;
+                        model.details = transport;
+
+                        responseModel.Transportes.Add(model);
+                    }
+                }
+
+                #endregion
+
+                return response.Ok(responseModel);
+
+            }
+            catch (Exception ex)
+            {
+
+                return response.Error(ex.Message);
+            }
+            
+        }
+
         #endregion
 
         #region RegistrosPagos
