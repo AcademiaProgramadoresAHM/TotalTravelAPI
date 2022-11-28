@@ -910,7 +910,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                         if (ResvHotelIDInt > 0)
                         {
                             //Create the reservation of the rooms
-                            
+
                             List<VW_tbPaquetesHabitaciones> packageRooms = (List<VW_tbPaquetesHabitaciones>)_saleService.ListPackageRooms().Data;
                             List<VW_tbPaquetesHabitaciones> filteredPackageRooms = packageRooms.Where(x => x.Paquete_Id == packID).ToList();
                             foreach (var room in filteredPackageRooms)
@@ -951,8 +951,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                     {
 
                                         continue;
-                                    } 
-                                    
+                                    }
+
                                 }
 
                                 foreach (var actvExtra in itemViewModel.ActividadesExtras)
@@ -1009,7 +1009,45 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                     var hotelActivities = _reservacionesActividadesHotelesRepository.Insert(actividadesHoteles);
                                 }
                             }
-                            
+
+                            if (itemViewModel.Restaurantes != null)
+                            {
+                                //Create the reservation of the restaurants
+                                foreach (var restaurantes in itemViewModel.Restaurantes)
+                                {
+                                    tbReservacionRestaurantes reservacionRestaurantes = new tbReservacionRestaurantes
+                                    {
+                                        Resv_ID = ResvIDInt,
+                                        Rest_ID = restaurantes.Rest_ID,
+                                        ReRe_FechaReservacion = restaurantes.ReRe_FechaReservacion,
+                                        ReRe_HoraReservacion = restaurantes.ReRe_HoraReservacion,
+                                        ReRe_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                    };
+
+                                    var resultRestaurants = _reservacionRestaurantesRepository.Insert(reservacionRestaurantes);
+                                }
+                            }
+
+
+                            if (itemViewModel.reservacionTransportes != null)
+                            {
+                                //Creates a reservation for a transport
+                                foreach (var transportes in itemViewModel.reservacionTransportes)
+                                {
+                                    tbReservacionTransporte reservacionTransporte = new tbReservacionTransporte
+                                    {
+                                        Detr_ID = transportes.Detr_ID,
+                                        Resv_ID = ResvIDInt,
+                                        ReTr_CantidadAsientos = transportes.ReTr_CantidadAsientos,
+                                        ReTr_FechaCancelado = transportes.ReTr_FechaCancelado,
+                                        ReTr_Cancelado = transportes.ReTr_Cancelado,
+                                        ReTr_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
+                                    };
+
+                                    var resultTransport = _reservacionTransporteRepository.Insert(reservacionTransporte);
+                                }
+
+                            }
                         }
                         else
                         {
@@ -1150,7 +1188,10 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                         ReTr_Cancelado = transportes.ReTr_Cancelado,
                                         ReTr_UsuarioCreacion = itemViewModel.Resv_UsuarioCreacion
                                     };
+
+                                    var resultRestaurants = _reservacionTransporteRepository.Insert(reservacionTransporte);
                                 }
+                                
                             }
                             
                         }
@@ -1495,6 +1536,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                                         ReTr_Cancelado = transportes.ReTr_Cancelado,
                                         ReTr_UsuarioCreacion = reservacionesView.Resv_UsuarioCreacion
                                     };
+                                    var resultTransport = _reservacionTransporteRepository.Insert(reservacionTransporte);
                                 }
                             }
 
@@ -1672,12 +1714,11 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     {
 
                         var Rooms = _HabitacionesRepository.Find(item.Key);
-
+                       
                         ReservacionHabitacionesDetail model = new ReservacionHabitacionesDetail();
                         model.details = Rooms;
                         model.Habi_ID = model.details.ID;
                         model.Habi_Cantidad = item.Count();
-
                         responseModel.Habitaciones.Add(model);
                     }
                 }
@@ -1696,7 +1737,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                         var activity = _ActividadesExtraRepository.Find(item.Id_Actividad_Extra);
                         var model = new ReservacionesActividadesExtrasDetail();
-
+                        model.ReAE_ID = item.ID;
                         model.AcEx_ID = item.Id_Actividad_Extra;
                         model.ReAE_Cantidad = item.Cantidad;
                         model.ReAE_Precio = (decimal)item.Precio;
@@ -1722,6 +1763,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                         var activity = _HotelesActividadesRepository.Find(item.ID);
                         var model = new ReservacionesActividadesHotelesDetail();
+                        model.ReAH_ID = item.ID;
                         model.HoAc_ID = item.ID_Actividad;
                         model.ReAH_Cantidad = item.Cantidad;
                         model.ReAH_Precio = activity.Precio;
@@ -1747,6 +1789,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                     {
                         var restaurant = _RestaurantesRepository.Find(item.ID_Restaurante);
                         var model = new ReservacionRestaurantesDetail();
+                        model.ReRe_ID = item.Id;
                         model.Rest_ID = item.ID_Restaurante;
                         model.details = restaurant;
                         model.ReRe_FechaReservacion = item.Fecha_Reservacion;
@@ -1769,6 +1812,7 @@ namespace AHM.Total.Travel.BusinessLogic.Services
 
                         var transport = _DetallesTransportesRepository.Find(item.ID_detalle_Transporte);
                         var model = new ReservacionTransporteDetail();
+                        model.ReTr_ID = item.Id;
                         model.Detr_ID = item.ID_detalle_Transporte;
                         model.ReTr_CantidadAsientos = item.Asientos;
                         model.details = transport;

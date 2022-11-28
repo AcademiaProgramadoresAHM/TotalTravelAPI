@@ -2354,9 +2354,7 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToTable("tbMenus", "Rest");
 
-                entity.Property(e => e.Menu_Descripcion)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
+                entity.Property(e => e.Menu_Descripcion).IsUnicode(false);
 
                 entity.Property(e => e.Menu_Estado).HasDefaultValueSql("('1')");
 
@@ -2466,7 +2464,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Paqu_FechaCreacion).HasColumnType("datetime");
+                entity.Property(e => e.Paqu_Estado).HasDefaultValueSql("('1')");
+
+                entity.Property(e => e.Paqu_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Paqu_FechaModifica).HasColumnType("datetime");
 
@@ -3267,6 +3269,14 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasKey(e => e.Usua_ID);
 
                 entity.ToTable("tbUsuarios", "Acce");
+
+                entity.HasIndex(e => e.Usua_DNI)
+                    .HasName("UK_Usua_DNI")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Usua_Email)
+                    .HasName("UQ__tbUsuari__4824D2127BF0B202")
+                    .IsUnique();
 
                 entity.Property(e => e.Usua_Apellido)
                     .HasMaxLength(50)

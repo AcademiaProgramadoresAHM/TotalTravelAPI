@@ -113,6 +113,7 @@ namespace AHM.Total.Travel.Common.Models
 
         public class ReservacionesActividadesExtrasDetail
         {
+            public int ReAE_ID { get; set; }
             public VW_tbActividadesExtras details { get; set; }
             public int? AcEx_ID { get; set; }
             public decimal ReAE_Precio { get; set; }
@@ -122,6 +123,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionRestaurantesDetail
         {
+            public int ReRe_ID { get; set; }
             public VW_tbRestaurantes details { get; set; }
             public int? Rest_ID { get; set; }
             public DateTime? ReRe_FechaReservacion { get; set; }
@@ -129,6 +131,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionesActividadesHotelesDetail
         {
+            public int ReAH_ID { get; set; }
             public VW_tbHotelesActividades details { get; set; }
             public int? HoAc_ID { get; set; }
             public decimal? ReAH_Precio { get; set; }
@@ -138,6 +141,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionTransporteDetail
         {
+            public int ReTr_ID { get; set; }
             public VW_tbDetallesTransportes details { get; set; }
             public int? Detr_ID { get; set; }
             public int? ReTr_CantidadAsientos { get; set; }
@@ -145,6 +149,7 @@ namespace AHM.Total.Travel.Common.Models
         }
         public class ReservacionHabitacionesDetail
         {
+            public int ReDe_ID { get; set; }
             public VW_tbHabitaciones details { get; set; }
             public int Habi_ID { get; set; }
             public int Habi_Cantidad { get; set; }
