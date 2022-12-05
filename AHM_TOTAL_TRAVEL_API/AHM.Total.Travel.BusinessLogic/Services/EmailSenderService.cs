@@ -145,8 +145,8 @@ namespace AHM.Total.Travel.BusinessLogic.Services
                 emailData.Subject = "Reservación Cancelada - Agencia Total Travel";
 
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(emailData.ToName, emailData.To));
-                message.To.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
+                message.From.Add(new MailboxAddress(_config["ApiGmail:Company"], _config["ApiGmail:Mail"]));
+                message.To.Add(new MailboxAddress(emailData.ToName, emailData.To));
                 message.Subject = emailData.Subject;
                 message.Body = new TextPart("plain")
                 {

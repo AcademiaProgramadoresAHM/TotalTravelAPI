@@ -123,7 +123,7 @@ namespace AHM.Total.Travel.Api.Controllers
         public ServiceResult ReservationCancel(EmailDataViewModel EmailDataViewModel)
         {
             ServiceResult result = new ServiceResult();
-
+            
             var user = _emailSenderService.CancelReservation(EmailDataViewModel);
             return user;
         }

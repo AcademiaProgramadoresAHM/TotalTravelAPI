@@ -19,6 +19,7 @@ namespace AHM.Total.Travel.Api.Controllers
     {
         private readonly ReservationService _reservationService;
         private readonly IMapper _mapper;
+
         public ReservationController(ReservationService reservationService, IMapper mapper)
         {
             _reservationService = reservationService;
@@ -32,7 +33,8 @@ namespace AHM.Total.Travel.Api.Controllers
             var list = _reservationService.ListReservation();
             return Ok(list);
         }
-        
+
+        [AllowAnonymous]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesViewModel item)
         {
@@ -42,7 +44,7 @@ namespace AHM.Total.Travel.Api.Controllers
                 var result = _reservationService.InsertReservation(items, item);
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 return BadRequest("Ha ocurrido un error al momento de realizar la operación");

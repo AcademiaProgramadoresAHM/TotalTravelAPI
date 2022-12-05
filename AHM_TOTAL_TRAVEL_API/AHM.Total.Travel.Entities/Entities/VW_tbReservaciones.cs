@@ -12,6 +12,7 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? CantidadPagos { get; set; }
         public int? Id_Paquete { get; set; }
         public bool? EsPersonalizado { get; set; }
+        public string NombrePaquete { get; set; }
         public string DescripcionPaquete { get; set; }
         public string DurecionPaquete { get; set; }
         public decimal? precio { get; set; }
@@ -21,6 +22,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Hotel_ID { get; set; }
         public string Nombre_Hotel { get; set; }
         public int? PartnerID { get; set; }
+        public int? Pais_ID { get; set; }
+        public string Pais { get; set; }
         public int? Ciudad_ID { get; set; }
         public string Ciudad { get; set; }
         public int Id_Cliente { get; set; }

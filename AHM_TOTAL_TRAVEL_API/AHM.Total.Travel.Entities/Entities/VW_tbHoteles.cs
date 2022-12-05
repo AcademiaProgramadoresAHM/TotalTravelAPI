@@ -10,6 +10,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public int ID { get; set; }
         public string Hotel { get; set; }
         public string Descripcion { get; set; }
+        public int PaisID { get; set; }
+        public string Pais { get; set; }
         public int CiudadID { get; set; }
         public string Ciudad { get; set; }
         public int ID_Direc { get; set; }

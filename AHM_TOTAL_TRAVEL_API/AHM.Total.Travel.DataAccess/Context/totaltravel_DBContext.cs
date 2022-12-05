@@ -528,6 +528,10 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.Property(e => e.Image_URL).IsUnicode(false);
 
+                entity.Property(e => e.Pais)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Partners)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -1181,6 +1185,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.NombrePaquete)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre_Hotel)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -1188,6 +1196,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Nombrecompleto)
                     .IsRequired()
                     .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Pais)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Telefono)
