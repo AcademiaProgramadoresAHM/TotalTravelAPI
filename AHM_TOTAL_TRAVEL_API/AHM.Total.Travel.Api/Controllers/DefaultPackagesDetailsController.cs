@@ -29,8 +29,16 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _saleService.ListPackagesdetail();
-            return Ok(list);
+            try
+            {
+                var list = _saleService.ListPackagesdetail();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpPost("Insert")]
@@ -60,8 +68,16 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _saleService.FindPackagesdetail(Id);
-            return Ok(result);
+            try
+            {
+                var result = _saleService.FindPackagesdetail(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }
