@@ -2583,7 +2583,11 @@ namespace AHM.Total.Travel.DataAccess.Context
 
                 entity.ToTable("tbPaquetesHabitaciones", "Sale");
 
-                entity.Property(e => e.PaHa_FechaCreacion).HasColumnType("datetime");
+                entity.Property(e => e.PaHa_Estado).HasDefaultValueSql("('1')");
+
+                entity.Property(e => e.PaHa_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PaHa_FechaModifica).HasColumnType("datetime");
 
