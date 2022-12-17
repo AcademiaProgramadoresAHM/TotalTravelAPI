@@ -71,6 +71,7 @@ namespace AHM.Total.Travel.DataAccess.Context
         public virtual DbSet<tbDestinosTransportes> tbDestinosTransportes { get; set; }
         public virtual DbSet<tbDetallesTransportes> tbDetallesTransportes { get; set; }
         public virtual DbSet<tbDirecciones> tbDirecciones { get; set; }
+        public virtual DbSet<tbEstadosCiviles> tbEstadosCiviles { get; set; }
         public virtual DbSet<tbHabitaciones> tbHabitaciones { get; set; }
         public virtual DbSet<tbHorariosTransportes> tbHorariosTransportes { get; set; }
         public virtual DbSet<tbHoteles> tbHoteles { get; set; }
@@ -1173,6 +1174,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.EstadoCivil)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.FechaModifica).HasColumnType("datetime");
@@ -1232,6 +1237,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.Property(e => e.Cliente)
                     .IsRequired()
                     .HasMaxLength(101)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
@@ -1809,6 +1818,10 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.EstadoCivil)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Fecha_Creacion).HasColumnType("datetime");
 
                 entity.Property(e => e.Fecha_Modifica).HasColumnType("datetime");
@@ -2150,6 +2163,36 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .WithMany(p => p.tbDireccionesDire_UsuarioModificaNavigation)
                     .HasForeignKey(d => d.Dire_UsuarioModifica)
                     .HasConstraintName("FK_tbDirecciones_tbUsuarios_Usuario_Modifica");
+            });
+
+            modelBuilder.Entity<tbEstadosCiviles>(entity =>
+            {
+                entity.HasKey(e => e.EsCi_Id)
+                    .HasName("PK__tbEstado__6D720574A420BCC9");
+
+                entity.ToTable("tbEstadosCiviles", "Gene");
+
+                entity.Property(e => e.EsCi_Descripcion)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EsCi_Estado).HasDefaultValueSql("('1')");
+
+                entity.Property(e => e.EsCi_FechaCreacion)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EsCi_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.EsCi_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbEstadosCivilesEsCi_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.EsCi_UsuarioCreacion)
+                    .HasConstraintName("FK_tbEstadosCiviles_tbUsuarios_Usuario_Creacion");
+
+                entity.HasOne(d => d.EsCi_UsuarioModificaNavigation)
+                    .WithMany(p => p.tbEstadosCivilesEsCi_UsuarioModificaNavigation)
+                    .HasForeignKey(d => d.EsCi_UsuarioModifica)
+                    .HasConstraintName("FK_tbEstadosCiviles_tbUsuarios_Usuario_Modifica");
             });
 
             modelBuilder.Entity<tbHabitaciones>(entity =>
@@ -3340,6 +3383,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                 entity.HasOne(d => d.Dire_)
                     .WithMany(p => p.tbUsuarios)
                     .HasForeignKey(d => d.Dire_ID);
+
+                entity.HasOne(d => d.EsCi_)
+                    .WithMany(p => p.tbUsuarios)
+                    .HasForeignKey(d => d.EsCi_ID)
+                    .HasConstraintName("tbUsuarios_tbEstadosCiviles_EsCi_Id");
 
                 entity.HasOne(d => d.Part_)
                     .WithMany(p => p.tbUsuarios)

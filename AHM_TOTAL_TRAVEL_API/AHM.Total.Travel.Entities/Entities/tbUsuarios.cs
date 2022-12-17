@@ -25,6 +25,8 @@ namespace AHM.Total.Travel.Entities.Entities
             tbDetallesTransportesDeTr_UsuarioModificaNavigation = new HashSet<tbDetallesTransportes>();
             tbDireccionesDire_UsuarioCreacionNavigation = new HashSet<tbDirecciones>();
             tbDireccionesDire_UsuarioModificaNavigation = new HashSet<tbDirecciones>();
+            tbEstadosCivilesEsCi_UsuarioCreacionNavigation = new HashSet<tbEstadosCiviles>();
+            tbEstadosCivilesEsCi_UsuarioModificaNavigation = new HashSet<tbEstadosCiviles>();
             tbHabitacionesHabi_UsuarioCreacionNavigation = new HashSet<tbHabitaciones>();
             tbHabitacionesHabi_UsuarioModificaNavigation = new HashSet<tbHabitaciones>();
             tbHorariosTransportesHoTr_UsuarioCreacionNavigation = new HashSet<tbHorariosTransportes>();
@@ -104,8 +106,10 @@ namespace AHM.Total.Travel.Entities.Entities
         public int? Usua_UsuarioModifica { get; set; }
         public DateTime? Usua_FechaModifica { get; set; }
         public bool? Usua_Estado { get; set; }
+        public int? EsCi_ID { get; set; }
 
         public virtual tbDirecciones Dire_ { get; set; }
+        public virtual tbEstadosCiviles EsCi_ { get; set; }
         public virtual tbPartners Part_ { get; set; }
         public virtual tbRoles Role_ { get; set; }
         public virtual tbUsuarios Usua_UsuarioCreacionNavigation { get; set; }
@@ -126,6 +130,8 @@ namespace AHM.Total.Travel.Entities.Entities
         public virtual ICollection<tbDetallesTransportes> tbDetallesTransportesDeTr_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbDirecciones> tbDireccionesDire_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbDirecciones> tbDireccionesDire_UsuarioModificaNavigation { get; set; }
+        public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesEsCi_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesEsCi_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbHabitaciones> tbHabitacionesHabi_UsuarioCreacionNavigation { get; set; }
         public virtual ICollection<tbHabitaciones> tbHabitacionesHabi_UsuarioModificaNavigation { get; set; }
         public virtual ICollection<tbHorariosTransportes> tbHorariosTransportesHoTr_UsuarioCreacionNavigation { get; set; }
