@@ -55,7 +55,7 @@ namespace AHM.Total.Travel.DataAccess.Repositories
             parameters.Add("@Dire_ID", item.Dire_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Part_ID", item.Part_ID, DbType.Int32, ParameterDirection.Input);
             parameters.Add("@Usuario_Creacion", item.Usua_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-
+            parameters.Add("@EsCi_ID", item.EsCi_ID, DbType.Int32, ParameterDirection.Input);
             using var db = new SqlConnection(TotalTravelContext.ConnectionString);
 
             return db.QueryFirst<RequestStatus>(ScriptDataBase.UDP_tbUsuarios_Insert, parameters, commandType: CommandType.StoredProcedure);

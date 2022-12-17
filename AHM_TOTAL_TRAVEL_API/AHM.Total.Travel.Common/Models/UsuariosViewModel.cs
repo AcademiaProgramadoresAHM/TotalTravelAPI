@@ -51,7 +51,7 @@ namespace AHM.Total.Travel.Common.Models
         public int? Part_ID { get; set; }
         public int? Usua_UsuarioCreacion { get; set; }
         public List<IFormFile> File { get; set; }
-
+        public int? EsCi_ID { get; set; }
     }
     public class UsuariosUpdateViewModel
     {
