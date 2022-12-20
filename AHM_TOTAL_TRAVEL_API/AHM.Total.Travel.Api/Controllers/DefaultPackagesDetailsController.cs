@@ -44,26 +44,53 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(PaquetePredeterminadosDetallesViewModel paquetePredeterminadosDetallesViewModel)
         {
-            var items = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
-            var result = _saleService.CreatePackagesdetail(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
+                var result = _saleService.CreatePackagesdetail(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+           
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, PaquetePredeterminadosDetallesViewModel paquetePredeterminadosDetallesViewModel)
         {
-            var item = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
-            var result = _saleService.UpdatePackagesdetail(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbPaquetePredeterminadosDetalles>(paquetePredeterminadosDetallesViewModel);
+                var result = _saleService.UpdatePackagesdetail(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _saleService.DeletePackagesdetail(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _saleService.DeletePackagesdetail(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            
         }
+
         [Authorize(Roles = "Administrador, Cliente")]
         [HttpGet("Find")]
         public IActionResult Details(int Id)

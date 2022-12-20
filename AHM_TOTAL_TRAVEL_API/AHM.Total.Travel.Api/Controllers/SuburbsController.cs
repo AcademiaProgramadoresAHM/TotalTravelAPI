@@ -17,8 +17,8 @@ namespace AHM.Total.Travel.Api.Controllers
     public class SuburbsController : Controller
     {
 
-        private readonly GeneralService _generalService;
-        private readonly IMapper _mapper;
+        private  GeneralService _generalService;
+        private static IMapper _mapper;
         public SuburbsController(GeneralService generalService, IMapper mapper)
         {
             _generalService = generalService;
@@ -29,17 +29,34 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _generalService.ListSuburbs();
-            return Ok(list);
+            try
+            {
+                var list = _generalService.ListSuburbs();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+            
         }
 
 
         [HttpPost("Insert")]
         public IActionResult Insert(ColoniasViewModel coloniasViewModel)
         {
-            var items = _mapper.Map<tbColonias>(coloniasViewModel);
-            var result = _generalService.CreateSuburbs(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbColonias>(coloniasViewModel);
+                var result = _generalService.CreateSuburbs(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
 
@@ -47,17 +64,33 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Update(int id, ColoniasViewModel items)
         {
 
-            var item = _mapper.Map<tbColonias>(items);
-            var result = _generalService.UpdateSuburbs(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbColonias>(items);
+                var result = _generalService.UpdateSuburbs(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _generalService.DeleteSuburbs(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _generalService.DeleteSuburbs(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
@@ -65,8 +98,16 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _generalService.FindSuburbs(Id);
-            return Ok(result);
+            try
+            {
+                var result = _generalService.FindSuburbs(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
     }

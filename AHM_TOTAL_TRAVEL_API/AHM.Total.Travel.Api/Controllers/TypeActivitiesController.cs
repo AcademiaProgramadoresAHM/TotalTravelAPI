@@ -31,34 +31,66 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _activitiesService.ListActTyp();
-            return Ok(list);
+            try
+            {
+                var list = _activitiesService.ListActTyp();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(TiposActividadesViewModel item)
         {
-            var items = _mapper.Map<tbTiposActividades>(item);
-            var result = _activitiesService.CreateActTyp(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbTiposActividades>(item);
+                var result = _activitiesService.CreateActTyp(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, TiposActividadesViewModel items)
         {
 
-            var item = _mapper.Map<tbTiposActividades>(items);
-            var result = _activitiesService.UpdateActTyp(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbTiposActividades>(items);
+                var result = _activitiesService.UpdateActTyp(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _activitiesService.DeleteActTyp(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _activitiesService.DeleteActTyp(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
@@ -66,9 +98,16 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
-            var result = _activitiesService.FindActTyp(Id);
-            return Ok(result);
+            try
+            {
+                var result = _activitiesService.FindActTyp(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 

@@ -39,50 +39,98 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _accessService.ListUsers();
-            return Ok(list);
+            try
+            {
+                var list = _accessService.ListUsers();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [AllowAnonymous]
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm] UsuariosInsertViewModel item)
         {
-            var user = _mapper.Map<tbUsuarios>(item);
-            var result = _accessService.CreateUsers(user, item.File);
-            return Ok(result);
+            try
+            {
+                var user = _mapper.Map<tbUsuarios>(item);
+                var result = _accessService.CreateUsers(user, item.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [AllowAnonymous]
         [HttpPut("Update")]
         public IActionResult Update(int id, [FromForm] UsuariosUpdateViewModel items)
         {
-            var item = _mapper.Map<tbUsuarios>(items);
-            var result = _accessService.UpdateUsers(id, item, items.Usua_Url);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbUsuarios>(items);
+                var result = _accessService.UpdateUsers(id, item, items.Usua_Url);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [AllowAnonymous]
         [HttpPut("UpdatePassword")]
         public IActionResult changePassword(UsuariosPasswordViewModel items)
         {
-            var item = _mapper.Map<tbUsuarios>(items);
-            var result = _accessService.UpdatePassword(item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbUsuarios>(items);
+                var result = _accessService.UpdatePassword(item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int mod)
         {
-            var result = _accessService.DeleteUsers(id, mod);
-            return Ok(result);
+            try
+            {
+                var result = _accessService.DeleteUsers(id, mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int id)
         {
-            var result = _accessService.FindUsers(id);
-            return Ok(result);
+            try
+            {
+                var result = _accessService.FindUsers(id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
     }

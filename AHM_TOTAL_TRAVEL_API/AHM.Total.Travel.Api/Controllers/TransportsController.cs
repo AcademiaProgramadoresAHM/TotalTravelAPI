@@ -28,8 +28,16 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _transportService.ListTransports();
-            return Ok(list);
+            try
+            {
+                var list = _transportService.ListTransports();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
         [AllowAnonymous]
         [HttpGet("ListComplete")]
@@ -43,34 +51,66 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(TransportesViewModel item)
         {
-            var items = _mapper.Map<tbTransportes>(item);
-            var result = _transportService.CreateTransports(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbTransportes>(item);
+                var result = _transportService.CreateTransports(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, TransportesViewModel items)
         {
 
-            var item = _mapper.Map<tbTransportes>(items);
-            var result = _transportService.UpdateTransports(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbTransportes>(items);
+                var result = _transportService.UpdateTransports(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _transportService.DeleteTransports(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.DeleteTransports(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
 
         }
         [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _transportService.FindTransports(Id);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.FindTransports(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }
