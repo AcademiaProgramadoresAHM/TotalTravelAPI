@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -29,39 +30,90 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _reservationService.ListReservationHotel();
-            return Ok(list);
+            try
+            {
+                var list = _reservationService.ListReservationHotel();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+           
         }
 
         [Authorize(Roles = "Administrador, Cliente")]
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionesHotelesViewModel item)
         {
-            var items = _mapper.Map<tbReservacionesHoteles>(item);
-            var result = _reservationService.CreateReservationHotel(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbReservacionesHoteles>(item);
+                var result = _reservationService.CreateReservationHotel(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+
+           
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, ReservacionesHotelesViewModel items)
         {
-            var item = _mapper.Map<tbReservacionesHoteles>(items);
-            var result = _reservationService.UpdateReservationHotel(id, item);
-            return Ok(result);
+            
+            try
+            {
+                var item = _mapper.Map<tbReservacionesHoteles>(items);
+                var result = _reservationService.UpdateReservationHotel(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _reservationService.DeleteReservationHotel(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _reservationService.DeleteReservationHotel(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+           
         }
 
         [HttpGet("Find")]
         public IActionResult Find(int id)
         {
-            var result = _reservationService.FindReservationHotel(id);
-            return Ok(result);
+            try
+            {
+                var result = _reservationService.FindReservationHotel(id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+          
         }
 
     }

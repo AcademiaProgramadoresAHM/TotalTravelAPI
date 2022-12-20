@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -30,41 +31,89 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _transportService.ListDetallesTransports();
-            return Ok(list);
+            
+            try
+            {
+                var list = _transportService.ListDetallesTransports();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
 
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
 
         }
         [HttpPost("Insert")]
         public IActionResult Insert(DetallesTransportesViewModel detallesTransportesViewModel)
         {
-            var items = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
-            var result = _transportService.CreateDetallesTransports(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
+                var result = _transportService.CreateDetallesTransports(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+           
         }
         [HttpPut("Update")]
         public IActionResult Update(int id, DetallesTransportesViewModel detallesTransportesViewModel)
         {
+            try
+            {
+                var item = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
+                var result = _transportService.UpdateDetallesTransports(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbDetallesTransportes>(detallesTransportesViewModel);
-            var result = _transportService.UpdateDetallesTransports(id, item);
-            return Ok(result);
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+          
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _transportService.DeleteDetallesTransports(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.DeleteDetallesTransports(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+            
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _transportService.FindDetallesTransports(Id);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.FindDetallesTransports(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+            
         }
 
     }

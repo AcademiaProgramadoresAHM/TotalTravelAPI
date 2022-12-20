@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -30,8 +31,17 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _reservationService.ListReservationTransport();
-            return Ok(list);
+            try
+            {
+                var list = _reservationService.ListReservationTransport();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
 
         }
 
@@ -40,10 +50,19 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert(ReservacionTransporteViewModel items)
         {
+            try
+            {
+                var item = _mapper.Map<tbReservacionTransporte>(items);
+                var result = _reservationService.CreateReservationTransport(item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbReservacionTransporte>(items);
-            var result = _reservationService.CreateReservationTransport(item);
-            return Ok(result);
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+            
 
         }
 
@@ -51,10 +70,18 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPut("Update")]
         public IActionResult Update(int id, ReservacionTransporteViewModel items)
         {
+            try
+            {
+                var item = _mapper.Map<tbReservacionTransporte>(items);
+                var result = _reservationService.UpdateReservationTransport(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbReservacionTransporte>(items);
-            var result = _reservationService.UpdateReservationTransport(id, item);
-            return Ok(result);
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
 
         }
 
@@ -62,8 +89,18 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _reservationService.DeleteReservationTransport(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _reservationService.DeleteReservationTransport(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+            
 
         }
 
@@ -72,8 +109,18 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _reservationService.FindReservationTransport(Id);
-            return Ok(result);
+            try
+            {
+                var result = _reservationService.FindReservationTransport(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                var data = new ServiceResult();
+                return Ok(data.Error());
+            }
+           
         }
     }
 }
