@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -30,42 +31,94 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _AccessService.ListRolePermission();
-            return Ok(list);
+            try
+            {
+                var list = _AccessService.ListRolePermission();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+            
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(RolesPermisosViewModel item)
         {
-            var items = _mapper.Map<tbRolesPermisos>(item);
-            var result = _AccessService.CreateRolePermission(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbRolesPermisos>(item);
+                var result = _AccessService.CreateRolePermission(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, RolesPermisosViewModel items)
         {
+            try
+            {
+                var item = _mapper.Map<tbRolesPermisos>(items);
+                var result = _AccessService.UpdateRolePermission(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbRolesPermisos>(items);
-            var result = _AccessService.UpdateRolePermission(id, item);
-            return Ok(result);
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+          
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _AccessService.DeleteRolePermission(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _AccessService.DeleteRolePermission(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
+            try
+            {
+                var result = _AccessService.FindRolePermission(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var result = _AccessService.FindRolePermission(Id);
-            return Ok(result);
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
         }
     }
 }
