@@ -32,43 +32,76 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHotelsActivity();
-            return Ok(list);
+            try
+            {
+                var list = _hotelService.ListHotelsActivity();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]HotelesActividadesViewModel hotelesActividadesViewModel)
         {
-            var items = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
-            var result = _hotelService.CreateHotelsActivity(items, hotelesActividadesViewModel.File);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
+                var result = _hotelService.CreateHotelsActivity(items, hotelesActividadesViewModel.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, [FromForm] HotelesActividadesViewModel hotelesActividadesViewModel)
         {
-
-            var item = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
-            var result = _hotelService.UpdateHotelsActivity(id, item, hotelesActividadesViewModel.File);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbHotelesActividades>(hotelesActividadesViewModel);
+                var result = _hotelService.UpdateHotelsActivity(id, item, hotelesActividadesViewModel.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotelsActivity(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.DeleteHotelsActivity(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
-            var result = _hotelService.FindHotelsActivity(Id);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.FindHotelsActivity(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
     }

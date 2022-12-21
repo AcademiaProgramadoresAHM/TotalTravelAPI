@@ -28,38 +28,73 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _restaurantService.ListTipoMenus();
-            return Ok(list);
+            try
+            {
+                var list = _restaurantService.ListTipoMenus();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(TipoMenusViewModel tipoMenusViewModel)
         {
-            var items = _mapper.Map<tbTipoMenus>(tipoMenusViewModel);
-            var result = _restaurantService.CreateTipoMenus(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbTipoMenus>(tipoMenusViewModel);
+                var result = _restaurantService.CreateTipoMenus(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, TipoMenusViewModel tipoMenusViewModel)
         {
-            var item = _mapper.Map<tbTipoMenus>(tipoMenusViewModel);
-            var result = _restaurantService.UpdateTipoMenus(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbTipoMenus>(tipoMenusViewModel);
+                var result = _restaurantService.UpdateTipoMenus(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _restaurantService.DeleteTipoMenus(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _restaurantService.DeleteTipoMenus(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _restaurantService.FindTipoMenus(Id);
-            return Ok(result);
+            try
+            {
+                var result = _restaurantService.FindTipoMenus(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

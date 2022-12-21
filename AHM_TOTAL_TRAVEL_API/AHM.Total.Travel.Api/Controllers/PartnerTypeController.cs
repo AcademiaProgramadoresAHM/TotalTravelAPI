@@ -29,42 +29,76 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _generalService.ListPartnersType();
-            return Ok(list);
+            try
+            {
+                var list = _generalService.ListPartnersType();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(TiposPartnersViewModel tipoPartnersViewModel)
         {
-            var items = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
-            var result = _generalService.CreatePartnersType(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
+                var result = _generalService.CreatePartnersType(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, TiposPartnersViewModel tipoPartnersViewModel)
         {
-
-            var item = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
-            var result = _generalService.UpdatePartnersType(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbTipoPartners>(tipoPartnersViewModel);
+                var result = _generalService.UpdatePartnersType(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _generalService.DeletePartnersType(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _generalService.DeletePartnersType(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _generalService.FindPartnersType(Id);
-            return Ok(result);
+            try
+            {
+                var result = _generalService.FindPartnersType(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

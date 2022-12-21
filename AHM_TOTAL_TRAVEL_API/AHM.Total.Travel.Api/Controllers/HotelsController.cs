@@ -32,42 +32,75 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
+            try
+            {
             var list = _hotelService.ListHotels();
             return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
 
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm] HotelesViewModel hotelesViewModel)
         {
+            try { 
             var items = _mapper.Map<tbHoteles>(hotelesViewModel);
             var result = _hotelService.CreateHotels(items, hotelesViewModel.File);
             return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id,[FromForm] HotelesViewModel hotelesViewModel)
         {
-
-            var item = _mapper.Map<tbHoteles>(hotelesViewModel);
-            var result = _hotelService.UpdateHotels(id, item, hotelesViewModel.File);
-            return Ok(result);
-
+            try
+            {
+                var item = _mapper.Map<tbHoteles>(hotelesViewModel);
+                var result = _hotelService.UpdateHotels(id, item, hotelesViewModel.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHotels(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.DeleteHotels(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _hotelService.FindHotels(Id);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.FindHotels(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
     }

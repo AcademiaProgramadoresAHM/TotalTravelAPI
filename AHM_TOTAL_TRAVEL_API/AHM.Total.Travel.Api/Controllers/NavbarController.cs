@@ -27,34 +27,61 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _AccessService.ListNavbarGroups();
-            return Ok(list);
+            try
+            {
+                var list = _AccessService.ListNavbarGroups();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(NavbarViewModel item)
         {
-            var items = _mapper.Map<tblGruposElementosNavbar>(item);
-            var result = _AccessService.CreateNavbarGroups(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tblGruposElementosNavbar>(item);
+                var result = _AccessService.CreateNavbarGroups(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpPut("Update")]
         public IActionResult Update(int id, NavbarViewModel items)
         {
-
-            var item = _mapper.Map<tblGruposElementosNavbar>(items);
-            var result = _AccessService.UpdateNavbarGroups(id, item);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tblGruposElementosNavbar>(items);
+                var result = _AccessService.UpdateNavbarGroups(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _AccessService.DeleteNavbarGroups(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _AccessService.DeleteNavbarGroups(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
@@ -62,9 +89,15 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
-            var result = _AccessService.FindNavbarGroups(Id);
-            return Ok(result);
+            try
+            {
+                var result = _AccessService.FindNavbarGroups(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 
 namespace AHM.Total.Travel.Api.Controllers
@@ -27,44 +28,77 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
+            try { 
             var list = _restaurantService.ListMenus();
             return Ok(list);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
 
         }
         
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]MenusViewModel item)
         {
-            var menu = _mapper.Map<tbMenus>(item);
-            var result = _restaurantService.CreateMenus(menu, item.File);
-            return Ok(result);
+            try
+            {
+                var menu = _mapper.Map<tbMenus>(item);
+                var result = _restaurantService.CreateMenus(menu, item.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpPut("Update")]
         public IActionResult Update(int id, [FromForm] MenusViewModel items)
         {
-
-            var item = _mapper.Map<tbMenus>(items);
-            var result = _restaurantService.UpdateMenus(id, item, items.File);
-            return Ok(result);
+            try
+            {
+                var item = _mapper.Map<tbMenus>(items);
+                var result = _restaurantService.UpdateMenus(id, item, items.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _restaurantService.DeleteMenus(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _restaurantService.DeleteMenus(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
 
         }
 
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-
-            var result = _restaurantService.FindMenus(Id);
-            return Ok(result);
+            try
+            {
+                var result = _restaurantService.FindMenus(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
     }
