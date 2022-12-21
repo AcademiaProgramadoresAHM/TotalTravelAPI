@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -32,8 +33,17 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _hotelService.ListHabitaciones();
-            return Ok(list);
+            try
+            {
+                var list = _hotelService.ListHabitaciones();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
 
@@ -41,26 +51,55 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpPost("Insert")]
         public IActionResult Insert([FromForm]HabitacionesViewModel habitacionesViewModel)
         {
-            var items = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
-            var result = _hotelService.CreateHabitaciones(items, habitacionesViewModel.File);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
+                var result = _hotelService.CreateHabitaciones(items, habitacionesViewModel.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+            
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, [FromForm] HabitacionesViewModel habitacionesViewModel)
         {
+            try
+            {
+                var item = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
+                var result = _hotelService.UpdateHabitaciones(id, item, habitacionesViewModel.File);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbHabitaciones>(habitacionesViewModel);
-            var result = _hotelService.UpdateHabitaciones(id, item, habitacionesViewModel.File);
-            return Ok(result);
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _hotelService.DeleteHabitaciones(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.DeleteHabitaciones(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
 
@@ -69,8 +108,18 @@ namespace AHM.Total.Travel.Api.Controllers
         public IActionResult Details(int Id)
         {
 
-            var result = _hotelService.FindHabitaciones(Id);
-            return Ok(result);
+            try
+            {
+                var result = _hotelService.FindHabitaciones(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
         }
     }
 }

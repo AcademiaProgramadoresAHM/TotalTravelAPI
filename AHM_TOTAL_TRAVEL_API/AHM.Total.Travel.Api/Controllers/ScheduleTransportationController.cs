@@ -1,4 +1,5 @@
-﻿using AHM.Total.Travel.BusinessLogic.Services;
+﻿using AHM.Total.Travel.BusinessLogic;
+using AHM.Total.Travel.BusinessLogic.Services;
 using AHM.Total.Travel.Common.Models;
 using AHM.Total.Travel.Entities.Entities;
 using AutoMapper;
@@ -27,42 +28,91 @@ namespace AHM.Total.Travel.Api.Controllers
         [HttpGet("List")]
         public IActionResult List()
         {
-            var list = _transportService.ListHorariosTransports();
-            return Ok(list);
+            try
+            {
+                var list = _transportService.ListHorariosTransports();
+                return Ok(list);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
 
         [HttpPost("Insert")]
         public IActionResult Insert(HorariosTransportesViewModel item)
         {
-            var items = _mapper.Map<tbHorariosTransportes>(item);
-            var result = _transportService.CreateHorariosTransports(items);
-            return Ok(result);
+            try
+            {
+                var items = _mapper.Map<tbHorariosTransportes>(item);
+                var result = _transportService.CreateHorariosTransports(items);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+         
         }
 
         [HttpPut("Update")]
         public IActionResult Update(int id, HorariosTransportesViewModel items)
         {
+            try
+            {
+                var item = _mapper.Map<tbHorariosTransportes>(items);
+                var result = _transportService.UpdateHorariosTransports(id, item);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
 
-            var item = _mapper.Map<tbHorariosTransportes>(items);
-            var result = _transportService.UpdateHorariosTransports(id, item);
-            return Ok(result);
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error()); 
+            }
+         
 
         }
 
         [HttpDelete("Delete")]
         public IActionResult Delete(int id, int Mod)
         {
-            var result = _transportService.DeleteHorariosTransports(id, Mod);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.DeleteHorariosTransports(id, Mod);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+           
 
         }
         [AllowAnonymous]
         [HttpGet("Find")]
         public IActionResult Details(int Id)
         {
-            var result = _transportService.FindHorariosTransports(Id);
-            return Ok(result);
+            try
+            {
+                var result = _transportService.FindHorariosTransports(Id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                ServiceResult serviceResult = new ServiceResult();
+                return Ok(serviceResult.Error());
+            }
+          
         }
     }
 }
