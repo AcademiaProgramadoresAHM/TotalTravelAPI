@@ -15,6 +15,10 @@
    "SelectedToBeGenerated": 1,
    "Tables": [
       {
+         "Name": "[Acce].[tblGruposElementosNavbar]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[Acce].[tbModulos]",
          "ObjectType": 0
       },
@@ -60,6 +64,10 @@
       },
       {
          "Name": "[Gene].[tbDirecciones]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gene].[tbEstadosCiviles]",
          "ObjectType": 0
       },
       {
@@ -177,6 +185,10 @@
       {
          "Name": "[Trpt].[tbTransportes]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[VW_tblGruposElementosNavbar]",
+         "ObjectType": 3
       },
       {
          "Name": "[Acce].[VW_tbModulos]",
@@ -355,7 +367,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "389b5d2fd45fffe.TotalTravel_DB",
+   "UiHint": "389b5d2fd45fffe.TotalTravelDB1",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

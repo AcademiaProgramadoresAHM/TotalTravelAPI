@@ -1207,6 +1207,11 @@ namespace AHM.Total.Travel.DataAccess.Context
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Sexo)
+                    .IsRequired()
+                    .HasMaxLength(9)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Telefono)
                     .HasMaxLength(20)
                     .IsUnicode(false);
